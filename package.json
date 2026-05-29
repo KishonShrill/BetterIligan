@@ -13,7 +13,8 @@
         "@bettergov/kapwa": "^1.2.4",
         "next": "16.2.6",
         "react": "19.2.4",
-        "react-dom": "19.2.4"
+        "react-dom": "19.2.4",
+        "wrangler": "^4.95.0"
     },
     "devDependencies": {
         "@commitlint/cli": "^21.0.1",
