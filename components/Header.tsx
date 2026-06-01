@@ -48,7 +48,7 @@ const navigation = [
 
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [activeAccordion, setActiveAccordion] = useState(null);
+    const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
     const pathname = usePathname();
 
     // Prevent background scrolling when mobile menu is open
@@ -66,23 +66,19 @@ export default function Header() {
         setIsMobileMenuOpen(false);
     }, [pathname]);
 
-    const toggleAccordion = (name) => {
+    const toggleAccordion = (name: string | null) => {
         setActiveAccordion(activeAccordion === name ? null : name);
     };
 
     return (
         <>
-            {/* 
-        MAIN HEADER
-        Sticky top-0 keeps it visible. z-40 stays below the mobile overlay (z-50).
-      */}
             <header className="font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200">
-                <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+                <div className="max-w-350 mx-auto px-4 md:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
 
                         {/* Logo area */}
-                        <div className="flex-shrink-0 flex items-center gap-3">
-                            {/* Replace with actual logo image later */}
+                        <div className="shrink-0 flex items-center gap-3">
+                            {/* TODO: Replace with actual logo image later */}
                             <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
                                 BI
                             </div>
@@ -95,25 +91,29 @@ export default function Header() {
                         </div>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden lg:flex items-center gap-8 h-full">
+                        <nav className="hidden lg:flex items-center gap-8 h-fit">
                             {navigation.map((item) => (
-                                <div key={item.name} className="relative group h-fit flex items-center">
+                                <div key={item.name} className="relative group h-full flex items-center">
                                     <Link
                                         href={item.href}
-                                        className="flex items-center gap-1 text-base text-mono! font-medium text-slate-700 hover:text-blue-600 transition-colors py-2"
+                                        className="flex items-center gap-1 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors py-2"
                                     >
-                                        {item.name}
+                                        {/* Wrapped the text in a relative container for the underline anchor */}
+                                        <span className="relative py-1">
+                                            {item.name}
+                                            {/* The Animated Center Underline Line */}
+                                            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                                        </span>
                                         <ChevronDown className="w-4 h-4 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
                                     </Link>
 
-                                    {/* Desktop Dropdown - Appears on hover */}
+                                    {/* Desktop Dropdown - Appears on hover (Unchanged, so it won't have the underline) */}
                                     <div className="absolute top-full left-0 w-64 bg-white border border-slate-200 shadow-xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top -translate-y-2 group-hover:translate-y-0">
                                         <ul className="py-2">
                                             {item.dropdown.map((subItem, idx) => (
                                                 <li key={subItem.name}>
                                                     <Link
                                                         href={subItem.href}
-                                                        // Highlight the first "All [Category]" item slightly differently
                                                         className={`block px-5 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-700 ${idx === 0 ? 'lg:hidden font-semibold border-b border-slate-100 mb-1' : ''}`}
                                                     >
                                                         {subItem.name}
@@ -175,7 +175,7 @@ export default function Header() {
                                 <div key={item.name} className="border-b border-slate-100 last:border-0">
                                     <button
                                         onClick={() => toggleAccordion(item.name)}
-                                        className="w-full flex items-center justify-between py-4 text-left text-lg font-medium text-slate-800"
+                                        className="w-full flex items-center justify-between py-2 text-left text-lg font-medium text-slate-800"
                                     >
                                         {item.name}
                                         <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${activeAccordion === item.name ? 'rotate-180' : ''}`} />
@@ -199,7 +199,7 @@ export default function Header() {
                                 </div>
                             ))}
 
-                            {/* Static Mobile Links */}
+                            {/* TODO: (still deciding to add or not) Static Mobile Links 
                             <div className="hidden pt-6 mt-2 border-t border-slate-200 flex flex-col gap-6">
                                 <Link href="/join" className="flex items-center gap-2 text-lg font-semibold text-blue-600">
                                     <Rocket className="w-5 h-5" /> Join Us
@@ -219,6 +219,7 @@ export default function Header() {
                                     </select>
                                 </div>
                             </div>
+                            */}
                         </div>
 
                         {/* Mobile Bottom Info Bar - Pinned at the bottom of the dropdown */}
