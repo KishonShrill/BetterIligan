@@ -14,10 +14,32 @@ If you want to get your hands dirty with the codebase, here is our standard work
 Start by forking the project repository to your own GitHub account and cloning it to your local machine. 
 
 ### 2. Find an Issue or Build a Feature
-Check out our [Issues tab](#) *(insert your repo issues link here)* to see if there's any task that interests you or needs fixing. Alternatively, if you have a specific code change or improvement you want to make, feel free to start working on it!
+Check out our [Issues tab](https://github.com/KishonShrill/BetterIligan/issues) to see if there's any task that interests you or needs fixing. Alternatively, if you have a specific code change or improvement you want to make, feel free to start working on it!
 
 ### 3. Make a Pull Request (PR)
 Once your changes are ready, push them to your fork and submit a Pull Request. 
+
+### 4. Reuse UI Components & Follow Architecture
+As part of **Phase 1 (Foundation & Layout Shell)**, we established the project's layout structure and a reusable UI Component Library. Before building custom UI elements or using raw HTML, check if there is an existing component in `components/ui/` or `components/layout/`.
+
+#### Core Tech Stack
+* **Framework:** Next.js 16 (App Router)
+* **Styling:** Tailwind CSS v4
+* **Package Manager:** `npm`
+* **Design System / Typography:** `@bettergov/kapwa` (custom `kapwaSans` and `kapwaMono` fonts)
+
+#### Available Reusable Components
+* **Layout:**
+  * `TopBanner` ([TopBanner.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/layout/TopBanner.tsx)): Displays emergency numbers, live weather (via Open-Meteo), and Forex data.
+  * `Footer` ([Footer.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/layout/Footer.tsx)): Branding, site links, and social links.
+* **UI Elements:**
+  * `Card` / `CardHeader` / `CardContent` / `CardFooter` ([Card.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Card.tsx)): Standard content card with optional `hoverable` translation.
+  * `Heading` ([Heading.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Heading.tsx)): Pre-styled typography for levels `h1` through `h6`.
+  * `Text` ([Text.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Text.tsx)): Pre-styled text segments supporting sizing and text transformations.
+  * `Section` ([Section.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Section.tsx)): Standard container wrappers.
+  * `Breadcrumbs` ([Breadcrumbs.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Breadcrumbs.tsx)): Multi-level breadcrumbs navigation with automatic pathname generation.
+  * `ListItem` ([ListItem.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/ListItem.tsx)): Reusable display card for lists and categories.
+  * `ScrollToTop` ([ScrollToTop.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/ScrollToTop.tsx)): Floating button to scroll back to the top of the page.
 
 **Crucial:** To keep our project history clean and readable, please format your PR title exactly like this: `[<prefix>: title]`. 
 
@@ -42,7 +64,7 @@ Choose the appropriate prefix from this list:
 
 You do not need to know how to code to make a massive impact on this project! If you want to report a broken page, suggest a new feature, or request that something be added to the website, you can do so by creating an **Issue**.
 
-Head over to our [Issues tab](#) *(insert your repo issues link here)* and click **New Issue**. 
+Head over to our [Issues tab](https://github.com/KishonShrill/BetterIligan/issues) and click **New Issue**. 
 
 ### Issue Title Format
 Please format your issue title strictly like this: `[<prefix>(where it is located on the url): title]`

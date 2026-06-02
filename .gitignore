@@ -49,3 +49,19 @@ next-env.d.ts
 !.dev.vars.example
 
 !.env.example
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+

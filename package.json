@@ -16,9 +16,11 @@
   "dependencies": {
     "@bettergov/kapwa": "^1.2.4",
     "@opennextjs/cloudflare": "^1.19.11",
+    "clsx": "^2.1.1",
     "next": "16.2.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",

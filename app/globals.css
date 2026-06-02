@@ -10,6 +10,20 @@
     --color-foreground: var(--foreground);
     --font-sans: var(--font-kapwa-sans);
     --font-mono: var(--font-kapwa-mono);
+
+    --color-primary-50: #e6f0fd;
+    --color-primary-100: #cce0fb;
+    --color-primary-200: #99c2f7;
+    --color-primary-300: #66a3f3;
+    --color-primary-400: #3385ef;
+    --color-primary-500: #0066eb;
+    --color-primary-600: #0052bc;
+    --color-primary-700: #003d8d;
+    --color-primary-800: #00295e;
+    --color-primary-900: #00142f;
+
+    --animate-fade-in: fadeIn 0.5s ease-in-out;
+    --animate-slide-in: slideIn 0.5s ease-out;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +37,20 @@ body {
     background: var(--background);
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
