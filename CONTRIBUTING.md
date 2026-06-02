@@ -30,16 +30,16 @@ As part of **Phase 1 (Foundation & Layout Shell)**, we established the project's
 
 #### Available Reusable Components
 * **Layout:**
-  * `TopBanner` ([TopBanner.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/layout/TopBanner.tsx)): Displays emergency numbers, live weather (via Open-Meteo), and Forex data.
-  * `Footer` ([Footer.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/layout/Footer.tsx)): Branding, site links, and social links.
+  * `TopBanner` ([TopBanner.tsx](components/layout/TopBanner.tsx)): Displays emergency numbers, live weather (via Open-Meteo), and Forex data.
+  * `Footer` ([Footer.tsx](components/layout/Footer.tsx)): Branding, site links, and social links.
 * **UI Elements:**
-  * `Card` / `CardHeader` / `CardContent` / `CardFooter` ([Card.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Card.tsx)): Standard content card with optional `hoverable` translation.
-  * `Heading` ([Heading.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Heading.tsx)): Pre-styled typography for levels `h1` through `h6`.
-  * `Text` ([Text.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Text.tsx)): Pre-styled text segments supporting sizing and text transformations.
-  * `Section` ([Section.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Section.tsx)): Standard container wrappers.
-  * `Breadcrumbs` ([Breadcrumbs.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/Breadcrumbs.tsx)): Multi-level breadcrumbs navigation with automatic pathname generation.
-  * `ListItem` ([ListItem.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/ListItem.tsx)): Reusable display card for lists and categories.
-  * `ScrollToTop` ([ScrollToTop.tsx](file:///c:/Users/ramos/OneDrive/Desktop/BetterIligan/components/ui/ScrollToTop.tsx)): Floating button to scroll back to the top of the page.
+  * `Card` / `CardHeader` / `CardContent` / `CardFooter` ([Card.tsx](components/ui/Card.tsx)): Standard content card with optional `hoverable` translation.
+  * `Heading` ([Heading.tsx](components/ui/Heading.tsx)): Pre-styled typography for levels `h1` through `h6`.
+  * `Text` ([Text.tsx](components/ui/Text.tsx)): Pre-styled text segments supporting sizing and text transformations.
+  * `Section` ([Section.tsx](components/ui/Section.tsx)): Standard container wrappers.
+  * `Breadcrumbs` ([Breadcrumbs.tsx](components/ui/Breadcrumbs.tsx)): Multi-level breadcrumbs navigation with automatic pathname generation.
+  * `ListItem` ([ListItem.tsx](components/ui/ListItem.tsx)): Reusable display card for lists and categories.
+  * `ScrollToTop` ([ScrollToTop.tsx](components/ui/ScrollToTop.tsx)): Floating button to scroll back to the top of the page.
 
 **Crucial:** To keep our project history clean and readable, please format your PR title exactly like this: `[<prefix>: title]`. 
 

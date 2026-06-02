@@ -49,8 +49,8 @@ export default function TopBanner() {
     const rate = rates[curr] ? (1 / rates[curr]).toFixed(2) : null;
 
     return (
-        <div className="bg-slate-50 border-b border-slate-200 text-[10px]">
-            <div className="container mx-auto px-4 py-1 flex items-center justify-between sm:justify-end sm:gap-4">
+        <div className="bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans">
+            <div className="container mx-auto px-4 py-1 sm:py-2 flex items-center justify-between sm:justify-end sm:gap-4">
                 <div className="flex items-center gap-3 text-slate-600">
                     <span className="text-slate-500">
                         {new Date().toLocaleDateString('en-PH', {
