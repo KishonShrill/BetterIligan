@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import { ResultAsync, ok, err } from 'neverthrow';
 import {
     CloudSun, Wind, Droplets, ThermometerSun, MapPin, X,
     Sunrise, Sunset, Eye, Compass, Sun, Moon, Cloud,
@@ -10,6 +11,7 @@ import {
 import Section from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
 import { OpenWeatherResponse } from '@/types/weather';
+import { FALLBACK_WEATHER } from '@/data/fallback/fallback_weather';
 
 // Helper to map OpenWeatherMap icon codes to Lucide React icons
 const getWeatherIcon = (iconCode: string, className = "w-16 h-16 text-yellow-300") => {
@@ -33,56 +35,53 @@ const formatTime = (unixTime: number) => {
     });
 };
 
-const FALLBACK_WEATHER: OpenWeatherResponse = {
-    coord: { lon: 124.4, lat: 8.25 },
-    weather: [{ id: 804, main: "Clouds", description: "overcast clouds", icon: "04d" }],
-    base: "stations",
-    main: {
-        temp: 31.02,
-        feels_like: 35.14,
-        temp_min: 31.02,
-        temp_max: 31.02,
-        pressure: 1011,
-        humidity: 61,
-    },
-    visibility: 10000,
-    wind: { speed: 2.06, deg: 327 },
-    clouds: { all: 100 },
-    dt: 1780456118, // Represents the last known update
-    sys: { country: "PH", sunrise: 1780435404, sunset: 1780480673 },
-    timezone: 28800,
-    id: 1711082,
-    name: "Iligan City",
-    cod: 200
-};
-
 export default function WeatherAndMap() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [weatherData, setWeatherData] = useState<OpenWeatherResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [isFallback, setIsFallback] = useState(false);
+    const [error, setError] = useState<string | null>(null)
 
     // Fetch weather data when the component mounts
     useEffect(() => {
         const fetchWeather = async () => {
-            try {
-                const res = await fetch('/api/weather');
+            setLoading(true);
 
-                // If the API route returns an error (like 500 for missing Env Var)
-                if (!res.ok) {
-                    throw new Error('API Unavailable');
+            const result = await ResultAsync.fromPromise(
+                fetch('/api/weather'),
+                (error) => new Error(error instanceof Error ? error.message : 'Network error')
+            )
+                .andThen((res) => {
+                    if (!res.ok) {
+                        return err(new Error(`API Unavailable: Status ${res.status}`));
+                    }
+                    return ResultAsync.fromPromise(
+                        res.json() as Promise<OpenWeatherResponse>,
+                        (jsonError) => new Error('Failed to parse response JSON')
+                    );
+                })
+                .andThen((data: any) => {
+                    if (data && data.error) {
+                        return err(new Error(data.error));
+                    }
+                    return ok(data as OpenWeatherResponse);
+                });
+
+            result.match(
+                (data) => {
+                    setWeatherData(data);
+                    setIsFallback(false);
+                    setError(null);
+                },
+                (error) => {
+                    console.error("Using fallback weather data due to error:", error.message);
+                    setWeatherData(FALLBACK_WEATHER);
+                    setIsFallback(true);
+                    setError(error.message);
                 }
+            );
 
-                const data = await res.json();
-                setWeatherData(data);
-                setIsFallback(false);
-            } catch (error) {
-                console.error("Using fallback weather data:", error);
-                setWeatherData(FALLBACK_WEATHER);
-                setIsFallback(true);
-            } finally {
-                setLoading(false);
-            }
+            setLoading(false);
         };
 
         fetchWeather();
