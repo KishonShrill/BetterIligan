@@ -1,13 +1,14 @@
 import React from 'react';
 import { Search, ArrowRight, ArrowUpRight, FileText, Landmark } from 'lucide-react';
+import Section from '@/components/ui/Section';
 
 export default function HeroSection() {
     return (
-        <section className="relative w-full bg-blue-600 overflow-hidden min-h-125 flex items-center">
+        <Section className='bg-blue-600 min-h-125'>
             {/* Subtle Background Grid for texture */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
-            <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+            <div className="relative max-w-404 mx-auto px-6 lg:px-8 py-4 md:py-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center">
 
                 {/* Status Badge */}
                 <div className="max-lg:hidden col-span-1 lg:col-span-2 w-fit mx-auto lg:mx-0 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/30 border border-blue-400/30 text-blue-50 text-sm font-medium">
@@ -92,6 +93,6 @@ export default function HeroSection() {
                 </div>
 
             </div>
-        </section>
+        </Section>
     );
 }

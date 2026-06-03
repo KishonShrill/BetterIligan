@@ -7,7 +7,7 @@ interface SectionProps {
 
 export default function Section({ children, className }: SectionProps) {
     return (
-        <section className={cn('py-12 bg-white', className)}>
+        <section className={cn('py-12 bg-white font-sans', className)}>
             <div className="container mx-auto px-4">{children}</div>
         </section>
     );
