@@ -80,5 +80,588 @@
                 "fee": "Php 0.00"
             }
         ]
+    },
+    {
+        "slug": "application-for-business-permit",
+        "title": "Application For Business Permit",
+        "category": "Business, Trade and Investment",
+        "description": "Requirements and guidelines for securing a new business permit or renewing an existing one at the City Mayor's Office.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "City Mayor's Office",
+        "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays, provision of services starts after flag raising. No noon break.",
+        "whoMayAvail": "Business Operators",
+        "requirements": [
+            {
+                "groupName": "For New Business",
+                "items": [
+                    "DTI Registration",
+                    "Barangay Clearance (Location of Business)",
+                    "Occupancy Permit (City Engineer's Office)",
+                    "Lease Contract (If business space is rented)",
+                    "Compliance of Zoning Ordinance (if applicable)"
+                ]
+            },
+            {
+                "groupName": "For Partnership, Corporation and Cooperative",
+                "items": [
+                    "SEC Registration and Article of Incorporation",
+                    "CDA Certificate for Cooperative",
+                    "Barangay Clearance (Location of Business)",
+                    "Occupancy Permit (City Engineer's Office)",
+                    "Lease Contract (If business space is rented)",
+                    "Compliance of Zoning Ordinance (if applicable)"
+                ]
+            },
+            {
+                "groupName": "For Renewal of Business Permit",
+                "items": [
+                    "Basis for computing taxes, fees and charges (Income Tax Return)",
+                    "Barangay Clearance (Location of Business)"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Secure Application for Business Permit form and checklist of requirements as to type of business applied for.",
+                "providerAction": "Issue Application of Business Permit form and checklist. Instruct applicant how to comply with requirements.",
+                "duration": "1 minute",
+                "personInCharge": "Victoria de Guzman",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Receive, fill up and submit application form and all requirements.",
+                "providerAction": "Receive the whole documents. Verify and check information on the Application for Business Permit form and the requirements.",
+                "duration": "5 minutes",
+                "personInCharge": "ResaDerama / Victoria de Guzman",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Wait while the encoding/processing is going on.",
+                "providerAction": "Encode all the data in the computer and print UNIFIED Form. Transmit information (applicant’s data) to City Engineer’s Office for assessment of regulatory fees.",
+                "duration": "5 minutes",
+                "personInCharge": "Mila Mahinay / Victoria de Guzman / Resa Derama",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "Proceed to Business Tax & Fees Division of City Treasurer’s Office for assessment and payment of business tax.",
+                "providerAction": "Advice client to proceed to City Treasurer’s Office for assessment of business taxes and other fees.",
+                "duration": "1 minute",
+                "personInCharge": "Mila Mahinay / Victoria de Guzman / Resa Derama",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 5,
+                "clientAction": "Submit all documents, together with the Official Receipt to Permits & Licensing Division.",
+                "providerAction": "Check the compliance of requirements including the Bureau of Fire Protection Certificate.",
+                "duration": "3 minutes",
+                "personInCharge": "Judith Surmion / Carmen Magnaye",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 6,
+                "clientAction": "Wait for the processing of the business permit.",
+                "providerAction": "Print Business Permit and countersign the Business Permit as to recommending approval.",
+                "duration": "2 minutes",
+                "personInCharge": "Judith Surmion / Carmen Magnaye",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 7,
+                "clientAction": "Receive and review duly approved Business Permit and corresponding Business Plate Number.",
+                "providerAction": "Forward Business Permit to the City Mayor for approval. Release the Business Permit with corresponding Business Plate Number.",
+                "duration": "2 minutes",
+                "personInCharge": "ResaDerama",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 8,
+                "clientAction": "Affix signature in the logbook as proof of receipt.",
+                "providerAction": "Require applicant to affix signature in the logbook as proof of receipt.",
+                "duration": "1 minute",
+                "personInCharge": "ResaDerama",
+                "fee": "Php 0.00"
+            }
+        ]
+    },
+    {
+        "slug": "application-for-building-permit",
+        "title": "Application For Building Permit",
+        "category": "Infrastructure and Public Works",
+        "description": "Requirements and procedures for securing a building permit for constructions and renovations.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "Municipal Engineering Office",
+        "schedule": "Monday 9:00 A.M - 5:00 P.M. (Flag Raising from 8:00 A.M. - 9:00A.M.) Tuesday to Friday, 8:30 A.M. to 5:00 P.M. (Morning Prayer 8:00 to 8:30 A.M.) No noon break",
+        "whoMayAvail": "Building Permit Applicants",
+        "requirements": [
+            {
+                "groupName": "General Requirements",
+                "items": [
+                    "2 copies of Lot Plan with certification from a Geodetic Engineer that the proposed building will not encroach the adjoining properties",
+                    "7 sets of Building Plans (Structural, Electrical, Plumbing) with Site Development Plan indicating the set-back/yard distances at the front sides and with Perspective at page 1 of every set",
+                    "4 copies of Bill of Materials and Cost Estimates",
+                    "4 copies of Specification documents",
+                    "4 copies of Title of Property (Transfer Certificate of Title), certified true copy",
+                    "4 copies of Deed of Absolute Sale/Lease Contract/Contact to Sell",
+                    "Consent and Authority from the owner if the TCT is not in the name of the applicant",
+                    "4 copies of latest Tax declaration (Please refer to City Assessor’s Office for the issuance of the Certification)",
+                    "4 copies of current Tax receipt of Real Property Tax payment",
+                    "1 copy of Construction log Book",
+                    "2 copies of Structural Design Computation w/ Seismic Analysis which conforms to the latest NSCP-for 2 storeys and above or 1 storey w/ attic/mezzanine/roof deck/penthouse",
+                    "2 copies of Plate Load Test Analysis-for 3 storeys or 2 storeys w/ attic/mezzanine/roof deck/penthouse",
+                    "2 copies of Environment Compliance Certificate/Environment and",
+                    "Natural Resources (ENRO) Clearance-for communication towers and gas depot",
+                    "1 copy of Department of Labor and Employment (DOLE) Clearance for Industrial Buildings",
+                    "Duly filled-out and Notarized Building permit Application Forms (and Ancillary Permit Forms: Electrical, Mechanical, Plumbing, Fencing)."
+                ]
+            },
+            {
+                "groupName": "BOX A Fees",
+                "items": [
+                    "Area of Building = 83 sq. m.",
+                    "Line and Grade - P 470.00",
+                    "Building - P 671.00",
+                    "Plumbing - P 112.00",
+                    "Electrical - P 280.00",
+                    "Fence - P 132.00"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Secure application forms and checklist Fill-up application forms (Building, Electrical, Mechanical, Plumbing forms)",
+                "providerAction": "Issue application forms and checklist",
+                "duration": "3 minutes",
+                "personInCharge": "Engineering Assistant (Receiving Section)",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Submit application form w/ all requirements",
+                "providerAction": "Receive duly filled-out Building Permit application and all the listed requirements. Inform client of the schedule for inspection.",
+                "duration": "20 minutes",
+                "personInCharge": "Engineering Assistant",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "-",
+                "providerAction": "If application submitted lacks some requirements the application is returned to concerned party for compliance",
+                "duration": "30 seconds",
+                "personInCharge": "Engineering Assistant",
+                "fee": "Php 00.00"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "-",
+                "providerAction": "Conduct inspection of site, evaluate/assess and process the Building Permit application",
+                "duration": "2 hours",
+                "personInCharge": "Engineering Assistant",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 5,
+                "clientAction": "Receive the plans and technical documents for correction",
+                "providerAction": "If technical deficiencies are found, returned the plans & technical documents for correction",
+                "duration": "10 minutes",
+                "personInCharge": "Division Chief- Engineer IV",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 6,
+                "clientAction": "Follow-up status of the application and submit required clearances (Zoning, Fire Safety Clearance, DENR, DOLE)",
+                "providerAction": "Receive the required clearances. Receive the corrected plans and documents for review and re-evaluation",
+                "duration": "30 minutes",
+                "personInCharge": "Division Chief- Engineer IV",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 7,
+                "clientAction": "Receive the order of payment",
+                "providerAction": "Issue the order of payment",
+                "duration": "5 minutes",
+                "personInCharge": "Division Chief- Engineer IV",
+                "fee": "Per assessment and schedule of Fees stipulated in the NBC"
+            },
+            {
+                "stepNumber": 8,
+                "clientAction": "Pay the corresponding fees at the City Treasurer’s Office",
+                "providerAction": "Receive and record OR payments",
+                "duration": "1 minutes",
+                "personInCharge": "Division Chief-Engineer IV",
+                "fee": "Refer to Box A in the requirements tab"
+            },
+            {
+                "stepNumber": 9,
+                "clientAction": "-",
+                "providerAction": "Final Evaluation and approval of the application",
+                "duration": "15 minutes",
+                "personInCharge": "Building Officer",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 10,
+                "clientAction": "Receive the approved Building Permit",
+                "providerAction": "Release the approved Building Permit",
+                "duration": "20 minutes",
+                "personInCharge": "Engineering Assistant",
+                "fee": "Php 0.00"
+            }
+        ]
+    },
+    {
+        "slug": "application-for-temporary-electrical-permit",
+        "title": "Application For Temporary Electrical Permit",
+        "category": "Infrastructure and Public Works",
+        "description": "Requirements for securing a temporary electrical permit for indigents.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "City Mayor's Office",
+        "schedule": "8:00 AM - 5:00 PM Daily (No noon break) excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising.",
+        "whoMayAvail": "1. Indigents who need temporary electrical connection at their residences\n2. Indigents not covered by Iligan City Resettlement Projects",
+        "requirements": [
+            {
+                "groupName": "General Requirements",
+                "items": [
+                    "Filled up forms",
+                    "Certificate of Indigency from applicant's barangay",
+                    "Photo copies of Land Title & Tax Declaration"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Present Certificate of Indigency and Tax Declaration.",
+                "providerAction": "Require Certificate of Indigency and Tax Declaration from the applicant",
+                "duration": "2 minutes",
+                "personInCharge": "Carina Winona Congmon",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Submit requirement as required",
+                "providerAction": "Issue list of requirements & forms to be filled-up and complied. Instruct applicant how how to fill-up the forms.",
+                "duration": "7 minutes",
+                "personInCharge": "Carina Winona Congmon",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Pay the Temporary Electrical Permit Fee at the cashier.",
+                "providerAction": "Inform client to pay to the cashier of the Temporary Electrical Permit Fee for processing the request.",
+                "duration": "2 minutes",
+                "personInCharge": "Cashier",
+                "fee": "Php 280.00"
+            }
+        ]
+    },
+    {
+        "slug": "application-for-locational-clearance-prior-to-building-permit",
+        "title": "Application for Locational Clearance Prior to Building Permit",
+        "category": "Infrastructure and Public Works",
+        "description": "Requirements for securing a locational clearance prior to applying for a building permit.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "Zoning Office",
+        "schedule": "Monday 9:00 A.M - 5:00 P.M. (Flag Raising from 8:00 A.M. - 9:00A.M.) | Tuesday to Friday, 8:30 A.M. to 5:00 P.M. (Morning Prayer 8:00 to 8:30 A.M.) | No noon break",
+        "whoMayAvail": "Not specified",
+        "requirements": [
+            {
+                "groupName": "General Requirements",
+                "items": [
+                    "Filled up Zoning Application form",
+                    "Notarized Zoning Application",
+                    "Money Order form from Post Office"
+                ]
+            },
+            {
+                "groupName": "Zoning / Locational Clearance Schedule of Fees",
+                "items": [
+                    "Single Residential (P100,000 and Below): P200 x .01",
+                    "Single Residential (Over P100,000 to P200,000): P400",
+                    "Single Residential (Over P200,000): P500 + 1/10 of 1% in excess of P200,000",
+                    "Apartment/Townhouses (P500,000 and Below): P1,000",
+                    "Apartment/Townhouses (Over P500,000 to P2M): P1,500",
+                    "Apartment/Townhouses (Over P2M): P2,500 + 1/10 of 1% of cost in excess of P2M",
+                    "Dormitories (P2M and below): P2,500",
+                    "Dormitories (Over P2M): P2,500 + 1/10 of 1% of cost in excess of P2M",
+                    "Institutional (Below P2M): P2,000",
+                    "Institutional (Over P2M): P2,000 + 1/10 of 1% of cost in excess of P2M",
+                    "Commercial/Industrial (Below P100,000): P1,000",
+                    "Commercial/Industrial (Over P100,000 - P500,000): P1,500",
+                    "Commercial/Industrial (Over P500,000 - P1M): P2,000",
+                    "Commercial/Industrial (Over P1M - P2M): P3,000",
+                    "Commercial/Industrial (Over P2M): P5,000 + 1/10 of 1% of cost in excess of P2M",
+                    "Special Uses/Projects (Below P2M): P5,000",
+                    "Special Uses/Projects (Over P2M): P5,000 + 1/10 of 1% of cost in excess of P2M"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Customer/Applicant to apply Zoning Clearance with complete document in support to the application such as building permit form with set of technical drawings, land ownership and other documents.",
+                "providerAction": "Receive and Evaluate building permit documents.",
+                "duration": "5 minutes per application/transaction",
+                "personInCharge": "Zoning Clerk",
+                "fee": "Varies (See Schedule of Fees in Requirements tab)"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "-",
+                "providerAction": "If no site inspection, issue zoning application form and assess zoning fees. If document is not complete, return the document to applicant/Customer. If with site inspection (prior assessment of zoning fees).",
+                "duration": "10 minutes to 1 day",
+                "personInCharge": "Zoning Clerk / DZA",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Fill up Zoning Application forms and notarize. Pay Zoning Fees in a form of PMO/Cheques to bank/post office.",
+                "providerAction": "-",
+                "duration": "Not specified",
+                "personInCharge": "Not specified",
+                "fee": "Based on assessment"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "Submit notarized application forms / Zoning Fees in a form of PMO/Cheques.",
+                "providerAction": "Process the Application and forward to DZA for decision/approval.",
+                "duration": "15 minutes",
+                "personInCharge": "Zoning Clerk",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 5,
+                "clientAction": "-",
+                "providerAction": "Approval / disapproval of application.",
+                "duration": "10 minutes per application/transaction",
+                "personInCharge": "DZA",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 6,
+                "clientAction": "-",
+                "providerAction": "Release Building Permit to Client.",
+                "duration": "5 minutes",
+                "personInCharge": "Zoning Clerk",
+                "fee": "Php 0.00"
+            }
+        ]
+    },
+    {
+        "slug": "application-for-traffic-clearance",
+        "title": "Application For Traffic Clearance",
+        "category": "Transport and Driving",
+        "description": "Requirements for securing a traffic clearance from the Iligan City Traffic and Parking Management Office.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "Iligan City Traffic and Parking Management Office",
+        "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising. No noon break.",
+        "whoMayAvail": "All government agencies, LGUs, GOCC, and other government instrumentalities and owners or operators/drivers of public and private conveyances including individual who may have concern with traffic.",
+        "requirements": [
+            {
+                "groupName": "Requirements For Traffic Clearance",
+                "items": [
+                    "Affidavit of loss three (3) copies, one (1) original and two (2) photocopies.",
+                    "Police Blotter Report Fee (Official Receipt issued by CTO)",
+                    "Certificate Fee (Official Receipt issued by CTO)",
+                    "Police Blotter Extract",
+                    "Supporting documents: (Not Compulsory)",
+                    "Deed of Sale",
+                    "Photocopy of OR/CR",
+                    "SPA",
+                    "Authorization Letter"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Fill out Iligan City Government Registry Form and present required documents.",
+                "providerAction": "Receive/Check Requirements: Official Receipt for Traffic Clearance Fee, Official Receipt for Police Blotter Report Fee, Affidavit of Loss (3 copies), and Police Blotter Report.",
+                "duration": "2 minutes",
+                "personInCharge": "Information Desk Officer Incharge / TCT Case In-charge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Proceed to secure Official Receipt.",
+                "providerAction": "If the requirement is complete, advise client to proceed at the Collection Services Division, City Treasurer’s Office, IBJT, East Bldg., Tambo, Hinaplanon, Iligan City. Process payment and issue corresponding Official Receipt.",
+                "duration": "8 minutes",
+                "personInCharge": "Cashier",
+                "fee": "Certification Fee Php 50.00, Police Report Fee Php 50.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Return to ICTPMO and submit official receipt. Wait for the process and further advice from the service provider.",
+                "providerAction": "If no pending traffic violations/cases and information is accurate, encode and print. Review Data/Findings, affix signature/initial on the copy of certification, and segregate. Affix signature on the certification. Advise client to proceed to PNP Traffic Unit for the next step.",
+                "duration": "6 minutes (1 min + 5 mins)",
+                "personInCharge": "Information Desk Officer Incharge / Data Encoder / TCT Case Incharge / Chief, ICTPMO Admin In-charge",
+                "fee": "Php 100.00"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "Follow advice if documents are lacking.",
+                "providerAction": "If the client is lacking requirements (e.g., Affidavit of Loss): Advise client to secure one from any lawyer and provide a photocopy. If there is no Police Blotter Report, advise clients to proceed to the Police Station with jurisdiction over the lost incident.",
+                "duration": "2 minutes",
+                "personInCharge": "Information Desk Officer Incharge / TCT Case In-charge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 5,
+                "clientAction": "Return to ICPTMO and submit requirements together with official receipt.",
+                "providerAction": "Receive/Check Requirements: Official Receipt for Traffic Clearance Fee, Official Receipt for Police Blotter Report Fee, Affidavit of Loss, and Police Blotter Report. Indicate in the logbook the proof of payment (official receipt) and client information.",
+                "duration": "1 minute",
+                "personInCharge": "Information Desk Officer Incharge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 6,
+                "clientAction": "Wait for the data check and for further advise from the service provider.",
+                "providerAction": "Verify/validate data and information based on records available. If found on record to have unsettled traffic violation/s, clients are advised to settle pending violation/s or cases; issue order of payment for the client to pay to the cashier.",
+                "duration": "5 minutes",
+                "personInCharge": "Data Encoder TCT Case Incharge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 7,
+                "clientAction": "Pay to the cashier.",
+                "providerAction": "Advise client to proceed at the Collection Services Division, City Treasurer’s Office, IBJT East Bldg., Tambo, Hinaplanon, Iligan City.",
+                "duration": "8 minutes",
+                "personInCharge": "Cashier",
+                "fee": "Fines and penalties in accordance with the provision of the New Traffic Code of Iligan City"
+            },
+            {
+                "stepNumber": 8,
+                "clientAction": "Proceed to Iligan City Traffic Management Office and wait for processing of clearance.",
+                "providerAction": "For Unsettled Traffic Violation: Receive/check proof of payment, indicate the O.R. number and amount paid, record Official Receipt Information. For Traffic Clearance: Receive/check official receipt and record information in the logbook. Encode personal details as indicated in affidavit of loss and print certification in three (3) copies.",
+                "duration": "3 minutes",
+                "personInCharge": "TCT Case Incharge Data Encoder",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 9,
+                "clientAction": "Wait for processing of traffic clearance.",
+                "providerAction": "If no pending traffic violation/s/case and information is accurate, encode and print. Review Data/Findings and affix signature/initial on the copy of certification and segregate. Affix Signature on the certification. Advise clients to proceed to PNP Traffic Unit, Iligan City Police Office for a signature of Chief Traffic Unit.",
+                "duration": "5 minutes",
+                "personInCharge": "Data Encoder / TCT Case Incharge / Chief, ICTPMO Admin In-charge",
+                "fee": "Php 100.00"
+            }
+        ]
+    },
+    {
+        "slug": "pre-marriage-counseling-certificate",
+        "title": "Pre-Marriage Counseling Certificate (P.D 965) - Preparation and Issuance",
+        "category": "Certificates and Vital Records",
+        "description": "Requirements for the preparation and issuance of a Pre-Marriage Counseling Certificate (P.D 965) for couples applying for a marriage license.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "City Mayor's Office - City Population Office",
+        "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising. No noon break.",
+        "whoMayAvail": "\"Couples to be\" who are applying for a Marriage License",
+        "requirements": [
+            {
+                "groupName": "Checklist of Requirements",
+                "items": [
+                    "Individual Residence Certificate (CEDULA) (1 original copy) - Secure from Barangay/City Hall",
+                    "Passport (For Foreigners Only) - Secure from Person concerned"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Request for a schedule of Pre-Marriage counseling seminar",
+                "providerAction": "a. Give logbook to client\nb. Conduct interview for profiling",
+                "duration": "8 Minutes",
+                "personInCharge": "Population Program Officer I or Population Program Officer III (City Population Office, City Mayor’s Office)",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Pay for PreMarriage Counseling (PMC) fee",
+                "providerAction": "Inform couple about the PMC fee and instruct to pay to the deputized collector",
+                "duration": "3 minutes",
+                "personInCharge": "Population Program Officer I or Population Program Officer III (City Population Office, City Mayor’s Office)",
+                "fee": "Php 250.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Accomplish and submit Marriage Expectation Inventory (MEI) questionnaire",
+                "providerAction": "a. Ask couple to answer MEI questionnaire\nb. Receive accomplished MEI and review answers",
+                "duration": "45 Minutes",
+                "personInCharge": "Population Program Officer I or Population Program Officer III (City Population Office, City Mayor's Office)",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "Receive schedule of PreMarriage Orientation",
+                "providerAction": "Provide couple specific date of pre marriage counseling schedule",
+                "duration": "3 minutes",
+                "personInCharge": "Population Program Officer I or Population Program Officer III (City Population Office, City Mayor’s Office)",
+                "fee": "Php 0.00"
+            }
+        ]
+    },
+    {
+        "slug": "granting-of-blood-request",
+        "title": "Granting of Blood Request",
+        "category": "Health and Wellness",
+        "description": "Requirements and guidelines for indigent residents of Iligan City to request blood assistance.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "City Mayor's Office - Administrative Division",
+        "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising. No noon break.",
+        "whoMayAvail": "Indigent residents of Iligan City",
+        "requirements": [
+            {
+                "groupName": "Checklist of Requirements",
+                "items": [
+                    "Signed Doctor's Blood Request (1 Original copy) - Secure from Hospital",
+                    "Certificate of Indigency from Barangay (1 Original Copy) - Secure from Barangay where the patient resides",
+                    "CMO Referral Slip (1 Original Copy) - Secure from City Mayor's Office - Administrative Division"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Proceed and submit requirements",
+                "providerAction": "Receive and check the completeness of requirements",
+                "duration": "6 Minutes",
+                "personInCharge": "Administrative Aide V City Mayor’s Office",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "When Securing Official Receipt:",
+                "providerAction": "Provide logbook to client",
+                "duration": "1 minute",
+                "personInCharge": "Administrative Aide V City Mayor’s Office",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Receive the document with the city seal to be signed by the City Mayor at the City Mayor’s Office Extension",
+                "providerAction": "Release the Mayor’s Clearance and instruct client to proceed to the City Mayor’s Office Office Extension",
+                "duration": "1 Minute",
+                "personInCharge": "Administrative Aide V City Mayor’s Office",
+                "fee": "Php 100.00"
+            }
+        ]
     }
 ]

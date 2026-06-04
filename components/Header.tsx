@@ -20,10 +20,11 @@ const navigation = [
         href: '/services',
         dropdown: [
             { name: 'All Services', href: '/services' },
-            { name: 'Business and Trade', href: '/services/business' },
-            { name: 'Certificates and IDs', href: '/services/certificates' },
-            { name: 'Disaster and Weather', href: '/services/disaster' },
-            { name: 'Health', href: '/services/health' },
+            { name: 'Business, Trade and Investment', href: '/services?category=Business%2C+Trade+and+Investment' },
+            { name: 'Certificates and Vital Records', href: '/services?category=Business%2C+Trade+and+Investment' },
+            { name: 'Health and Wellness', href: '/services?category=Business%2C+Trade+and+Investment' },
+            { name: 'Infrastructure and Public Works', href: '/services?category=Infrastructure+and+Public+Works' },
+            { name: 'Transport and Driving', href: '/services?category=Transport+and+Driving' }
         ],
     },
     {

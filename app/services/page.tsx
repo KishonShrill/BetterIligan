@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { Search, FileText, CheckCircle, ArrowRight, PlusCircle } from 'lucide-react';
 import { GovernmentService } from '@/types/service';
 
@@ -9,15 +10,46 @@ import servicesData from '@/data/services.json';
 
 const allServices = servicesData as GovernmentService[];
 
-export default function ServicesDirectoryPage() {
+function ServicesDirectoryContent() {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('All Services');
+
+    // Initialize the category from the URL, defaulting to 'All Services'
+    const initialCategory = searchParams.get('category') || 'All Services';
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+
+    // Sync state if the user uses the browser's Back/Forward buttons
+    useEffect(() => {
+        const currentCategory = searchParams.get('category') || 'All Services';
+        setSelectedCategory(currentCategory);
+    }, [searchParams]);
 
     // Dynamically generate the list of categories based on the data
     const categories = useMemo(() => {
         const uniqueCategories = Array.from(new Set(allServices.map((s) => s.category)));
         return ['All Services', ...uniqueCategories.sort()];
     }, []);
+
+    // Handle category clicks: update state AND shallow-update the URL
+    const handleCategoryChange = (category: string) => {
+        setSelectedCategory(category);
+
+        const params = new URLSearchParams(searchParams.toString());
+        if (category === 'All Services') {
+            params.delete('category');
+        } else {
+            params.set('category', category);
+        }
+
+        // Construct the new URL string
+        const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
+
+        // Use the native browser API to update the URL WITHOUT triggering a Next.js server fetch
+        window.history.pushState(null, '', newUrl);
+    };
 
     // Filter services based on search text AND selected category
     const filteredServices = useMemo(() => {
@@ -70,7 +102,7 @@ export default function ServicesDirectoryPage() {
                             {categories.map((category) => (
                                 <li key={category}>
                                     <button
-                                        onClick={() => setSelectedCategory(category)}
+                                        onClick={() => handleCategoryChange(category)}
                                         className={`w-full text-left px-5 py-3.5 text-sm font-medium transition-colors border-l-2 ${selectedCategory === category
                                             ? 'border-blue-600 bg-blue-50/50 text-blue-700'
                                             : 'border-transparent text-slate-600 hover:bg-slate-50 hover:text-slate-900'
@@ -186,7 +218,7 @@ export default function ServicesDirectoryPage() {
                                 We couldn't find any services matching "{searchQuery}" in {selectedCategory}.
                             </p>
                             <button
-                                onClick={() => { setSearchQuery(''); setSelectedCategory('All Services'); }}
+                                onClick={() => { setSearchQuery(''); handleCategoryChange('All Services'); }}
                                 className="mt-6 text-blue-600 font-semibold text-sm hover:underline"
                             >
                                 Clear all filters
@@ -196,5 +228,14 @@ export default function ServicesDirectoryPage() {
                 </div>
             </div>
         </main>
+    );
+}
+
+// Wrap the main content in a Suspense boundary to prevent build errors related to useSearchParams()
+export default function ServicesDirectoryPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#F8FAFC]"></div>}>
+            <ServicesDirectoryContent />
+        </Suspense>
     );
 }
