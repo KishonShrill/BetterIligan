@@ -1,40 +1,40 @@
 {
-  "name": "betteriligan",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "start": "next start",
-    "lint": "eslint",
-    "prepare": "husky",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
-  },
-  "dependencies": {
-    "@bettergov/kapwa": "^1.2.4",
-    "@opennextjs/cloudflare": "^1.19.11",
-    "clsx": "^2.1.1",
-    "neverthrow": "^8.2.0",
-    "next": "16.2.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "tailwind-merge": "^3.6.0"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^21.0.1",
-    "@commitlint/config-conventional": "^21.0.1",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
-    "husky": "^9.1.7",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "wrangler": "^4.95.0"
-  }
+    "name": "betteriligan",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "build": "next build",
+        "dev": "next dev --turbo",
+        "start": "next start",
+        "lint": "eslint",
+        "prepare": "husky",
+        "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+        "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+        "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+        "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    },
+    "dependencies": {
+        "@bettergov/kapwa": "^1.2.4",
+        "@opennextjs/cloudflare": "^1.19.11",
+        "clsx": "^2.1.1",
+        "neverthrow": "^8.2.0",
+        "next": "16.2.6",
+        "react": "19.2.4",
+        "react-dom": "19.2.4",
+        "tailwind-merge": "^3.6.0"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^21.0.1",
+        "@commitlint/config-conventional": "^21.0.1",
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "eslint": "^9",
+        "eslint-config-next": "16.2.6",
+        "husky": "^9.1.7",
+        "tailwindcss": "^4",
+        "typescript": "^5",
+        "wrangler": "^4.95.0"
+    }
 }

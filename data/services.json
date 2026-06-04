@@ -1,0 +1,84 @@
+[
+    {
+        "slug": "application-for-birth-certificate",
+        "title": "Application For Birth Certificate",
+        "category": "Certificates and Vital Records",
+        "description": "Register a timely or delayed Certificate of Live Birth (COLB) with the City Civil Registrar.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "City Civil Registry (CCR)",
+        "schedule": "Monday 9:00 AM - 5:00 PM (Flag Raising from 8:00 AM - 9:00 AM) | Tuesday to Friday, 8:30 AM to 5:00 PM (Morning Prayer 8:00 AM - 8:30 AM) | No noon break",
+        "whoMayAvail": "Concerned person of legal age, parents, guardians, attendant-at-birth, barangay secretary and civil registrar agents.",
+        "requirements": [
+            {
+                "groupName": "Timely Registration (Within 1-30 days after birth)",
+                "items": [
+                    "Duly accomplished Certificate of Live Birth, MF-102, in 4 copies",
+                    "Duly accomplished Muslim/IP Attachment - MF-102 for Muslim/Indigenous Peoples, in 3 copies",
+                    "If legitimate child, marriage contract of parents",
+                    "If illegitimate child, Duly accomplished Affidavit of Acknowledgement/ Paternity executed by the father and mother (personal appearance) at the back of the COLB, for illegitimate child and Affidavit to use Surname of the father (AUSF)"
+                ]
+            },
+            {
+                "groupName": "Delayed Registration (Beyond 30 days after birth)",
+                "items": [
+                    "Duly accomplished Certificate of Live Birth (COLB) MF-102, in 4 copies",
+                    "Duly accomplished Muslim/IP attachment MF-102 for Muslim/Indigenous Peoples, in 3 copies",
+                    "NSO Negative Certificate",
+                    "Barangay Captain Certification, if born at home",
+                    "Duly accomplished Affidavit of Acknowledgement/ Paternity executed by the father and mother (personal appearance) at the back of the COLB, for illegitimate child",
+                    "Duly accomplished Affidavit of Delayed Registration executed by the informant at the back of the COLB",
+                    "Community Tax Cert. No., date, place of issue",
+                    "Approval of Indorsement to City Prosecutor’s Office",
+                    "Posting period of 10 days",
+                    "Sworn Affidavit of 2 disinterested persons attesting to the facts and circumstances of birth",
+                    "Any 2 documents (public or private) showing the facts and circumstances of birth",
+                    "Affidavit to Use the Surname of the Father (AUSF), if illegitimate child"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Submit duly accomplished COLB or submit for interview as to the facts and circumstances of birth and comply with all requirements",
+                "providerAction": "Receive and review duly accomplished COLB and documentary evidences or prepare COLB to be accomplished by the concerned signatories",
+                "duration": "10 mins If with prepared COLB, 30 mins If without prepared COLB",
+                "personInCharge": "Reg. Ofcr. II/Bookbinder II",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Wait for the approval and release of duty registered COLB if timely registered",
+                "providerAction": "Process the registration and release of approved COLB, if timely registered.",
+                "duration": "30 minutes",
+                "personInCharge": "Reg. Ofcr. IV//Reg. Ofcr. IV",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "In case of delayed registration, hand carry the referral letter prepared by CCR to the City Prosecutor for appropriate action, get it back and submit it to CCR",
+                "providerAction": "In case of delayed registration, prepare referral letter addressed to the City Prosecutor and request the application/client to hand carry it to the said office, after which, submit same CCR.",
+                "duration": "5 minutes",
+                "personInCharge": "Reg. Ofcr. IV",
+                "fee": "Php 50.00 (Prosecutor’s Fee)"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "You wait...",
+                "providerAction": "Post the application for 10 consecutive days in CCR Bulletin Board",
+                "duration": "10 days",
+                "personInCharge": "Bookbinder II",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 5,
+                "clientAction": "Wait for the release of late COLB",
+                "providerAction": "Process the registration and release of approved delayed registered COLB on the 11th day.",
+                "duration": "20 minutes",
+                "personInCharge": "Reg. Ofcr. IV",
+                "fee": "Php 0.00"
+            }
+        ]
+    }
+]
