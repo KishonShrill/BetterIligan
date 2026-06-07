@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Search, ArrowRight, ArrowUpRight, FileText, Landmark } from 'lucide-react';
 import Section from '@/components/ui/Section';
 
@@ -31,10 +32,13 @@ export default function HeroSection() {
 
                     {/* Action Buttons */}
                     <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                        <button className="group flex items-center justify-center gap-2 bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 hover:shadow-lg transition-all duration-200">
+                        <Link
+                            href='/services'
+                            className="group flex items-center justify-center gap-2 bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 hover:shadow-lg transition-all duration-200"
+                        >
                             Browse Services
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </button>
+                        </Link>
                         <button className="flex items-center justify-center gap-2 bg-transparent border border-blue-400 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500/50 transition-all duration-200">
                             Contact Us
                         </button>

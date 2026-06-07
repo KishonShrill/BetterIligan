@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { kapwaSans, kapwaMono } from "./fonts";
 import "./globals.css";
 
-import Header from "@/components/Header";
+import Header from "@/components/layout/Header";
 import TopBanner from "@/components/layout/TopBanner";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
