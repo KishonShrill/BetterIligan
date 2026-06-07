@@ -1,7 +1,6 @@
 'use client'
 
-// 1. Import `use` from React
-import React, { useState, use } from 'react';
+import { useState, use } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -17,7 +16,6 @@ import {
 import { GovernmentService } from '@/types/service';
 
 import servicesData from '@/data/services.json';
-
 const allServices = servicesData as GovernmentService[];
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {

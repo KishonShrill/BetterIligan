@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Search, FileText, CheckCircle, ArrowRight, PlusCircle } from 'lucide-react';
 import { GovernmentService } from '@/types/service';
 
@@ -11,7 +11,6 @@ import servicesData from '@/data/services.json';
 const allServices = servicesData as GovernmentService[];
 
 function ServicesDirectoryContent() {
-    const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
