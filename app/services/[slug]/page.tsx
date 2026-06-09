@@ -13,10 +13,8 @@ import {
     BadgeCheck,
     Info
 } from 'lucide-react';
-import { GovernmentService } from '@/types/service';
 
-import servicesData from '@/data/services.json';
-const allServices = servicesData as GovernmentService[];
+import { allServices } from '@/data/categories';
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);

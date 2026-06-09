@@ -1,0 +1,110 @@
+[
+    {
+        "slug": "application-for-business-permit",
+        "title": "Application For Business Permit",
+        "category": "Business, Trade and Investment",
+        "description": "Requirements and guidelines for securing a new business permit or renewing an existing one at the City Mayor's Office.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "City Mayor's Office",
+        "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays, provision of services starts after flag raising. No noon break.",
+        "whoMayAvail": "Business Operators",
+        "requirements": [
+            {
+                "groupName": "For New Business",
+                "items": [
+                    "DTI Registration",
+                    "Barangay Clearance (Location of Business)",
+                    "Occupancy Permit (City Engineer's Office)",
+                    "Lease Contract (If business space is rented)",
+                    "Compliance of Zoning Ordinance (if applicable)"
+                ]
+            },
+            {
+                "groupName": "For Partnership, Corporation and Cooperative",
+                "items": [
+                    "SEC Registration and Article of Incorporation",
+                    "CDA Certificate for Cooperative",
+                    "Barangay Clearance (Location of Business)",
+                    "Occupancy Permit (City Engineer's Office)",
+                    "Lease Contract (If business space is rented)",
+                    "Compliance of Zoning Ordinance (if applicable)"
+                ]
+            },
+            {
+                "groupName": "For Renewal of Business Permit",
+                "items": [
+                    "Basis for computing taxes, fees and charges (Income Tax Return)",
+                    "Barangay Clearance (Location of Business)"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Secure Application for Business Permit form and checklist of requirements as to type of business applied for.",
+                "providerAction": "Issue Application of Business Permit form and checklist. Instruct applicant how to comply with requirements.",
+                "duration": "1 minute",
+                "personInCharge": "Victoria de Guzman",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Receive, fill up and submit application form and all requirements.",
+                "providerAction": "Receive the whole documents. Verify and check information on the Application for Business Permit form and the requirements.",
+                "duration": "5 minutes",
+                "personInCharge": "ResaDerama / Victoria de Guzman",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Wait while the encoding/processing is going on.",
+                "providerAction": "Encode all the data in the computer and print UNIFIED Form. Transmit information (applicant’s data) to City Engineer’s Office for assessment of regulatory fees.",
+                "duration": "5 minutes",
+                "personInCharge": "Mila Mahinay / Victoria de Guzman / Resa Derama",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "Proceed to Business Tax & Fees Division of City Treasurer’s Office for assessment and payment of business tax.",
+                "providerAction": "Advice client to proceed to City Treasurer’s Office for assessment of business taxes and other fees.",
+                "duration": "1 minute",
+                "personInCharge": "Mila Mahinay / Victoria de Guzman / Resa Derama",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 5,
+                "clientAction": "Submit all documents, together with the Official Receipt to Permits & Licensing Division.",
+                "providerAction": "Check the compliance of requirements including the Bureau of Fire Protection Certificate.",
+                "duration": "3 minutes",
+                "personInCharge": "Judith Surmion / Carmen Magnaye",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 6,
+                "clientAction": "Wait for the processing of the business permit.",
+                "providerAction": "Print Business Permit and countersign the Business Permit as to recommending approval.",
+                "duration": "2 minutes",
+                "personInCharge": "Judith Surmion / Carmen Magnaye",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 7,
+                "clientAction": "Receive and review duly approved Business Permit and corresponding Business Plate Number.",
+                "providerAction": "Forward Business Permit to the City Mayor for approval. Release the Business Permit with corresponding Business Plate Number.",
+                "duration": "2 minutes",
+                "personInCharge": "ResaDerama",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 8,
+                "clientAction": "Affix signature in the logbook as proof of receipt.",
+                "providerAction": "Require applicant to affix signature in the logbook as proof of receipt.",
+                "duration": "1 minute",
+                "personInCharge": "ResaDerama",
+                "fee": "Php 0.00"
+            }
+        ]
+    }
+]

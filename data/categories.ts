@@ -1,3 +1,4 @@
+import { GovernmentService } from '@/types/service';
 import {
     Building2,
     FileText,
@@ -5,6 +6,12 @@ import {
     HardHat,
     Car
 } from 'lucide-react';
+
+import business from './business.json';
+import certificates from './certificates.json';
+import health from './health.json';
+import infrastructure from './infrastructure.json';
+import transport from './transport.json';
 
 export const serviceCategories = [
     {
@@ -44,3 +51,12 @@ export const headerDropdown = [
     { name: 'All Services', href: '/services' },
     ...serviceCategories.map(cat => ({ name: cat.name, href: cat.href }))
 ];
+
+// Combine them all into one flat array and cast it to your type
+export const allServices = [
+    ...business,
+    ...certificates,
+    ...health,
+    ...infrastructure,
+    ...transport,
+] as GovernmentService[];

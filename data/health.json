@@ -1,0 +1,50 @@
+[
+    {
+        "slug": "granting-of-blood-request",
+        "title": "Granting of Blood Request",
+        "category": "Health and Wellness",
+        "description": "Requirements and guidelines for indigent residents of Iligan City to request blood assistance.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "City Mayor's Office - Administrative Division",
+        "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising. No noon break.",
+        "whoMayAvail": "Indigent residents of Iligan City",
+        "requirements": [
+            {
+                "groupName": "Checklist of Requirements",
+                "items": [
+                    "Signed Doctor's Blood Request (1 Original copy) - Secure from Hospital",
+                    "Certificate of Indigency from Barangay (1 Original Copy) - Secure from Barangay where the patient resides",
+                    "CMO Referral Slip (1 Original Copy) - Secure from City Mayor's Office - Administrative Division"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Proceed and submit requirements",
+                "providerAction": "Receive and check the completeness of requirements",
+                "duration": "6 Minutes",
+                "personInCharge": "Administrative Aide V City Mayor’s Office",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "When Securing Official Receipt:",
+                "providerAction": "Provide logbook to client",
+                "duration": "1 minute",
+                "personInCharge": "Administrative Aide V City Mayor’s Office",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Receive the document with the city seal to be signed by the City Mayor at the City Mayor’s Office Extension",
+                "providerAction": "Release the Mayor’s Clearance and instruct client to proceed to the City Mayor’s Office Office Extension",
+                "duration": "1 Minute",
+                "personInCharge": "Administrative Aide V City Mayor’s Office",
+                "fee": "Php 100.00"
+            }
+        ]
+    }
+]

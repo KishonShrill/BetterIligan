@@ -4,11 +4,8 @@ import { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Search, FileText, CheckCircle, ArrowRight, PlusCircle } from 'lucide-react';
-import { GovernmentService } from '@/types/service';
 
-import servicesData from '@/data/services.json';
-
-const allServices = servicesData as GovernmentService[];
+import { allServices } from '@/data/categories';
 
 function ServicesDirectoryContent() {
     const pathname = usePathname();

@@ -1,0 +1,104 @@
+[
+    {
+        "slug": "application-for-traffic-clearance",
+        "title": "Application For Traffic Clearance",
+        "category": "Transport and Driving",
+        "description": "Requirements for securing a traffic clearance from the Iligan City Traffic and Parking Management Office.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": false,
+        "department": "Iligan City Traffic and Parking Management Office",
+        "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising. No noon break.",
+        "whoMayAvail": "All government agencies, LGUs, GOCC, and other government instrumentalities and owners or operators/drivers of public and private conveyances including individual who may have concern with traffic.",
+        "requirements": [
+            {
+                "groupName": "Requirements For Traffic Clearance",
+                "items": [
+                    "Affidavit of loss three (3) copies, one (1) original and two (2) photocopies.",
+                    "Police Blotter Report Fee (Official Receipt issued by CTO)",
+                    "Certificate Fee (Official Receipt issued by CTO)",
+                    "Police Blotter Extract",
+                    "Supporting documents: (Not Compulsory)",
+                    "Deed of Sale",
+                    "Photocopy of OR/CR",
+                    "SPA",
+                    "Authorization Letter"
+                ]
+            }
+        ],
+        "procedures": [
+            {
+                "stepNumber": 1,
+                "clientAction": "Fill out Iligan City Government Registry Form and present required documents.",
+                "providerAction": "Receive/Check Requirements: Official Receipt for Traffic Clearance Fee, Official Receipt for Police Blotter Report Fee, Affidavit of Loss (3 copies), and Police Blotter Report.",
+                "duration": "2 minutes",
+                "personInCharge": "Information Desk Officer Incharge / TCT Case In-charge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 2,
+                "clientAction": "Proceed to secure Official Receipt.",
+                "providerAction": "If the requirement is complete, advise client to proceed at the Collection Services Division, City Treasurer’s Office, IBJT, East Bldg., Tambo, Hinaplanon, Iligan City. Process payment and issue corresponding Official Receipt.",
+                "duration": "8 minutes",
+                "personInCharge": "Cashier",
+                "fee": "Certification Fee Php 50.00, Police Report Fee Php 50.00"
+            },
+            {
+                "stepNumber": 3,
+                "clientAction": "Return to ICTPMO and submit official receipt. Wait for the process and further advice from the service provider.",
+                "providerAction": "If no pending traffic violations/cases and information is accurate, encode and print. Review Data/Findings, affix signature/initial on the copy of certification, and segregate. Affix signature on the certification. Advise client to proceed to PNP Traffic Unit for the next step.",
+                "duration": "6 minutes (1 min + 5 mins)",
+                "personInCharge": "Information Desk Officer Incharge / Data Encoder / TCT Case Incharge / Chief, ICTPMO Admin In-charge",
+                "fee": "Php 100.00"
+            },
+            {
+                "stepNumber": 4,
+                "clientAction": "Follow advice if documents are lacking.",
+                "providerAction": "If the client is lacking requirements (e.g., Affidavit of Loss): Advise client to secure one from any lawyer and provide a photocopy. If there is no Police Blotter Report, advise clients to proceed to the Police Station with jurisdiction over the lost incident.",
+                "duration": "2 minutes",
+                "personInCharge": "Information Desk Officer Incharge / TCT Case In-charge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 5,
+                "clientAction": "Return to ICPTMO and submit requirements together with official receipt.",
+                "providerAction": "Receive/Check Requirements: Official Receipt for Traffic Clearance Fee, Official Receipt for Police Blotter Report Fee, Affidavit of Loss, and Police Blotter Report. Indicate in the logbook the proof of payment (official receipt) and client information.",
+                "duration": "1 minute",
+                "personInCharge": "Information Desk Officer Incharge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 6,
+                "clientAction": "Wait for the data check and for further advise from the service provider.",
+                "providerAction": "Verify/validate data and information based on records available. If found on record to have unsettled traffic violation/s, clients are advised to settle pending violation/s or cases; issue order of payment for the client to pay to the cashier.",
+                "duration": "5 minutes",
+                "personInCharge": "Data Encoder TCT Case Incharge",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 7,
+                "clientAction": "Pay to the cashier.",
+                "providerAction": "Advise client to proceed at the Collection Services Division, City Treasurer’s Office, IBJT East Bldg., Tambo, Hinaplanon, Iligan City.",
+                "duration": "8 minutes",
+                "personInCharge": "Cashier",
+                "fee": "Fines and penalties in accordance with the provision of the New Traffic Code of Iligan City"
+            },
+            {
+                "stepNumber": 8,
+                "clientAction": "Proceed to Iligan City Traffic Management Office and wait for processing of clearance.",
+                "providerAction": "For Unsettled Traffic Violation: Receive/check proof of payment, indicate the O.R. number and amount paid, record Official Receipt Information. For Traffic Clearance: Receive/check official receipt and record information in the logbook. Encode personal details as indicated in affidavit of loss and print certification in three (3) copies.",
+                "duration": "3 minutes",
+                "personInCharge": "TCT Case Incharge Data Encoder",
+                "fee": "Php 0.00"
+            },
+            {
+                "stepNumber": 9,
+                "clientAction": "Wait for processing of traffic clearance.",
+                "providerAction": "If no pending traffic violation/s/case and information is accurate, encode and print. Review Data/Findings and affix signature/initial on the copy of certification and segregate. Affix Signature on the certification. Advise clients to proceed to PNP Traffic Unit, Iligan City Police Office for a signature of Chief Traffic Unit.",
+                "duration": "5 minutes",
+                "personInCharge": "Data Encoder / TCT Case Incharge / Chief, ICTPMO Admin In-charge",
+                "fee": "Php 100.00"
+            }
+        ]
+    }
+]
