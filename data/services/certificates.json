@@ -1,5 +1,55 @@
 [
     {
+        "title": "Application/Request For Birth Certificate (Online)",
+        "category": "Certificates and Vital Records",
+        "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
+        "source": "external",
+        "isWalkIn": false,
+        "isOnline": true,
+        "department": "Philippine Statistics Authority (PSA)",
+        "externalUrl": "https://www.psaserbilis.com.ph/BirthCertificate"
+    },
+    {
+        "title": "Application/Request For Marriage Certificate (Online)",
+        "category": "Certificates and Vital Records",
+        "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
+        "source": "external",
+        "isWalkIn": false,
+        "isOnline": true,
+        "department": "Philippine Statistics Authority (PSA)",
+        "externalUrl": "https://www.psaserbilis.com.ph/MarriageCertificate"
+    },
+    {
+        "title": "Application/Request For Death Certificate (Online)",
+        "category": "Certificates and Vital Records",
+        "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
+        "source": "external",
+        "isWalkIn": false,
+        "isOnline": true,
+        "department": "Philippine Statistics Authority (PSA)",
+        "externalUrl": "https://www.psaserbilis.com.ph/DeathCertificate"
+    },
+    {
+        "title": "Application/Request For CENOMAR Certificate (Online)",
+        "category": "Certificates and Vital Records",
+        "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
+        "source": "external",
+        "isWalkIn": false,
+        "isOnline": true,
+        "department": "Philippine Statistics Authority (PSA)",
+        "externalUrl": "https://www.psaserbilis.com.ph/CENOMARCertificate"
+    },
+    {
+        "title": "Application/Request For CENODEATH Certificate (Online)",
+        "category": "Certificates and Vital Records",
+        "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
+        "source": "external",
+        "isWalkIn": false,
+        "isOnline": true,
+        "department": "Philippine Statistics Authority (PSA)",
+        "externalUrl": "https://www.psaserbilis.com.ph/CENODEATHCertificate"
+    },
+    {
         "slug": "application-for-birth-certificate",
         "title": "Application For Birth Certificate",
         "category": "Certificates and Vital Records",

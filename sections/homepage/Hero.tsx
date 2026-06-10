@@ -166,6 +166,7 @@ export default function HeroSection() {
                             <div className="flex flex-wrap gap-2">
                                 {[
                                     { name: 'Birth Certificate', icon: FileText },
+                                    { name: 'Marriage Certificate', icon: FileText },
                                     { name: 'Business Permit', icon: Landmark },
                                     { name: 'Real Property Tax', icon: FileText },
                                 ].map((item) => (

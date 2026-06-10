@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Search, FileText, CheckCircle, ArrowRight, PlusCircle } from 'lucide-react';
+import { Search, PlusCircle } from 'lucide-react';
 
 import { allServices } from '@/data/services';
 import ServiceCard from '@/components/ServiceCard';
@@ -144,8 +144,8 @@ function ServicesDirectoryContent() {
                     {/* Cards Grid */}
                     {filteredServices.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            {filteredServices.map((service) => (
-                                <ServiceCard key={service.slug} service={service} />
+                            {filteredServices.map((service, idx) => (
+                                <ServiceCard key={`service-${idx}`} service={service} />
                             ))}
                         </div>
                     ) : (

@@ -17,27 +17,26 @@ const ProcedureSchema = z.object({
 
 // 2. Define the base fields that EVERY service must have
 const BaseServiceSchema = z.object({
-    slug: z.string(),
     title: z.string(),
     category: z.string(),
     description: z.string(),
     isWalkIn: z.boolean(),
     isOnline: z.boolean(),
     department: z.string(),
-    schedule: z.string(),
-    whoMayAvail: z.string(),
 });
 
 // 3. Define the "Official" shape
 const OfficialServiceSchema = BaseServiceSchema.extend({
+    slug: z.string(),
+    schedule: z.string(),
+    whoMayAvail: z.string(),
+
     source: z.literal("official"),
     requirements: z.array(RequirementSchema),
     procedures: z.array(ProcedureSchema),
 });
 
 // 4. Define the "External" shape
-// Notice it does NOT have description, requirements, or procedures.
-// (I added an externalUrl here, as you'll likely need a place to send the user!)
 const ExternalServiceSchema = BaseServiceSchema.extend({
     source: z.literal("external"),
     externalUrl: z.string().url(),

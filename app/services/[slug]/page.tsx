@@ -19,7 +19,7 @@ import { allServices } from '@/data/services';
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
-    const service = allServices.find((s) => s.slug === resolvedParams.slug);
+    const service = allServices.find((s) => s.source === "official" && s.slug === resolvedParams.slug);
 
     if (!service) {
         notFound();
@@ -251,24 +251,27 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                                     {service.department}
                                 </p>
                             </div>
+                            {service.source === "official" && (
+                                <>
+                                    <div>
+                                        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-1">
+                                            <Clock className="w-3.5 h-3.5" /> Schedule
+                                        </p>
+                                        <p className="text-slate-800 text-sm font-medium leading-relaxed">
+                                            {service.schedule}
+                                        </p>
+                                    </div>
 
-                            <div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-1">
-                                    <Clock className="w-3.5 h-3.5" /> Schedule
-                                </p>
-                                <p className="text-slate-800 text-sm font-medium leading-relaxed">
-                                    {service.schedule}
-                                </p>
-                            </div>
-
-                            <div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-1">
-                                    <Users className="w-3.5 h-3.5" /> Who may avail
-                                </p>
-                                <p className="text-slate-800 text-sm font-medium leading-relaxed">
-                                    {service.whoMayAvail}
-                                </p>
-                            </div>
+                                    <div>
+                                        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-1">
+                                            <Users className="w-3.5 h-3.5" /> Who may avail
+                                        </p>
+                                        <p className="text-slate-800 text-sm font-medium leading-relaxed">
+                                            {service.whoMayAvail}
+                                        </p>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
 
