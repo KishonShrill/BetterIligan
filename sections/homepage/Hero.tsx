@@ -6,8 +6,8 @@ import { Search, ArrowRight, ArrowUpRight, FileText, Landmark, ChevronRight } fr
 import Section from '@/components/ui/Section';
 
 // Import your centralized services array!
-import { allServices } from '@/data/categories';
-import { GovernmentService } from '@/types/service';
+import { allServices } from '@/data/services'; // Changed from categories
+import { GovernmentService } from '@/validations/serviceSchema';
 
 export default function HeroSection() {
     const [searchQuery, setSearchQuery] = useState('');

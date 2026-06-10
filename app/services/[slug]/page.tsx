@@ -14,7 +14,7 @@ import {
     Info
 } from 'lucide-react';
 
-import { allServices } from '@/data/categories';
+import { allServices } from '@/data/services';
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
@@ -108,7 +108,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     {/* Tab Content: Requirements */}
                     {activeTab === 'requirements' && (
                         <div className="animate-in fade-in duration-300">
-                            {service.requirements?.map((group, idx) => (
+                            {service.source === "official" && service.requirements?.map((group, idx) => (
                                 <div key={idx} className="mb-8 last:mb-0">
                                     <h3 className="text-lg font-bold text-slate-900 mb-4 bg-slate-100 px-4 py-2 rounded-lg inline-block">
                                         {group.groupName}
@@ -152,7 +152,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     {/* Tab Content: Procedures */}
                     {activeTab === 'procedures' && (
                         <div className="animate-in fade-in duration-300 space-y-6">
-                            {service.procedures?.map((step) => (
+                            {service.source === "official" && service.procedures?.map((step) => (
                                 <div key={step.stepNumber} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                                     <div className="flex items-center gap-3 mb-4 border-b border-slate-100 pb-4">
                                         <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shrink-0">

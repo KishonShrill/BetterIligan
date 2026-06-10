@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Search, FileText, CheckCircle, ArrowRight, PlusCircle } from 'lucide-react';
 
-import { allServices } from '@/data/categories';
+import { allServices } from '@/data/services';
 
 function ServicesDirectoryContent() {
     const pathname = usePathname();
