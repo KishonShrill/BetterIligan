@@ -11,16 +11,34 @@ import {
     Check,
     FileText,
     BadgeCheck,
-    Info
+    Info,
+    ExternalLink
 } from 'lucide-react';
 
 import { allServices } from '@/data/services';
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
-    const [activeTab, setActiveTab] = useState<'requirements' | 'procedures'>('requirements');
-
     const service = allServices.find((s) => s.slug === resolvedParams.slug);
+
+    if (!service) {
+        notFound();
+    }
+
+    // 1. Dynamically determine which tabs should exist based on the data payload
+    const availableTabs: { id: 'requirements' | 'procedures'; label: string }[] = [];
+
+    if ('requirements' in service && service.requirements && service.requirements.length > 0) {
+        availableTabs.push({ id: 'requirements', label: 'Requirements' });
+    }
+    if ('procedures' in service && service.procedures && service.procedures.length > 0) {
+        availableTabs.push({ id: 'procedures', label: 'Procedures' });
+    }
+
+    // 2. Set the default active tab safely to whatever is available first, or fallback to null
+    const [activeTab, setActiveTab] = useState<'requirements' | 'procedures' | null>(
+        availableTabs.length > 0 ? availableTabs[0].id : null
+    );
 
     const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
 
@@ -33,10 +51,6 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
         }
         setCheckedItems(newChecked);
     };
-
-    if (!service) {
-        notFound();
-    }
 
     return (
         <main className="min-h-screen bg-slate-50 font-sans pb-20">
@@ -66,6 +80,11 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                                 <BadgeCheck className="w-3.5 h-3.5" /> Official Data
                             </span>
                         )}
+                        {service.source === 'external' && (
+                            <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 px-2 py-1 rounded text-xs font-semibold border border-amber-200">
+                                <ExternalLink className="w-3.5 h-3.5" /> External Link
+                            </span>
+                        )}
                     </div>
 
                     <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
@@ -83,39 +102,34 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                 {/* Left Column: Tabs & Content */}
                 <div className="lg:col-span-8">
 
-                    {/* Tab Navigation */}
-                    <div className="flex border-b border-slate-200 mb-8 overflow-x-auto hide-scrollbar">
-                        <button
-                            onClick={() => setActiveTab('requirements')}
-                            className={`px-6 py-3 text-sm font-bold border-b-2 whitespace-nowrap transition-colors ${activeTab === 'requirements'
-                                ? 'border-blue-600 text-blue-600'
-                                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
-                                }`}
-                        >
-                            Requirements
-                        </button>
-                        <button
-                            onClick={() => setActiveTab('procedures')}
-                            className={`px-6 py-3 text-sm font-bold border-b-2 whitespace-nowrap transition-colors ${activeTab === 'procedures'
-                                ? 'border-blue-600 text-blue-600'
-                                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
-                                }`}
-                        >
-                            Procedures
-                        </button>
-                    </div>
+                    {/* Dynamic Tab Navigation (Only renders if tabs exist) */}
+                    {availableTabs.length > 0 && (
+                        <div className="flex border-b border-slate-200 mb-8 overflow-x-auto hide-scrollbar">
+                            {availableTabs.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-6 py-3 text-sm font-bold border-b-2 whitespace-nowrap transition-colors ${activeTab === tab.id
+                                        ? 'border-blue-600 text-blue-600'
+                                        : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                                        }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
+                    )}
 
                     {/* Tab Content: Requirements */}
-                    {activeTab === 'requirements' && (
+                    {activeTab === 'requirements' && service.source === 'official' && service.requirements && (
                         <div className="animate-in fade-in duration-300">
-                            {service.source === "official" && service.requirements?.map((group, idx) => (
+                            {service.requirements.map((group, idx) => (
                                 <div key={idx} className="mb-8 last:mb-0">
                                     <h3 className="text-lg font-bold text-slate-900 mb-4 bg-slate-100 px-4 py-2 rounded-lg inline-block">
                                         {group.groupName}
                                     </h3>
                                     <ul className="space-y-3">
                                         {group.items.map((item, itemIdx) => {
-                                            // Create a unique ID for each item based on its group and item index
                                             const itemId = `${idx}-${itemIdx}`;
                                             const isChecked = checkedItems.has(itemId);
 
@@ -125,15 +139,12 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                                                     onClick={() => toggleCheck(itemId)}
                                                     className="flex gap-3 cursor-pointer group"
                                                 >
-                                                    {/* Custom Checkbox */}
                                                     <div className={`w-5 h-5 mt-0.5 shrink-0 rounded flex items-center justify-center border transition-colors duration-200 ${isChecked
                                                         ? 'bg-emerald-500 border-emerald-500'
                                                         : 'bg-white border-slate-300 group-hover:border-emerald-400'
                                                         }`}>
                                                         {isChecked && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
                                                     </div>
-
-                                                    {/* Requirement Text */}
                                                     <span className={`leading-relaxed transition-all duration-200 select-none ${isChecked
                                                         ? 'text-slate-400 line-through'
                                                         : 'text-slate-700 group-hover:text-slate-900'
@@ -150,9 +161,9 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     )}
 
                     {/* Tab Content: Procedures */}
-                    {activeTab === 'procedures' && (
+                    {activeTab === 'procedures' && service.source === 'official' && service.procedures && (
                         <div className="animate-in fade-in duration-300 space-y-6">
-                            {service.source === "official" && service.procedures?.map((step) => (
+                            {service.procedures.map((step) => (
                                 <div key={step.stepNumber} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                                     <div className="flex items-center gap-3 mb-4 border-b border-slate-100 pb-4">
                                         <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shrink-0">
@@ -191,11 +202,30 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                         </div>
                     )}
 
+                    {/* Fallback for External Links / Services with zero tabs */}
+                    {availableTabs.length === 0 && service.source === 'external' && (
+                        <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center shadow-sm">
+                            <Info className="w-12 h-12 text-blue-500 mx-auto mb-4" />
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">External Portal Redirection</h3>
+                            <p className="text-slate-600 mb-6 max-w-md mx-auto">
+                                This service is processed via an external platform or agency portal. Click the button below to visit their live link.
+                            </p>
+                            <a
+                                href={service.externalUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-bold rounded-xl shadow-md hover:bg-blue-700 transition-colors"
+                            >
+                                Access Service Portal
+                                <ExternalLink className="w-4 h-4" />
+                            </a>
+                        </div>
+                    )}
+
                 </div>
 
                 {/* Right Column: Quick Facts Sidebar */}
                 <div className="lg:col-span-4 space-y-6">
-
                     {/* Action/Status Card */}
                     <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
                         <h3 className="font-bold text-slate-900 mb-4 text-lg">Availability</h3>
@@ -253,8 +283,8 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                             Suggest an Edit
                         </button>
                     </div>
-
                 </div>
+
             </div>
         </main>
     );
