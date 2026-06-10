@@ -129,10 +129,10 @@ export default function HeroSection() {
                                 <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                                     {searchResults.length > 0 ? (
                                         <ul className="max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar">
-                                            {searchResults.map((service) => (
-                                                <li key={service.slug}>
+                                            {searchResults.map((service, idx) => (
+                                                <li key={`service-${idx}`}>
                                                     <Link
-                                                        href={`/services/${service.slug}`}
+                                                        href={service.source === "official" ? `/services/${service.slug}` : service.externalUrl}
                                                         className="flex items-center justify-between p-4 hover:bg-blue-50 transition-colors group/item"
                                                         onClick={() => setIsDropdownOpen(false)}
                                                     >
