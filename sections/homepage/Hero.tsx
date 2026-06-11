@@ -167,8 +167,7 @@ export default function HeroSection() {
                                 {[
                                     { name: 'Birth Certificate', icon: FileText },
                                     { name: 'Marriage Certificate', icon: FileText },
-                                    { name: 'Business Permit', icon: Landmark },
-                                    { name: 'Real Property Tax', icon: FileText },
+                                    { name: 'Business Permit', icon: Landmark }
                                 ].map((item) => (
                                     <button
                                         key={item.name}

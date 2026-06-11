@@ -39,11 +39,9 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                             External
                         </span>
                     )}
-                    {service.isWalkIn && (
-                        <span className="bg-slate-50 text-slate-600 border border-slate-200 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider">
-                            Walk-In
-                        </span>
-                    )}
+                    <span className="bg-slate-50 text-slate-600 border border-slate-200 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider">
+                        {service.isWalkIn ? "Walk-In" : "Online"}
+                    </span>
                 </div>
             </div>
 
@@ -65,7 +63,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                 <div className="flex items-center gap-1.5 text-emerald-600">
                     <CheckCircle className="w-3.5 h-3.5" />
                     <span className="text-[11px] font-bold uppercase tracking-widest">
-                        {isExternal ? 'LGU Portal Link' : `${service.source === 'official' ? 'Official' : 'Community'} Data`}
+                        {isExternal ? 'Portal Link' : `${service.source === 'official' ? 'Official' : 'Community'} Data`}
                     </span>
                 </div>
 
