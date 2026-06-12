@@ -4,7 +4,7 @@ const LOCAL_IP = process.env.DEVELOPMENT_IP;
 
 const nextConfig: NextConfig = {
     /* config options here */
-    allowedDevOrigins: [LOCAL_IP]
+    allowedDevOrigins: LOCAL_IP ? [LOCAL_IP] : [],
 };
 
 export default nextConfig;
