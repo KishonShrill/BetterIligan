@@ -181,9 +181,15 @@ export default function WeatherAndMap() {
                     <div className="flex-1 w-full relative bg-slate-100">
                         <iframe
                             title="Map of Iligan City"
-                            width="100%" height="100%" frameBorder="0" scrolling="no"
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=124.1800%2C8.1800%2C124.3000%2C8.2800&layer=mapnik&marker=8.2280%2C124.2452"
+                            width="100%"
+                            height="100%"
+                            frameBorder="0"
+                            scrolling="no"
+                            // Using the standard Google Maps embed URL (No API key required)
+                            src="https://maps.google.com/maps?q=Iligan%20City%20Hall,%20Buhanginan%20Hills,%20Iligan%20City&t=&z=14&ie=UTF8&iwloc=&output=embed"
                             className="absolute inset-0 w-full h-full"
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
                         ></iframe>
                     </div>
 
