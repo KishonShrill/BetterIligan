@@ -10,6 +10,7 @@
         "department": "Municipal Engineering Office",
         "schedule": "Monday 9:00 A.M - 5:00 P.M. (Flag Raising from 8:00 A.M. - 9:00A.M.) Tuesday to Friday, 8:30 A.M. to 5:00 P.M. (Morning Prayer 8:00 to 8:30 A.M.) No noon break",
         "whoMayAvail": "Building Permit Applicants",
+        "type": "standard",
         "requirements": [
             {
                 "groupName": "General Requirements",
@@ -138,6 +139,7 @@
         "department": "City Mayor's Office",
         "schedule": "8:00 AM - 5:00 PM Daily (No noon break) excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising.",
         "whoMayAvail": "1. Indigents who need temporary electrical connection at their residences\n2. Indigents not covered by Iligan City Resettlement Projects",
+        "type": "standard",
         "requirements": [
             {
                 "groupName": "General Requirements",
@@ -186,6 +188,7 @@
         "department": "Zoning Office",
         "schedule": "Monday 9:00 A.M - 5:00 P.M. (Flag Raising from 8:00 A.M. - 9:00A.M.) | Tuesday to Friday, 8:30 A.M. to 5:00 P.M. (Morning Prayer 8:00 to 8:30 A.M.) | No noon break",
         "whoMayAvail": "Not specified",
+        "type": "standard",
         "requirements": [
             {
                 "groupName": "General Requirements",

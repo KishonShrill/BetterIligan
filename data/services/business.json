@@ -10,6 +10,7 @@
         "department": "City Mayor's Office",
         "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays, provision of services starts after flag raising. No noon break.",
         "whoMayAvail": "Business Operators",
+        "type": "standard",
         "requirements": [
             {
                 "groupName": "For New Business",

@@ -3,50 +3,55 @@
         "title": "Application/Request For Birth Certificate (Online)",
         "category": "Certificates and Vital Records",
         "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
-        "source": "external",
+        "source": "official",
         "isWalkIn": false,
         "isOnline": true,
         "department": "Philippine Statistics Authority (PSA)",
+        "type": "external",
         "externalUrl": "https://www.psaserbilis.com.ph/BirthCertificate"
     },
     {
         "title": "Application/Request For Marriage Certificate (Online)",
         "category": "Certificates and Vital Records",
         "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
-        "source": "external",
+        "source": "official",
         "isWalkIn": false,
         "isOnline": true,
         "department": "Philippine Statistics Authority (PSA)",
+        "type": "external",
         "externalUrl": "https://www.psaserbilis.com.ph/MarriageCertificate"
     },
     {
         "title": "Application/Request For Death Certificate (Online)",
         "category": "Certificates and Vital Records",
         "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
-        "source": "external",
+        "source": "official",
         "isWalkIn": false,
         "isOnline": true,
         "department": "Philippine Statistics Authority (PSA)",
+        "type": "external",
         "externalUrl": "https://www.psaserbilis.com.ph/DeathCertificate"
     },
     {
         "title": "Application/Request For CENOMAR Certificate (Online)",
         "category": "Certificates and Vital Records",
         "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
-        "source": "external",
+        "source": "official",
         "isWalkIn": false,
         "isOnline": true,
         "department": "Philippine Statistics Authority (PSA)",
+        "type": "external",
         "externalUrl": "https://www.psaserbilis.com.ph/CENOMARCertificate"
     },
     {
         "title": "Application/Request For CENODEATH Certificate (Online)",
         "category": "Certificates and Vital Records",
         "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
-        "source": "external",
+        "source": "official",
         "isWalkIn": false,
         "isOnline": true,
         "department": "Philippine Statistics Authority (PSA)",
+        "type": "external",
         "externalUrl": "https://www.psaserbilis.com.ph/CENODEATHCertificate"
     },
     {
@@ -60,6 +65,7 @@
         "department": "City Civil Registry (CCR)",
         "schedule": "Monday 9:00 AM - 5:00 PM (Flag Raising from 8:00 AM - 9:00 AM) | Tuesday to Friday, 8:30 AM to 5:00 PM (Morning Prayer 8:00 AM - 8:30 AM) | No noon break",
         "whoMayAvail": "Concerned person of legal age, parents, guardians, attendant-at-birth, barangay secretary and civil registrar agents.",
+        "type": "standard",
         "requirements": [
             {
                 "groupName": "Timely Registration (Within 1-30 days after birth)",
@@ -142,6 +148,7 @@
         "department": "City Mayor's Office - City Population Office",
         "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising. No noon break.",
         "whoMayAvail": "\"Couples to be\" who are applying for a Marriage License",
+        "type": "standard",
         "requirements": [
             {
                 "groupName": "Checklist of Requirements",

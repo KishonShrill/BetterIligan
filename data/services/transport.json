@@ -10,6 +10,7 @@
         "department": "Iligan City Traffic and Parking Management Office",
         "schedule": "8:00 AM - 5:00 PM Daily excluding Saturdays, Sundays and Holidays. On Mondays provision of services starts after flag raising. No noon break.",
         "whoMayAvail": "All government agencies, LGUs, GOCC, and other government instrumentalities and owners or operators/drivers of public and private conveyances including individual who may have concern with traffic.",
+        "type": "standard",
         "requirements": [
             {
                 "groupName": "Requirements For Traffic Clearance",

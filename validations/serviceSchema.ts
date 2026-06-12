@@ -20,38 +20,41 @@ const BaseServiceSchema = z.object({
     title: z.string(),
     category: z.string(),
     description: z.string(),
+    department: z.string(),
+
+    // Dimension 1: The Trust Level
+    source: z.enum(["official", "community", "unverified"]),
+
+    // Dimension 2: Physical vs Digital Availability
     isWalkIn: z.boolean(),
     isOnline: z.boolean(),
-    department: z.string(),
 });
 
-// 3. Define the "Official" shape
-const OfficialServiceSchema = BaseServiceSchema.extend({
+// Used when BetterIligan hosts the step-by-step guide
+const StandardServiceSchema = BaseServiceSchema.extend({
     slug: z.string(),
+    type: z.literal("standard"),
     schedule: z.string(),
     whoMayAvail: z.string(),
-
-    source: z.literal("official"),
     requirements: z.array(RequirementSchema),
     procedures: z.array(ProcedureSchema),
 });
 
-// 4. Define the "External" shape
+// Used when we just want to redirect them to another portal
 const ExternalServiceSchema = BaseServiceSchema.extend({
-    source: z.literal("external"),
+    type: z.literal("external"),
     externalUrl: z.string().url(),
 });
 
-// 5. Combine them using a Discriminated Union
-export const ServiceSchema = z.discriminatedUnion("source", [
-    OfficialServiceSchema,
+// Combine them using a Discriminated Union on "type" (NOT "source")
+export const ServiceSchema = z.discriminatedUnion("type", [
+    StandardServiceSchema,
     ExternalServiceSchema
 ]);
 
-// 6. Export a schema for an array of these services
 export const ServicesArraySchema = z.array(ServiceSchema);
 
-// 7. Infer the TypeScript types automatically so you don't have to write them twice!
-export type OfficialService = z.infer<typeof OfficialServiceSchema>;
+// Infer the TypeScript types
+export type StandardService = z.infer<typeof StandardServiceSchema>;
 export type ExternalService = z.infer<typeof ExternalServiceSchema>;
 export type GovernmentService = z.infer<typeof ServiceSchema>;
