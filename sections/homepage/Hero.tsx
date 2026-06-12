@@ -132,7 +132,7 @@ export default function HeroSection() {
                                             {searchResults.map((service, idx) => (
                                                 <li key={`service-${idx}`}>
                                                     <Link
-                                                        href={service.source === "official" ? `/services/${service.slug}` : service.externalUrl}
+                                                        href={service.type === "standard" ? `/services/${service.slug}` : service.externalUrl}
                                                         className="flex items-center justify-between p-4 hover:bg-blue-50 transition-colors group/item"
                                                         onClick={() => setIsDropdownOpen(false)}
                                                     >

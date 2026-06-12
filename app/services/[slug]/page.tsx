@@ -19,7 +19,7 @@ import { allServices } from '@/data/services';
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
-    const service = allServices.find((s) => s.source === "official" && s.slug === resolvedParams.slug);
+    const service = allServices.find((s) => s.type === "standard" && s.slug === resolvedParams.slug);
 
     if (!service) {
         notFound();
@@ -80,9 +80,9 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                                 <BadgeCheck className="w-3.5 h-3.5" /> Official Data
                             </span>
                         )}
-                        {service.source === 'external' && (
+                        {service.source === 'community' && (
                             <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 px-2 py-1 rounded text-xs font-semibold border border-amber-200">
-                                <ExternalLink className="w-3.5 h-3.5" /> External Link
+                                <ExternalLink className="w-3.5 h-3.5" /> Community Info
                             </span>
                         )}
                     </div>
@@ -121,7 +121,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     )}
 
                     {/* Tab Content: Requirements */}
-                    {activeTab === 'requirements' && service.source === 'official' && service.requirements && (
+                    {activeTab === 'requirements' && service.type === 'standard' && service.requirements && (
                         <div className="animate-in fade-in duration-300">
                             {service.requirements.map((group, idx) => (
                                 <div key={idx} className="mb-8 last:mb-0">
@@ -161,7 +161,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     )}
 
                     {/* Tab Content: Procedures */}
-                    {activeTab === 'procedures' && service.source === 'official' && service.procedures && (
+                    {activeTab === 'procedures' && service.type === 'standard' && service.procedures && (
                         <div className="animate-in fade-in duration-300 space-y-6">
                             {service.procedures.map((step) => (
                                 <div key={step.stepNumber} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
@@ -203,7 +203,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     )}
 
                     {/* Fallback for External Links / Services with zero tabs */}
-                    {availableTabs.length === 0 && service.source === 'external' && (
+                    {availableTabs.length === 0 && service.type === 'external' && (
                         <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center shadow-sm">
                             <Info className="w-12 h-12 text-blue-500 mx-auto mb-4" />
                             <h3 className="text-xl font-bold text-slate-900 mb-2">External Portal Redirection</h3>
@@ -251,7 +251,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                                     {service.department}
                                 </p>
                             </div>
-                            {service.source === "official" && (
+                            {service.type === "standard" && (
                                 <>
                                     <div>
                                         <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-1">
