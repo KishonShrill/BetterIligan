@@ -83,7 +83,6 @@ export default function WeatherAndMap() {
 
             setLoading(false);
         };
-
         fetchWeather();
     }, []);
 
@@ -95,7 +94,7 @@ export default function WeatherAndMap() {
     }, [isModalOpen]);
 
     return (
-        <Section className='bg-blue-50'>
+        <Section className='bg-white'>
 
             {/* Section Header */}
             <div className="text-center mb-10">
@@ -108,7 +107,7 @@ export default function WeatherAndMap() {
                 {/* WEATHER CARD (Interactive) */}
                 <div
                     onClick={() => !loading && weatherData && setIsModalOpen(true)}
-                    className={`lg:col-span-4 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col transition-all duration-300 ${!loading && weatherData ? 'cursor-pointer hover:shadow-lg hover:border-blue-300 hover:-translate-y-1 group' : ''}`}
+                    className={`lg:col-span-4 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col transition-all duration-300 ${!loading && weatherData ? 'cursor-context-menu hover:shadow-lg hover:border-blue-300 hover:-translate-y-1 group' : ''}`}
                 >
                     {loading ? (
                         <div className="flex-1 flex flex-col items-center justify-center min-h-[300px]">

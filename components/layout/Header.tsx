@@ -12,8 +12,9 @@ const navigation = [
         href: '/iligan',
         dropdown: [
             { name: 'All About Iligan', href: '/iligan' },
-            { name: 'History & Heritage', href: '/iligan/history' },
-            { name: 'Barangays', href: '/iligan/barangays' },
+            { name: 'City Stats', href: '/iligan/city-stats' }
+            //{ name: 'History & Heritage', href: '/iligan/history' },
+            //{ name: 'Barangays', href: '/iligan/barangays' },
         ],
     },
     {
@@ -25,18 +26,18 @@ const navigation = [
         name: 'Travel',
         href: '/travel',
         dropdown: [
-            { name: 'Explore Travel', href: '/travel' },
-            { name: 'Waterfalls', href: '/travel/waterfalls' },
-            { name: 'Accommodations', href: '/travel/accommodations' },
+            //{ name: 'Explore Travel', href: '/travel' },
+            //{ name: 'Waterfalls', href: '/travel/waterfalls' },
+            //{ name: 'Accommodations', href: '/travel/accommodations' },
         ],
     },
     {
         name: 'Government',
         href: '/government',
         dropdown: [
-            { name: 'Government Overview', href: '/government' },
-            { name: 'City Officials', href: '/government/officials' },
-            { name: 'Departments', href: '/government/departments' },
+            //{ name: 'Government Overview', href: '/government' },
+            //{ name: 'City Officials', href: '/government/officials' },
+            //{ name: 'Departments', href: '/government/departments' },
         ],
     },
 ];
@@ -85,6 +86,20 @@ export default function Header() {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center gap-8 h-fit">
+                        {pathname !== '/' && (
+                            <div className="relative group h-full flex items-center">
+                                <Link
+                                    href="/"
+                                    className="flex items-center gap-1 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors py-2"
+                                >
+                                    <span className="relative py-1">
+                                        Home
+                                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                                    </span>
+                                </Link>
+                            </div>
+                        )}
+
                         {navigation.map((item) => (
                             <div key={item.name} className="relative group h-full flex items-center">
                                 <Link
@@ -143,6 +158,19 @@ export default function Header() {
 
                     {/* Mobile Navigation Links - Scrollable area */}
                     <div className="h-fit overflow-y-auto px-4 py-4 flex flex-col gap-1">
+
+                        {pathname !== '/' && (
+                            <div className="border-b border-slate-100">
+                                <Link
+                                    href="/"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="w-full block py-2 text-left text-lg font-medium text-slate-800 hover:text-blue-600 transition-colors"
+                                >
+                                    Home
+                                </Link>
+                            </div>
+                        )}
+
                         {navigation.map((item) => (
                             <div key={item.name} className="border-b border-slate-100 last:border-0">
                                 <button

@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
+const LOCAL_IP = process.env.DEVELOPMENT_IP;
+
 const nextConfig: NextConfig = {
     /* config options here */
+    allowedDevOrigins: [LOCAL_IP]
 };
 
 export default nextConfig;
