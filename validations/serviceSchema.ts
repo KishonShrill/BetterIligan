@@ -1,4 +1,3 @@
-import { type } from "os";
 import * as z from "zod";
 
 // 1. Define the reusable sub-schemas
@@ -61,16 +60,12 @@ export const CommunityProfileSchema = BaseServiceSchema.extend({
     type: z.literal("internal"),
     locationUrl: z.string().url().optional(),
 
-    // Organization-level contact info
     websiteUrl: z.string().url().optional(),
     facebookUrl: z.string().url().optional(),
     instagramUrl: z.string().url().optional(),
 
-    // The specific person handling inquiries
     representative: ContactPersonSchema.optional(),
 
-    // An array of service slugs this community provides 
-    // (We will use these to fetch and render ServiceCards later)
     offeredServices: z.array(z.string()),
 });
 
@@ -86,5 +81,5 @@ export const ServicesArraySchema = z.array(ServiceSchema);
 // Infer the TypeScript types
 export type StandardService = z.infer<typeof StandardServiceSchema>;
 export type ExternalService = z.infer<typeof ExternalServiceSchema>;
-export type GovernmentService = z.infer<typeof ServiceSchema>;
+export type AllService = z.infer<typeof ServiceSchema>;
 export type CommunityProfile = z.infer<typeof CommunityProfileSchema>;

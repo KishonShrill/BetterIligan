@@ -8,9 +8,19 @@ import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 
 export const metadata: Metadata = {
-    title: "BetterIligan | Better Iligan City Website",
-    description:
-        "Community portal for Iligan City government services, officials, departments, barangays, and transparency data.",
+    title: {
+        default: 'BetterIligan City',
+        template: '%s | BetterIligan City'
+    },
+    description: 'A modernized, volunteer-driven portal to access government services, public data, and resources for the people of Iligan.',
+    openGraph: {
+        title: 'BetterIligan City',
+        description: 'A modernized, volunteer-driven portal to access government services...',
+        url: 'https://betteriligancity.org',
+        siteName: 'BetterIligan',
+        locale: 'en_PH',
+        type: 'website',
+    },
 };
 
 export default function RootLayout({

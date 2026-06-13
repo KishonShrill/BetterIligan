@@ -8,11 +8,11 @@ import Button3D from '@/components/ui/Button3D';
 
 // Import your centralized services array!
 import { allServices } from '@/data/services';
-import { GovernmentService } from '@/validations/serviceSchema';
+import { AllService } from '@/validations/serviceSchema';
 
 export default function HeroSection() {
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState<GovernmentService[]>([]);
+    const [searchResults, setSearchResults] = useState<AllService[]>([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     // Reference to the search container to detect clicks outside

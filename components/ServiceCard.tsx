@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { FileText, CheckCircle, ArrowRight, ExternalLink, Users, AlertTriangle } from 'lucide-react';
-import { GovernmentService } from '@/validations/serviceSchema';
+import { AllService } from '@/validations/serviceSchema';
 import { serviceCategories } from '@/data/categories';
 
 interface ServiceCardProps {
-    service: GovernmentService;
+    service: AllService;
 }
 
 export default function ServiceCard({ service }: ServiceCardProps) {
