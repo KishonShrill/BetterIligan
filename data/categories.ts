@@ -14,6 +14,8 @@ export const serviceCategories = [
         description: 'Resources and services for starting, managing, and growing a business, including permits, taxes, and local investment opportunities.',
         href: '/services?category=Business%2C+Trade+and+Investment',
         icon: Building2,
+        primaryColor: 'text-blue-600',
+        secondaryColor: 'bg-blue-50',
         subItems: []
     },
     {
@@ -22,6 +24,8 @@ export const serviceCategories = [
         description: 'Official documentation services including birth, marriage, and death certificates, as well as clearances and personal records.',
         href: '/services?category=Certificates+and+Vital+Records',
         icon: FileText,
+        primaryColor: 'text-amber-600',
+        secondaryColor: 'bg-amber-50',
         subItems: []
     },
     {
@@ -30,6 +34,8 @@ export const serviceCategories = [
         description: 'Public health services, medical assistance, community wellness programs, and access to local healthcare facilities.',
         href: '/services?category=Health+and+Wellness',
         icon: HeartPulse,
+        primaryColor: 'text-rose-600',
+        secondaryColor: 'bg-rose-50',
         subItems: []
     },
     {
@@ -38,6 +44,8 @@ export const serviceCategories = [
         description: 'Services related to city infrastructure, road maintenance, public utilities, and building or construction permits.',
         href: '/services?category=Infrastructure+and+Public+Works',
         icon: HardHat,
+        primaryColor: 'text-orange-600',
+        secondaryColor: 'bg-orange-50',
         subItems: []
     },
     {
@@ -46,6 +54,8 @@ export const serviceCategories = [
         description: 'Information and services for vehicle registration, driver licensing, traffic regulations, and public transportation.',
         href: '/services?category=Transport+and+Driving',
         icon: Car,
+        primaryColor: 'text-violet-600',
+        secondaryColor: 'bg-violet-50',
         subItems: []
     },
     {
@@ -54,6 +64,8 @@ export const serviceCategories = [
         description: 'Veterinary services, pet registration, animal bite treatment centers, and responsible pet ownership programs.',
         href: '/services?category=Animal+Welfare',
         icon: PawPrint,
+        primaryColor: 'text-emerald-600',
+        secondaryColor: 'bg-emerald-50',
         subItems: []
     }
 ].sort((a, b) => a.name.localeCompare(b.name));

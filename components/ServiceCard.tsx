@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { FileText, CheckCircle, ArrowRight, ExternalLink, Users, AlertTriangle } from 'lucide-react';
 import { GovernmentService } from '@/validations/serviceSchema';
+import { serviceCategories } from '@/data/categories';
 
 interface ServiceCardProps {
     service: GovernmentService;
@@ -12,13 +13,20 @@ export default function ServiceCard({ service }: ServiceCardProps) {
     const isExternal = service.type === 'external';
     const isInternal = service.type === 'internal';
 
+    const matchedCategory = serviceCategories.find(
+        (c) => c.name === service.category || c.slug === service.category
+    );
+
+    // 2. Extract the icon, or use a default fallback (FileText) if not found
+    const CategoryIcon = matchedCategory?.icon || FileText;
+
     const CardContent = (
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 h-full flex flex-col cursor-pointer group text-left">
 
             {/* Top Row: Icon & Dynamic Status Pills */}
             <div className="flex justify-between items-start mb-6">
-                <div className="bg-blue-50 p-2.5 rounded-xl border border-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors shrink-0">
-                    <FileText className="w-5 h-5" />
+                <div className={`${matchedCategory?.secondaryColor} ${matchedCategory?.primaryColor} p-3 rounded-xl group-hover:bg-slate-800 group-hover:text-white transition-colors shrink-0`}>
+                    <CategoryIcon className="w-5 h-5" />
                 </div>
 
                 {/* Wrap the pills so they don't break the layout if there are many */}

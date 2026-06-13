@@ -41,7 +41,7 @@ export default function ServicesSection() {
                         >
                             {/* Icon & Title */}
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="bg-blue-50 text-blue-600 p-3 rounded-lg">
+                                <div className={`${category.secondaryColor} ${category.primaryColor} p-3 rounded-xl group-hover:bg-slate-800 group-hover:text-white transition-colors shrink-0`}>
                                     <Icon className="w-6 h-6" />
                                 </div>
                                 <h3 className="text-lg font-bold text-slate-900 leading-tight">
