@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Search, ArrowRight, ArrowUpRight, FileText, Landmark, ChevronRight } from 'lucide-react';
+import { Search, ArrowUpRight, FileText, Landmark, ChevronRight } from 'lucide-react';
 import Section from '@/components/ui/Section';
+import Button3D from '@/components/ui/Button3D';
 
 // Import your centralized services array!
-import { allServices } from '@/data/services'; // Changed from categories
+import { allServices } from '@/data/services';
 import { GovernmentService } from '@/validations/serviceSchema';
 
 export default function HeroSection() {
@@ -24,7 +25,8 @@ export default function HeroSection() {
             const filtered = allServices.filter(service =>
                 service.title.toLowerCase().includes(lowerCaseQuery) ||
                 service.description.toLowerCase().includes(lowerCaseQuery) ||
-                service.category.toLowerCase().includes(lowerCaseQuery)
+                service.category.toLowerCase().includes(lowerCaseQuery) ||
+                service.tags?.some(tag => tag.toLowerCase().includes(lowerCaseQuery))
             ).slice(0, 10); // Limit to top 10 results
 
             setSearchResults(filtered);
@@ -57,7 +59,7 @@ export default function HeroSection() {
             {/* Subtle Background Grid for texture */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
-            <div className="relative max-w-404 mx-auto px-6 lg:px-8 py-4 md:py-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+            <div className="relative max-w-404 mx-auto px-6 lg:px-8 py-8 md:py-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
                 {/* Status Badge */}
                 <div className="max-lg:hidden col-span-1 lg:col-span-2 w-fit mx-auto lg:mx-0 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/30 border border-blue-400/30 text-blue-50 text-sm font-medium">
@@ -79,78 +81,84 @@ export default function HeroSection() {
                     </p>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                        <Link
-                            href='/services'
-                            className="group flex items-center justify-center gap-2 bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 hover:shadow-lg transition-all duration-200"
-                        >
-                            Browse Services
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                        <button className="flex items-center justify-center gap-2 bg-transparent border border-blue-400 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-500/50 transition-all duration-200">
-                            Contact Us
-                        </button>
+                    <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-2">
+                        <Button3D
+                            text="Browse Services"
+                            href="/services"
+                            hasArrow={true}
+                            variant="white"
+                            size="md"
+                            className="w-full md:w-auto"
+                        />
                     </div>
                 </div>
 
-                {/* Right Column - Elevated Search Card */}
+                {/* Right Column - Dynamic Search Card */}
                 <div className="w-full max-lg:max-w-lg mx-auto lg:mx-0 lg:ml-auto">
-                    <div className="bg-white rounded-2xl shadow-2xl p-5 md:p-8 border border-slate-100 relative">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="bg-blue-100 p-2 rounded-lg">
-                                <Search className="w-5 h-5 text-blue-600" />
+                    {/* Note: The background, border, and shadow are removed on mobile to save space, but added back on md: screens */}
+                    <div className="md:bg-white md:rounded-2xl md:shadow-2xl md:p-8 md:border md:border-slate-100 relative">
+
+                        <div className="flex items-center gap-3 mb-5 md:mb-6">
+                            {/* Icon adjusts color based on mobile (translucent white) or desktop (light blue) */}
+                            <div className="bg-white/20 md:bg-blue-100 p-2.5 md:p-2 rounded-xl md:rounded-lg backdrop-blur-sm md:backdrop-blur-none">
+                                <Search className="w-5 h-5 text-white md:text-blue-600" />
                             </div>
-                            <h2 className="text-xl font-bold text-slate-800">Find a Service</h2>
+                            <h2 className="text-2xl md:text-xl font-bold text-white md:text-slate-800">Find a Service</h2>
                         </div>
 
                         {/* Search Input & Dropdown Container */}
-                        <div className="relative mb-6 group" ref={searchContainerRef}>
-                            <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors z-10" />
+                        <div className="relative mb-6 md:mb-8 group" ref={searchContainerRef}>
                             <input
                                 type="text"
                                 placeholder="e.g., birth certificate, business permit"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onFocus={() => searchQuery.trim().length >= 2 && setIsDropdownOpen(true)}
-                                className="w-full pl-3.5 md:pl-4 pr-12 py-3.5 md:py-4 rounded-xl border-2 border-slate-100 bg-slate-50 text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-all duration-200 relative z-10"
+                                // Inputs are massively upscaled on mobile (py-4, pl-14, text-lg) for better touch targets
+                                className="w-full pl-4 pr-16 md:pr-14 py-4 md:py-4 rounded-2xl md:rounded-xl border-2 border-transparent md:border-slate-100 bg-white md:bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-all duration-200 shadow-xl md:shadow-none text-lg md:text-base relative z-10"
                             />
 
-                            {/* Search Button (now acts as a quick link to the main services page with the query) */}
+                            {/* Search Button */}
                             <Link
                                 href={`/services?search=${encodeURIComponent(searchQuery)}`}
                                 aria-label="Search"
-                                className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-lg transition-colors z-10 flex items-center justify-center"
+                                className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-3 md:p-2.5 rounded-xl md:rounded-lg transition-colors z-10 flex items-center justify-center shadow-sm"
                             >
-                                <ArrowUpRight className="w-4 h-4" />
+                                <ArrowUpRight className="w-5 h-5 md:w-4 md:h-4" />
                             </Link>
 
                             {/* FLOATING DROPDOWN RESULTS */}
                             {isDropdownOpen && (
-                                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                                // Makes dropdown wider than the search bar on desktop using negative left/right margins (md:-left-4 md:-right-4)
+                                <div className="absolute top-full left-0 right-0 md:-left-4 md:-right-4 mt-3 md:mt-2 bg-white rounded-2xl md:rounded-xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                                     {searchResults.length > 0 ? (
-                                        <ul className="max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar">
+                                        <ul className="max-h-[60vh] md:max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar">
                                             {searchResults.map((service, idx) => (
                                                 <li key={`service-${idx}`}>
                                                     <Link
-                                                        href={service.type === "standard" ? `/services/${service.slug}` : service.externalUrl}
-                                                        className="flex items-center justify-between p-4 hover:bg-blue-50 transition-colors group/item"
+                                                        href={service.type === "standard"
+                                                            ? `/services/${service.category.toLowerCase().replace(/\s+/g, '-')}/${service.slug}`
+                                                            : service.type === "internal"
+                                                                ? `/community/${service.slug}`
+                                                                : service.externalUrl}
+                                                        className="flex items-center justify-between p-5 md:p-4 hover:bg-blue-50 transition-colors group/item"
                                                         onClick={() => setIsDropdownOpen(false)}
                                                     >
                                                         <div className="flex flex-col pr-4">
-                                                            <span className="text-sm font-bold text-slate-900 group-hover/item:text-blue-700 transition-colors line-clamp-1">
+                                                            <span className="text-base md:text-sm font-bold text-slate-900 group-hover/item:text-blue-700 transition-colors line-clamp-1 mb-0.5">
                                                                 {service.title}
                                                             </span>
-                                                            <span className="text-xs text-slate-500 line-clamp-1 mt-0.5">
-                                                                {service.department} • {service.category}
+                                                            <span className="text-sm md:text-xs text-slate-500 line-clamp-1">
+                                                                {service.type !== "internal" && `${service.department} • `} {service.category}
                                                             </span>
                                                         </div>
-                                                        <ChevronRight className="w-4 h-4 text-slate-300 group-hover/item:text-blue-500 shrink-0 transition-transform group-hover/item:translate-x-1" />
+                                                        <ChevronRight className="w-5 h-5 md:w-4 md:h-4 text-slate-300 group-hover/item:text-blue-500 shrink-0 transition-transform group-hover/item:translate-x-1" />
                                                     </Link>
                                                 </li>
                                             ))}
                                         </ul>
                                     ) : (
-                                        <div className="p-6 text-center text-slate-500 text-sm">
+                                        <div className="p-8 md:p-6 text-center text-slate-500 text-base md:text-sm">
                                             No services found matching &ldquo;{searchQuery}&rdquo;
                                         </div>
                                     )}
@@ -160,10 +168,11 @@ export default function HeroSection() {
 
                         {/* Popular Searches */}
                         <div>
-                            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                            {/* Text turns light blue on mobile, slate on desktop */}
+                            <p className="text-xs font-semibold text-blue-200 md:text-slate-400 uppercase tracking-wider mb-3">
                                 Popular Searches
                             </p>
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-2.5 md:gap-2">
                                 {[
                                     { name: 'Birth Certificate', icon: FileText },
                                     { name: 'Marriage Certificate', icon: FileText },
@@ -172,9 +181,10 @@ export default function HeroSection() {
                                     <button
                                         key={item.name}
                                         onClick={() => handlePopularSearch(item.name)}
-                                        className="flex items-center gap-1.5 bg-slate-50 hover:bg-blue-50 border border-slate-100 hover:border-blue-200 text-slate-600 hover:text-blue-700 text-sm px-3.5 py-2 rounded-full transition-colors"
+                                        // Pills become translucent buttons on mobile, standard gray buttons on desktop
+                                        className="flex items-center gap-1.5 bg-white/10 md:bg-slate-50 hover:bg-white/20 md:hover:bg-blue-50 border border-white/20 md:border-slate-100 text-white md:text-slate-600 hover:text-white md:hover:text-blue-700 text-sm px-4 py-2.5 md:py-2 rounded-full transition-colors backdrop-blur-sm md:backdrop-blur-none"
                                     >
-                                        <item.icon className="w-3.5 h-3.5" />
+                                        <item.icon className="w-4 h-4 md:w-3.5 md:h-3.5" />
                                         {item.name}
                                     </button>
                                 ))}

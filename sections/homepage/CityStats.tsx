@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
+import Button3D from '@/components/ui/Button3D';
 
 export default function CityStatsSummary() {
     const quickStats = [
@@ -58,13 +59,13 @@ export default function CityStatsSummary() {
                 </div>
 
                 {/* CTA Button - Solid blue pops beautifully against blue-50 */}
-                <Link
-                    href="/iligan/city-stats"
-                    className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-sm px-5 py-3 md:py-2.5 rounded-xl text-sm font-bold transition-all duration-200 group w-full md:w-auto shrink-0"
-                >
-                    Explore Full City Stats
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <Button3D
+                    text='Explore Full City Stats'
+                    href='/iligan/city-stats'
+                    hasArrow={true}
+                    size='sm'
+                    variant='blue'
+                />
             </div>
 
             {/* Main Stats Grid */}

@@ -1,0 +1,66 @@
+[
+    {
+        "slug": "dogs-camp-iligan",
+        "title": "Dogs Camp Iligan",
+        "category": "Animal Welfare",
+        "description": "Dogs Camp Iligan is a Non-Profit Organization aims to help and provide aid to stray animals.",
+        "source": "community",
+        "isWalkIn": false,
+        "isOnline": true,
+        "type": "internal",
+        "facebookUrl": "https://www.facebook.com/profile.php?id=100085008576116",
+        "tags": [
+            "cats",
+            "dogs",
+            "animals"
+        ],
+        "offeredServices": [
+            "Non-profit Organization",
+            "Animal Rescue"
+        ]
+    },
+    {
+        "slug": "part-iligan-pet-inc",
+        "title": "PART- Iligan (PET ADOPTION and RESCUE TEAM- Iligan), Inc.",
+        "category": "Animal Welfare",
+        "description": "A SEC Registered, Non- Profit Organization, based in Iligan City. It's rescue team was founded and created in December 2017.",
+        "source": "community",
+        "isWalkIn": false,
+        "isOnline": true,
+        "type": "internal",
+        "facebookUrl": "https://www.facebook.com/groups/2077966912432711",
+        "tags": [
+            "cats",
+            "dogs",
+            "animals"
+        ],
+        "offeredServices": [
+            "Pet Adoption",
+            "Animal Rescue",
+            "Spaying & Neutering"
+        ]
+    },
+    {
+        "slug": "iligan-stray-feeders",
+        "title": "Iligan Stray Feeder",
+        "category": "Animal Welfare",
+        "description": "Iligan Stray Feeders is a community of animal lovers dedicated to caring for homeless and free-ranging dogs and cats in Iligan by providing food, compassion, and support for their welfare. Beyond feeding, the group works together to promote adoption, spay/neuter programs, and other initiatives that help give strays a healthier and brighter future. 🐶🐱❤️",
+        "source": "community",
+        "isWalkIn": false,
+        "isOnline": true,
+        "type": "internal",
+        "representative": {
+            "name": "Leamarie Hempesao",
+            "messengerUrl": "https://www.facebook.com/leamarie.hempesao.2024"
+        },
+        "tags": [
+            "cats",
+            "dogs",
+            "animals"
+        ],
+        "offeredServices": [
+            "Non-profit Organization",
+            "Animal Rescue"
+        ]
+    }
+]

@@ -57,7 +57,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
 
             {/* Top Navigation Bar */}
             <div className="bg-white border-b border-slate-200">
-                <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-4">
+                <div className="max-w-300 mx-auto px-4 md:px-6 py-4">
                     <Link
                         href="/services"
                         className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
@@ -247,9 +247,11 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-1">
                                     <Building className="w-3.5 h-3.5" /> Department
                                 </p>
-                                <p className="text-slate-800 text-sm font-medium leading-relaxed">
-                                    {service.department}
-                                </p>
+                                {service.type !== 'internal' && (
+                                    <p className="text-slate-800 text-sm font-medium leading-relaxed">
+                                        {service.department}
+                                    </p>
+                                )}
                             </div>
                             {service.type === "standard" && (
                                 <>

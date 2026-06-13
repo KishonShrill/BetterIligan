@@ -1,0 +1,46 @@
+[
+    {
+        "slug": "iligan-tech-volunteers",
+        "name": "Iligan Tech Volunteers",
+        "type": "internal",
+        "description": "A grassroots collective of developers, designers, and civic workers building digital tools to bridge the gap between local government operations and the citizens of Iligan City.",
+        "websiteUrl": "https://betteriligancity.org",
+        "facebookUrl": "https://facebook.com/IliganTechVolunteers",
+        "instagramUrl": "https://instagram.com/iligan_tech",
+        "representative": {
+            "name": "Maria Santos",
+            "contactNumber": "+63 917 123 4567",
+            "messengerUrl": "https://m.me/mariasantos.tech"
+        },
+        "offeredServices": [
+            "tech-assistance",
+            "digital-literacy"
+        ]
+    },
+    {
+        "slug": "save-the-waterfalls",
+        "name": "Save the Waterfalls Initiative",
+        "type": "internal",
+        "description": "An environmental advocacy group dedicated to preserving Iligan's 23 waterfalls through community clean-up drives, tree planting, and eco-tourism education.",
+        "facebookUrl": "https://facebook.com/SaveIliganWaterfalls",
+        "representative": {
+            "name": "Juan Dela Cruz",
+            "messengerUrl": "https://m.me/juan.environment"
+        },
+        "offeredServices": [
+            "eco-tour-guide",
+            "tree-planting-permit"
+        ]
+    },
+    {
+        "slug": "tibanga-youth-council",
+        "name": "Sangguniang Kabataan - Brgy. Tibanga",
+        "type": "internal",
+        "description": "The official youth council of Barangay Tibanga, organizing sports fests, leadership seminars, and community service programs for local youth.",
+        "facebookUrl": "https://facebook.com/SKTibanga",
+        "offeredServices": [
+            "youth-clearance",
+            "sports-equipment-borrowing"
+        ]
+    }
+]

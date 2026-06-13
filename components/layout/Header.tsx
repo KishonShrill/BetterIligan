@@ -68,7 +68,7 @@ export default function Header() {
 
     return (
         <header className="font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200">
-            <div className="max-w-350 mx-auto px-4 md:px-6 lg:px-8">
+            <div className="max-w-404 mx-auto px-4 md:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
 
                     {/* Logo area */}
@@ -116,16 +116,17 @@ export default function Header() {
                                 {/* Desktop Dropdown */}
                                 <div className="absolute top-full left-0 w-64 bg-white border border-slate-200 shadow-xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top -translate-y-2 group-hover:translate-y-0">
                                     <ul className="py-2">
-                                        {item.dropdown.map((subItem, idx) => (
-                                            <li key={subItem.name}>
-                                                <Link
-                                                    href={subItem.href}
-                                                    className={`block px-5 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-700 ${idx === 0 ? 'lg:hidden font-semibold border-b border-slate-100 mb-1' : ''}`}
-                                                >
-                                                    {subItem.name}
-                                                </Link>
-                                            </li>
-                                        ))}
+                                        {[...item.dropdown]
+                                            .map((subItem, idx) => (
+                                                <li key={subItem.name}>
+                                                    <Link
+                                                        href={subItem.href}
+                                                        className={`block px-5 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-700 ${idx === 0 ? 'lg:hidden font-semibold border-b border-slate-100 mb-1' : ''}`}
+                                                    >
+                                                        {subItem.name}
+                                                    </Link>
+                                                </li>
+                                            ))}
                                     </ul>
                                 </div>
                             </div>
@@ -184,16 +185,17 @@ export default function Header() {
                                 {/* Mobile Dropdown (Accordion Content) */}
                                 {activeAccordion === item.name && (
                                     <ul className="p-4 border-l-2 border-blue-100 bg-gray-100 animate-in slide-in-from-top-2 fade-in duration-200">
-                                        {item.dropdown.map((subItem, idx) => (
-                                            <li key={subItem.name}>
-                                                <Link
-                                                    href={subItem.href}
-                                                    className={`pl-4 py-2 hover:bg-gray-200 hover:text-blue-600 block text-base ${idx === 0 ? 'text-blue-600 font-semibold' : 'text-slate-600'}`}
-                                                >
-                                                    {subItem.name}
-                                                </Link>
-                                            </li>
-                                        ))}
+                                        {[...item.dropdown]
+                                            .map((subItem, idx) => (
+                                                <li key={subItem.name}>
+                                                    <Link
+                                                        href={subItem.href}
+                                                        className={`pl-4 py-2 hover:bg-gray-200 hover:text-blue-600 block text-base ${idx === 0 ? 'text-blue-600 font-semibold' : 'text-slate-600'}`}
+                                                    >
+                                                        {subItem.name}
+                                                    </Link>
+                                                </li>
+                                            ))}
                                     </ul>
                                 )}
                             </div>

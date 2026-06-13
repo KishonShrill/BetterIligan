@@ -10,6 +10,7 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service }: ServiceCardProps) {
     const isExternal = service.type === 'external';
+    const isInternal = service.type === 'internal';
 
     const CardContent = (
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 h-full flex flex-col cursor-pointer group text-left">
@@ -66,9 +67,16 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                 <h3 className="text-lg font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-600 transition-colors">
                     {service.title}
                 </h3>
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider line-clamp-1">
-                    {service.department}
-                </p>
+                {service.type !== "internal" && (
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider line-clamp-1">
+                        {service.department}
+                    </p>
+                )}
+                {service.type === "internal" && (
+                    <p className='text-sm font-semibold text-slate-500'>
+                        {service.description}
+                    </p>
+                )}
             </div>
 
             {/* Bottom Row: Redirection Indicator & CTA */}
@@ -107,11 +115,12 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                 <span className="text-blue-600 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
                     {isExternal ? (
                         <>Launch <ExternalLink className="w-4 h-4" /></>
+                    ) : isInternal ? (
+                        <>View Profile <ArrowRight className="w-4 h-4" /></>
                     ) : (
                         <>View <ArrowRight className="w-4 h-4" /></>
                     )}
-                </span>
-            </div>
+                </span>            </div>
 
         </div>
     );
@@ -127,6 +136,14 @@ export default function ServiceCard({ service }: ServiceCardProps) {
             >
                 {CardContent}
             </a>
+        );
+    }
+
+    if (isInternal) {
+        return (
+            <Link href={`/community/${service.slug}`} className="block h-full group">
+                {CardContent}
+            </Link>
         );
     }
 

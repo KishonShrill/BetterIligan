@@ -87,7 +87,7 @@ function ServicesDirectoryContent() {
             </section>
 
             {/* Main Layout Grid */}
-            <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="max-w-404 mx-auto px-4 md:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
                 {/* Left Sidebar: Categories */}
                 <div className="lg:col-span-3 space-y-6 lg:sticky lg:top-28">
