@@ -35,13 +35,14 @@ export default function ServicesSection() {
                     const Icon = category.icon;
 
                     return (
-                        <div
+                        <Link
                             key={category.name}
-                            className="border border-slate-200 rounded-xl p-6 flex flex-col h-full hover:border-blue-500 hover:shadow-md transition-all duration-300"
+                            href={category.href}
+                            className={`group border border-slate-200 rounded-xl p-6 flex flex-col h-full ${category.hoverBorder} hover:shadow-md transition-all duration-300`}
                         >
                             {/* Icon & Title */}
                             <div className="flex items-center gap-4 mb-6">
-                                <div className={`${category.secondaryColor} ${category.primaryColor} p-3 rounded-xl group-hover:bg-slate-800 group-hover:text-white transition-colors shrink-0`}>
+                                <div className={`${category.secondaryColor} ${category.primaryColor} p-3 rounded-xl transition-colors shrink-0`}>
                                     <Icon className="w-6 h-6" />
                                 </div>
                                 <h3 className="text-lg font-bold text-slate-900 leading-tight">
@@ -50,7 +51,7 @@ export default function ServicesSection() {
                             </div>
 
                             {category.description && (
-                                <p className={`text-sm text-slate-600 leading-relaxed ${category.subItems.length > 0 ? 'mb-5' : 'mb-8 flex-1'}`}>
+                                <p className={`text-sm text-slate-600 leading-relaxed ${category.subItems.length > 0 ? 'mb-5' : 'mb-6 flex-1'}`}>
                                     {category.description}
                                 </p>
                             )}
@@ -66,14 +67,13 @@ export default function ServicesSection() {
                             </ul>}
 
                             {/* Action Link */}
-                            <Link
-                                href={category.href}
-                                className="text-blue-600 font-semibold text-sm flex items-center gap-1.5 group w-fit"
+                            <span
+                                className="text-blue-600 self-end font-semibold text-sm flex items-center gap-1.5 w-fit"
                             >
                                 View More
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </div>
+                            </span>
+                        </Link>
                     );
                 })}
             </div>

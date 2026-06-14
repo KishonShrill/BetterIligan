@@ -21,11 +21,11 @@ export default function ServiceCard({ service }: ServiceCardProps) {
     const CategoryIcon = matchedCategory?.icon || FileText;
 
     const CardContent = (
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 h-full flex flex-col cursor-pointer group text-left">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 h-full flex flex-col cursor-pointer group text-left">
 
             {/* Top Row: Icon & Dynamic Status Pills */}
-            <div className="flex justify-between items-start mb-6">
-                <div className={`${matchedCategory?.secondaryColor} ${matchedCategory?.primaryColor} p-3 rounded-xl group-hover:bg-slate-800 group-hover:text-white transition-colors shrink-0`}>
+            <div className="flex justify-between items-start mb-4 md:mb-6">
+                <div className={`${matchedCategory?.secondaryColor} ${matchedCategory?.primaryColor} p-3 rounded-xl transition-colors shrink-0`}>
                     <CategoryIcon className="w-5 h-5" />
                 </div>
 
@@ -68,7 +68,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
             </div>
 
             {/* Middle Row: Information Block */}
-            <div className="flex-1">
+            <div className="flex-1 overflow-hidden">
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                     {service.category}
                 </p>
@@ -81,14 +81,21 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                     </p>
                 )}
                 {service.type === "internal" && (
-                    <p className='text-sm font-semibold text-slate-500'>
+                    <p className='text-xs font-semibold text-slate-500'>
                         {service.description}
                     </p>
                 )}
+                <p className='text-xs text-blue-700 mt-0.5 w-full'>
+                    {service.type === 'standard'
+                        ? `http://betteriligancity.org/services/${service.slug}`
+                        : service.type === 'internal'
+                            ? `http://betteriligancity.org/community/${service.slug}`
+                            : service.externalUrl}
+                </p>
             </div>
 
             {/* Bottom Row: Redirection Indicator & CTA */}
-            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div className="mt-4 md:mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
 
                 {/* Dynamic Status Indicator */}
                 {service.source === 'official' && (
@@ -128,7 +135,8 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                     ) : (
                         <>View <ArrowRight className="w-4 h-4" /></>
                     )}
-                </span>            </div>
+                </span>
+            </div>
 
         </div>
     );

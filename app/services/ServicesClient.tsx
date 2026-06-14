@@ -12,16 +12,19 @@ function ServicesDirectoryContent() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    const [searchQuery, setSearchQuery] = useState('');
-
-    // Initialize the category from the URL, defaulting to 'All Services'
+    // 1. Initialize both states from the URL
     const initialCategory = searchParams.get('category') || 'All Services';
-    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+    const initialQuery = searchParams.get('q') || '';
 
-    // Sync state if the user uses the browser's Back/Forward buttons
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+    const [searchQuery, setSearchQuery] = useState(initialQuery);
+
+    // 2. Sync state if the user uses the browser's Back/Forward buttons to navigate across pages
     useEffect(() => {
         const currentCategory = searchParams.get('category') || 'All Services';
+        const currentQuery = searchParams.get('q') || '';
         setSelectedCategory(currentCategory);
+        setSearchQuery(currentQuery);
     }, [searchParams]);
 
     // Dynamically generate the list of categories based on the data
@@ -30,22 +33,47 @@ function ServicesDirectoryContent() {
         return ['All Services', ...uniqueCategories.sort()];
     }, []);
 
-    // Handle category clicks: update state AND shallow-update the URL
-    const handleCategoryChange = (category: string) => {
-        setSelectedCategory(category);
-
+    // 3. Centralized URL Updater
+    const updateUrl = (category: string, query: string) => {
         const params = new URLSearchParams(searchParams.toString());
+
+        // Handle Category Param
         if (category === 'All Services') {
             params.delete('category');
         } else {
             params.set('category', category);
         }
 
-        // Construct the new URL string
+        // Handle Search Param
+        if (query.trim() === '') {
+            params.delete('q');
+        } else {
+            params.set('q', query);
+        }
+
         const newUrl = params.toString() ? `${pathname}?${params.toString()}` : pathname;
 
-        // Use the native browser API to update the URL WITHOUT triggering a Next.js server fetch
-        window.history.pushState(null, '', newUrl);
+        // replaceState is the magic here! It updates the URL in the address bar 
+        // without adding 50 new entries to the user's back button history while they type.
+        window.history.replaceState(null, '', newUrl);
+    };
+
+    // 4. Update Handlers
+    const handleCategoryChange = (category: string) => {
+        setSelectedCategory(category);
+        updateUrl(category, searchQuery); // Preserve the current search query
+    };
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+        updateUrl(selectedCategory, query); // Preserve the current category
+    };
+
+    const clearFilters = () => {
+        setSearchQuery('');
+        setSelectedCategory('All Services');
+        updateUrl('All Services', '');
     };
 
     // Filter services based on search text AND selected category
@@ -80,7 +108,7 @@ function ServicesDirectoryContent() {
                         type="text"
                         placeholder="Search for services (e.g., Business Permit)..."
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={handleSearchChange} /* Updated to use the new handler */
                         className="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 shadow-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-all duration-200 text-base"
                     />
                 </div>
@@ -143,7 +171,7 @@ function ServicesDirectoryContent() {
 
                     {/* Cards Grid */}
                     {filteredServices.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 md:gap-5">
                             {filteredServices.map((service, idx) => (
                                 <ServiceCard key={`service-${idx}`} service={service} />
                             ))}
@@ -160,7 +188,7 @@ function ServicesDirectoryContent() {
                                 We couldn&apos;t find any services matching &ldquo;{searchQuery}&rdquo; in {selectedCategory}.
                             </p>
                             <button
-                                onClick={() => { setSearchQuery(''); handleCategoryChange('All Services'); }}
+                                onClick={clearFilters} /* Updated to use the new clear helper */
                                 className="mt-6 text-blue-600 font-semibold text-sm hover:underline"
                             >
                                 Clear all filters
@@ -173,12 +201,10 @@ function ServicesDirectoryContent() {
     );
 }
 
-// Wrap the main content in a Suspense boundary to prevent build errors related to useSearchParams()
-export default function ServicesDirectoryPage() {
+export default function ServicesClient() {
     return (
         <Suspense fallback={<div className="min-h-screen bg-[#F8FAFC]"></div>}>
             <ServicesDirectoryContent />
         </Suspense>
     );
 }
-

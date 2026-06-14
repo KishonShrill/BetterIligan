@@ -6,6 +6,7 @@ import health from './health.json';
 import infrastructure from './infrastructure.json';
 import transport from './transport.json';
 import animals from './animals.json';
+import disasters from './disaster.json';
 
 const rawServices = [
     ...business,
@@ -13,7 +14,8 @@ const rawServices = [
     ...health,
     ...infrastructure,
     ...transport,
-    ...animals
+    ...animals,
+    ...disasters
 ]
 
 export const allServices = ServicesArraySchema.parse(rawServices);
