@@ -2,8 +2,12 @@
 
 import {
     Globe, Facebook, Instagram, Phone,
-    MessageCircle, User, Briefcase, ExternalLink, ArrowLeft, ShieldCheck, CheckCircle2, PawPrint
+    MessageCircle, User, Briefcase, ExternalLink, ShieldCheck, CheckCircle2
 } from 'lucide-react';
+
+import SubpageNav from '@/components/ui/SubpageNav';
+import SubpageHero from '@/components/ui/SubpageHero';
+
 import { serviceCategories } from '@/data/categories';
 import { AllService } from '@/validations/serviceSchema';
 
@@ -23,44 +27,33 @@ export default function CommunityClient({ community }: CommunityClientProps) {
         <main className="min-h-screen bg-slate-50 font-sans pb-20">
 
             {/* Top Navigation Bar */}
-            <div className="bg-white border-b border-slate-200">
-                <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-4">
-                    <button
-                        onClick={() => window.history.back()}
-                        className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        Go Back
-                    </button>
-                </div>
-            </div>
+            <SubpageNav />
 
             {/* Hero Section */}
-            <div className="bg-white border-b border-slate-200">
-                <div className="max-w-[1200px] flex mx-auto px-4 md:px-6 py-10 md:py-16">
-                    <div>
-                        <div className="flex flex-wrap items-center gap-3 mb-4">
-                            <span className="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold uppercase tracking-wider rounded-full border border-purple-100">
-                                Community Profile
-                            </span>
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-50 text-slate-700 text-xs font-bold uppercase tracking-wider rounded-full border border-slate-200">
-                                <CategoryIcon className="w-3.5 h-3.5 text-slate-500" />
-                                {community.category}
-                            </span>
-                            <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-1 rounded text-xs font-semibold border border-emerald-200">
-                                <ShieldCheck className="w-3.5 h-3.5" /> Verified Partner
-                            </span>
-                        </div>
+            <SubpageHero>
+                <SubpageHero.Badges>
+                    <span className="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold uppercase tracking-wider rounded-full border border-purple-100">
+                        Community Profile
+                    </span>
 
-                        <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-                            {community.title}
-                        </h1>
-                        <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
-                            {community.description}
-                        </p>
-                    </div>
-                </div>
-            </div>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-50 text-slate-700 text-xs font-bold uppercase tracking-wider rounded-full border border-slate-200">
+                        <CategoryIcon className="w-3.5 h-3.5 text-slate-500" />
+                        {community.category}
+                    </span>
+
+                    <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-1 rounded text-xs font-semibold border border-emerald-200">
+                        <ShieldCheck className="w-3.5 h-3.5" /> Verified Partner
+                    </span>
+                </SubpageHero.Badges>
+
+                <SubpageHero.Title>
+                    {community.title}
+                </SubpageHero.Title>
+
+                <SubpageHero.Description>
+                    {community.description}
+                </SubpageHero.Description>
+            </SubpageHero>
 
             {/* Main Content Area */}
             <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-10 grid grid-cols-1 lg:grid-cols-12 gap-10">

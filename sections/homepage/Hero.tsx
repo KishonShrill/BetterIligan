@@ -137,7 +137,7 @@ export default function HeroSection() {
                                                 <li key={`service-${idx}`}>
                                                     <Link
                                                         href={service.type === "standard"
-                                                            ? `/services/${service.category.toLowerCase().replace(/\s+/g, '-')}/${service.slug}`
+                                                            ? `/services/${service.slug}`
                                                             : service.type === "internal"
                                                                 ? `/community/${service.slug}`
                                                                 : service.externalUrl}

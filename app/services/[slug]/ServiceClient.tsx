@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react';
-import Link from 'next/link';
 import {
-    ArrowLeft, Building, Clock, Users, Check,
+    Building, Clock, Users, Check,
     FileText, BadgeCheck, Info, ExternalLink
 } from 'lucide-react';
+
+import SubpageNav from '@/components/ui/SubpageNav';
+import SubpageHero from '@/components/ui/SubpageHero';
 import { AllService } from '@/validations/serviceSchema';
 
 interface ServiceClientProps {
@@ -44,45 +46,36 @@ export default function ServicePage({ service }: ServiceClientProps) {
         <main className="min-h-screen bg-slate-50 font-sans pb-20">
 
             {/* Top Navigation Bar */}
-            <div className="bg-white border-b border-slate-200">
-                <div className="max-w-300 mx-auto px-4 md:px-6 py-4">
-                    <Link
-                        href="/services"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        Back to Directory
-                    </Link>
-                </div>
-            </div>
+            <SubpageNav text="Back to Directory" href="/services" />
 
             {/* Hero Section */}
-            <div className="bg-white border-b border-slate-200">
-                <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-10 md:py-16">
-                    <div className="flex flex-wrap items-center gap-3 mb-4">
-                        <span className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider rounded-full border border-blue-100">
-                            {service.category}
-                        </span>
-                        {service.source === 'official' && (
-                            <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-1 rounded text-xs font-semibold border border-emerald-200">
-                                <BadgeCheck className="w-3.5 h-3.5" /> Official Data
-                            </span>
-                        )}
-                        {service.source === 'community' && (
-                            <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 px-2 py-1 rounded text-xs font-semibold border border-amber-200">
-                                <ExternalLink className="w-3.5 h-3.5" /> Community Info
-                            </span>
-                        )}
-                    </div>
+            <SubpageHero>
+                <SubpageHero.Badges>
+                    <span className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider rounded-full border border-blue-100">
+                        {service.category}
+                    </span>
 
-                    <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-                        {service.title}
-                    </h1>
-                    <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
-                        {service.description}
-                    </p>
-                </div>
-            </div>
+                    {service.source === 'official' && (
+                        <span className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 px-2 py-1 rounded text-xs font-semibold border border-emerald-200">
+                            <BadgeCheck className="w-3.5 h-3.5" /> Official Data
+                        </span>
+                    )}
+
+                    {service.source === 'community' && (
+                        <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 px-2 py-1 rounded text-xs font-semibold border border-amber-200">
+                            <ExternalLink className="w-3.5 h-3.5" /> Community Info
+                        </span>
+                    )}
+                </SubpageHero.Badges>
+
+                <SubpageHero.Title>
+                    {service.title}
+                </SubpageHero.Title>
+
+                <SubpageHero.Description>
+                    {service.description}
+                </SubpageHero.Description>
+            </SubpageHero>
 
             {/* Main Content Area */}
             <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
