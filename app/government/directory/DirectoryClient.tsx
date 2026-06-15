@@ -36,7 +36,7 @@ export default function DirectoryClient() {
                         Official Directory
                     </span>
                 </SubpageHero.Badges>
-                <SubpageHero.Title>Government Agencies</SubpageHero.Title>
+                <SubpageHero.Title>National Agencies</SubpageHero.Title>
                 <SubpageHero.Description>
                     A comprehensive directory of local and national government offices, bureaus, and corporations operating within Iligan City.
                 </SubpageHero.Description>

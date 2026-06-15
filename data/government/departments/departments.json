@@ -1,0 +1,400 @@
+[
+    {
+        "name": "Iligan City Gender and Development Office (GAD)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Renefe M. Padilla",
+            "numbers": [
+                "223-8091",
+                "09171428083"
+            ],
+            "emails": [
+                "gad@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/iligan-city-gender-and-development-office-(gad).png"
+    },
+    {
+        "name": "Sangguniang Panlungsod",
+        "category": "Social Services",
+        "representative": {
+            "name": "Hon. Ernest Oliver C. Uy",
+            "numbers": [
+                "843 0569"
+            ],
+            "emails": [
+                "sp.secretariat@iligan.gov.ph",
+                "cvmo@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/sangguniang-panlungsod.jpg"
+    },
+    {
+        "name": "Local School Board",
+        "category": "Social Services",
+        "representative": {
+            "name": "Jennifer P. Densing",
+            "numbers": [
+                "09955242205"
+            ]
+        },
+        "logoUrl": "/images/logos/local-school-board.png"
+    },
+    {
+        "name": "Iligan City Anti-Drug Abuse Council (CMO - ICADAC)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Rowel C. Rubio",
+            "numbers": [
+                "222-0670"
+            ],
+            "emails": [
+                "icadac@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/iligan-city-anti-drug-abuse-council-(cmo---icadac).png"
+    },
+    {
+        "name": "Iligan City Waterworks Systems (ICWS)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Engr. Hubert G. Reyes",
+            "numbers": [
+                "228-3288",
+                "221-4810"
+            ],
+            "emails": [
+                "icws@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/iligan-city-waterworks-systems-(icws).jpg"
+    },
+    {
+        "name": "Gregorio T. Lluch Memorial Hospital",
+        "category": "Social Services",
+        "representative": {
+            "name": "Dr. Richillo C. Daguman,MD, FPOA, MPSM",
+            "numbers": [
+                "221-6775",
+                "0926-111-0698"
+            ],
+            "emails": [
+                "gtlmh@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/gregorio-t.-lluch-memorial-hospital.png"
+    },
+    {
+        "name": "City Environment & Natural Resources Office (CENRO)",
+        "category": "Social Services",
+        "representative": {
+            "name": "EnP Virgilio B. Encabo, JD",
+            "numbers": [
+                "222-8211",
+                "09154633775"
+            ],
+            "emails": [
+                "cenro@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-environment-and-natural-resources-office-(cenro).png"
+    },
+    {
+        "name": "Civil Security Unit (CSU)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Marlon C. Clapano"
+        },
+        "logoUrl": "/images/logos/civil-security-unit-(csu).jpg"
+    },
+    {
+        "name": "City Disaster Risk Reduction and Management Office (CDRRMO)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Armien P. Alorro, MSSW",
+            "numbers": [
+                "221-8459",
+                "09177160826"
+            ]
+        },
+        "logoUrl": "/images/logos/city-disaster-risk-reduction-and-management-office-(cdrrmo).png"
+    },
+    {
+        "name": "City Social Welfare And Development Office (CSWD)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Evelyn S. Madrio",
+            "numbers": [
+                "224-4311",
+                "09153213396"
+            ],
+            "emails": [
+                "cswd@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-social-welfare-and-development-office-(cswd).jpg"
+    },
+    {
+        "name": "City Registrar's Office",
+        "category": "Social Services",
+        "representative": {
+            "name": "Atty. Yussif Don Justin F. Martil, REB",
+            "numbers": [
+                "221-4308",
+                "09569322306"
+            ],
+            "emails": [
+                "ccro@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-registrars-office.png"
+    },
+    {
+        "name": "Office of the Senior Citizen Affair (OSCA)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Edgar U. Navales",
+            "numbers": [
+                "09179939728"
+            ]
+        },
+        "logoUrl": "/images/logos/office-of-the-senior-citizen-affair-(osca).png"
+    },
+    {
+        "name": "Iligan City Sports Office (ICSO)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Karl Joseph P. Badelles",
+            "numbers": [
+                "0962-738-5969"
+            ],
+            "emails": [
+                "citysports@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/iligan-city-sports-office-(icso).png"
+    },
+    {
+        "name": "City Health Office (CHO)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Dr. Glenn L. Manarpaac",
+            "numbers": [
+                "09176411627",
+                "221-7646"
+            ],
+            "emails": [
+                "cho@iligan.gov.ph"
+            ]
+        },
+        "facebookUrl": "https://www.facebook.com/iligancitysports",
+        "logoUrl": "/images/logos/city-health-office-(cho).png"
+    },
+    {
+        "name": "Iligan City Drug Treatment and Rehabilitation Center (ICDTRC)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Maricar Y. Go",
+            "numbers": [
+                "0926 778 8300"
+            ],
+            "emails": [
+                "icdtrc@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/iligan-city-drug-treatment-and-rehabilitation-center-(icdtrc).jpg"
+    },
+    {
+        "name": "Public Order Safety, Security & Command Center",
+        "category": "Social Services",
+        "representative": {
+            "name": "P/LTCOL Adonis L Mutya (Ret)",
+            "emails": [
+                "posscc@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/public-order-safety-security-and-command-center.jpg"
+    },
+    {
+        "name": "Barangay Affairs Office (BAO)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Ariel Benolirao",
+            "numbers": [
+                "09126158003"
+            ],
+            "emails": [
+                "cmobaooic@gmail.com"
+            ]
+        },
+        "logoUrl": "/images/logos/barangay-affairs-office-(bao).jpg"
+    },
+    {
+        "name": "City Human Resource Management Office (CHRMO)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Ceferino V. Sanchez, Jr.",
+            "numbers": [
+                "221-0595",
+                "09178945611"
+            ],
+            "emails": [
+                "chrmo@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-human-resource-management-office-(chrmo).jpg"
+    },
+    {
+        "name": "City Information Office (CIO)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Roxanne R. Arevalo",
+            "numbers": [
+                "+0632228115"
+            ],
+            "emails": [
+                "cioiligan2022@gmail.com"
+            ]
+        },
+        "logoUrl": "/images/logos/city-information-office-(cio).png"
+    },
+    {
+        "name": "City Legal Office (CLO)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Atty. Roberto C. Padilla",
+            "numbers": [
+                "221-3818"
+            ],
+            "emails": [
+                "clo@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-legal-office-(clo).png"
+    },
+    {
+        "name": "Information and Communications Technology Center (ICTC)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Nouvell Krish Aehmery A. Lagapa",
+            "numbers": [
+                "228-1405"
+            ],
+            "emails": []
+        },
+        "logoUrl": "/images/logos/information-and-communications-technology-center-(ictc).png"
+    },
+    {
+        "name": "City General Services Office (CGSO)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Mila A. Rodrigo",
+            "numbers": [
+                "221-4341",
+                "09171272823"
+            ],
+            "emails": [
+                "cgso@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-general-services-office-(cgso).png"
+    },
+    {
+        "name": "City Planning And Development Office (CPDO)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Enp. Elsa M. Maquiling",
+            "numbers": [
+                "221-5388"
+            ],
+            "emails": [
+                "cpdo@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-planning-and-development-office-(cpdo).jpg"
+    },
+    {
+        "name": "Office Of The City Building Official (OCBO)",
+        "category": "Infrastructure",
+        "representative": {
+            "name": "Engr. Ma. Geovannae Español",
+            "numbers": [
+                "09177151563"
+            ],
+            "emails": [
+                "ocbo@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/office-of-the-city-building-official-(ocbo).png"
+    },
+    {
+        "name": "City Engineer's Office (CEO)",
+        "category": "Infrastructure",
+        "representative": {
+            "name": "Engr. Leonor T. Actub",
+            "numbers": [
+                "221-4645",
+                "09159859637"
+            ],
+            "emails": [
+                "ceo@iligan.gov.ph"
+            ]
+        },
+        "logoUrl": "/images/logos/city-engineers-office-(ceo).png"
+    },
+    {
+        "name": "City Budget Office (CBO)",
+        "category": "Fiscal Management",
+        "representative": {
+            "name": "Magdalena R. Carpentero",
+            "numbers": [
+                "222-2856"
+            ],
+            "emails": [
+                "cbo@iligan.gov.ph"
+            ]
+        },
+        "facebookUrl": "https://www.facebook.com/profile.php?id=100069025095965",
+        "logoUrl": "/images/logos/city-budget-office-(cbo).jpg"
+    },
+    {
+        "name": "City Treasurer's Office (CTO)",
+        "category": "Fiscal Management",
+        "representative": {
+            "name": "Atty. Laurentino P. Badelles, CPA, MDM",
+            "numbers": [
+                "221-4343",
+                "09178165574"
+            ],
+            "emails": [
+                "cto@iligan.gov.ph"
+            ]
+        },
+        "facebookUrl": "https://www.facebook.com/ctoiliganofficial",
+        "logoUrl": "/images/logos/city-treasurers-office-(cto).png"
+    },
+    {
+        "name": "City Assessor Office (CASSO)",
+        "category": "Fiscal Management",
+        "representative": {
+            "name": "Evan V. Puyos",
+            "numbers": [
+                "221-1968",
+                "09177152002"
+            ],
+            "emails": [
+                "casso@iligan.gov.ph"
+            ]
+        },
+        "facebookUrl": "https://www.facebook.com/profile.php?id=100064686457207",
+        "logoUrl": "/images/logos/city-assessor-office-(casso).png"
+    },
+    {
+        "name": "CMO-BAC",
+        "category": "City Mayors Office",
+        "representative": {
+            "name": "Verne Padilla"
+        },
+        "logoUrl": "/images/logos/cmo-bac.png"
+    }
+]
