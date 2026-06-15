@@ -58,6 +58,8 @@ const ExternalServiceSchema = BaseServiceSchema.extend({
 export const CommunityProfileSchema = BaseServiceSchema.extend({
     slug: z.string(),
     type: z.literal("internal"),
+    bannerUrl: z.string().url().optional(),
+    logoUrl: z.string().url().optional(),
     locationUrl: z.string().url().optional(),
 
     websiteUrl: z.string().url().optional(),

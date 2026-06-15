@@ -30,7 +30,10 @@ export default function CommunityClient({ community }: CommunityClientProps) {
             <SubpageNav />
 
             {/* Hero Section */}
-            <SubpageHero>
+            <SubpageHero
+                bannerUrl={community.type === 'internal' ? community.bannerUrl : undefined}
+                logoUrl={community.type === 'internal' ? community.logoUrl : undefined}
+            >
                 <SubpageHero.Badges>
                     <span className="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold uppercase tracking-wider rounded-full border border-purple-100">
                         Community Profile
