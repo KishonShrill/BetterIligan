@@ -12,7 +12,7 @@ const navigation = [
         href: '/iligan',
         dropdown: [
             { name: 'All About Iligan', href: '/iligan' },
-            { name: 'City Stats', href: '/iligan/city-stats' },
+            { name: 'Profile', href: '/iligan/city-stats' },
             { name: 'History & Heritage', href: '#', upcoming: true },
             { name: 'Barangays', href: '#', upcoming: true },
             { name: 'Electricity', href: '/iligan/electricity' }
@@ -24,6 +24,15 @@ const navigation = [
         dropdown: headerDropdown,
     },
     {
+        name: 'Government',
+        href: '/government',
+        dropdown: [
+            { name: 'Government Overview', href: '/government' },
+            { name: 'National Agencies', href: '/government/directory' },
+            { name: 'Departments', href: '/government/departments' },
+        ],
+    },
+    {
         name: 'Travel',
         href: '/travel',
         dropdown: [
@@ -33,12 +42,12 @@ const navigation = [
         ],
     },
     {
-        name: 'Government',
-        href: '/government',
+        name: 'About',
+        href: '/about',
         dropdown: [
-            { name: 'Government Overview', href: '/government' },
-            { name: 'National Agencies', href: '/government/directory' },
-            { name: 'Departments', href: '/government/departments' },
+            { name: 'About Us', href: '/about' },
+            { name: 'Privacy Policy', href: '/privacy-policy' },
+            { name: 'Terms of Service', href: '/terms-of-service' },
         ],
     },
 ];

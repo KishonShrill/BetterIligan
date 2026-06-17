@@ -16,7 +16,7 @@ const footerSections: FooterSection[] = [
     {
         title: 'About',
         links: [
-            { label: 'Contact Us', href: '/about' },
+            { label: 'About Us', href: '/about' },
             { label: 'Open Data', href: '/open-data' },
             { label: 'Privacy Policy', href: '/privacy-policy' },
             { label: 'Terms of Service', href: '/terms-of-service' }
