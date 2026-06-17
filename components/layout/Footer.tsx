@@ -17,6 +17,9 @@ const footerSections: FooterSection[] = [
         title: 'About',
         links: [
             { label: 'Contact Us', href: '/about' },
+            { label: 'Open Data', href: '/open-data' },
+            { label: 'Privacy Policy', href: '/privacy-policy' },
+            { label: 'Terms of Service', href: '/terms-of-service' }
         ],
     },
     {
@@ -32,9 +35,9 @@ const footerSections: FooterSection[] = [
         title: 'Government',
         links: [
             { label: 'City Officials', href: '/government' },
-            { label: 'Departments', href: '/government' },
+            { label: 'Departments', href: '/government/departments' },
             { label: 'Barangays', href: '/iligan/barangays' },
-            { label: 'Transparency', href: '/transparency' },
+            { label: 'Transparency', href: '#' },
         ],
     },
     {
@@ -63,20 +66,20 @@ export default function Footer() {
                         </p>
                         <div className="flex gap-3">
                             <a
-                                href="https://github.com/KishonShrill/BetterIligan"
-                                className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Github className="h-4 w-4" />
-                            </a>
-                            <a
                                 href="https://www.facebook.com/BetterIliganCity.org"
                                 className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 <Facebook className="h-4 w-4" />
+                            </a>
+                            <a
+                                href="https://github.com/KishonShrill/BetterIligan"
+                                className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Github className="h-4 w-4" />
                             </a>
                         </div>
                     </div>
