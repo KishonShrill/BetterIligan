@@ -8,6 +8,8 @@ import transport from './transport.json';
 import animals from './animals.json';
 import disasters from './disaster.json';
 
+import betteriliganservices from './betteriligan-services.json';
+
 const rawServices = [
     ...business,
     ...certificates,
@@ -15,7 +17,9 @@ const rawServices = [
     ...infrastructure,
     ...transport,
     ...animals,
-    ...disasters
+    ...disasters,
+
+    ...betteriliganservices
 ]
 
 export const allServices = ServicesArraySchema.parse(rawServices);

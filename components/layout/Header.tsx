@@ -12,9 +12,10 @@ const navigation = [
         href: '/iligan',
         dropdown: [
             { name: 'All About Iligan', href: '/iligan' },
-            { name: 'City Stats', href: '/iligan/city-stats' }
-            //{ name: 'History & Heritage', href: '/iligan/history' },
-            //{ name: 'Barangays', href: '/iligan/barangays' },
+            { name: 'City Stats', href: '/iligan/city-stats' },
+            { name: 'History & Heritage', href: '#', upcoming: true },
+            { name: 'Barangays', href: '#', upcoming: true },
+            { name: 'Electricity', href: '/iligan/electricity' }
         ],
     },
     {
@@ -26,9 +27,9 @@ const navigation = [
         name: 'Travel',
         href: '/travel',
         dropdown: [
-            //{ name: 'Explore Travel', href: '/travel' },
-            //{ name: 'Waterfalls', href: '/travel/waterfalls' },
-            //{ name: 'Accommodations', href: '/travel/accommodations' },
+            { name: 'Explore Travel', href: '#', upcoming: true },
+            { name: 'Waterfalls', href: '#', upcoming: true },
+            { name: 'Accommodations', href: '#', upcoming: true },
         ],
     },
     {
@@ -114,7 +115,7 @@ export default function Header() {
                                 </Link>
 
                                 {/* Desktop Dropdown */}
-                                <div className="absolute top-full left-0 w-64 bg-white border border-slate-200 shadow-xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top -translate-y-2 group-hover:translate-y-0">
+                                <div className="absolute top-full left-0 w-70 bg-white border border-slate-200 shadow-xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top -translate-y-2 group-hover:translate-y-0">
                                     <ul className="py-2">
                                         {[...item.dropdown]
                                             .map((subItem, idx) => (
@@ -123,7 +124,7 @@ export default function Header() {
                                                         href={subItem.href}
                                                         className={`block px-5 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-700 ${idx === 0 ? 'lg:hidden font-semibold border-b border-slate-100 mb-1' : ''}`}
                                                     >
-                                                        {subItem.name}
+                                                        {subItem.name} {subItem.upcoming && (<b className='text-red-700'>(Coming Soon)</b>)}
                                                     </Link>
                                                 </li>
                                             ))}

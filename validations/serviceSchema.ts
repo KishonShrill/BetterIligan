@@ -52,7 +52,7 @@ const StandardServiceSchema = BaseServiceSchema.extend({
 const ExternalServiceSchema = BaseServiceSchema.extend({
     department: z.string(),
     type: z.literal("external"),
-    externalUrl: z.string().url(),
+    externalUrl: z.string(),
 });
 
 export const CommunityProfileSchema = BaseServiceSchema.extend({

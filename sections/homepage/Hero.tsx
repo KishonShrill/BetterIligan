@@ -147,10 +147,9 @@ export default function HeroSection() {
 
                             {/* FLOATING DROPDOWN RESULTS */}
                             {isDropdownOpen && (
-                                // Makes dropdown wider than the search bar on desktop using negative left/right margins (md:-left-4 md:-right-4)
                                 <div className="absolute top-full left-0 right-0 md:-left-4 md:-right-4 mt-3 md:mt-2 bg-white rounded-2xl md:rounded-xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                                     {searchResults.length > 0 ? (
-                                        <ul className="max-h-[60vh] md:max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar">
+                                        <ul className="max-h-[60vh] md:max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar p-1">
                                             {searchResults.map((service, idx) => (
                                                 <li key={`service-${idx}`}>
                                                     <Link
@@ -159,21 +158,22 @@ export default function HeroSection() {
                                                             : service.type === "internal"
                                                                 ? `/community/${service.slug}`
                                                                 : service.externalUrl}
-                                                        className="flex items-center justify-between p-4 hover:bg-blue-50 transition-colors group/item"
+                                                        /* --- ADDED ACCESSIBILITY CLASSES HERE --- */
+                                                        className="flex items-center justify-between p-3 md:p-4 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset rounded-lg transition-all group/item"
                                                         onClick={() => setIsDropdownOpen(false)}
                                                     >
                                                         <div className="flex flex-col">
-                                                            <span className="text-base md:text-sm font-bold text-slate-900 group-hover/item:text-blue-700 transition-colors mb-0.5">
+                                                            <span className="text-base md:text-sm font-bold text-slate-900 group-hover/item:text-blue-700 group-focus/item:text-blue-700 transition-colors mb-0.5">
                                                                 {service.title}
                                                             </span>
                                                             <span className="text-xs md:text-xs text-slate-500 mb-0.5">
                                                                 {service.type !== "internal" && `${service.department} • `} {service.category}
                                                             </span>
-                                                            <span className='text-xs md:text-sm text-blue-700'>
+                                                            <span className='text-xs md:text-sm text-blue-700 line-clamp-1'>
                                                                 {service.type === 'standard'
-                                                                    ? `http://betteriligancity.org/services/${service.slug}`
+                                                                    ? `betteriligancity.org/services/${service.slug}`
                                                                     : service.type === 'internal'
-                                                                        ? `http://betteriligancity.org/community/${service.slug}`
+                                                                        ? `betteriligancity.org/community/${service.slug}`
                                                                         : service.externalUrl}
                                                             </span>
                                                         </div>

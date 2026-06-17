@@ -24,13 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
-            url: `${baseUrl}/iligan/government/directory`,
+            url: `${baseUrl}/government/directory`,
             lastModified: new Date(),
             changeFrequency: 'yearly',
             priority: 0.7,
         },
         {
-            url: `${baseUrl}/iligan/government/departments`,
+            url: `${baseUrl}/government/departments`,
             lastModified: new Date(),
             changeFrequency: 'yearly',
             priority: 0.7,
