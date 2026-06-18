@@ -15,7 +15,8 @@ const navigation = [
             { name: 'All About Iligan', href: '/iligan' },
             { name: 'Profile', href: '/iligan/city-stats' },
             { name: 'History & Heritage', href: '#', upcoming: true },
-            { name: 'Barangays', href: '#', upcoming: true },
+            { name: 'City Officials', href: '/iligan/city-officials' },
+            { name: 'Barangays', href: '/iligan/brangays' },
             { name: 'Electricity', href: '/iligan/electricity' }
         ],
     },
@@ -100,7 +101,7 @@ export default function Header() {
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-8 h-fit">
+                    <nav className="hidden lg:flex items-center gap-4 h-fit">
                         {pathname !== '/' && (
                             <div className="relative group h-full flex items-center">
                                 <Link
@@ -207,7 +208,7 @@ export default function Header() {
                                                         href={subItem.href}
                                                         className={`pl-4 py-2 hover:bg-gray-200 hover:text-blue-600 block text-base ${idx === 0 ? 'text-blue-600 font-semibold' : 'text-slate-600'}`}
                                                     >
-                                                        {subItem.name}
+                                                        {subItem.name} {subItem.upcoming && (<b className='text-red-700'>(Coming Soon)</b>)}
                                                     </Link>
                                                 </li>
                                             ))}

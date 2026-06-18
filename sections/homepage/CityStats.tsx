@@ -1,9 +1,8 @@
 'use client'
 
-import Link from 'next/link';
 import {
     Users, Calendar, Map, Droplets,
-    Layers, TrendingUp, Compass, ArrowRight
+    Layers, TrendingUp, Compass
 } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
@@ -15,8 +14,8 @@ export default function CityStatsSummary() {
             icon: <Users className="w-5 h-5 text-blue-600" />,
             bgIcon: "bg-blue-50 border-blue-100",
             label: "Total Population",
-            value: "363,115",
-            subtext: "2020 Census • 421/km² density",
+            value: "368,132",
+            subtext: "2024 Census • 452.60/km² density",
         },
         {
             icon: <Map className="w-5 h-5 text-emerald-600" />,
@@ -60,7 +59,7 @@ export default function CityStatsSummary() {
 
                 {/* CTA Button - Solid blue pops beautifully against blue-50 */}
                 <Button3D
-                    text='Explore Full City Stats'
+                    text='Explore Full City Profile'
                     href='/iligan/city-stats'
                     hasArrow={true}
                     size='sm'
@@ -123,7 +122,7 @@ export default function CityStatsSummary() {
                 <div className="flex flex-row md:flex-nowrap gap-3 md:gap-4 text-[11px] md:text-xs font-bold text-slate-500 border-t md:border-t-0 pt-3 md:pt-0 w-full md:w-auto justify-between md:justify-end border-slate-100">
                     <div className="flex items-center gap-1.5 flex-1 md:flex-auto justify-center md:justify-start">
                         <TrendingUp className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                        <span className="truncate">1.18% Growth</span>
+                        <span className="truncate">0.33% Growth</span>
                     </div>
                     <div className="w-px h-4 bg-slate-200 hidden md:block"></div>
                     <div className="flex items-center gap-1.5 flex-1 md:flex-auto justify-center md:justify-start border-l border-slate-100 md:border-0 pl-3 md:pl-0">

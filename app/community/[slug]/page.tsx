@@ -32,7 +32,6 @@ export default async function CommunityProfilePage({
     params: Promise<{ slug: string }>
 }) {
     const { slug } = await params;
-
     const community = allServices.find((c) => c.type === "internal" && c.slug === slug);
 
     if (!community || community.type !== "internal") {

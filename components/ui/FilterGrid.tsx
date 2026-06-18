@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export default function FilterGrid({ children }: { children: React.ReactNode }) {
+export default function FilterGrid({ children, className }: { children: React.ReactNode, className?: string }) {
     return (
-        <div className="max-w-404 mx-auto px-4 md:px-6 py-12">
+        <div className={`max-w-404 mx-auto px-4 md:px-6 py-6 md:py-12 ${className}`}>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 {children}
             </div>
@@ -74,6 +74,7 @@ interface ContentProps {
     title: string;
     itemCount: number;
     columns?: 1 | 2 | 3 | 4;
+    hasSidebar?: boolean;
     children: React.ReactNode;
 }
 
@@ -81,6 +82,7 @@ FilterGrid.Content = function FilterGridContent({
     title,
     itemCount,
     columns = 3,
+    hasSidebar = true,
     children
 }: ContentProps) {
 
@@ -91,8 +93,10 @@ FilterGrid.Content = function FilterGridContent({
         4: 'lg:grid-cols-4',
     }[columns];
 
+    const containerSpanClass = hasSidebar ? 'lg:col-span-9' : 'lg:col-span-12';
+
     return (
-        <div className="lg:col-span-9">
+        <div className={containerSpanClass}>
             {/* Header: Title and Count Badge */}
             <div className="mb-6 flex justify-between items-center">
                 <h2 className="text-xl font-bold text-slate-900">{title}</h2>
@@ -102,7 +106,7 @@ FilterGrid.Content = function FilterGridContent({
             </div>
 
             {/* The Grid */}
-            <div className={`grid grid-cols-1 md:grid-cols-2 ${gridColsClass} gap-5`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 ${gridColsClass} gap-5`}>
                 {children}
             </div>
         </div>

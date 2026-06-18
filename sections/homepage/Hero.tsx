@@ -111,7 +111,7 @@ export default function HeroSection() {
                 </div>
 
                 {/* Right Column - Dynamic Search Card */}
-                <div className="w-full max-lg:max-w-lg mx-auto lg:mx-0 lg:ml-auto">
+                <div className="w-full max-lg:max-w-2xl mx-auto lg:mx-0 lg:ml-auto">
                     {/* Note: The background, border, and shadow are removed on mobile to save space, but added back on md: screens */}
                     <div className="md:bg-white md:rounded-2xl md:shadow-2xl md:p-8 md:border md:border-slate-100 relative">
 
