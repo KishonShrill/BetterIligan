@@ -3,14 +3,15 @@ import Image from 'next/image';
 
 interface SubpageHeroProps {
     children: React.ReactNode;
+    className?: string;
     bannerUrl?: string;
     logoUrl?: string;
 }
 
 // 1. The Main Wrapper
-export default function SubpageHero({ children, bannerUrl, logoUrl }: SubpageHeroProps) {
+export default function SubpageHero({ children, bannerUrl, className, logoUrl }: SubpageHeroProps) {
     return (
-        <header className="relative bg-white border-b border-slate-200 overflow-hidden">
+        <header className={`relative bg-white border-b border-slate-200 overflow-hidden ${className}`}>
 
             {/* Background Banner Layer */}
             {bannerUrl && (
@@ -59,27 +60,27 @@ export default function SubpageHero({ children, bannerUrl, logoUrl }: SubpageHer
 }
 
 // 2. The Badges Container
-SubpageHero.Badges = function SubpageHeroBadges({ children }: { children: React.ReactNode }) {
+SubpageHero.Badges = function SubpageHeroBadges({ children, className }: SubpageHeroProps) {
     return (
-        <div className="flex flex-wrap items-center gap-3 mb-4">
+        <div className={`${className} flex flex-wrap items-center gap-3 mb-4`}>
             {children}
         </div>
     );
 };
 
 // 3. The Title
-SubpageHero.Title = function SubpageHeroTitle({ children }: { children: React.ReactNode }) {
+SubpageHero.Title = function SubpageHeroTitle({ children, className }: SubpageHeroProps) {
     return (
-        <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+        <h1 className={`text-3xl md:text-5xl font-extrabold tracking-tight mb-4 ${className ? className : 'text-slate-900'}`}>
             {children}
         </h1>
     );
 };
 
 // 4. The Description
-SubpageHero.Description = function SubpageHeroDescription({ children }: { children: React.ReactNode }) {
+SubpageHero.Description = function SubpageHeroDescription({ children, className }: SubpageHeroProps) {
     return (
-        <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
+        <p className={`text-[13px] sm:text-lg max-w-3xl leading-relaxed ${className ? className : 'text-slate-600'}`}>
             {children}
         </p>
     );

@@ -18,8 +18,22 @@ export const metadata: Metadata = {
         description: 'A modernized, volunteer-driven portal to access government services...',
         url: 'https://betteriligancity.org',
         siteName: 'BetterIligan',
+        images: [
+            {
+                url: '/og-banner.jpg', // Points to public/og-banner.jpg
+                width: 1200,
+                height: 630,
+                alt: 'BetterIligan City Preview Banner',
+            },
+        ],
         locale: 'en_PH',
         type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'BetterIligan City',
+        description: 'A modernized, volunteer-driven portal to access government services...',
+        images: ['/og-banner.jpg'],
     },
 };
 
@@ -31,7 +45,8 @@ export default function RootLayout({
     return (
         <html
             lang="en"
-            className={`${kapwaSans.variable} ${kapwaMono.variable} h-full antialiased`}
+            data-scroll-behavior="smooth"
+            className={`${kapwaSans.variable} ${kapwaMono.variable} scroll-smooth h-full antialiased`}
         >
             <body className="min-h-full flex flex-col">
                 <TopBanner />

@@ -59,7 +59,7 @@ export default function ElectricityClient() {
                     <div className="lg:col-span-9 space-y-8">
 
                         {/* Section: Overview/Management */}
-                        <div className="md:bg-white md:border md:border-slate-200 rounded-2xl md:p-8 md:shadow-sm">
+                        <div id="power-generation-and-management" className="scroll-mt-24 md:bg-white md:border md:border-slate-200 rounded-2xl md:p-8 md:shadow-sm">
                             <h2 className="text-2xl font-bold text-slate-900 mb-6">Power Generation & Management</h2>
 
                             <div className="space-y-6">
@@ -117,7 +117,7 @@ export default function ElectricityClient() {
                         </div>
 
                         {/* Section: ILPI */}
-                        <div className="md:bg-white md:border md:border-slate-200 md:rounded-2xl md:p-8 md:shadow-sm">
+                        <div id="ilpi" className="md:bg-white md:border md:border-slate-200 md:rounded-2xl md:p-8 md:shadow-sm">
 
                             {/* Header */}
                             <div className="flex items-center gap-3 mb-4">

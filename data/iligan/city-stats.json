@@ -1,0 +1,139 @@
+{
+    "header": {
+        "classification": "Highly Urbanized City",
+        "founded": "1950",
+        "name": "ILIGAN CITY",
+        "description": "Official City Profile. Known for its rich industrial heritage and globally renowned as the",
+        "highlight": "\"City of Majestic Waterfalls\""
+    },
+    "quickStats": [
+        {
+            "label": "Charter Date",
+            "value": "June 16, 1950",
+            "subtext": "Republic Act No. 525"
+        },
+        {
+            "label": "Literacy Rate",
+            "value": "94.71%",
+            "subtext": "Educational Baseline"
+        },
+        {
+            "label": "Growth Rate",
+            "value": "+0.33%",
+            "subtext": "Annual Population Trend"
+        },
+        {
+            "label": "Primary Dialect",
+            "value": "Cebuano",
+            "subtext": "Widely spoken in the region"
+        }
+    ],
+    "demographics": [
+        {
+            "label": "Total Population",
+            "value": "368,132",
+            "subtext": "Sourced from the latest 2020 Census records."
+        },
+        {
+            "label": "Population Density",
+            "value": "452.60 / km²",
+            "subtext": "Inhabitants per square kilometer of city territory."
+        },
+        {
+            "label": "Total Households",
+            "value": "87,239",
+            "subtext": "Averaging 4.2 members per household.",
+            "hasHighlight": true
+        },
+        {
+            "label": "Political Subdivisions",
+            "value": "44 Barangays",
+            "subtext": "Local administrative units serving the city's districts."
+        }
+    ],
+    "environment": {
+        "wonders": [
+            {
+                "label": "Waterfalls",
+                "count": 23,
+                "bgColor": "bg-cyan-50",
+                "borderColor": "border-cyan-100",
+                "divColor": "text-cyan-600",
+                "textColor": "text-cyan-700"
+            },
+            {
+                "label": "Natural Springs",
+                "count": 8,
+                "bgColor": "bg-teal-50",
+                "borderColor": "border-teal-100",
+                "divColor": "text-teal-600",
+                "textColor": "text-teal-700"
+            },
+            {
+                "label": "Tourist Caves",
+                "count": 15,
+                "bgColor": "bg-indigo-50",
+                "borderColor": "border-indigo-100",
+                "divColor": "text-indigo-600",
+                "textColor": "text-indigo-700"
+            }
+        ],
+        "climate": {
+            "label": "Climate Profile",
+            "value": "Short Dry Season",
+            "subtext": "1 to 3 months of dry spells, with rainfall evenly distributed throughout the year."
+        },
+        "soil": {
+            "label": "Soil Type",
+            "value": "Cool Highland Mountain Soil",
+            "subtext": "Geological foundation suitable for diverse agricultural and environmental growth."
+        }
+    },
+    "infrastructure": [
+        {
+            "label": "Educational Institutions",
+            "value": "181 Schools",
+            "subtext": "106 Public • 75 Private • 17 Madrasah facilities available.",
+            "icon": "GraduationCap",
+            "href": "#"
+        },
+        {
+            "label": "Healthcare Facilities",
+            "value": "54 Facilities",
+            "subtext": "5 Core Hospitals • 49 Barangay Health centers active.",
+            "icon": "Stethoscope",
+            "href": "#"
+        },
+        {
+            "label": "Power Generation",
+            "value": "3 Hydro Plants",
+            "subtext": "Renewable hydro-electric power systems supplying the city.",
+            "icon": "Zap",
+            "href": "/iligan/electricity#power-generation-and-management"
+        },
+        {
+            "label": "Seaports & Maritime",
+            "value": "12 Seaports",
+            "subtext": "1 Public Port • 9 Private Ports • 2 Fishing anchor docks.",
+            "icon": "Anchor",
+            "href": "#"
+        }
+    ],
+    "sidebar": {
+        "landArea": {
+            "total": "81,337 ha",
+            "metric": "813.37 Square Kilometers"
+        },
+        "economy": {
+            "industrial": "11 Major Industries",
+            "banking": "24 Banks Total",
+            "bankingSubtext": "Distribution: 4 Private Banks • 20 Public Branches"
+        },
+        "communications": [
+            "4 Digital / 2 Wireless Comm Systems",
+            "4 Internet Providers (Maranet, IGAN, etc.)",
+            "8 Active Radio Broadcast Stations",
+            "4 Newspaper Publications"
+        ]
+    }
+}

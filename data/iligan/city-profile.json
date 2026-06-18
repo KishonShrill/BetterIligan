@@ -1,0 +1,304 @@
+{
+    "header": {
+        "classification": "Highly urbanized city",
+        "location": "Northern Mindanao, Philippines",
+        "foundedBadge": "Cityhood 1950",
+        "name": "Iligan City",
+        "description": "City of Majestic Waterfalls —",
+        "highlight": "founded 1609",
+        "descriptionEnd": ", chartered 1914. Highly urbanized city since November 1983. Located in Northern Mindanao, geographically within Lanao del Norte."
+    },
+    "quickStats": [
+        {
+            "label": "Population",
+            "value": "368,132",
+            "subtext": "2024 census"
+        },
+        {
+            "label": "Land area",
+            "value": "813.37 km²",
+            "subtext": "314.04 sq mi"
+        },
+        {
+            "label": "Mayor",
+            "value": "F. Wee Siao",
+            "subtext": "Current term"
+        },
+        {
+            "label": "GDP (2022)",
+            "value": "₱77.02B",
+            "subtext": "1st income class"
+        },
+        {
+            "label": "Literacy",
+            "value": "94.71%",
+            "subtext": "Educational baseline"
+        },
+        {
+            "label": "Time zone",
+            "value": "UTC+8",
+            "subtext": "PST"
+        }
+    ],
+    "demographics": {
+        "grid": [
+            {
+                "label": "Total population",
+                "value": "368,132",
+                "subtext": "2024 Census of Population"
+            },
+            {
+                "label": "Population density",
+                "value": "452.60 / km²",
+                "subtext": "Inhabitants per square kilometer"
+            },
+            {
+                "label": "Total households",
+                "value": "87,239",
+                "subtext": "Averaging 4.2 members per household"
+            },
+            {
+                "label": "Barangays",
+                "value": "44",
+                "subtext": "Local administrative units"
+            }
+        ],
+        "generalInfo": [
+            {
+                "key": "Demonym",
+                "value": "Iliganon"
+            },
+            {
+                "key": "Primary language",
+                "value": "Cebuano"
+            },
+            {
+                "key": "Major religions",
+                "value": "Roman Catholicism, Islam"
+            },
+            {
+                "key": "Literacy rate",
+                "value": "94.71%"
+            },
+            {
+                "key": "Annual growth rate",
+                "value": "+0.33%"
+            },
+            {
+                "key": "ZIP code",
+                "value": "9200"
+            },
+            {
+                "key": "IDD / area code",
+                "value": "+63 (0)63"
+            },
+            {
+                "key": "Time zone",
+                "value": "UTC+8 (PST)"
+            }
+        ]
+    },
+    "government": {
+        "local": [
+            {
+                "key": "Type",
+                "value": "Sangguniang Panlungsod"
+            },
+            {
+                "key": "Mayor",
+                "value": "Frederick Wee Siao"
+            },
+            {
+                "key": "Vice Mayor",
+                "value": "Ernest Oliver \"Wekwek\" C. Uy"
+            },
+            {
+                "key": "Representative",
+                "value": "Ret. Col. Celso G. Regencia"
+            },
+            {
+                "key": "District",
+                "value": "Lone district"
+            },
+            {
+                "key": "Electorate (2025)",
+                "value": "189,050 voters"
+            }
+        ],
+        "history": [
+            {
+                "key": "Founded",
+                "value": "1609"
+            },
+            {
+                "key": "Chartered",
+                "value": "1914"
+            },
+            {
+                "key": "Cityhood",
+                "value": "June 16, 1950 · R.A. 525"
+            },
+            {
+                "key": "Highly urbanized",
+                "value": "November 22, 1983"
+            },
+            {
+                "key": "Region",
+                "value": "Northern Mindanao (Region X)"
+            },
+            {
+                "key": "Province (geographic)",
+                "value": "Lanao del Norte"
+            },
+            {
+                "key": "PSGC",
+                "value": "103504000"
+            }
+        ]
+    },
+    "economy": {
+        "grid": [
+            {
+                "label": "Gross domestic product",
+                "value": "₱77.02B",
+                "subtext": "2022 · $1.36B USD"
+            },
+            {
+                "label": "Income class",
+                "value": "1st city",
+                "subtext": "Highest classification in the Philippines"
+            },
+            {
+                "label": "Revenue (2024)",
+                "value": "₱3,031M"
+            },
+            {
+                "label": "Assets (2024)",
+                "value": "₱13,377M"
+            }
+        ],
+        "commerce": [
+            {
+                "key": "Major industries",
+                "value": "11 sectors"
+            },
+            {
+                "key": "Banks (total)",
+                "value": "24 banks"
+            },
+            {
+                "key": "Private banks",
+                "value": "4"
+            },
+            {
+                "key": "Public bank branches",
+                "value": "20"
+            },
+            {
+                "key": "Poverty incidence",
+                "value": "11.8% (2021)"
+            },
+            {
+                "key": "Expenditure (2024)",
+                "value": "₱3,367M"
+            },
+            {
+                "key": "Electricity provider",
+                "value": "ILPI"
+            },
+            {
+                "key": "Water provider",
+                "value": "Iligan City Waterworks System"
+            }
+        ]
+    },
+    "environment": {
+        "wonders": [
+            {
+                "label": "Waterfalls",
+                "count": 23,
+                "bgColor": "bg-cyan-50",
+                "borderColor": "border-cyan-100",
+                "divColor": "text-cyan-600",
+                "textColor": "text-cyan-700"
+            },
+            {
+                "label": "Natural Springs",
+                "count": 8,
+                "bgColor": "bg-teal-50",
+                "borderColor": "border-teal-100",
+                "divColor": "text-teal-600",
+                "textColor": "text-teal-700"
+            },
+            {
+                "label": "Tourist Caves",
+                "count": 15,
+                "bgColor": "bg-indigo-50",
+                "borderColor": "border-indigo-100",
+                "divColor": "text-indigo-600",
+                "textColor": "text-indigo-700"
+            }
+        ],
+        "geography": [
+            {
+                "key": "Total land area",
+                "value": "813.37 km² (81,337 ha)"
+            },
+            {
+                "key": "Elevation (city)",
+                "value": "262 m (860 ft)"
+            },
+            {
+                "key": "Highest point",
+                "value": "1,195 m (3,921 ft)"
+            },
+            {
+                "key": "Lowest point",
+                "value": "0 m (sea level)"
+            },
+            {
+                "key": "Climate type",
+                "value": "Short dry season (1–3 months)"
+            },
+            {
+                "key": "Soil type",
+                "value": "Cool highland mountain soil"
+            }
+        ]
+    },
+    "infrastructure": {
+        "facilities": [
+            {
+                "label": "Educational institutions",
+                "value": "181 schools",
+                "subtext": "106 public · 75 private · 17 Madrasah",
+                "icon": "GraduationCap"
+            },
+            {
+                "label": "Healthcare facilities",
+                "value": "54 facilities",
+                "subtext": "5 core hospitals · 49 barangay health centers",
+                "icon": "Stethoscope"
+            },
+            {
+                "label": "Power generation",
+                "value": "3 hydro plants",
+                "subtext": "Renewable hydro-electric · supplied by ILPI",
+                "icon": "Zap",
+                "href": "/iligan/electricity#power-generation-and-management"
+            },
+            {
+                "label": "Seaports & maritime",
+                "value": "12 seaports",
+                "subtext": "1 public · 9 private · 2 fishing docks",
+                "icon": "Anchor"
+            }
+        ],
+        "communications": [
+            "4 digital / 2 wireless communication systems",
+            "4 internet service providers — Maranet, IGAN, and others",
+            "8 active radio broadcast stations",
+            "4 newspaper publications"
+        ]
+    }
+}

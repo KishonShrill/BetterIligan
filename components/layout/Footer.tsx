@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Github } from 'lucide-react';
 
 interface FooterLink {
@@ -55,9 +56,13 @@ export default function Footer() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10">
                     <div className='col-span-1 sm:col-span-2'>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                BI
-                            </div>
+                            <Image
+                                src="/images/logos/betteriligan-logo.png"
+                                alt="BetterIligan Logo"
+                                width={75}
+                                height={75}
+                                className="w-12 h-12 rounded-md object-cover"
+                            />
                             <div className="font-bold">BetterIligan</div>
                         </div>
                         <p className="text-slate-400 text-sm mb-5 leading-relaxed">

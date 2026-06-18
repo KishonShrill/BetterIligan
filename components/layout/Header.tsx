@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Search, Menu, ChevronDown } from 'lucide-react';
 import { headerDropdown } from '@/data/categories';
@@ -83,9 +84,13 @@ export default function Header() {
 
                     {/* Logo area */}
                     <div className="shrink-0 flex items-center gap-3">
-                        <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                            BI
-                        </div>
+                        <Image
+                            src="/images/logos/betteriligan-logo.png"
+                            alt="BetterIligan Logo"
+                            width={75}
+                            height={75}
+                            className="w-12 h-12 object-cover"
+                        />
                         <div className="block leading-[0.25]">
                             <Link href="/" className="text-xl font-bold text-slate-900 leading-tight block">
                                 BetterIliganCity
