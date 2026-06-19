@@ -99,7 +99,7 @@ export default function WeatherAndMap() {
             {/* Section Header */}
             <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold text-slate-900">Weather & Location</h2>
-                <Text className='text-slate-600 mt-2 mx-auto' size='md'>Current conditions and interactive map of Iligan City</Text>
+                <Text className='text-slate-600 mt-2 mx-auto text-sm md:text-base' size='md'>Current conditions and interactive map of Iligan City</Text>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-stretch">

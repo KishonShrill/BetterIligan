@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { Text } from '@/components/ui/Text';
 import Section from '@/components/ui/Section';
 import Button3D from '@/components/ui/Button3D';
 import { serviceCategories } from '@/data/categories';
@@ -22,11 +23,11 @@ export default function ServicesSection() {
             {/* Header */}
             <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
-                    Government Services
+                    City Services
                 </h2>
-                <p className="text-slate-500 max-w-2xl mx-auto text-lg">
-                    Access official government services quickly and easily. Find what you need for citizenship, business, education, and more.
-                </p>
+                <Text className="text-slate-500 max-w-2xl mx-auto text-sm md:text-base" size='md'>
+                    Access all list of services quickly and easily. Find what you need for citizenship, business, education, and more.
+                </Text>
             </div>
 
             {/* Services Grid */}

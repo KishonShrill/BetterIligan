@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { ElementType, type Ref } from 'react';
 
 interface Button3DProps {
     text: string;
     href?: string;
     onClick?: () => void;
+    icon?: ElementType;
+    ref?: Ref<HTMLAnchorElement | HTMLButtonElement>;
     hasArrow?: boolean;
+    iconPosition?: 'left' | 'right';
     variant?: 'white' | 'blue' | 'slate';
     size?: 'sm' | 'md' | 'lg';
     className?: string; // For passing extra classes like w-full
@@ -15,6 +19,9 @@ export default function Button3D({
     text,
     href,
     onClick,
+    icon: IconComponent,
+    ref,
+    iconPosition = 'right',
     hasArrow = false,
     variant = 'white',
     size = 'md',
@@ -61,20 +68,25 @@ export default function Button3D({
 
     // Combine them all together safely
     const finalClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`.trim().replace(/\s+/g, ' ');
+    const iconSizeClass = size === 'sm' ? 'w-3.5 h-3.5' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4';
+    const hoverTranslateClass = iconPosition === 'right' ? 'group-hover:translate-x-1' : 'group-hover:-translate-x-1';
+
+    const renderIcon = IconComponent
+        ? <IconComponent className={`transition-transform ${hoverTranslateClass} ${iconSizeClass}`} />
+        : hasArrow ? <ArrowRight className={`group-hover:translate-x-1 transition-transform ${hoverTranslateClass} ${iconSizeClass}`} /> : null;
 
     const InnerContent = (
         <>
+            {iconPosition === 'left' && renderIcon}
             {text}
-            {hasArrow && (
-                <ArrowRight className={`group-hover:translate-x-1 transition-transform ${size === 'sm' ? 'w-3.5 h-3.5' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4'}`} />
-            )}
+            {iconPosition === 'right' && renderIcon}
         </>
     );
 
     // If an href is provided, render a Next.js Link
     if (href) {
         return (
-            <Link href={href} className={finalClasses}>
+            <Link ref={ref as Ref<HTMLAnchorElement>} href={href} className={finalClasses}>
                 {InnerContent}
             </Link>
         );
@@ -82,7 +94,7 @@ export default function Button3D({
 
     // Otherwise, render a standard HTML button
     return (
-        <button onClick={onClick} className={finalClasses}>
+        <button ref={ref as Ref<HTMLButtonElement>} onClick={onClick} className={finalClasses}>
             {InnerContent}
         </button>
     );

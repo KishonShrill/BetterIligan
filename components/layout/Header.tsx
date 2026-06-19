@@ -6,52 +6,29 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Search, Menu, ChevronDown } from 'lucide-react';
 import { headerDropdown } from '@/data/categories';
+import navigationJson from '@/data/navigation.json';
 
-const navigation = [
-    {
-        name: 'Iligan City',
-        href: '/iligan',
-        dropdown: [
-            { name: 'All About Iligan', href: '/iligan' },
-            { name: 'Profile', href: '/iligan/city-stats' },
-            { name: 'History & Heritage', href: '#', upcoming: true },
-            { name: 'City Officials', href: '/iligan/city-officials' },
-            { name: 'Barangays', href: '/iligan/brangays' },
-            { name: 'Electricity', href: '/iligan/electricity' }
-        ],
-    },
+interface SubItem {
+    name: string;
+    description?: string;
+    href: string;
+    upcoming?: boolean;
+}
+
+interface Navigation {
+    name: string;
+    href: string;
+    dropdown: SubItem[];
+}
+
+const navigation: Navigation[] = [
+    navigationJson[0],
     {
         name: 'Services',
         href: '/services',
         dropdown: headerDropdown,
     },
-    {
-        name: 'Government',
-        href: '/government',
-        dropdown: [
-            { name: 'Government Overview', href: '/government' },
-            { name: 'National Agencies', href: '/government/directory' },
-            { name: 'Departments', href: '/government/departments' },
-        ],
-    },
-    {
-        name: 'Travel',
-        href: '/travel',
-        dropdown: [
-            { name: 'Explore Travel', href: '#', upcoming: true },
-            { name: 'Waterfalls', href: '#', upcoming: true },
-            { name: 'Accommodations', href: '#', upcoming: true },
-        ],
-    },
-    {
-        name: 'About',
-        href: '/about',
-        dropdown: [
-            { name: 'About Us', href: '/about' },
-            { name: 'Privacy Policy', href: '/privacy-policy' },
-            { name: 'Terms of Service', href: '/terms-of-service' },
-        ],
-    },
+    ...navigationJson.slice(1),
 ];
 
 export default function Header() {
@@ -80,7 +57,7 @@ export default function Header() {
 
     return (
         <header className="font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200">
-            <div className="max-w-404 mx-auto px-4 md:px-6 lg:px-8">
+            <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-20">
 
                     {/* Logo area */}

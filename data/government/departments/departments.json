@@ -15,6 +15,21 @@
         "logoUrl": "/images/logos/iligan-city-gender-and-development-office-(gad).png"
     },
     {
+        "name": "City Administrator's Office (CAD)",
+        "category": "Public Administration",
+        "representative": {
+            "name": "Darwin J. Manumbag",
+            "numbers": [
+                "(063) 222-2623"
+            ],
+            "emails": [
+                "cad.iligancity@gmail.com"
+            ]
+        },
+        "facebookUrl": "https://www.facebook.com/p/Iligan-City-Administrators-Office-at-your-Service-100067402227027/",
+        "logoUrl": "https://scontent.fcgy1-3.fna.fbcdn.net/v/t39.30808-6/594055216_1163179102605486_1332750481471461095_n.jpg?stp=dst-jpg_tt6&cstp=mx1080x1080&ctp=s1080x1080&_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGCflz_7NapF-22oNmwvWsIjb5ZIORA3aSNvlkg5EDdpHwhTtA1TPo3E3uGiZfnekO9U17R2vqDYglI7Lcdo58M&_nc_ohc=Y8Q1CXRddEkQ7kNvwHYCmqN&_nc_oc=Adp4F6MMvUZBukUVgYDYEC-ffTEyrh5p-cRPmlvixbKnlLH6WgrVZ096U1UVhHXU8Qg&_nc_zt=23&_nc_ht=scontent.fcgy1-3.fna&_nc_gid=tOv0Wm6GsqurSljhDhGvkg&_nc_ss=7b2a8&oh=00_Af-h7htRUZuVQ0mgzZGwaA9qvEUjAia826SJVJvYuemZgg&oe=6A3AC9F2"
+    },
+    {
         "name": "Sangguniang Panlungsod",
         "category": "Social Services",
         "representative": {
@@ -67,6 +82,7 @@
                 "icws@iligan.gov.ph"
             ]
         },
+        "facebookUrl": "https://www.facebook.com/lguiliganwaterworks",
         "logoUrl": "/images/logos/iligan-city-waterworks-systems-(icws).jpg"
     },
     {
@@ -173,6 +189,7 @@
                 "citysports@iligan.gov.ph"
             ]
         },
+        "facebookUrl": "https://www.facebook.com/iligancitysports",
         "logoUrl": "/images/logos/iligan-city-sports-office-(icso).png"
     },
     {
@@ -312,6 +329,7 @@
                 "cpdo@iligan.gov.ph"
             ]
         },
+        "facebookUrl": "https://www.facebook.com/LGUIliganCPDO",
         "logoUrl": "/images/logos/city-planning-and-development-office-(cpdo).jpg"
     },
     {

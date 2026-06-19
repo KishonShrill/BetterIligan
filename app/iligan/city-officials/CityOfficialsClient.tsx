@@ -3,16 +3,22 @@
 import { Landmark, Gavel, User, Award, ShieldCheck } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
 import SubpageHero from '@/components/ui/SubpageHero';
+import ReferencesFooter from '@/components/ui/ReferencesFooter';
 
 // Adjust the path to match where you saved your JSON
 import officialsData from '@/data/iligan/city-officials.json';
 
 export default function CityOfficialsClient() {
+    const cityOfficialsReferences = [
+        {
+            title: "iligan.gov.ph - 18th Council",
+            url: "https://iligan.gov.ph/knowiligan/18thcouncil?640614431"
+        }
+    ]
     return (
         <main className="min-h-screen bg-slate-50 font-sans pb-24">
 
             <SubpageNav />
-
             <SubpageHero>
                 <SubpageHero.Badges>
                     <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider rounded-full border border-indigo-100">
@@ -105,6 +111,8 @@ export default function CityOfficialsClient() {
                         })}
                     </div>
                 </section>
+
+                <ReferencesFooter references={cityOfficialsReferences} />
 
             </div>
         </main>

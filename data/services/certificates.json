@@ -1,5 +1,16 @@
 [
     {
+        "title": "Passport - Schedule an Appointment (Online)",
+        "category": "Certificates and Vital Records",
+        "description": "Welcome to the DFA Online Passport Appointment System. Schedule an appointment for your passport. This appointment and scheduling system allocates slots on a first come, first served basis.",
+        "source": "official",
+        "isWalkIn": true,
+        "isOnline": true,
+        "department": "Department of Foreign Affairs (DFA)",
+        "type": "external",
+        "externalUrl": "https://passport.gov.ph/appointment"
+    },
+    {
         "title": "Application/Request For Birth Certificate (Online)",
         "category": "Certificates and Vital Records",
         "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",

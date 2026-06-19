@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search, ArrowUpRight, FileText, Landmark } from 'lucide-react';
+import { Search, ArrowUpRight, FileText, Landmark, X } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import Button3D from '@/components/ui/Button3D';
 
@@ -16,9 +16,13 @@ export default function HeroSection() {
     const [searchResults, setSearchResults] = useState<AllService[]>([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+    // NEW STATE: Controls whether the full search card is visible on mobile
+    const [isMobileSearchVisible, setIsMobileSearchVisible] = useState(false);
+
     // Reference to the search container to detect clicks outside
     const router = useRouter();
     const searchContainerRef = useRef<HTMLDivElement>(null);
+    const mobileSearchInputRef = useRef<HTMLInputElement>(null);
 
     // Handle the filtering logic whenever the query changes
     useEffect(() => {
@@ -51,18 +55,31 @@ export default function HeroSection() {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
+    // When mobile search opens, automatically focus the input
+    useEffect(() => {
+        if (isMobileSearchVisible && mobileSearchInputRef.current) {
+            // Small delay to allow the animation to render first
+            setTimeout(() => {
+                mobileSearchInputRef.current?.focus();
+            }, 50);
+        }
+    }, [isMobileSearchVisible]);
+
     // Helper to handle popular search clicks
     const handlePopularSearch = (term: string) => {
         setSearchQuery(term);
+        // If they click a popular search on mobile BEFORE opening the search box, 
+        // open the search box so they can see the results!
+        if (!isMobileSearchVisible && window.innerWidth < 1024) {
+            setIsMobileSearchVisible(true);
+        }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            // Close the dropdown immediately so it feels snappy
             setIsDropdownOpen(false);
 
-            // Push to the services page using the 'q' parameter we set up earlier
             if (searchQuery.trim()) {
                 router.push(`/services?q=${encodeURIComponent(searchQuery)}`);
             } else {
@@ -72,11 +89,11 @@ export default function HeroSection() {
     };
 
     return (
-        <Section className='bg-[#0038A8] min-h-125'>
+        <Section className='bg-[#0038A8] max-md:py-3'>
             {/* Subtle Background Grid for texture */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
-            <div className="relative max-w-404 mx-auto py-8 md:py-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            <div className="relative max-w-404 mx-auto py-8 md:py-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-center">
 
                 {/* Status Badge */}
                 <div className="max-lg:hidden col-span-1 lg:col-span-2 w-fit mx-auto lg:mx-0 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/30 border border-blue-400/30 text-blue-50 text-sm font-medium">
@@ -93,63 +110,92 @@ export default function HeroSection() {
                         Welcome to <br /> BetterIligan City
                     </h1>
 
-                    <p className="max-lg:max-w-lg max-lg:text-left text-blue-100 text-lg mb-8 leading-relaxed">
+                    <p className="max-lg:max-w-lg max-lg:text-left text-blue-100 text-base lg:text-lg mb-8 leading-relaxed">
                         A modernized, volunteer-driven portal to access government services, public data, and resources for the people of Iligan.
                     </p>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-2">
+                    <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-2">
                         <Button3D
                             text="Browse Services"
                             href="/services"
                             hasArrow={true}
                             variant="white"
                             size="md"
-                            className="w-full md:w-auto"
+                            className="w-full sm:w-auto"
                         />
+
+                        {/* NEW: The Mobile Reveal Search Button! Hidden on Desktop (lg) */}
+                        {!isMobileSearchVisible && (
+                            <Button3D
+                                text="Find a Service"
+                                icon={Search}
+                                iconPosition='left'
+                                onClick={() => setIsMobileSearchVisible(true)}
+                                variant="blue"
+                                size="md"
+                                className="lg:hidden w-full sm:w-auto"
+                            />
+                        )}
                     </div>
                 </div>
 
                 {/* Right Column - Dynamic Search Card */}
-                <div className="w-full max-lg:max-w-2xl mx-auto lg:mx-0 lg:ml-auto">
-                    {/* Note: The background, border, and shadow are removed on mobile to save space, but added back on md: screens */}
-                    <div className="md:bg-white md:rounded-2xl md:shadow-2xl md:p-8 md:border md:border-slate-100 relative">
+                {/* Notice the conditional class handling: It's always visible on 'lg', but toggled by state on mobile */}
+                <div className={`w-full max-lg:max-w-2xl mx-auto lg:mx-0 lg:ml-auto ${!isMobileSearchVisible ? 'max-lg:hidden' : 'max-lg:animate-in max-lg:fade-in max-lg:slide-in-from-bottom-4 max-lg:duration-300'}`}>
 
-                        <div className="flex items-center gap-3 mb-5 md:mb-6">
-                            {/* Icon adjusts color based on mobile (translucent white) or desktop (light blue) */}
-                            <div className="bg-white/20 md:bg-blue-100 p-2.5 md:p-2 rounded-xl md:rounded-lg backdrop-blur-sm md:backdrop-blur-none">
-                                <Search className="w-5 h-5 text-white md:text-blue-600" />
+                    {/* The main Search Card UI */}
+                    <div className="md:bg-white max-lg:bg-white/10 max-lg:backdrop-blur-md md:rounded-2xl rounded-xl md:shadow-2xl shadow-lg p-5 md:p-8 border border-white/20 md:border-slate-100 relative">
+
+                        {/* Card Header & Mobile Close Button */}
+                        <div className="flex items-center justify-between mb-5 md:mb-6">
+                            <div className="flex items-center gap-3">
+                                <div className="bg-white/20 md:bg-blue-100 p-2.5 md:p-2 rounded-xl md:rounded-lg">
+                                    <Search className="w-5 h-5 text-white md:text-blue-600" />
+                                </div>
+                                <h2 className="text-xl font-bold text-white md:text-slate-800">Find a Service</h2>
                             </div>
-                            <h2 className="text-2xl md:text-xl font-bold text-white md:text-slate-800">Find a Service</h2>
+
+                            {/* Mobile Close Button (X) */}
+                            <button
+                                onClick={() => {
+                                    setIsMobileSearchVisible(false);
+                                    setSearchQuery(''); // Optional: clear search when closing
+                                }}
+                                className="lg:hidden p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+                                aria-label="Close search"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
                         </div>
 
                         {/* Search Input & Dropdown Container */}
                         <div className="relative mb-6 md:mb-8 group" ref={searchContainerRef}>
                             <input
+                                ref={mobileSearchInputRef} // Added ref for auto-focus
                                 type="text"
                                 placeholder="e.g., birth certificate, business permit"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onFocus={() => searchQuery.trim().length >= 2 && setIsDropdownOpen(true)}
                                 onKeyDown={handleKeyDown}
-                                // Inputs are massively upscaled on mobile (py-4, pl-14, text-lg) for better touch targets
-                                className="w-full pl-4 pr-16 md:pr-14 py-4 md:py-4 rounded-2xl md:rounded-xl border-2 border-transparent md:border-slate-100 bg-white md:bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-all duration-200 shadow-xl md:shadow-none text-lg md:text-base relative z-10"
+                                className="w-full pl-4 pr-16 md:pr-14 py-4 rounded-xl border-2 border-transparent md:border-slate-100 bg-white md:bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-all duration-200 shadow-xl md:shadow-none text-base relative z-10"
                             />
 
-                            {/* Search Button */}
+                            {/* Search Submit Button */}
                             <Link
                                 href={`/services?q=${encodeURIComponent(searchQuery)}`}
                                 aria-label="Search"
-                                className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-3 md:p-2.5 rounded-xl md:rounded-lg transition-colors z-10 flex items-center justify-center shadow-sm"
+                                className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-3 md:p-2.5 rounded-lg transition-colors z-10 flex items-center justify-center shadow-sm"
                             >
                                 <ArrowUpRight className="w-5 h-5 md:w-4 md:h-4" />
                             </Link>
 
                             {/* FLOATING DROPDOWN RESULTS */}
                             {isDropdownOpen && (
-                                <div className="absolute top-full left-0 right-0 md:-left-4 md:-right-4 mt-3 md:mt-2 bg-white rounded-2xl md:rounded-xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                                     {searchResults.length > 0 ? (
-                                        <ul className="max-h-[60vh] md:max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar p-1">
+                                        <ul className="max-h-[50vh] md:max-h-80 overflow-y-auto divide-y divide-slate-100 custom-scrollbar p-1">
                                             {searchResults.map((service, idx) => (
                                                 <li key={`service-${idx}`}>
                                                     <Link
@@ -158,7 +204,6 @@ export default function HeroSection() {
                                                             : service.type === "internal"
                                                                 ? `/community/${service.slug}`
                                                                 : service.externalUrl}
-                                                        /* --- ADDED ACCESSIBILITY CLASSES HERE --- */
                                                         className="flex items-center justify-between p-3 md:p-4 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset rounded-lg transition-all group/item"
                                                         onClick={() => setIsDropdownOpen(false)}
                                                     >
@@ -182,7 +227,7 @@ export default function HeroSection() {
                                             ))}
                                         </ul>
                                     ) : (
-                                        <div className="p-8 md:p-6 text-center text-slate-500 text-base md:text-sm">
+                                        <div className="p-6 text-center text-slate-500 text-sm">
                                             No services found matching &ldquo;{searchQuery}&rdquo;
                                         </div>
                                     )}
@@ -192,11 +237,10 @@ export default function HeroSection() {
 
                         {/* Popular Searches */}
                         <div>
-                            {/* Text turns light blue on mobile, slate on desktop */}
                             <p className="text-xs font-semibold text-blue-200 md:text-slate-400 uppercase tracking-wider mb-3">
                                 Popular Searches
                             </p>
-                            <div className="flex flex-wrap gap-2.5 md:gap-2">
+                            <div className="flex flex-wrap gap-2">
                                 {[
                                     { name: 'Birth Certificate', icon: FileText },
                                     { name: 'Marriage Certificate', icon: FileText },
@@ -205,15 +249,15 @@ export default function HeroSection() {
                                     <button
                                         key={item.name}
                                         onClick={() => handlePopularSearch(item.name)}
-                                        // Pills become translucent buttons on mobile, standard gray buttons on desktop
-                                        className="flex items-center gap-1.5 bg-white/10 md:bg-slate-50 hover:bg-white/20 md:hover:bg-blue-50 border border-white/20 md:border-slate-100 text-white md:text-slate-600 hover:text-white md:hover:text-blue-700 text-sm px-4 py-2.5 md:py-2 rounded-full transition-colors backdrop-blur-sm md:backdrop-blur-none"
+                                        className="flex items-center gap-1.5 bg-white/10 md:bg-slate-50 hover:bg-white/20 md:hover:bg-blue-50 border border-white/20 md:border-slate-100 text-white md:text-slate-600 hover:text-white md:hover:text-blue-700 text-xs px-3 py-2 rounded-full transition-colors backdrop-blur-sm md:backdrop-blur-none"
                                     >
-                                        <item.icon className="w-4 h-4 md:w-3.5 md:h-3.5" />
+                                        <item.icon className="w-3.5 h-3.5" />
                                         {item.name}
                                     </button>
                                 ))}
                             </div>
                         </div>
+
                     </div>
                 </div>
 

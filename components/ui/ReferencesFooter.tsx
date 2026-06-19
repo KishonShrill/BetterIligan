@@ -10,14 +10,15 @@ export interface ReferenceItem {
 interface ReferencesFooterProps {
     references: ReferenceItem[];
     disclaimer?: string;
+    className?: string;
 }
 
-export default function ReferencesFooter({ references, disclaimer }: ReferencesFooterProps) {
+export default function ReferencesFooter({ references, disclaimer, className }: ReferencesFooterProps) {
     // If there are no references, don't render the footer at all
     if (!references || references.length === 0) return null;
 
     return (
-        <div className="pt-8 mt-8 border-t border-slate-200">
+        <div className={`pt-8 mt-8 border-t border-slate-200 ${className}`}>
             <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">
                 Sources & References
             </h3>

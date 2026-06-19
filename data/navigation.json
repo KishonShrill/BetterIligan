@@ -1,0 +1,111 @@
+[
+    {
+        "name": "Iligan City",
+        "href": "/iligan",
+        "dropdown": [
+            {
+                "name": "All About Iligan",
+                "description": "Overview of Iligan City, including its culture, geography, and key highlights.",
+                "href": "/iligan"
+            },
+            {
+                "name": "Profile",
+                "description": "Key facts, demographics, and statistical data about Iligan City.",
+                "href": "/iligan/city-stats"
+            },
+            {
+                "name": "History & Heritage",
+                "description": "Explore the rich history, traditions, and heritage of Iligan City.",
+                "href": "#",
+                "upcoming": true
+            },
+            {
+                "name": "City Officials",
+                "description": "Meet the elected officials and leaders serving Iligan City.",
+                "href": "/iligan/city-officials"
+            },
+            {
+                "name": "Barangays",
+                "description": "Directory of barangays with basic information and local details.",
+                "href": "/iligan/brangays"
+            },
+            {
+                "name": "Electricity",
+                "description": "Information about power providers, services, and utilities in the city.",
+                "href": "/iligan/electricity"
+            }
+        ]
+    },
+    {
+        "name": "Government",
+        "href": "/government",
+        "dropdown": [
+            {
+                "name": "Government Overview",
+                "description": "Structure, roles, and functions of the local government of Iligan.",
+                "href": "/government"
+            },
+            {
+                "name": "National Agencies",
+                "description": "List of national government offices and agencies operating in Iligan.",
+                "href": "/government/directory"
+            },
+            {
+                "name": "Departments",
+                "description": "Overview of city departments and their services to the public.",
+                "href": "/government/departments"
+            }
+        ]
+    },
+    {
+        "name": "Travel",
+        "href": "/travel",
+        "dropdown": [
+            {
+                "name": "Explore Travel",
+                "description": "Discover top destinations, attractions, and experiences in Iligan.",
+                "href": "#",
+                "upcoming": true
+            },
+            {
+                "name": "Transportation",
+                "description": "Guide to getting around Iligan, including routes and transport options.",
+                "href": "/travel/transportation",
+                "upcoming": true
+            },
+            {
+                "name": "Waterfalls",
+                "description": "Explore Iligan’s famous waterfalls and natural attractions.",
+                "href": "#",
+                "upcoming": true
+            },
+            {
+                "name": "Accommodations",
+                "description": "Find hotels, inns, and places to stay in Iligan City.",
+                "href": "#",
+                "upcoming": true
+            }
+        ]
+    },
+    {
+        "name": "About",
+        "href": "/about",
+        "dropdown": [
+            {
+                "name": "About Us",
+                "description": "Learn more about this platform and its purpose.",
+                "href": "/about"
+            },
+            {
+                "name": "Privacy Policy",
+                "description": "Understand how your data is collected, used, and protected.",
+                "href": "/privacy-policy"
+            },
+            {
+                "name": "Terms of Service",
+                "description": "Review the terms and conditions for using this website.",
+                "href": "/terms-of-service"
+            }
+        ]
+    }
+]

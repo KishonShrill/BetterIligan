@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react';
 
 export default function FilterGrid({ children, className }: { children: React.ReactNode, className?: string }) {
     return (
-        <div className={`max-w-404 mx-auto px-4 md:px-6 py-6 md:py-12 ${className}`}>
+        <div className={`container mx-auto px-4 md:px-6 py-6 md:py-12 ${className}`}>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 {children}
             </div>
