@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Search, Menu, ChevronDown } from 'lucide-react';
 import { headerDropdown } from '@/data/categories';
 import navigationJson from '@/data/navigation.json';
+import Breadcrumbs from '../ui/Breadcrumbs';
 
 interface SubItem {
     name: string;
@@ -28,7 +29,7 @@ const navigation: Navigation[] = [
         href: '/services',
         dropdown: headerDropdown,
     },
-    ...navigationJson.slice(1),
+    ...navigationJson.slice(1).filter((_, index) => index !== 1),
 ];
 
 export default function Header() {
@@ -57,7 +58,7 @@ export default function Header() {
 
     return (
         <header className="font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200">
-            <div className="container mx-auto px-4">
+            <div className={`container mx-auto px-4 ${pathname != "/" && 'pb-4'}`}>
                 <div className="flex items-center justify-between h-20">
 
                     {/* Logo area */}
@@ -144,6 +145,7 @@ export default function Header() {
                         </button>
                     </div>
                 </div>
+                {pathname != "/" && <Breadcrumbs />}
             </div>
 
             {/* MOBILE MENU OVERLAY */}
