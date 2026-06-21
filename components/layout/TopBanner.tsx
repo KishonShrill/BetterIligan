@@ -1,16 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Cloud, CloudRain, Sun, CloudLightning, Phone } from 'lucide-react';
 
 const ILIGAN_LAT = 8.2280;
 const ILIGAN_LNG = 124.2452;
 const CURRENCIES = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'SGD', 'KRW', 'CNY'];
 
-export default function TopBanner() {
+type ClassName = { className?: string; }
+
+export default function TopBanner({ className }: ClassName) {
     const [weather, setWeather] = useState<{ temp: number; code: number } | null>(null);
     const [rates, setRates] = useState<Record<string, number>>({});
     const [currIdx, setCurrIdx] = useState(0);
+    const pathname = usePathname();
 
     useEffect(() => {
         fetch(
@@ -23,12 +27,12 @@ export default function TopBanner() {
                     code: data.current?.weather_code,
                 });
             })
-            .catch(() => {});
+            .catch(() => { });
 
         fetch('https://api.exchangerate-api.com/v4/latest/PHP')
             .then((r) => r.json())
             .then((data) => setRates(data.rates || {}))
-            .catch(() => {});
+            .catch(() => { });
     }, []);
 
     useEffect(() => {
@@ -49,7 +53,7 @@ export default function TopBanner() {
     const rate = rates[curr] ? (1 / rates[curr]).toFixed(2) : null;
 
     return (
-        <div className="bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans">
+        <div className={`${className} ${pathname === "/travel/transportation" && "hidden"} bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans`}>
             <div className="container mx-auto px-4 py-1 sm:py-2 flex items-center justify-between sm:justify-end sm:gap-4">
                 <div className="flex items-center gap-3 text-slate-600">
                     <span className="text-slate-500">

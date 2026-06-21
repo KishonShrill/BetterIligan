@@ -32,7 +32,9 @@ const navigation: Navigation[] = [
     ...navigationJson.slice(1).filter((_, index) => index !== 1),
 ];
 
-export default function Header() {
+type ClassName = { className?: string; }
+
+export default function Header({ className }: ClassName) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
     const pathname = usePathname();
@@ -57,7 +59,7 @@ export default function Header() {
     };
 
     return (
-        <header className="font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200">
+        <header className={`${className} ${pathname === "/travel/transportation" && "hidden"} font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200`}>
             <div className={`container mx-auto px-4 ${pathname != "/" && 'pb-4'}`}>
                 <div className="flex items-center justify-between h-20">
 
