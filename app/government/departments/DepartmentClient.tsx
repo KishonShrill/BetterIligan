@@ -36,7 +36,6 @@ export default function DirectoryClient() {
     return (
         <main className="min-h-screen bg-slate-50 font-sans pb-24">
 
-
             <SubpageNav />
             <SubpageHero>
                 <SubpageHero.Badges>
@@ -93,10 +92,14 @@ export default function DirectoryClient() {
 
                                         {/* Address */}
                                         {department.address && (
-                                            <p className="text-sm text-slate-500 flex items-start gap-1.5 mb-4">
+                                            <a
+                                                href={`https://maps.google.com/?q=${encodeURIComponent(department.address)}`}
+                                                target="_blank" rel="noopener noreferrer"
+                                                className="text-sm text-slate-500 flex items-start gap-1.5 mb-4"
+                                            >
                                                 <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                                                <span className="line-clamp-2">{department.address}</span>
-                                            </p>
+                                                <span className="line-clamp-2 text-blue-500 underline">{department.address}</span>
+                                            </a>
                                         )}
 
                                         {/* Contact Details (Only renders if at least ONE exists) */}

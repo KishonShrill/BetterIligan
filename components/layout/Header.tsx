@@ -59,9 +59,9 @@ export default function Header({ className }: ClassName) {
     };
 
     return (
-        <header className={`${className} ${pathname === "/travel/transportation" && "hidden"} font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200`}>
-            <div className={`container relative mx-auto px-4}`}>
-                <div className="flex items-center justify-between h-20">
+        <header className={`${className} ${pathname === "/travel/transportation" && "hidden"} px-4 font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200`}>
+            <div className={`container relative mx-auto p-0}`}>
+                <div className="flex items-center justify-between h-20 sm:px-4">
 
                     {/* Logo area */}
                     <div className="shrink-0 flex items-center gap-3">
@@ -139,7 +139,7 @@ export default function Header({ className }: ClassName) {
                         {/* Mobile menu button */}
                         <button
                             type="button"
-                            className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+                            className="lg:hidden p-2 rounded-lg bg-white/95 backdrop-blur border border-slate-200 text-slate-700 shadow-lg shadow-slate-300/30 hover:bg-slate-700 hover:text-white active:translate-y-0"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
                             <span className="sr-only">Open main menu</span>
@@ -152,10 +152,10 @@ export default function Header({ className }: ClassName) {
 
             {/* MOBILE MENU OVERLAY */}
             {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 w-full bg-white border-t border-t-gray-100 shadow-xl flex flex-col lg:hidden animate-in slide-in-from-top-2 fade-in duration-200">
+                <div className="absolute top-full left-0 w-full max-h-[calc(100vh-81.1px-33.1px)] bg-white border-t border-t-gray-100 shadow-xl flex flex-col items-center lg:hidden animate-in slide-in-from-top-2 fade-in duration-200">
 
                     {/* Mobile Navigation Links - Scrollable area */}
-                    <div className="h-fit overflow-y-auto px-4 py-4 flex flex-col gap-1">
+                    <div className="container h-fit overflow-y-auto px-4 py-4 flex flex-col gap-1">
 
                         {pathname !== '/' && (
                             <div className="border-b border-slate-100">
@@ -200,7 +200,7 @@ export default function Header({ className }: ClassName) {
                     </div>
 
                     {/* Mobile Bottom Info Bar - Pinned at the bottom of the dropdown */}
-                    <div className="shrink-0 bg-[#1a2b4c] text-white py-3 px-4">
+                    <div className="w-full shrink-0 bg-[#1a2b4c] text-white py-3 px-4">
                         <div className="flex justify-center gap-8 items-center text-xs font-medium">
                             <div className="flex flex-col items-center">
                                 <span className="opacity-70">ILIGAN</span>
