@@ -1,5 +1,6 @@
 [
     {
+        "slug": "applicance-electricity-calculator",
         "title": "Appliance Electricity Calculator",
         "category": "Electricity",
         "description": "Estimate how much your home appliances add to your daily, monthly, and yearly ILPI bill based on their power consumption and your usage habits.",
@@ -12,8 +13,7 @@
         "source": "community",
         "isWalkIn": false,
         "isOnline": true,
-        "department": "BetterIligan City",
-        "type": "external",
-        "externalUrl": "/iligan/electricity/calculator"
+        "type": "internal",
+        "internalUrl": "/iligan/electricity/calculator"
     }
 ]

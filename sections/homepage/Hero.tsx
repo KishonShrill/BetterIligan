@@ -199,11 +199,15 @@ export default function HeroSection() {
                                             {searchResults.map((service, idx) => (
                                                 <li key={`service-${idx}`}>
                                                     <Link
-                                                        href={service.type === "standard"
-                                                            ? `/services/${service.slug}`
-                                                            : service.type === "internal"
-                                                                ? `/community/${service.slug}`
-                                                                : service.externalUrl}
+                                                        href={
+                                                            service.type === "external"
+                                                                ? service.externalUrl
+                                                                : service.type === "internal" && !service.internalUrl
+                                                                    ? `/community/${service.slug}`
+                                                                    : service.type === "internal" && service.internalUrl
+                                                                        ? service.internalUrl
+                                                                        : `/services/${service.slug}`
+                                                        }
                                                         className="flex items-center justify-between p-3 md:p-4 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset rounded-lg transition-all group/item"
                                                         onClick={() => setIsDropdownOpen(false)}
                                                     >

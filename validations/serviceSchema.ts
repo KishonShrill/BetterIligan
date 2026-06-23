@@ -62,13 +62,14 @@ export const CommunityProfileSchema = BaseServiceSchema.extend({
     logoUrl: z.string().url().optional(),
     locationUrl: z.string().url().optional(),
 
+    internalUrl: z.string().optional(),
     websiteUrl: z.string().url().optional(),
     facebookUrl: z.string().url().optional(),
     instagramUrl: z.string().url().optional(),
 
     representative: ContactPersonSchema.optional(),
 
-    offeredServices: z.array(z.string()),
+    offeredServices: z.array(z.string()).optional(),
 });
 
 // Combine them using a Discriminated Union on "type" (NOT "source")
