@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect, Suspense } from 'react';
+import { useState, useMemo, useEffect, Suspense, useDeferredValue } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Search, PlusCircle } from 'lucide-react';
@@ -19,6 +19,7 @@ function ServicesDirectoryContent() {
 
     const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [searchQuery, setSearchQuery] = useState(initialQuery);
+    const deferredSearchQuery = useDeferredValue(searchQuery);
 
     // Dynamically generate the list of categories based on the data
     const categories = useMemo(() => {
@@ -50,10 +51,20 @@ function ServicesDirectoryContent() {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             updateUrl(selectedCategory, searchQuery);
-        }, 300);
+        }, 500);
 
         return () => clearTimeout(timeoutId);
     }, [searchQuery, selectedCategory]);
+
+    useEffect(() => {
+        setSelectedCategory(
+            searchParams.get('category') || 'All Services'
+        );
+
+        setSearchQuery(
+            searchParams.get('q') || ''
+        );
+    }, [searchParams]);
 
 
     // 4. Update Handlers (Notice how lightweight they are now!)
@@ -72,17 +83,20 @@ function ServicesDirectoryContent() {
 
     // Filter services based on search text AND selected category
     const filteredServices = useMemo(() => {
+        const query = deferredSearchQuery.toLowerCase();
+
         return allServices.filter((service) => {
             const matchesSearch =
-                service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                service.description.toLowerCase().includes(searchQuery.toLowerCase());
+                service.title.toLowerCase().includes(query) ||
+                service.description.toLowerCase().includes(query);
 
             const matchesCategory =
-                selectedCategory === 'All Services' || service.category === selectedCategory;
+                selectedCategory === 'All Services' ||
+                service.category === selectedCategory;
 
             return matchesSearch && matchesCategory;
         });
-    }, [searchQuery, selectedCategory]);
+    }, [deferredSearchQuery, selectedCategory]);
 
     return (
         <main className="min-h-screen bg-[#F8FAFC] font-sans pb-24">

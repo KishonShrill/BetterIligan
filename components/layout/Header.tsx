@@ -60,7 +60,7 @@ export default function Header({ className }: ClassName) {
 
     return (
         <header className={`${className} ${pathname === "/travel/transportation" && "hidden"} font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200`}>
-            <div className={`container mx-auto px-4 ${pathname != "/" && 'pb-4'}`}>
+            <div className={`container relative mx-auto px-4}`}>
                 <div className="flex items-center justify-between h-20">
 
                     {/* Logo area */}
@@ -147,7 +147,7 @@ export default function Header({ className }: ClassName) {
                         </button>
                     </div>
                 </div>
-                {pathname != "/" && <Breadcrumbs />}
+                {pathname != "/" && <Breadcrumbs className='md:absolute w-fit md:p-2 pb-2 bg-white md:rounded-b-2xl md:border-x md:border-b border-slate-200 mx-auto' />}
             </div>
 
             {/* MOBILE MENU OVERLAY */}
