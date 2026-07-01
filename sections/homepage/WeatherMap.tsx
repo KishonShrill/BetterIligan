@@ -185,7 +185,7 @@ export default function WeatherAndMap() {
                             frameBorder="0"
                             scrolling="no"
                             // Using the standard Google Maps embed URL (No API key required)
-                            src="https://maps.google.com/maps?q=Iligan%20City%20Hall,%20Buhanginan%20Hills,%20Iligan%20City&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                            src="https://www.google.com/mps/embed?pb=!1m18!1m12!1m3!1d252718.48057860922!2d124.36626500000001!3d8.230258599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x325579b328c9540d%3A0xe6e208aba2f0d03b!2sIligan%20City%2C%20Lanao%20del%20Norte!5e0!3m2!1sen!2sph!4v1782924366412!5m2!1sen!2sph"
                             className="absolute inset-0 w-full h-full"
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"

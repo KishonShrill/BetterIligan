@@ -8,7 +8,10 @@
         "isOnline": true,
         "department": "Department of Foreign Affairs (DFA)",
         "type": "external",
-        "externalUrl": "https://passport.gov.ph/appointment"
+        "externalUrl": "https://passport.gov.ph/appointment",
+        "tags": [
+            "airplane"
+        ]
     },
     {
         "title": "Application/Request For Birth Certificate (Online)",
