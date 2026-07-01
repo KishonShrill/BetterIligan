@@ -105,9 +105,15 @@ the source research done for this design.
 ## Navigation & cross-links
 
 - `data/navigation.json`: add a `"Budget & Finances"` entry to the `Iligan City` dropdown.
-- `data/iligan/city-profile.json`: add `href: "/iligan/budget"` to the existing Revenue and
-  Expenditure rows in `economy.grid` (same pattern already used by the "Power generation" row
-  linking to `/iligan/electricity#anchor`).
+- `data/iligan/city-profile.json`'s "Revenue (2024)" row lives in `economy.grid`, typed by
+  `GridStatSchema` (`validations/cityProfileSchema.ts`) — which has no `href` field today. The
+  href pattern currently only exists on `FacilityStatSchema` (used by `infrastructure.facilities`,
+  e.g. "Power generation" -> `/iligan/electricity#anchor`). This PR adds an optional `href` field
+  to `GridStatSchema` (mirroring `FacilityStatSchema`'s), then sets
+  `href: "/iligan/budget"` on the Revenue row only.
+- "Expenditure (2024)" lives in `economy.commerce`, typed by `KeyValueRowSchema` — a plain
+  key/value list used for many non-linkable facts across the schema. Adding href support there
+  is out of scope for this PR; Expenditure stays as a flat figure for now.
 
 ## API
 
