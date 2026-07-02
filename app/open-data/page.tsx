@@ -53,7 +53,7 @@ export default function OpenDataPage() {
                         </div>
 
                         <p className="text-slate-600 mb-6">
-                            We currently offer three separate REST endpoints to keep data payloads small and highly targeted. All endpoints accept standard <code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">GET</code> requests and return JSON.
+                            We currently offer four separate REST endpoints to keep data payloads small and highly targeted. All endpoints accept standard <code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">GET</code> requests and return JSON.
                         </p>
 
                         <div className="space-y-4">
@@ -87,6 +87,17 @@ export default function OpenDataPage() {
                                 </div>
                                 <code className="text-emerald-400 font-mono text-sm whitespace-nowrap bg-black/30 px-3 py-1.5 rounded-lg border border-white/10">
                                     /api/v1/agencies
+                                </code>
+                            </div>
+
+                            {/* 4. Budget & Finances */}
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 bg-slate-900 rounded-xl p-4">
+                                <div className="flex-1">
+                                    <p className="text-white font-bold text-sm mb-1">4. Budget & Finances</p>
+                                    <p className="text-slate-400 text-xs">Returns Iligan City&apos;s annual revenue and expenditure breakdown.</p>
+                                </div>
+                                <code className="text-emerald-400 font-mono text-sm whitespace-nowrap bg-black/30 px-3 py-1.5 rounded-lg border border-white/10">
+                                    /api/v1/budget
                                 </code>
                             </div>
                         </div>
