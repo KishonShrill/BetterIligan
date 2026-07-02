@@ -10,6 +10,12 @@
 
 **Spec:** `docs/superpowers/specs/2026-07-02-budget-visualizer-design.md`
 
+> **Addendum (post-implementation):** per maintainer guidance on issue #29, the page was moved
+> from `app/iligan/budget/` to `app/transparency/budget/` after this plan was executed — `/iligan`
+> is reserved for culture/heritage/city-profile content only. Every `/iligan/budget` reference in
+> the tasks below reflects the original plan; the live route is `/transparency/budget`.
+> `data/iligan/budget.json` is unaffected — that's the data file's location, not a route.
+
 ---
 
 ### Task 1: Add the `recharts` dependency

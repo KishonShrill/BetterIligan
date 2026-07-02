@@ -33,11 +33,17 @@
                 "name": "Electricity",
                 "description": "Information about power providers, services, and utilities in the city.",
                 "href": "/iligan/electricity"
-            },
+            }
+        ]
+    },
+    {
+        "name": "Transparency",
+        "href": "/transparency/budget",
+        "dropdown": [
             {
                 "name": "Budget & Finances",
                 "description": "See where the city's revenue comes from and where it's spent.",
-                "href": "/iligan/budget"
+                "href": "/transparency/budget"
             }
         ]
     },

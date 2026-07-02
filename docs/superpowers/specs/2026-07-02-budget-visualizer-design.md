@@ -1,5 +1,13 @@
 # Budget Visualizer — Design
 
+> **Addendum (post-implementation):** the maintainer clarified via issue #29 that `/iligan` is
+> reserved strictly for culture/heritage/city-profile content, and this feature should live under
+> a new `/transparency` route instead — a dedicated hub for fiscal accountability and governance
+> documents (budget, SALN, FOI, etc.). The page was moved to `app/transparency/budget/` and the
+> nav entry to a new top-level "Transparency" section. All `/iligan/budget` references below are
+> from the original design and are superseded by `/transparency/budget`; the data file itself
+> stays at `data/iligan/budget.json` since that's about data organization, not routing.
+
 ## Problem
 
 `data/iligan/city-profile.json` currently shows two flat rows — Revenue (2024): ₱3,031M and

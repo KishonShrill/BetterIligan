@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Iligan City Budget & Finances',
         description: "See where Iligan City's revenue comes from and where it's spent.",
-        url: 'https://betteriligancity.org/iligan/budget',
+        url: 'https://betteriligancity.org/transparency/budget',
         type: 'website',
     },
 };
