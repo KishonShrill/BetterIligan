@@ -102,14 +102,9 @@
                 "href": "/about"
             },
             {
-                "name": "Privacy Policy",
-                "description": "Understand how your data is collected, used, and protected.",
-                "href": "/privacy-policy"
-            },
-            {
-                "name": "Terms of Service",
-                "description": "Review the terms and conditions for using this website.",
-                "href": "/terms-of-service"
+                "name": "Volunteer",
+                "description": "Learn more about this platform and its purpose.",
+                "href": "/volunteer"
             }
         ]
     }

@@ -8,6 +8,7 @@ import { Search, Menu, ChevronDown } from 'lucide-react';
 import { headerDropdown } from '@/data/categories';
 import navigationJson from '@/data/navigation.json';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import Button3D from '../ui/Button3D';
 
 interface SubItem {
     name: string;
@@ -130,11 +131,13 @@ export default function Header({ className }: ClassName) {
                     </nav>
 
                     {/* Right side actions */}
-                    <div className="flex items-center gap-4 lg:gap-6">
-                        <button className="hidden md:flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600">
-                            <Search className="w-5 h-5" />
-                            Search
-                        </button>
+                    <div className="flex items-center gap-4">
+                        <Button3D
+                            text="Join Us!"
+                            variant="blue"
+                            size="sm"
+                            className="max-[470px]:hidden w-fit max-sm:mx-auto"
+                        />
 
                         {/* Mobile menu button */}
                         <button

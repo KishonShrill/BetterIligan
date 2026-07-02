@@ -110,20 +110,22 @@ export default function HeroSection() {
                         Welcome to <br /> BetterIliganCity.org
                     </h1>
 
-                    <p className="lg:max-w-lg lg:text-left text-blue-100 text-base lg:text-lg mb-8 leading-relaxed">
+                    <p className="lg:max-w-lg lg:text-left text-blue-100 text-base lg:text-lg mb-4 leading-relaxed">
                         A modernized, volunteer-driven portal to access government services, public data, and resources for the people of Iligan.
                     </p>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-2">
-                        <Button3D
-                            text="Browse Services"
-                            href="/services"
-                            hasArrow={true}
-                            variant="white"
-                            size="md"
-                            className="w-full sm:w-auto"
-                        />
+                    <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                        {!isMobileSearchVisible && (
+                            <Button3D
+                                text="Browse Services"
+                                href="/services"
+                                hasArrow={true}
+                                variant="white"
+                                size="md"
+                                className="w-fit max-sm:mx-auto sm:w-auto"
+                            />
+                        )}
 
                         {/* NEW: The Mobile Reveal Search Button! Hidden on Desktop (lg) */}
                         {!isMobileSearchVisible && (
@@ -134,7 +136,7 @@ export default function HeroSection() {
                                 onClick={() => setIsMobileSearchVisible(true)}
                                 variant="blue"
                                 size="md"
-                                className="lg:hidden w-full sm:w-auto"
+                                className="lg:hidden w-fit max-sm:mx-auto sm:w-auto"
                             />
                         )}
                     </div>

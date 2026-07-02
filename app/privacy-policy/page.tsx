@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
 import SubpageHero from '@/components/ui/SubpageHero';
 
@@ -13,6 +15,14 @@ export default function PrivacyPolicyPage() {
 
             <SubpageNav href='/' text='Go Home' />
             <SubpageHero>
+                <SubpageHero.Badges>
+                    <Link
+                        href="/about"
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors"
+                    >
+                        <ArrowLeft className="w-4 h-4" /> Back to About
+                    </Link>
+                </SubpageHero.Badges>
                 <SubpageHero.Title>Privacy Policy</SubpageHero.Title>
                 <SubpageHero.Description>
                     Last updated: June 9, 2025
