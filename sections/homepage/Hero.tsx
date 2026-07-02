@@ -107,7 +107,7 @@ export default function HeroSection() {
                 {/* Left Column */}
                 <div className="max-w-404 mx-auto lg:mx-0 text-center lg:text-left">
                     <h1 className="lg:text-left text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5">
-                        Welcome to <br /> BetterIligan City
+                        Welcome to <br /> BetterIliganCity.org
                     </h1>
 
                     <p className="lg:max-w-lg lg:text-left text-blue-100 text-base lg:text-lg mb-8 leading-relaxed">
