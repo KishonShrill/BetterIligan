@@ -41,6 +41,11 @@
         "href": "/transparency/budget",
         "dropdown": [
             {
+                "name": "Transparency Overview",
+                "description": "Fiscal accountability and governance documents for Iligan City.",
+                "href": "/transparency/budget"
+            },
+            {
                 "name": "Budget & Finances",
                 "description": "See where the city's revenue comes from and where it's spent.",
                 "href": "/transparency/budget"
