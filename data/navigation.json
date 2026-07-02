@@ -79,6 +79,11 @@
                 "name": "Budget & Finances",
                 "description": "See where the city's revenue comes from and where it's spent.",
                 "href": "/transparency/budget"
+            },
+            {
+                "name": "City Resolutions",
+                "description": "Browse resolutions and ordinances passed by the Sangguniang Panlungsod.",
+                "href": "/transparency/resolutions"
             }
         ]
     },
