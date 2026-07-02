@@ -185,11 +185,11 @@ export default function CityStatsFullPage() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                                 {cityData.economy.grid.map((stat, idx) => (
-                                    <div key={idx} className="bg-white border border-[#B5D4F4] rounded-2xl p-4 md:p-5">
+                                    <Link key={idx} href={stat.href ? stat.href : "#"} className={`block bg-white border border-[#B5D4F4] ${stat.href ? "cursor-pointer hover:border-[#185FA5] transition-colors" : "cursor-default"} rounded-2xl p-4 md:p-5`}>
                                         <div className="text-[11px] text-[#185FA5] font-medium mb-0.5">{stat.label}</div>
                                         <div className="text-[22px] font-bold text-slate-900 leading-tight">{stat.value}</div>
                                         {stat.subtext && <div className="text-[11px] text-slate-500 mt-1">{stat.subtext}</div>}
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                             <div className="bg-white border border-[#B5D4F4] rounded-2xl p-4 md:p-5">

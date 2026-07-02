@@ -10,6 +10,7 @@ export const GridStatSchema = z.object({
     label: z.string(),
     value: z.string(),
     subtext: z.string().optional(), // Optional since revenue/assets don't always have it
+    href: z.string().optional(),
 });
 
 export const WonderStatSchema = z.object({
