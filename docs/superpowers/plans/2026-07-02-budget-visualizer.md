@@ -15,7 +15,7 @@
 ### Task 1: Add the `recharts` dependency
 
 **Files:**
-- Modify: `package.json:16-31`
+- Modify: `package.json:16-28` (the `"dependencies"` block)
 
 - [ ] **Step 1: Add the dependency**
 
