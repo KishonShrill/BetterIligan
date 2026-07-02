@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo, useState } from 'react';
 import {
     PieChart, Pie, Cell, Tooltip, ResponsiveContainer,
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LabelList,
@@ -8,38 +9,80 @@ import SubpageNav from '@/components/ui/SubpageNav';
 import SubpageHero from '@/components/ui/SubpageHero';
 import ReferencesFooter from '@/components/ui/ReferencesFooter';
 
-import { BudgetSchema, BudgetData } from '@/validations/budgetSchema';
+import { BudgetSchema, BudgetData, BudgetYear } from '@/validations/budgetSchema';
 import rawBudgetData from '@/data/iligan/budget.json';
 
 const budgetData: BudgetData = BudgetSchema.parse(rawBudgetData);
 
 const PESO = (millions: number) => `₱${millions.toLocaleString('en-PH', { maximumFractionDigits: 0 })}M`;
+const PERCENT = (n: number) => `${n.toFixed(1)}%`;
+const yearLabel = (y: BudgetYear) => (y.status === 'preliminary' ? `${y.fiscalYear} (Prelim.)` : String(y.fiscalYear));
 
 const INCOME_COLORS = ['#047857', '#10b981', '#6ee7b7', '#a7f3d0'];
 const EXPENDITURE_COLORS = ['#1e293b', '#475569', '#64748b', '#94a3b8'];
 
+type MetricKey =
+    | 'localTax' | 'localNonTax' | 'nationalTaxAllotment'
+    | 'generalPublicServices' | 'economicServices' | 'socialServices' | 'debtService'
+    | 'capitalOutlay' | 'netOperatingSurplus';
+
+// "percentOf" is the denominator each metric is measured against when the trend
+// is viewed as a share rather than a raw amount — expenditure categories are a
+// share of total spending; everything else (revenue, capital outlay, surplus) is
+// a share of total income, since those aren't part of the operating-expenditure bucket.
+const METRICS: Record<MetricKey, { label: string; percentOf: 'income' | 'expenditure'; get: (y: BudgetYear) => number }> = {
+    localTax: { label: 'Local Tax Revenue', percentOf: 'income', get: (y) => y.income.localTax },
+    localNonTax: { label: 'Local Non-Tax Revenue', percentOf: 'income', get: (y) => y.income.localNonTax },
+    nationalTaxAllotment: { label: 'National Tax Allotment (IRA)', percentOf: 'income', get: (y) => y.income.nationalTaxAllotment },
+    generalPublicServices: { label: 'General Public Services', percentOf: 'expenditure', get: (y) => y.expenditure.generalPublicServices },
+    economicServices: { label: 'Economic Services', percentOf: 'expenditure', get: (y) => y.expenditure.economicServices },
+    socialServices: { label: 'Social Services', percentOf: 'expenditure', get: (y) => y.expenditure.socialServices },
+    debtService: { label: 'Debt Service', percentOf: 'expenditure', get: (y) => y.expenditure.debtService },
+    capitalOutlay: { label: 'Capital Outlay', percentOf: 'income', get: (y) => y.capitalOutlay },
+    netOperatingSurplus: { label: 'Net Operating Surplus', percentOf: 'income', get: (y) => y.netOperatingSurplus },
+};
+
 export default function BudgetClient() {
     const latest = budgetData.years[budgetData.years.length - 1];
 
+    const [selectedYear, setSelectedYear] = useState(latest.fiscalYear);
+    const [selectedMetric, setSelectedMetric] = useState<'totals' | MetricKey>('totals');
+    const [showPercent, setShowPercent] = useState(false);
+
+    const shownYear = budgetData.years.find((y) => y.fiscalYear === selectedYear) ?? latest;
+
     const incomeBreakdown = [
-        { name: 'National Tax Allotment (IRA)', value: latest.income.nationalTaxAllotment },
-        { name: 'Local Tax Revenue', value: latest.income.localTax },
-        { name: 'Local Non-Tax Revenue', value: latest.income.localNonTax },
-        { name: 'Other External Sources', value: latest.income.otherExternal },
+        { name: 'National Tax Allotment (IRA)', value: shownYear.income.nationalTaxAllotment },
+        { name: 'Local Tax Revenue', value: shownYear.income.localTax },
+        { name: 'Local Non-Tax Revenue', value: shownYear.income.localNonTax },
+        { name: 'Other External Sources', value: shownYear.income.otherExternal },
     ];
 
     const expenditureBreakdown = [
-        { name: 'General Public Services', value: latest.expenditure.generalPublicServices },
-        { name: 'Economic Services', value: latest.expenditure.economicServices },
-        { name: 'Social Services', value: latest.expenditure.socialServices },
-        { name: 'Debt Service', value: latest.expenditure.debtService },
+        { name: 'General Public Services', value: shownYear.expenditure.generalPublicServices },
+        { name: 'Economic Services', value: shownYear.expenditure.economicServices },
+        { name: 'Social Services', value: shownYear.expenditure.socialServices },
+        { name: 'Debt Service', value: shownYear.expenditure.debtService },
     ];
 
-    const trend = budgetData.years.map((y) => ({
-        year: y.status === 'preliminary' ? `${y.fiscalYear} (Prelim.)` : String(y.fiscalYear),
+    const totalsTrend = budgetData.years.map((y) => ({
+        year: yearLabel(y),
         Income: y.income.total,
         Expenditure: y.expenditure.total,
     }));
+
+    const metricTrend = useMemo(() => {
+        if (selectedMetric === 'totals') return [];
+        const metric = METRICS[selectedMetric];
+        return budgetData.years.map((y) => {
+            const raw = metric.get(y);
+            const denominator = metric.percentOf === 'income' ? y.income.total : y.expenditure.total;
+            return {
+                year: yearLabel(y),
+                Value: showPercent ? Math.round((raw / denominator) * 1000) / 10 : raw,
+            };
+        });
+    }, [selectedMetric, showPercent]);
 
     const budgetReferences = [
         {
@@ -69,7 +112,7 @@ export default function BudgetClient() {
 
                 {/* Ledger strip — receipt-style line items, tabular figures for easy scanning */}
                 <div className="bg-white border border-slate-200 rounded-2xl md:p-8 p-5 shadow-sm">
-                    <h2 className="text-lg font-bold text-slate-900 mb-4">At a glance</h2>
+                    <h2 className="text-lg font-bold text-slate-900 mb-4">At a glance · FY{latest.fiscalYear}</h2>
                     <div className="flex items-baseline gap-3 py-2.5">
                         <span className="text-sm text-slate-500 whitespace-nowrap">Net Operating Surplus</span>
                         <span className="flex-1 border-b border-dotted border-slate-300 translate-y-[-4px]" />
@@ -93,91 +136,156 @@ export default function BudgetClient() {
                 </div>
 
                 {/* Composition — the two questions everyone actually asks: where's it from, where's it going */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-white border border-slate-200 rounded-2xl md:p-8 p-5 shadow-sm">
-                        <h2 className="text-lg font-bold text-slate-900 mb-1">Where the money comes from</h2>
-                        <p className="text-sm text-slate-500 mb-3">Revenue sources, FY{latest.fiscalYear}</p>
-                        <ResponsiveContainer width="100%" height={300}>
-                            <PieChart>
-                                <Pie
-                                    data={incomeBreakdown}
-                                    dataKey="value"
-                                    nameKey="name"
-                                    innerRadius={55}
-                                    outerRadius={95}
-                                    paddingAngle={2}
-                                    label={({ percent }) => `${((percent ?? 0) * 100).toFixed(0)}%`}
-                                    labelLine={false}
+                <div>
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <h2 className="text-lg font-bold text-slate-900">Revenue & spending breakdown</h2>
+                        <div className="inline-flex rounded-lg border border-slate-200 bg-white p-1">
+                            {budgetData.years.map((y) => (
+                                <button
+                                    key={y.fiscalYear}
+                                    onClick={() => setSelectedYear(y.fiscalYear)}
+                                    className={`px-3 py-1.5 text-xs font-bold rounded-md transition-colors ${y.fiscalYear === selectedYear ? 'bg-emerald-700 text-white' : 'text-slate-500 hover:text-slate-900'}`}
                                 >
-                                    {incomeBreakdown.map((entry, idx) => (
-                                        <Cell key={entry.name} fill={INCOME_COLORS[idx % INCOME_COLORS.length]} />
-                                    ))}
-                                </Pie>
-                                <Tooltip formatter={(v: number) => PESO(v)} />
-                                <Legend
-                                    layout="vertical"
-                                    verticalAlign="middle"
-                                    align="right"
-                                    iconType="circle"
-                                    iconSize={8}
-                                    wrapperStyle={{ fontSize: 11, lineHeight: '20px' }}
-                                />
-                            </PieChart>
-                        </ResponsiveContainer>
+                                    {yearLabel(y)}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="bg-white border border-slate-200 rounded-2xl md:p-8 p-5 shadow-sm">
-                        <h2 className="text-lg font-bold text-slate-900 mb-1">Where the money goes</h2>
-                        <p className="text-sm text-slate-500 mb-3">Expenditure by sector, FY{latest.fiscalYear}</p>
-                        <ResponsiveContainer width="100%" height={300}>
-                            <PieChart>
-                                <Pie
-                                    data={expenditureBreakdown}
-                                    dataKey="value"
-                                    nameKey="name"
-                                    innerRadius={55}
-                                    outerRadius={95}
-                                    paddingAngle={2}
-                                    label={({ percent }) => `${((percent ?? 0) * 100).toFixed(0)}%`}
-                                    labelLine={false}
-                                >
-                                    {expenditureBreakdown.map((entry, idx) => (
-                                        <Cell key={entry.name} fill={EXPENDITURE_COLORS[idx % EXPENDITURE_COLORS.length]} />
-                                    ))}
-                                </Pie>
-                                <Tooltip formatter={(v: number) => PESO(v)} />
-                                <Legend
-                                    layout="vertical"
-                                    verticalAlign="middle"
-                                    align="right"
-                                    iconType="circle"
-                                    iconSize={8}
-                                    wrapperStyle={{ fontSize: 11, lineHeight: '20px' }}
-                                />
-                            </PieChart>
-                        </ResponsiveContainer>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-white border border-slate-200 rounded-2xl md:p-8 p-5 shadow-sm">
+                            <h3 className="text-base font-bold text-slate-900 mb-1">Where the money comes from</h3>
+                            <p className="text-sm text-slate-500 mb-3">Revenue sources, FY{shownYear.fiscalYear}</p>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <PieChart>
+                                    <Pie
+                                        data={incomeBreakdown}
+                                        dataKey="value"
+                                        nameKey="name"
+                                        innerRadius={55}
+                                        outerRadius={95}
+                                        paddingAngle={2}
+                                        label={({ percent }) => `${((percent ?? 0) * 100).toFixed(0)}%`}
+                                        labelLine={false}
+                                    >
+                                        {incomeBreakdown.map((entry, idx) => (
+                                            <Cell key={entry.name} fill={INCOME_COLORS[idx % INCOME_COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip formatter={(v: number) => PESO(v)} />
+                                    <Legend
+                                        layout="vertical"
+                                        verticalAlign="middle"
+                                        align="right"
+                                        iconType="circle"
+                                        iconSize={8}
+                                        wrapperStyle={{ fontSize: 11, lineHeight: '20px' }}
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        <div className="bg-white border border-slate-200 rounded-2xl md:p-8 p-5 shadow-sm">
+                            <h3 className="text-base font-bold text-slate-900 mb-1">Where the money goes</h3>
+                            <p className="text-sm text-slate-500 mb-3">Expenditure by sector, FY{shownYear.fiscalYear}</p>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <PieChart>
+                                    <Pie
+                                        data={expenditureBreakdown}
+                                        dataKey="value"
+                                        nameKey="name"
+                                        innerRadius={55}
+                                        outerRadius={95}
+                                        paddingAngle={2}
+                                        label={({ percent }) => `${((percent ?? 0) * 100).toFixed(0)}%`}
+                                        labelLine={false}
+                                    >
+                                        {expenditureBreakdown.map((entry, idx) => (
+                                            <Cell key={entry.name} fill={EXPENDITURE_COLORS[idx % EXPENDITURE_COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip formatter={(v: number) => PESO(v)} />
+                                    <Legend
+                                        layout="vertical"
+                                        verticalAlign="middle"
+                                        align="right"
+                                        iconType="circle"
+                                        iconSize={8}
+                                        wrapperStyle={{ fontSize: 11, lineHeight: '20px' }}
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
 
-                {/* Trend — the one thing a snapshot can't show: is it growing */}
+                {/* Trend — pick any line item and watch it move across years */}
                 <div className="bg-white border border-slate-200 rounded-2xl md:p-8 p-5 shadow-sm">
-                    <h2 className="text-lg font-bold text-slate-900 mb-1">Income vs. expenditure, year over year</h2>
-                    <p className="text-sm text-slate-500 mb-3">Is the city collecting more than it spends?</p>
-                    <ResponsiveContainer width="100%" height={320}>
-                        <BarChart data={trend} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-                            <XAxis dataKey="year" tick={{ fontSize: 12 }} />
-                            <YAxis tickFormatter={(v) => `₱${v}M`} tick={{ fontSize: 12 }} />
-                            <Tooltip formatter={(v: number) => PESO(v)} />
-                            <Legend />
-                            <Bar dataKey="Income" fill="#047857" radius={[4, 4, 0, 0]}>
-                                <LabelList dataKey="Income" position="top" formatter={(v: number) => PESO(v)} fontSize={11} fill="#047857" />
-                            </Bar>
-                            <Bar dataKey="Expenditure" fill="#475569" radius={[4, 4, 0, 0]}>
-                                <LabelList dataKey="Expenditure" position="top" formatter={(v: number) => PESO(v)} fontSize={11} fill="#475569" />
-                            </Bar>
-                        </BarChart>
-                    </ResponsiveContainer>
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-1">
+                        <h2 className="text-lg font-bold text-slate-900">Trend over time</h2>
+                        <div className="flex items-center gap-2">
+                            <select
+                                value={selectedMetric}
+                                onChange={(e) => setSelectedMetric(e.target.value as 'totals' | MetricKey)}
+                                className="text-xs font-bold border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700"
+                            >
+                                <option value="totals">Total Income & Expenditure</option>
+                                {(Object.keys(METRICS) as MetricKey[]).map((key) => (
+                                    <option key={key} value={key}>{METRICS[key].label}</option>
+                                ))}
+                            </select>
+                            <button
+                                onClick={() => setShowPercent((v) => !v)}
+                                disabled={selectedMetric === 'totals'}
+                                title={selectedMetric === 'totals' ? 'Pick a specific category to view it as a percentage' : undefined}
+                                className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-colors ${selectedMetric === 'totals'
+                                    ? 'border-slate-100 text-slate-300 cursor-not-allowed'
+                                    : showPercent
+                                        ? 'bg-emerald-700 text-white border-emerald-700'
+                                        : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                                    }`}
+                            >
+                                % of {selectedMetric !== 'totals' && METRICS[selectedMetric].percentOf === 'income' ? 'income' : 'spending'}
+                            </button>
+                        </div>
+                    </div>
+                    <p className="text-sm text-slate-500 mb-3">
+                        {selectedMetric === 'totals'
+                            ? 'Is the city collecting more than it spends?'
+                            : showPercent
+                                ? `${METRICS[selectedMetric].label} as a share of total ${METRICS[selectedMetric].percentOf === 'income' ? 'income' : 'expenditure'} each year.`
+                                : `${METRICS[selectedMetric].label} in raw pesos each year.`}
+                    </p>
+
+                    {selectedMetric === 'totals' ? (
+                        <ResponsiveContainer width="100%" height={320}>
+                            <BarChart data={totalsTrend} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                                <XAxis dataKey="year" tick={{ fontSize: 12 }} />
+                                <YAxis tickFormatter={(v) => `₱${v}M`} tick={{ fontSize: 12 }} />
+                                <Tooltip formatter={(v: number) => PESO(v)} />
+                                <Legend />
+                                <Bar dataKey="Income" fill="#047857" radius={[4, 4, 0, 0]}>
+                                    <LabelList dataKey="Income" position="top" formatter={(v: number) => PESO(v)} fontSize={11} fill="#047857" />
+                                </Bar>
+                                <Bar dataKey="Expenditure" fill="#475569" radius={[4, 4, 0, 0]}>
+                                    <LabelList dataKey="Expenditure" position="top" formatter={(v: number) => PESO(v)} fontSize={11} fill="#475569" />
+                                </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    ) : (
+                        <ResponsiveContainer width="100%" height={320}>
+                            <BarChart data={metricTrend} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                                <XAxis dataKey="year" tick={{ fontSize: 12 }} />
+                                <YAxis tickFormatter={(v) => (showPercent ? `${v}%` : `₱${v}M`)} tick={{ fontSize: 12 }} />
+                                <Tooltip formatter={(v: number) => (showPercent ? PERCENT(v) : PESO(v))} />
+                                <Bar dataKey="Value" name={METRICS[selectedMetric].label} fill="#047857" radius={[4, 4, 0, 0]}>
+                                    <LabelList dataKey="Value" position="top" formatter={(v: number) => (showPercent ? PERCENT(v) : PESO(v))} fontSize={11} fill="#047857" />
+                                </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    )}
                 </div>
 
                 <ReferencesFooter
