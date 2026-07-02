@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import {
     PieChart, Pie, Cell, Tooltip, ResponsiveContainer,
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LabelList,
@@ -224,16 +225,19 @@ export default function BudgetClient() {
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-1">
                         <h2 className="text-lg font-bold text-slate-900">Trend over time</h2>
                         <div className="flex items-center gap-2">
-                            <select
-                                value={selectedMetric}
-                                onChange={(e) => setSelectedMetric(e.target.value as 'totals' | MetricKey)}
-                                className="text-xs font-bold border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700"
-                            >
-                                <option value="totals">Total Income & Expenditure</option>
-                                {(Object.keys(METRICS) as MetricKey[]).map((key) => (
-                                    <option key={key} value={key}>{METRICS[key].label}</option>
-                                ))}
-                            </select>
+                            <div className="relative">
+                                <select
+                                    value={selectedMetric}
+                                    onChange={(e) => setSelectedMetric(e.target.value as 'totals' | MetricKey)}
+                                    className="appearance-none text-xs font-bold border border-slate-200 rounded-lg pl-3 pr-8 py-1.5 bg-white text-slate-700 [color-scheme:light] hover:border-slate-300 cursor-pointer"
+                                >
+                                    <option value="totals">Total Income & Expenditure</option>
+                                    {(Object.keys(METRICS) as MetricKey[]).map((key) => (
+                                        <option key={key} value={key}>{METRICS[key].label}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                            </div>
                             <button
                                 onClick={() => setShowPercent((v) => !v)}
                                 disabled={selectedMetric === 'totals'}
