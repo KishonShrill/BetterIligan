@@ -43,8 +43,6 @@ export default function VolunteerClient() {
     return (
         <main className="min-h-screen bg-slate-50 font-sans pb-24 relative">
 
-            <SubpageNav href="/about" text="Back to About" />
-
             <SubpageHero>
                 <SubpageHero.Badges>
                     <Link
@@ -95,7 +93,7 @@ export default function VolunteerClient() {
 
                     <section className="space-y-4">
                         <h2 className="text-2xl font-bold text-slate-900">
-                            Lend expertise in your chosen field
+                            Lend expertise <br className='sm:hidden' /> in your chosen field
                         </h2>
                         <p className="text-lg text-slate-600 leading-relaxed">
                             No matter where your expertise lies, there is a good chance that BetterIligan needs it. You do not need to be a programmer to contribute to a tech-centric city.
@@ -174,7 +172,7 @@ export default function VolunteerClient() {
                     {/* MODAL TRIGGER BUTTON */}
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="group flex items-center justify-center gap-2 w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all shadow-sm focus:outline-none focus:ring-4 focus:ring-slate-900/20"
+                        className="group flex items-center justify-center gap-2 w-full p-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all shadow-sm focus:outline-none focus:ring-4 focus:ring-slate-900/20"
                     >
                         <Users className="w-5 h-5" />
                         Join the BetterIligan Community

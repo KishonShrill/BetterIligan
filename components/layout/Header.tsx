@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Search, Menu, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import { headerDropdown } from '@/data/categories';
 import navigationJson from '@/data/navigation.json';
 import Breadcrumbs from '../ui/Breadcrumbs';
@@ -82,7 +82,7 @@ export default function Header({ className }: ClassName) {
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-4 h-fit">
+                    <nav className="hidden lg:flex items-center gap-2 h-fit">
                         {pathname !== '/' && (
                             <div className="relative group h-full flex items-center">
                                 <Link
@@ -133,6 +133,7 @@ export default function Header({ className }: ClassName) {
                     {/* Right side actions */}
                     <div className="flex items-center gap-4">
                         <Button3D
+                            href='/volunteer'
                             text="Join Us!"
                             variant="blue"
                             size="sm"

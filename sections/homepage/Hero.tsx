@@ -110,7 +110,7 @@ export default function HeroSection() {
                         Welcome to <br /> BetterIliganCity.org
                     </h1>
 
-                    <p className="lg:max-w-lg lg:text-left text-blue-100 text-base lg:text-lg mb-4 leading-relaxed">
+                    <p className={`lg:max-w-lg lg:text-left text-blue-100 text-base lg:text-lg ${!isMobileSearchVisible ? 'mb-8' : 'mb-4'} leading-relaxed`}>
                         A modernized, volunteer-driven portal to access government services, public data, and resources for the people of Iligan.
                     </p>
 
