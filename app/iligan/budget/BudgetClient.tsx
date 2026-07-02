@@ -173,14 +173,19 @@ export default function BudgetClient() {
                                             <Cell key={entry.name} fill={INCOME_COLORS[idx % INCOME_COLORS.length]} />
                                         ))}
                                     </Pie>
-                                    <Tooltip formatter={(v: number) => PESO(v)} />
+                                    <Tooltip
+                                        formatter={(v: number) => PESO(v)}
+                                        contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: 8 }}
+                                        labelStyle={{ color: '#0f172a' }}
+                                        itemStyle={{ color: '#0f172a' }}
+                                    />
                                     <Legend
                                         layout="vertical"
                                         verticalAlign="middle"
                                         align="right"
                                         iconType="circle"
                                         iconSize={8}
-                                        wrapperStyle={{ fontSize: 11, lineHeight: '20px' }}
+                                        wrapperStyle={{ fontSize: 11, lineHeight: '20px', color: '#334155' }}
                                     />
                                 </PieChart>
                             </ResponsiveContainer>
@@ -205,14 +210,19 @@ export default function BudgetClient() {
                                             <Cell key={entry.name} fill={EXPENDITURE_COLORS[idx % EXPENDITURE_COLORS.length]} />
                                         ))}
                                     </Pie>
-                                    <Tooltip formatter={(v: number) => PESO(v)} />
+                                    <Tooltip
+                                        formatter={(v: number) => PESO(v)}
+                                        contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: 8 }}
+                                        labelStyle={{ color: '#0f172a' }}
+                                        itemStyle={{ color: '#0f172a' }}
+                                    />
                                     <Legend
                                         layout="vertical"
                                         verticalAlign="middle"
                                         align="right"
                                         iconType="circle"
                                         iconSize={8}
-                                        wrapperStyle={{ fontSize: 11, lineHeight: '20px' }}
+                                        wrapperStyle={{ fontSize: 11, lineHeight: '20px', color: '#334155' }}
                                     />
                                 </PieChart>
                             </ResponsiveContainer>
@@ -265,10 +275,15 @@ export default function BudgetClient() {
                         <ResponsiveContainer width="100%" height={320}>
                             <BarChart data={totalsTrend} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-                                <XAxis dataKey="year" tick={{ fontSize: 12 }} />
-                                <YAxis tickFormatter={(v) => `₱${v}M`} tick={{ fontSize: 12 }} />
-                                <Tooltip formatter={(v: number) => PESO(v)} />
-                                <Legend />
+                                <XAxis dataKey="year" tick={{ fontSize: 12, fill: '#64748b' }} />
+                                <YAxis tickFormatter={(v) => `₱${v}M`} tick={{ fontSize: 12, fill: '#64748b' }} />
+                                <Tooltip
+                                    formatter={(v: number) => PESO(v)}
+                                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: 8 }}
+                                    labelStyle={{ color: '#0f172a' }}
+                                    itemStyle={{ color: '#0f172a' }}
+                                />
+                                <Legend wrapperStyle={{ color: '#334155' }} />
                                 <Bar dataKey="Income" fill="#047857" radius={[4, 4, 0, 0]}>
                                     <LabelList dataKey="Income" position="top" formatter={(v: number) => PESO(v)} fontSize={11} fill="#047857" />
                                 </Bar>
@@ -281,9 +296,14 @@ export default function BudgetClient() {
                         <ResponsiveContainer width="100%" height={320}>
                             <BarChart data={metricTrend} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-                                <XAxis dataKey="year" tick={{ fontSize: 12 }} />
-                                <YAxis tickFormatter={(v) => (showPercent ? `${v}%` : `₱${v}M`)} tick={{ fontSize: 12 }} />
-                                <Tooltip formatter={(v: number) => (showPercent ? PERCENT(v) : PESO(v))} />
+                                <XAxis dataKey="year" tick={{ fontSize: 12, fill: '#64748b' }} />
+                                <YAxis tickFormatter={(v) => (showPercent ? `${v}%` : `₱${v}M`)} tick={{ fontSize: 12, fill: '#64748b' }} />
+                                <Tooltip
+                                    formatter={(v: number) => (showPercent ? PERCENT(v) : PESO(v))}
+                                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e2e8f0', borderRadius: 8 }}
+                                    labelStyle={{ color: '#0f172a' }}
+                                    itemStyle={{ color: '#0f172a' }}
+                                />
                                 <Bar dataKey="Value" name={METRICS[selectedMetric].label} fill="#047857" radius={[4, 4, 0, 0]}>
                                     <LabelList dataKey="Value" position="top" formatter={(v: number) => (showPercent ? PERCENT(v) : PESO(v))} fontSize={11} fill="#047857" />
                                 </Bar>
