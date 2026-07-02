@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import SubpageNav from '@/components/ui/SubpageNav';
 import SubpageHero from '@/components/ui/SubpageHero';
@@ -39,6 +39,16 @@ const FacebookIcon = ({ className }: { className?: string }) => (
 
 export default function VolunteerClient() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [isModalOpen]);
+
 
     return (
         <main className="min-h-screen bg-slate-50 font-sans pb-24 relative">

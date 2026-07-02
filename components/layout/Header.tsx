@@ -24,13 +24,13 @@ interface Navigation {
 }
 
 const navigation: Navigation[] = [
-    navigationJson[0],
+    ...navigationJson.slice(0, 2),
     {
         name: 'Services',
         href: '/services',
         dropdown: headerDropdown,
     },
-    ...navigationJson.slice(1).filter((_, index) => index !== 1),
+    ...navigationJson.slice(2),
 ];
 
 type ClassName = { className?: string; }
@@ -65,13 +65,13 @@ export default function Header({ className }: ClassName) {
                 <div className="flex items-center justify-between h-20 sm:px-4">
 
                     {/* Logo area */}
-                    <div className="shrink-0 flex items-center gap-3">
+                    <div className="shrink-0 flex items-center gap-1 sm:gap-3">
                         <Image
                             src="/images/logos/betteriligan-logo.png"
                             alt="BetterIligan Logo"
                             width={75}
                             height={75}
-                            className="w-12 h-12 object-cover"
+                            className="w-12 h-12 sm:w-18 sm:h-18 object-cover"
                         />
                         <div className="block leading-[0.25]">
                             <Link href="/" className="text-xl font-bold text-slate-900 leading-tight block">
@@ -87,7 +87,7 @@ export default function Header({ className }: ClassName) {
                             <div className="relative group h-full flex items-center">
                                 <Link
                                     href="/"
-                                    className="flex items-center gap-1 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors py-2"
+                                    className="flex items-center gap-1 text-base font-medium text-slate-700 hover:text-blue-600 transition-colors py-2 mr-4"
                                 >
                                     <span className="relative py-1">
                                         Home

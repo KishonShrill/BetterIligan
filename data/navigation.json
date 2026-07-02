@@ -37,6 +37,36 @@
         ]
     },
     {
+        "name": "Travel",
+        "href": "/travel",
+        "dropdown": [
+            {
+                "name": "Explore Travel",
+                "description": "Discover top destinations, attractions, and experiences in Iligan.",
+                "href": "#",
+                "upcoming": true
+            },
+            {
+                "name": "Transportation",
+                "description": "Guide to getting around Iligan, including routes and transport options.",
+                "href": "/travel/transportation",
+                "upcoming": true
+            },
+            {
+                "name": "Waterfalls",
+                "description": "Explore Iligan’s famous waterfalls and natural attractions.",
+                "href": "#",
+                "upcoming": true
+            },
+            {
+                "name": "Accommodations",
+                "description": "Find hotels, inns, and places to stay in Iligan City.",
+                "href": "#",
+                "upcoming": true
+            }
+        ]
+    },
+    {
         "name": "Transparency",
         "href": "/transparency",
         "dropdown": [
@@ -72,41 +102,6 @@
                 "href": "/government/departments"
             }
         ]
-    },
-    {
-        "name": "Travel",
-        "href": "/travel",
-        "dropdown": [
-            {
-                "name": "Explore Travel",
-                "description": "Discover top destinations, attractions, and experiences in Iligan.",
-                "href": "#",
-                "upcoming": true
-            },
-            {
-                "name": "Transportation",
-                "description": "Guide to getting around Iligan, including routes and transport options.",
-                "href": "/travel/transportation",
-                "upcoming": true
-            },
-            {
-                "name": "Waterfalls",
-                "description": "Explore Iligan’s famous waterfalls and natural attractions.",
-                "href": "#",
-                "upcoming": true
-            },
-            {
-                "name": "Accommodations",
-                "description": "Find hotels, inns, and places to stay in Iligan City.",
-                "href": "#",
-                "upcoming": true
-            }
-        ]
-    },
-    {
-        "name": "Transparency",
-        "href": "#",
-        "dropdown": []
     },
     {
         "name": "About",
