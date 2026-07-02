@@ -107,7 +107,7 @@ These figures were extracted and verified from BLGF's official `By-LGU-SRE-2024.
     "years": [
         {
             "fiscalYear": 2024,
-            "status": "final",
+            "status": "preliminary",
             "income": {
                 "localTax": 629.63,
                 "localNonTax": 212.03,
@@ -450,7 +450,7 @@ export default function BudgetClient() {
 
     const budgetReferences = [
         {
-            title: 'Bureau of Local Government Finance — Statement of Receipts and Expenditures by LGU (FY2024, FY2025 Preliminary)',
+            title: 'Bureau of Local Government Finance — Statement of Receipts and Expenditures by LGU (FY2024 and FY2025, both Preliminary)',
             url: 'https://blgf.gov.ph/lgu-fiscal-data/',
         },
     ];

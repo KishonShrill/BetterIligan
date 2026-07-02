@@ -15,7 +15,7 @@ license, cataloged at `data.bettergov.ph` (dataset #9, same civic-tech family as
 `@bettergov/kapwa` dependency).
 
 Two fiscal years are currently published with a full per-LGU breakdown:
-- `By-LGU-SRE-2024.xlsx` — FY2024 (Final)
+- `By-LGU-SRE-2024.xlsx` — FY2024 (Preliminary — the source file's own title cell reads "FY 2024 (Preliminary)"; BLGF has not published a superseding finalized per-LGU file for 2024 as of this writing)
 - `By-LGU-SRE-2025.xlsx` — FY2025 (Preliminary)
 
 Iligan City's row (row 215 in both files) was extracted and verified. FY2024's total current

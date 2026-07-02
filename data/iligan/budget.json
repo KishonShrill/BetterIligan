@@ -4,7 +4,7 @@
     "years": [
         {
             "fiscalYear": 2024,
-            "status": "final",
+            "status": "preliminary",
             "income": {
                 "localTax": 629.63,
                 "localNonTax": 212.03,
