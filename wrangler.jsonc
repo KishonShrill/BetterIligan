@@ -1,25 +1,29 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "main": ".open-next/worker.js",
-  "name": "betteriligan",
-  "compatibility_date": "2026-05-29",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
-  "services": [
-    {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "betteriligan"
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "main": ".open-next/worker.js",
+    "name": "betteriligan",
+    "compatibility_date": "2026-05-29",
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
+    "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS"
+    },
+    "services": [
+        {
+            "binding": "WORKER_SELF_REFERENCE",
+            "service": "betteriligan"
+        }
+    ],
+    "images": {
+        "binding": "IMAGES"
+    },
+    "observability": {
+        "enabled": true
+    },
+    "vars": {
+        "NEXT_PUBLIC_WEATHER_CITY_ID": "1711082",
+        "NEXT_PUBLIC_RECAPTCHA_SITE_KEY": "6Lctqy4tAAAAAOCsQWyrephKpem5ldizZjm87c7X",
     }
-  ],
-  "images": {
-    "binding": "IMAGES"
-  },
-  "observability": {
-    "enabled": true
-  }
 }

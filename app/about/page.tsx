@@ -1,7 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SubpageHero from '@/components/ui/SubpageHero';
-import { Target, CheckCircle2, AlertTriangle, Flame, Scale, ExternalLink, HeartHandshake } from 'lucide-react';
+import {
+    Target, CheckCircle2, AlertTriangle, Flame,
+    Scale, ExternalLink, HeartHandshake, Users,
+    ArrowRight, ArrowLeft
+} from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'About | BetterIliganCity',
@@ -14,11 +18,17 @@ export default function AboutPage() {
 
             <SubpageHero>
                 <SubpageHero.Badges>
+                    <Link
+                        href="/"
+                        className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors"
+                    >
+                        <ArrowLeft className="w-4 h-4" /> Back to Home
+                    </Link>
                     <span className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider rounded-full border border-blue-100">
                         Civic Tech Project
                     </span>
                 </SubpageHero.Badges>
-                <SubpageHero.Title>About BetterIliganCity</SubpageHero.Title>
+                <SubpageHero.Title>About BetterIliganCity.org</SubpageHero.Title>
                 <SubpageHero.Description>
                     A volunteer-led initiative building digital public goods for the City of Majestic Waterfalls.
                 </SubpageHero.Description>
@@ -126,6 +136,23 @@ export default function AboutPage() {
                             WE&apos;RE LOOKING FOR PEOPLE SMARTER THAN US!
                         </p>
                     </div>
+                </section>
+
+                <section className="bg-emerald-50 border border-emerald-100 rounded-3xl p-8 md:p-12 text-center shadow-sm">
+                    <div className="inline-flex items-center justify-center p-3 bg-emerald-100 text-emerald-600 rounded-full mb-5">
+                        <Users className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-emerald-950 mb-4">Ready to Make an Impact?</h3>
+                    <p className="text-lg text-emerald-800 max-w-2xl mx-auto mb-8 leading-relaxed">
+                        Whether you're a developer, designer, researcher, or just someone who wants to help verify local data—we need you. Join our community of citizen builders and help shape the digital future of Iligan City.
+                    </p>
+                    <Link
+                        href="/volunteer"
+                        className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                    >
+                        Join as a Volunteer
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                 </section>
 
                 {/* 6. License */}

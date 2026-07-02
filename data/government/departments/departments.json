@@ -1,5 +1,21 @@
 [
     {
+        "name": "Iligan City Youth Development Office (ICYD)",
+        "category": "Social Services",
+        "representative": {
+            "name": "Nora Fe Escorial",
+            "numbers": [
+                "0955 744 6496"
+            ],
+            "emails": [
+                "cmoyouthaffairsiliganofficial@gmail.com"
+            ]
+        },
+        "address": "Iligan City Hall, Buhanginan Hills, Pala-o Iligan City",
+        "facebookUrl": "https://www.facebook.com/IliganCityYouthDevelopmentOffice/",
+        "logoUrl": "/images/logos/iligan-city-youth-development-office.jpg"
+    },
+    {
         "name": "Iligan City Gender and Development Office (GAD)",
         "category": "Social Services",
         "representative": {
@@ -359,6 +375,7 @@
                 "ceo@iligan.gov.ph"
             ]
         },
+        "facebookUrl": "https://www.facebook.com/CEOIliganCity",
         "logoUrl": "/images/logos/city-engineers-office-(ceo).png"
     },
     {

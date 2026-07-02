@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Search, Menu, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import { headerDropdown } from '@/data/categories';
 import navigationJson from '@/data/navigation.json';
+import Breadcrumbs from '../ui/Breadcrumbs';
+import Button3D from '../ui/Button3D';
 
 interface SubItem {
     name: string;
@@ -28,10 +30,12 @@ const navigation: Navigation[] = [
         href: '/services',
         dropdown: headerDropdown,
     },
-    ...navigationJson.slice(1),
+    ...navigationJson.slice(1).filter((_, index) => index !== 1),
 ];
 
-export default function Header() {
+type ClassName = { className?: string; }
+
+export default function Header({ className }: ClassName) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
     const pathname = usePathname();
@@ -56,9 +60,9 @@ export default function Header() {
     };
 
     return (
-        <header className="font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200">
-            <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between h-20">
+        <header className={`${className} ${pathname === "/travel/transportation" && "hidden"} px-4 font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200`}>
+            <div className={`container relative mx-auto p-0}`}>
+                <div className="flex items-center justify-between h-20 sm:px-4">
 
                     {/* Logo area */}
                     <div className="shrink-0 flex items-center gap-3">
@@ -78,7 +82,7 @@ export default function Header() {
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-4 h-fit">
+                    <nav className="hidden lg:flex items-center gap-2 h-fit">
                         {pathname !== '/' && (
                             <div className="relative group h-full flex items-center">
                                 <Link
@@ -127,16 +131,19 @@ export default function Header() {
                     </nav>
 
                     {/* Right side actions */}
-                    <div className="flex items-center gap-4 lg:gap-6">
-                        <button className="hidden md:flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600">
-                            <Search className="w-5 h-5" />
-                            Search
-                        </button>
+                    <div className="flex items-center gap-4">
+                        <Button3D
+                            href='/volunteer'
+                            text="Join Us!"
+                            variant="blue"
+                            size="sm"
+                            className="max-[470px]:hidden w-fit max-sm:mx-auto"
+                        />
 
                         {/* Mobile menu button */}
                         <button
                             type="button"
-                            className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+                            className="lg:hidden p-2 rounded-lg bg-white/95 backdrop-blur border border-slate-200 text-slate-700 shadow-lg shadow-slate-300/30 hover:bg-slate-700 hover:text-white active:translate-y-0"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
                             <span className="sr-only">Open main menu</span>
@@ -144,14 +151,15 @@ export default function Header() {
                         </button>
                     </div>
                 </div>
+                {pathname != "/" && <Breadcrumbs className='md:absolute w-fit md:p-2 pb-2 bg-white md:rounded-b-2xl md:border-x md:border-b border-slate-200 mx-auto' />}
             </div>
 
             {/* MOBILE MENU OVERLAY */}
             {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 w-full bg-white border-t border-t-gray-100 shadow-xl flex flex-col lg:hidden animate-in slide-in-from-top-2 fade-in duration-200">
+                <div className="absolute top-full left-0 w-full max-h-[calc(100vh-81.1px-33.1px)] bg-white border-t border-t-gray-100 shadow-xl flex flex-col items-center lg:hidden animate-in slide-in-from-top-2 fade-in duration-200">
 
                     {/* Mobile Navigation Links - Scrollable area */}
-                    <div className="h-fit overflow-y-auto px-4 py-4 flex flex-col gap-1">
+                    <div className="container h-fit overflow-y-auto px-4 py-4 flex flex-col gap-1">
 
                         {pathname !== '/' && (
                             <div className="border-b border-slate-100">
@@ -196,7 +204,7 @@ export default function Header() {
                     </div>
 
                     {/* Mobile Bottom Info Bar - Pinned at the bottom of the dropdown */}
-                    <div className="shrink-0 bg-[#1a2b4c] text-white py-3 px-4">
+                    <div className="w-full shrink-0 bg-[#1a2b4c] text-white py-3 px-4">
                         <div className="flex justify-center gap-8 items-center text-xs font-medium">
                             <div className="flex flex-col items-center">
                                 <span className="opacity-70">ILIGAN</span>

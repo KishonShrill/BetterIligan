@@ -32,7 +32,7 @@ export default function SubpageHero({ children, bannerUrl, className, logoUrl }:
             )}
 
             {/* Content Layer */}
-            <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-6 py-10 md:py-16">
+            <div className="relative z-10 container mx-auto px-4 md:px-6 py-10 md:py-16">
                 <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
 
                     {/* Logo Container */}

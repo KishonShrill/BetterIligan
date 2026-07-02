@@ -21,7 +21,7 @@ export default function ServicesSection() {
         <Section>
 
             {/* Header */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-7 sm:mb-12">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
                     City Services
                 </h2>
@@ -31,7 +31,7 @@ export default function ServicesSection() {
             </div>
 
             {/* Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-10">
                 {displayedCategories.map((category) => {
                     const Icon = category.icon;
 
@@ -42,7 +42,7 @@ export default function ServicesSection() {
                             className={`group border border-slate-200 rounded-xl p-6 flex flex-col h-full ${category.hoverBorder} hover:shadow-md transition-all duration-300`}
                         >
                             {/* Icon & Title */}
-                            <div className="flex items-center gap-4 mb-6">
+                            <div className="flex items-center gap-4 mb-4 sm:mb-6">
                                 <div className={`${category.secondaryColor} ${category.primaryColor} p-3 rounded-xl transition-colors shrink-0`}>
                                     <Icon className="w-6 h-6" />
                                 </div>
@@ -52,7 +52,7 @@ export default function ServicesSection() {
                             </div>
 
                             {category.description && (
-                                <p className={`text-sm text-slate-600 leading-relaxed ${category.subItems.length > 0 ? 'mb-5' : 'mb-6 flex-1'}`}>
+                                <p className={`text-sm text-slate-600 leading-relaxed ${category.subItems.length > 0 ? 'mb-5' : 'mb-4 flex-1'}`}>
                                     {category.description}
                                 </p>
                             )}

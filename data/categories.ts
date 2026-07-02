@@ -1,7 +1,7 @@
 import {
     Building2, FileText, HeartPulse,
     HardHat, Car, PawPrint,
-    Trash2, Leaf, ShieldAlert
+    ShieldAlert
 } from 'lucide-react';
 
 export const serviceCategories = [

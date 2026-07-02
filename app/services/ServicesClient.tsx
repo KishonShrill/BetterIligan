@@ -1,17 +1,18 @@
 'use client'
 
-import { useState, useMemo, useEffect, Suspense } from 'react';
-import Link from 'next/link';
+import { useState, useMemo, useEffect, Suspense, useDeferredValue } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Search, PlusCircle } from 'lucide-react';
 
 import { allServices } from '@/data/services';
 import ServiceCard from '@/components/ServiceCard';
 import FilterGrid from '@/components/ui/FilterGrid';
+import ContributionModal from '@/components/ui/ContributionModal';
 
 function ServicesDirectoryContent() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const [isContributionModalOpen, setIsContributionModalOpen] = useState(false);
 
     // 1. Initialize both states from the URL
     const initialCategory = searchParams.get('category') || 'All Services';
@@ -19,6 +20,7 @@ function ServicesDirectoryContent() {
 
     const [selectedCategory, setSelectedCategory] = useState(initialCategory);
     const [searchQuery, setSearchQuery] = useState(initialQuery);
+    const deferredSearchQuery = useDeferredValue(searchQuery);
 
     // Dynamically generate the list of categories based on the data
     const categories = useMemo(() => {
@@ -50,10 +52,20 @@ function ServicesDirectoryContent() {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             updateUrl(selectedCategory, searchQuery);
-        }, 300);
+        }, 500);
 
         return () => clearTimeout(timeoutId);
     }, [searchQuery, selectedCategory]);
+
+    useEffect(() => {
+        setSelectedCategory(
+            searchParams.get('category') || 'All Services'
+        );
+
+        setSearchQuery(
+            searchParams.get('q') || ''
+        );
+    }, [searchParams]);
 
 
     // 4. Update Handlers (Notice how lightweight they are now!)
@@ -72,17 +84,20 @@ function ServicesDirectoryContent() {
 
     // Filter services based on search text AND selected category
     const filteredServices = useMemo(() => {
+        const query = deferredSearchQuery.toLowerCase();
+
         return allServices.filter((service) => {
             const matchesSearch =
-                service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                service.description.toLowerCase().includes(searchQuery.toLowerCase());
+                service.title.toLowerCase().includes(query) ||
+                service.description.toLowerCase().includes(query);
 
             const matchesCategory =
-                selectedCategory === 'All Services' || service.category === selectedCategory;
+                selectedCategory === 'All Services' ||
+                service.category === selectedCategory;
 
             return matchesSearch && matchesCategory;
         });
-    }, [searchQuery, selectedCategory]);
+    }, [deferredSearchQuery, selectedCategory]);
 
     return (
         <main className="min-h-screen bg-[#F8FAFC] font-sans pb-24">
@@ -130,20 +145,20 @@ function ServicesDirectoryContent() {
                             ))}
 
                             {/* Missing Service CTA - Injected into the grid like a card! */}
-                            <div className="bg-[#FFF8F1] border border-orange-200 rounded-2xl p-6 h-full flex flex-col justify-center">
-                                <div className="flex items-center gap-2 text-orange-600 font-bold mb-2">
+                            <div
+                                onClick={() => setIsContributionModalOpen(true)}
+                                className="bg-[#F8FAFC] border border-slate-200 hover:border-blue-300 hover:shadow-md cursor-pointer rounded-2xl p-6 h-full flex flex-col justify-center transition-all group"
+                            >
+                                <div className="flex items-center gap-2 text-slate-800 group-hover:text-blue-700 font-bold mb-2 transition-colors">
                                     <PlusCircle className="w-5 h-5" />
-                                    Missing a service?
+                                    Contribute or Report a Fix
                                 </div>
-                                <p className="text-sm text-slate-600 leading-relaxed mb-4">
-                                    BetterIliganCity is community-maintained. Help your fellow citizens by suggesting a new service directory.
+                                <p className="text-sm text-slate-500 leading-relaxed mb-4">
+                                    Notice missing information or an outdated procedure? Help your fellow citizens by updating the directory.
                                 </p>
-                                <Link
-                                    href="/suggest"
-                                    className="block w-full text-center py-2.5 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold rounded-lg transition-colors shadow-sm mt-auto"
-                                >
-                                    Suggest New Service
-                                </Link>
+                                <div className="mt-auto block w-full text-center py-2.5 bg-white border border-slate-200 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-blue-700 text-slate-700 text-sm font-bold rounded-lg transition-colors shadow-sm">
+                                    Submit Information
+                                </div>
                             </div>
                         </>
                     ) : (
@@ -166,6 +181,11 @@ function ServicesDirectoryContent() {
                     )}
                 </FilterGrid.Content>
             </FilterGrid>
+
+            <ContributionModal
+                isOpen={isContributionModalOpen}
+                onClose={() => setIsContributionModalOpen(false)}
+            />
         </main>
     );
 }

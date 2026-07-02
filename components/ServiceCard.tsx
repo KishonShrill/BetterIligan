@@ -155,9 +155,15 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         );
     }
 
-    if (isInternal) {
+    if (isInternal && !service.internalUrl) {
         return (
             <Link href={`/community/${service.slug}`} className="block h-full group">
+                {CardContent}
+            </Link>
+        );
+    } else if (isInternal && service.internalUrl) {
+        return (
+            <Link href={`${service.internalUrl}`} className="block h-full group">
                 {CardContent}
             </Link>
         );
