@@ -7,6 +7,8 @@ import SubpageHero from '@/components/ui/SubpageHero';
 import FilterGrid from '@/components/ui/FilterGrid';
 import iliganDirectories from '@/data/navigation.json';
 
+const section = iliganDirectories.find((item) => item.name === 'Iligan City')!;
+
 export default function IliganDirectories() {
     return (
         <main className="min-h-screen bg-slate-50 font-sans pb-24">
@@ -22,11 +24,11 @@ export default function IliganDirectories() {
             <FilterGrid>
                 <FilterGrid.Content
                     title="Directories"
-                    itemCount={iliganDirectories[0].dropdown.length}
+                    itemCount={section.dropdown.length - 1}
                     columns={2}
                     hasSidebar={false}
                 >
-                    {iliganDirectories[0].dropdown.map((item, index) => index !== 0 && (
+                    {section.dropdown.map((item, index) => index !== 0 && (
                         <Link
                             key={index}
                             href={item.href}
