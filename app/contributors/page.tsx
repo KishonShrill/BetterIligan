@@ -107,7 +107,7 @@ export default async function ContributorsPage() {
 
                                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
                                     <span className="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-lg">
-                                        {owner.contributions} Commits
+                                        {owner.contributions} Contribution{owner.contributions !== 1 ? 's' : ''}
                                     </span>
                                     <a
                                         href={owner.html_url}
@@ -139,27 +139,35 @@ export default async function ContributorsPage() {
                                     href={contributor.html_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md rounded-2xl p-5 flex flex-col items-center text-center transition-all group"
+                                    className="relative bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md rounded-2xl p-5 flex flex-col items-center text-center transition-all group"
                                 >
+                                    <Github className="w-4 h-4 text-slate-300 group-hover:text-blue-500 absolute top-4 right-4 transition-colors" />
                                     <Image
                                         src={contributor.avatar_url}
                                         alt={contributor.login}
                                         width={128}
                                         height={128}
-                                        className="w-16 h-16 rounded-full mb-3 shadow-sm group-hover:ring-2 group-hover:ring-blue-100 transition-all"
+                                        className="w-18 h-18 rounded-full mb-3 shadow-sm group-hover:ring-2 group-hover:ring-blue-100 transition-all"
                                     />
                                     <h3 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
                                         {contributor.login}
                                     </h3>
-                                    <p className="text-xs text-slate-500 mt-1">
-                                        {contributor.contributions} commits
-                                    </p>
+                                    <span className="mt-2 bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider">
+                                        {contributor.contributions} Contribution{contributor.contributions !== 1 ? 's' : ''}
+                                    </span>
                                 </a>
                             ))}
                         </div>
                     ) : (
-                        <div className="bg-slate-50 border border-slate-200 border-dashed rounded-2xl p-8 text-center">
-                            <p className="text-slate-500 text-sm">No other code contributors found on GitHub yet.</p>
+                        <div className="bg-white border border-slate-200 border-dashed rounded-3xl p-10 text-center flex flex-col items-center">
+                            <div className="w-16 h-16 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center mb-4">
+                                <Github className="w-8 h-8" />
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">No contributors to show right now</h3>
+                            <p className="text-slate-500 max-w-md mx-auto">
+                                We couldn&apos;t load the contributor list from GitHub. Check back shortly, or view the
+                                project directly on GitHub.
+                            </p>
                         </div>
                     )}
                 </section>
@@ -184,16 +192,18 @@ export default async function ContributorsPage() {
                                         <Image
                                             src={volunteer.profile_pic}
                                             alt={volunteer.name}
-                                            className="w-12 h-12 rounded-full object-cover shadow-sm bg-slate-100"
+                                            className="w-14 h-14 rounded-full object-cover shadow-sm bg-slate-100 shrink-0"
                                         />
                                     ) : (
-                                        <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                                            <User className="w-5 h-5" />
+                                        <div className="w-14 h-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                            <User className="w-6 h-6" />
                                         </div>
                                     )}
-                                    <div>
+                                    <div className="min-w-0">
                                         <h3 className="font-bold text-slate-900 line-clamp-1">{volunteer.name}</h3>
-                                        <p className="text-xs text-slate-500 line-clamp-1">{volunteer.profession}</p>
+                                        <span className="inline-block mt-1.5 bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider line-clamp-1">
+                                            {volunteer.profession}
+                                        </span>
                                     </div>
                                 </div>
                             ))}
