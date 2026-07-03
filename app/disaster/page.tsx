@@ -9,11 +9,11 @@ import GuidesSection from "./GuidesSection";
 export const metadata: Metadata = {
     title: "Disaster Preparedness",
     description:
-        "Emergency hotlines, evacuation information, and typhoon, flood, and earthquake preparedness guides for Iligan City.",
+        "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City.",
     openGraph: {
         title: "Iligan City Disaster Preparedness Hub",
         description:
-            "Emergency hotlines, evacuation information, and preparedness guides for Iligan City.",
+            "Emergency hotlines and disaster preparedness guides for Iligan City.",
         url: "https://betteriligancity.org/disaster",
         type: "website",
     },
@@ -32,7 +32,7 @@ export default function DisasterPage() {
         "@type": "WebPage",
         name: "Iligan City Disaster Preparedness Hub",
         description:
-            "Community-maintained emergency hotlines, evacuation information, and disaster preparedness guides for Iligan City.",
+            "Community-maintained emergency hotlines and disaster preparedness guides for Iligan City.",
         url: "https://betteriligancity.org/disaster",
     };
 

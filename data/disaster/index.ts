@@ -1,6 +1,7 @@
 // SERVER-ONLY MODULE — parse happens at build/render time on the server.
-// Do NOT import this from any 'use client' file: it would ship the full
-// JSON payload plus zod to the browser (see audit finding on data/services).
+// Do NOT import this from any 'use client' file: that would bundle the full
+// JSON payload plus zod into the browser build (data/services/index.ts has
+// this problem via the client components that import it).
 import { HotlinesArraySchema, GuidesArraySchema } from "@/validations/disasterSchema";
 import rawHotlines from "./hotlines.json";
 import rawGuides from "./guides.json";

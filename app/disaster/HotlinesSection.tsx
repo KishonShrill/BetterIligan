@@ -21,7 +21,10 @@ const CATEGORY_LABELS: Record<Hotline["category"], string> = {
 };
 
 function telHref(display: string): string {
-    return `tel:${display.replace(/[^+\d]/g, "")}`;
+    const cleaned = display.replace(/[^+\d]/g, "");
+    // LGU-published landlines are 7-digit local numbers; prepend the Iligan
+    // area code so tap-to-call routes from mobile phones.
+    return `tel:${cleaned.length === 7 ? `063${cleaned}` : cleaned}`;
 }
 
 export default function HotlinesSection() {
@@ -36,7 +39,9 @@ export default function HotlinesSection() {
                 Emergency Hotlines
             </h2>
             <p className="text-slate-600 mb-6">
-                Tap a number to call. Each entry lists where the number was
+                Tap a number to call. Short codes (such as 811 or 160) connect
+                when dialed within Iligan; from outside the city, use the full
+                landline or mobile numbers. Each entry lists where the number was
                 published and when we last verified it.
             </p>
 
