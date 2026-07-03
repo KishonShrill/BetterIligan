@@ -10,12 +10,6 @@ const STATUS_STYLES: Record<ReturnType<typeof getBidStatus>, { bg: string; text:
     'Ongoing': { bg: 'bg-emerald-50', text: 'text-emerald-700' },
 };
 
-const STAGE_LABELS: Record<string, string> = {
-    ITB: 'Invitation to Bid',
-    NOA: 'Notice of Award',
-    NTP: 'Notice to Proceed',
-};
-
 export default function BidCard({ bid }: { bid: Bid }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const status = getBidStatus(bid.stages);
@@ -59,7 +53,7 @@ export default function BidCard({ bid }: { bid: Bid }) {
                             className="flex items-center justify-between px-4 py-3 bg-slate-50 hover:bg-blue-50 rounded-xl transition-colors group"
                         >
                             <span className="text-sm font-medium text-slate-700 group-hover:text-blue-700">
-                                {STAGE_LABELS[s.stage]}
+                                {s.label}
                             </span>
                             <span className="flex items-center gap-1.5 text-xs font-bold text-blue-600">
                                 <FileText className="w-4 h-4" />
