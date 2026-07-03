@@ -36,7 +36,10 @@ async function getGithubContributors(): Promise<GitHubContributor[]> {
         // We use your exact repo path. 
         // 'next: { revalidate: 3600 }' caches this fetch for 1 hour (3600 seconds)!
         const res = await fetch('https://api.github.com/repos/KishonShrill/BetterIligan/contributors', {
-            next: { revalidate: 3600 }
+            next: { revalidate: 3600 },
+            headers: {
+                'User-Agent': 'BetterIligan-Contributors-Page',
+            }
         });
 
         if (!res.ok) {
