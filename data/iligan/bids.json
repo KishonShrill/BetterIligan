@@ -1,0 +1,73 @@
+{
+    "entries": [
+        {
+            "reference": "CB(B)-26-025",
+            "office": "CGSO",
+            "title": "Procurement Of LED WALL (2.5 Indoor) With Installation",
+            "stages": [
+                { "stage": "ITB", "label": "Invitation to Bid", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/025-ITB_1782975092.pdf" },
+                { "stage": "NOA", "label": "Notice of Award", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/025- NOA.pdf" },
+                { "stage": "NTP", "label": "Notice to Proceed", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/025- NTP.pdf" }
+            ]
+        },
+        {
+            "reference": "CB(B)-26-022",
+            "office": "CEO-INFRA",
+            "title": "Bahay Pag-asa Youth Home Center, Brgy. Abuno, Iligan City",
+            "stages": [
+                { "stage": "ITB", "label": "Invitation to Bid", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/022-ITB_1782713794.pdf" },
+                { "stage": "NOA", "label": "Notice of Award", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/022-NOA_1782713842.pdf" },
+                { "stage": "NTP", "label": "Notice to Proceed", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/022-NTP_1782713881.pdf" }
+            ]
+        },
+        {
+            "reference": "CB(B)-26-027",
+            "office": "CEO-INFRA",
+            "title": "Rehabilitation/Repair Of The Women's Building At Anahaw Amphitheatre, Brgy. Pala-o, Iligan City",
+            "stages": [
+                { "stage": "ITB", "label": "Invitation to Bid", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/027-ITB_1782347596.pdf" },
+                { "stage": "NOA", "label": "Notice of Award", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/027-NOA_1782348415.pdf" },
+                { "stage": "NTP", "label": "Notice to Proceed", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/027-NTP_1782347781.pdf" }
+            ]
+        },
+        {
+            "reference": "CB(B)-26-015V",
+            "office": "CAD",
+            "title": "Procurement Of 1 Unit Motor Vehicle (Electric Vehicle)",
+            "stages": [
+                { "stage": "ITB", "label": "Invitation to Bid", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/015V- ITB.pdf" },
+                { "stage": "NOA", "label": "Notice of Award", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/015V - NOA.pdf" },
+                { "stage": "NTP", "label": "Notice to Proceed", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/015V- NTP.pdf" }
+            ]
+        },
+        {
+            "reference": "CB(B)-25-122 DM",
+            "office": "GTLMH",
+            "title": "Procurement Of Drugs And Medicines",
+            "stages": [
+                { "stage": "ITB", "label": "Invitation to Bid", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/122-ITB-compressed.pdf" },
+                { "stage": "NOA", "label": "Notice of Award", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/122- NOA.pdf" },
+                { "stage": "NTP", "label": "Notice to Proceed", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/122- NTP.pdf" }
+            ]
+        },
+        {
+            "reference": "CB(B)-25-129",
+            "office": "CMO-ICDRRMO",
+            "title": "Procurement Of IT Equipment (Server CPU, Desktop Computers, Laptop, Cloud Core Router, And Other Technological Equipment)",
+            "stages": [
+                { "stage": "ITB", "label": "Invitation to Bid", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/129-ITB_1781835844.pdf" },
+                { "stage": "NOA", "label": "Notice of Award", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/129-NOA.pdf" },
+                { "stage": "NTP", "label": "Notice to Proceed", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/129-NTP.pdf" }
+            ]
+        },
+        {
+            "reference": "CB(B)-26-013",
+            "office": "CAD-LSB",
+            "title": "Procurement Of Books (Supplementary Learning Resources)",
+            "stages": [
+                { "stage": "NOA", "label": "Notice of Award", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/013-NOA_1780968558.pdf" },
+                { "stage": "NTP", "label": "Notice to Proceed", "pdfUrl": "https://iligan.gov.ph/assets/img/bidsandproc/013-NTP_1780968581.pdf" }
+            ]
+        }
+    ]
+}
