@@ -5,6 +5,7 @@ import { Search } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
 import SubpageHero from '@/components/ui/SubpageHero';
 import FilterGrid from '@/components/ui/FilterGrid';
+import ReferencesFooter from '@/components/ui/ReferencesFooter';
 import BidCard from '@/components/BidCard';
 import { BidsSchema, getBidStatus } from '@/validations/bidSchema';
 import rawBidsData from '@/data/iligan/bids.json';
@@ -29,6 +30,13 @@ export default function BidsClient() {
             return matchesStatus && matchesSearch;
         });
     }, [selectedStatus, searchQuery]);
+
+    const bidsReferences = [
+        {
+            title: 'City Government of Iligan — Bids & Procurement',
+            url: 'https://iligan.gov.ph/transparency/bidsandprocurement',
+        },
+    ];
 
     return (
         <main className="min-h-screen bg-slate-50 font-sans pb-24">
@@ -91,6 +99,13 @@ export default function BidsClient() {
                     )}
                 </FilterGrid.Content>
             </FilterGrid>
+
+            <div className="container mx-auto px-4 md:px-6">
+                <ReferencesFooter
+                    references={bidsReferences}
+                    disclaimer="Every project listed here was individually verified against the city's live Bids & Procurement page, with each stage document (ITB/NOA/NTP) confirmed as a real, reachable PDF before being added."
+                />
+            </div>
         </main>
     );
 }
