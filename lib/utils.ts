@@ -12,3 +12,11 @@ export function formatDate(date: Date): string {
         day: 'numeric',
     }).format(date);
 }
+
+/**
+ * Safely serialize JSON-LD for injection into a <script type="application/ld+json"> tag.
+ * Escapes `<` as `\u003c` to prevent `</script>` injection via malicious data.
+ */
+export function safeJsonLd(data: Record<string, unknown>): string {
+    return JSON.stringify(data).replace(/</g, '\\u003c');
+}

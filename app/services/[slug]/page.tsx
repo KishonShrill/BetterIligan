@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allServices } from '@/data/services';
+import { safeJsonLd } from '@/lib/utils';
 
 import ServiceClient from './ServiceClient';
 
@@ -66,7 +67,7 @@ export default async function ServicePage({
             {/* Inject the invisible SEO script into the HTML */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
 
             {/* Pass the fully type-safe data into your Client Component UI */}

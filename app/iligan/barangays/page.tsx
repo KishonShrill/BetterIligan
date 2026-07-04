@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { safeJsonLd } from '@/lib/utils';
 import BarangaysClient from "./BarangaysClient";
 
 export const metadata: Metadata = {
@@ -31,7 +32,7 @@ export default function BarangaysPage() {
             {/* JSON-LD Structured Data Injection for SEO */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
 
             {/* The interactive Client Component we built earlier */}

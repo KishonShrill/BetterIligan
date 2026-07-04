@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { safeJsonLd } from '@/lib/utils';
 import CityOfficialsClient from "./CityOfficialsClient";
 
 export const metadata: Metadata = {
@@ -37,7 +38,7 @@ export default function CityOfficialsPage() {
             {/* JSON-LD Structured Data Injection for SEO */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
 
             {/* The Client Component containing the layout grid */}

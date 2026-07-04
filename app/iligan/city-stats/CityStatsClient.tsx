@@ -263,7 +263,11 @@ export default function CityStatsFullPage() {
                                     {cityData.infrastructure.communications.map((comm, idx) => (
                                         <div key={idx} className="flex items-start gap-2.5">
                                             <div className="w-[5px] h-[5px] rounded-full bg-[#378ADD] shrink-0 mt-1.5"></div>
-                                            <div className="text-[13px] text-slate-900" dangerouslySetInnerHTML={{ __html: comm.replace(/(\d+[^ ]*)/, '<strong>$1</strong>') }} />
+                                            <div className="text-[13px] text-slate-900">
+                                                {comm.split(/(\d+[^ ]*)/).map((part, i) =>
+                                                    /^\d+/.test(part) ? <strong key={i}>{part}</strong> : part
+                                                )}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

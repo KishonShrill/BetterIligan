@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { safeJsonLd } from '@/lib/utils';
 import CityStatsClient from './CityStatsClient';
 
 // 1. STATIC METADATA (Server Side)
@@ -41,7 +42,7 @@ export default function CityStatsPage() {
             {/* Inject the invisible SEO script into the HTML */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
 
             <CityStatsClient />

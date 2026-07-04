@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allServices } from '@/data/services';
+import { safeJsonLd } from '@/lib/utils';
 
 // Import the Client UI component we just made
 import CommunityClient from './CommunityClient';
@@ -65,7 +66,7 @@ export default async function CommunityProfilePage({
             {/* Inject the invisible SEO script into the HTML */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
 
             <CommunityClient community={community} />

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { safeJsonLd } from '@/lib/utils';
 import VolunteerClient from './VolunteerClient';
 
 export const metadata: Metadata = {
@@ -46,7 +47,7 @@ export default function VolunteerPage() {
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
             <VolunteerClient />
         </>

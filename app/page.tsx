@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { safeJsonLd } from '@/lib/utils';
 import HeroSection from "@/sections/homepage/Hero";
 import ServicesSection from "@/sections/homepage/Services";
 import WeatherAndMap from "@/sections/homepage/WeatherMap";
@@ -21,7 +22,7 @@ export default function Home() {
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
 
             <HeroSection />
