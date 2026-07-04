@@ -1,5 +1,4 @@
-"use client";
-
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Navigation, HardHat } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
@@ -8,6 +7,11 @@ import FilterGrid from '@/components/ui/FilterGrid';
 import iliganDirectories from '@/data/navigation.json';
 
 const section = iliganDirectories.find((item) => item.name === 'Travel')!;
+
+export const metadata: Metadata = {
+    title: 'Travel & Transportation | BetterIliganCity',
+    description: 'Navigate Iligan City with ease. Find essential information on local transportation, terminals, jeepney routes, and travel guidelines for residents and visitors.',
+};
 
 export default function IliganDirectories() {
     return (

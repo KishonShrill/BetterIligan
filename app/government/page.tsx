@@ -1,4 +1,4 @@
-"use client";
+import { Metadata } from 'next';
 
 import Link from 'next/link';
 import { ArrowRight, Landmark } from 'lucide-react';
@@ -8,6 +8,11 @@ import FilterGrid from '@/components/ui/FilterGrid';
 import iliganDirectories from '@/data/navigation.json';
 
 const section = iliganDirectories.find((item) => item.name === 'Government')!;
+
+export const metadata: Metadata = {
+    title: 'Government & Departments | BetterIliganCity',
+    description: 'Access government directories, departmental profiles, public services, and contact information for the Iligan City local government unit.',
+};
 
 export default function IliganDirectories() {
     return (

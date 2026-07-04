@@ -1,5 +1,4 @@
-"use client";
-
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Landmark, ShieldCheck } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
@@ -8,6 +7,11 @@ import FilterGrid from '@/components/ui/FilterGrid';
 import iliganDirectories from '@/data/navigation.json';
 
 const section = iliganDirectories.find((item) => item.name === 'Transparency')!;
+
+export const metadata: Metadata = {
+    title: 'Transparency & Open Data | BetterIliganCity',
+    description: 'Explore Iligan City\'s public records, budget allocations, city resolutions, and open data initiatives for accountable and transparent governance.',
+};
 
 export default function TransparencyDirectory() {
     return (

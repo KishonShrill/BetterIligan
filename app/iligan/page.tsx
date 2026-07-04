@@ -1,5 +1,4 @@
-"use client";
-
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Building2 } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
@@ -8,6 +7,11 @@ import FilterGrid from '@/components/ui/FilterGrid';
 import iliganDirectories from '@/data/navigation.json';
 
 const section = iliganDirectories.find((item) => item.name === 'Iligan City')!;
+
+export const metadata: Metadata = {
+    title: 'Iligan Directory | BetterIliganCity',
+    description: 'Browse essential information about Iligan City, from local profiles and officials to barangays and public services.',
+};
 
 export default function IliganDirectories() {
     return (
