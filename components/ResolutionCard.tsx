@@ -40,9 +40,20 @@ export default function ResolutionCard({ resolution }: { resolution: Resolution 
                     <h3 className="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-600 transition-colors line-clamp-3">
                         {resolution.title}
                     </h3>
-                    <p className="text-sm text-slate-500 line-clamp-2">
-                        {resolution.summary}
-                    </p>
+                    {/* ADDED: Tooltip Wrapper with a named group */}
+                    <div className="relative group/tooltip cursor-help">
+                        <p className="text-sm text-slate-500 line-clamp-2">
+                            {resolution.summary}
+                        </p>
+
+                        {/* ADDED: The Tooltip Overlay */}
+                        <div className="absolute bottom-full left-0 mb-2 w-64 sm:w-72 p-3 bg-slate-900 text-white text-xs leading-relaxed rounded-xl shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 pointer-events-none z-50">
+                            {resolution.summary}
+
+                            {/* Little triangle arrow pointing down */}
+                            <div className="absolute top-full left-4 -mt-px border-[6px] border-transparent border-t-slate-900"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
