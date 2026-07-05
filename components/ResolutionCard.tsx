@@ -6,6 +6,8 @@ const CATEGORY_STYLES: Record<Resolution['category'], { bg: string; text: string
     'Social Services': { bg: 'bg-rose-50', text: 'text-rose-600' },
     'Economic Services': { bg: 'bg-violet-50', text: 'text-violet-600' },
     'Debt Service': { bg: 'bg-amber-50', text: 'text-amber-600' },
+    'Financial Services': { bg: 'bg-emerald-50', text: 'text-emerald-600' },
+    'Infrastructure and Transport': { bg: 'bg-blue-50', text: 'text-blue-600' }
 };
 
 function formatDate(iso: string) {

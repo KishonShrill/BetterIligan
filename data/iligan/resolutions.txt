@@ -1,0 +1,10 @@
+{
+    "number": "22-7192",
+    "type": "ordinance",
+    "title": "AN ORDINANCE AUTHORIZING FOR THE TEMPORARY CLOSURE OF PORTION OF CABILI AVENUE FROM ROTUNDA TO THE INTERSECTION OF QUEZON AVENUE (ONE SIDE ADJACENT LUDO BUILDING) ON JULY 31, 2022 FROM 9:00 A.M. TO 10:00 P.M., FOR THE \"ILIGAN/RAVE PARTY AUTO MOTO EXHIBIT\" HOSTED BY LMNTRX EVENTS PRODUCTION",
+    "summary": "Temporarily closes a stretch of Cabili Avenue for a commercial auto show, with pandemic-era health protocols required of the organizer.",
+    "category": "Economic Services",
+    "sessionDate": "2022-07-22",
+    "sourceUrl": "https://iligan.gov.ph/assets/img/ordinance/Ordinance%20no.%2022-7192.pdf"
+}
+
