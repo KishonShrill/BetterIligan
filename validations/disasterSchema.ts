@@ -25,5 +25,22 @@ export const GuideSchema = z.object({
 
 export const GuidesArraySchema = z.array(GuideSchema).min(1);
 
+// A geolocated emergency facility for the map. `source` + `verifiedAt` carry the
+// same provenance bar as hotlines; `lat`/`lon` are community-sourced from
+// OpenStreetMap and are approximate — the UI labels them as such.
+export const FacilitySchema = z.object({
+    name: z.string(),
+    category: z.enum(["evacuation", "medical", "fire", "police", "government", "utility", "barangay"]),
+    lat: z.number().gte(-90).lte(90),
+    lon: z.number().gte(-180).lte(180),
+    address: z.string().optional(),
+    tel: z.string().optional(),
+    source: z.string().url(),
+    verifiedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "verifiedAt must be YYYY-MM-DD"),
+});
+
+export const FacilitiesArraySchema = z.array(FacilitySchema).min(1);
+
 export type Hotline = z.infer<typeof HotlineSchema>;
 export type DisasterGuide = z.infer<typeof GuideSchema>;
+export type DisasterFacility = z.infer<typeof FacilitySchema>;

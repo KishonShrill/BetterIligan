@@ -4,7 +4,9 @@ import SubpageNav from "@/components/ui/SubpageNav";
 import SubpageHero from "@/components/ui/SubpageHero";
 import ReferencesFooter from "@/components/ui/ReferencesFooter";
 import HotlinesSection from "./HotlinesSection";
+import FacilitiesSection from "./FacilitiesSection";
 import GuidesSection from "./GuidesSection";
+import EmergencyQuickCall from "./EmergencyQuickCall";
 
 export const metadata: Metadata = {
     title: "Disaster Preparedness",
@@ -49,26 +51,27 @@ export default function DisasterPage() {
             <SubpageHero>
                 <SubpageHero.Title>Disaster Preparedness</SubpageHero.Title>
                 <SubpageHero.Description>
-                    Emergency hotlines and hazard checklists for Iliganons —
-                    everything on one page, built to load even on a bad
-                    connection.
+                    Emergency numbers, a facilities map, and simple
+                    what-to-do guides for Iliganons — all on one fast page.
                 </SubpageHero.Description>
             </SubpageHero>
 
-            <div className="container mx-auto px-4 md:px-6 py-10 space-y-12">
+            <div className="container mx-auto px-4 md:px-6 py-8 space-y-10">
+                <EmergencyQuickCall />
+
                 <div
                     role="note"
-                    className="flex gap-3 items-start bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm text-amber-900"
+                    className="flex gap-3 items-start bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-900"
                 >
                     <ShieldAlert className="w-5 h-5 shrink-0 mt-0.5 text-amber-600" aria-hidden />
                     <p>
-                        This page is community-maintained and is <strong>not an official
-                        LGU channel</strong>. In an emergency, follow instructions from
-                        the Iligan City CDRRMO and your barangay officials. Every number
-                        below lists its source and the date we last verified it.
+                        Community-maintained — <strong>not an official LGU channel</strong>.
+                        In an emergency, always follow the Iligan City CDRRMO and your
+                        barangay officials. Every number lists its source and verify date.
                     </p>
                 </div>
 
+                <FacilitiesSection />
                 <HotlinesSection />
                 <GuidesSection />
 

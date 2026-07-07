@@ -1,6 +1,6 @@
 import { disasterHotlines } from "@/data/disaster";
 import type { Hotline } from "@/validations/disasterSchema";
-import { Phone } from "lucide-react";
+import { Phone, Building2, LifeBuoy, Cross, Flame, Shield, Zap } from "lucide-react";
 
 const CATEGORY_ORDER: Hotline["category"][] = [
     "government",
@@ -11,13 +11,16 @@ const CATEGORY_ORDER: Hotline["category"][] = [
     "utility",
 ];
 
-const CATEGORY_LABELS: Record<Hotline["category"], string> = {
-    government: "Emergency & Government",
-    rescue: "Rescue & Disaster Response",
-    medical: "Medical",
-    fire: "Fire",
-    police: "Police",
-    utility: "Utilities",
+const CATEGORY_META: Record<
+    Hotline["category"],
+    { label: string; color: string; Icon: typeof Phone }
+> = {
+    government: { label: "Emergency & Government", color: "#4f46e5", Icon: Building2 },
+    rescue: { label: "Rescue & Disaster Response", color: "#059669", Icon: LifeBuoy },
+    medical: { label: "Medical", color: "#dc2626", Icon: Cross },
+    fire: { label: "Fire", color: "#ea580c", Icon: Flame },
+    police: { label: "Police", color: "#2563eb", Icon: Shield },
+    utility: { label: "Utilities", color: "#475569", Icon: Zap },
 };
 
 function telHref(display: string): string {
@@ -39,20 +42,27 @@ export default function HotlinesSection() {
                 Emergency Hotlines
             </h2>
             <p className="text-slate-600 mb-6">
-                Tap a number to call. Short codes (such as 811 or 160) connect
-                when dialed within Iligan; from outside the city, use the full
-                landline or mobile numbers. Each entry lists where the number was
-                published and when we last verified it.
+                Tap any number to call. Short codes like 811 or 160 work inside
+                Iligan; from outside the city, use the full landline or mobile
+                numbers.
             </p>
 
             <div className="grid gap-6 md:grid-cols-2">
-                {grouped.map(({ category, entries }) => (
+                {grouped.map(({ category, entries }) => {
+                    const { label, color, Icon } = CATEGORY_META[category];
+                    return (
                     <div
                         key={category}
-                        className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6"
+                        className="bg-white border border-gray-200 rounded-lg shadow-sm p-6"
                     >
-                        <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">
-                            {CATEGORY_LABELS[category]}
+                        <h3 className="flex items-center gap-2.5 text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">
+                            <span
+                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                                style={{ backgroundColor: `${color}1a` }}
+                            >
+                                <Icon className="w-4 h-4" style={{ color }} aria-hidden />
+                            </span>
+                            {label}
                         </h3>
                         <ul className="space-y-4">
                             {entries.map((hotline) => (
@@ -65,19 +75,19 @@ export default function HotlinesSection() {
                                             </span>
                                         )}
                                     </p>
-                                    <div className="flex flex-wrap gap-2 mt-1.5">
+                                    <div className="flex flex-wrap gap-2 mt-2">
                                         {hotline.numbers.map((number) => (
                                             <a
                                                 key={number}
                                                 href={telHref(number)}
-                                                className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg px-3 py-1.5 transition-colors"
+                                                className="inline-flex items-center gap-1.5 text-base font-bold text-blue-700 hover:text-white bg-blue-50 hover:bg-blue-600 rounded-lg px-4 py-2.5 transition-colors"
                                             >
-                                                <Phone className="w-3.5 h-3.5" aria-hidden />
+                                                <Phone className="w-4 h-4" aria-hidden />
                                                 {number}
                                             </a>
                                         ))}
                                     </div>
-                                    <p className="text-xs text-slate-400 mt-1.5">
+                                    <p className="text-xs text-slate-400 mt-2">
                                         Source:{" "}
                                         <a
                                             href={hotline.source}
@@ -93,7 +103,8 @@ export default function HotlinesSection() {
                             ))}
                         </ul>
                     </div>
-                ))}
+                    );
+                })}
             </div>
         </section>
     );
