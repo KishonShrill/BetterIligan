@@ -55,8 +55,7 @@
             {
                 "name": "Waterfalls",
                 "description": "Explore Iligan’s famous waterfalls and natural attractions.",
-                "href": "#",
-                "upcoming": true
+                "href": "/travel/waterfalls"
             },
             {
                 "name": "Accommodations",
