@@ -1,6 +1,6 @@
 import { disasterHotlines } from "@/data/disaster";
 import type { Hotline } from "@/validations/disasterSchema";
-import { Phone, Building2, LifeBuoy, Cross, Flame, Shield, Zap } from "lucide-react";
+import { Phone, Building2, LifeBuoy, Cross, Flame, Shield, Zap, ExternalLink, ArrowRight } from "lucide-react";
 
 const CATEGORY_ORDER: Hotline["category"][] = [
     "government",
@@ -106,6 +106,25 @@ export default function HotlinesSection() {
                     );
                 })}
             </div>
+
+            {/* Curated, maintained full directory from the BetterGov project. */}
+            <a
+                href="https://hotlines.bettergov.ph/?city=iligan+city&province=lanao+del+norte"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-6 flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
+            >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-50">
+                    <ExternalLink className="h-6 w-6 text-blue-600" aria-hidden />
+                </span>
+                <span className="flex-1">
+                    <span className="block font-bold text-slate-900">See the full hotline directory</span>
+                    <span className="block text-sm text-slate-500">
+                        A complete, regularly-maintained list for Iligan City, curated by BetterGov.ph.
+                    </span>
+                </span>
+                <ArrowRight className="h-5 w-5 shrink-0 text-slate-400 transition-all group-hover:translate-x-0.5 group-hover:text-blue-600" aria-hidden />
+            </a>
         </section>
     );
 }

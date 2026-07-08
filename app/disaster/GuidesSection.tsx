@@ -1,6 +1,19 @@
+import { Fragment } from "react";
 import { disasterGuides } from "@/data/disaster";
 import type { DisasterGuide } from "@/validations/disasterSchema";
 import { CloudRain, Waves, Activity, ChevronDown } from "lucide-react";
+
+// Renders **bolded** key words from the checklist strings so a panicking user
+// can skim the critical action words (per PR review). Plain text otherwise.
+function renderEmphasis(text: string) {
+    return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+        part.startsWith("**") && part.endsWith("**") ? (
+            <strong key={i} className="font-bold text-slate-900">{part.slice(2, -2)}</strong>
+        ) : (
+            <Fragment key={i}>{part}</Fragment>
+        ),
+    );
+}
 
 const HAZARD_META: Record<
     DisasterGuide["hazard"],
@@ -98,7 +111,7 @@ export default function GuidesSection() {
                                                     className="text-sm text-slate-600 leading-relaxed pl-3 border-l-2"
                                                     style={{ borderColor: `${color}40` }}
                                                 >
-                                                    {item}
+                                                    {renderEmphasis(item)}
                                                 </li>
                                             ))}
                                         </ul>

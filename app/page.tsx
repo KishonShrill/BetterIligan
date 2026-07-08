@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import HeroSection from "@/sections/homepage/Hero";
 import ServicesSection from "@/sections/homepage/Services";
+import EmergencyHotlines from "@/sections/homepage/EmergencyHotlines";
 import WeatherAndMap from "@/sections/homepage/WeatherMap";
 import CityStatsSummary from "@/sections/homepage/CityStats";
 
@@ -26,6 +27,7 @@ export default function Home() {
 
             <HeroSection />
             <ServicesSection />
+            <EmergencyHotlines />
             <CityStatsSummary />
             <WeatherAndMap />
         </>

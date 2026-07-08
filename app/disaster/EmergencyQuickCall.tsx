@@ -39,7 +39,8 @@ export default function EmergencyQuickCall() {
                 <a
                     key={label}
                     href={telHref(number)}
-                    className="group flex h-full items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
+                    aria-label={`Call ${label} at ${number}`}
+                    className="group flex h-full items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md active:scale-[0.98] active:bg-slate-50"
                 >
                     <span
                         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
@@ -51,8 +52,17 @@ export default function EmergencyQuickCall() {
                         <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                             {label}
                         </span>
-                        <span className="whitespace-nowrap text-base font-extrabold text-slate-900 sm:text-lg">
+                        {/* Phone icon + colored number reads as a tap-to-call action,
+                            not a static div — the mobile affordance the review asked for. */}
+                        <span
+                            className="flex items-center gap-1.5 whitespace-nowrap text-base font-extrabold sm:text-lg"
+                            style={{ color }}
+                        >
+                            <Phone className="h-4 w-4 shrink-0" aria-hidden />
                             {number}
+                        </span>
+                        <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                            Tap to call
                         </span>
                     </span>
                 </a>
