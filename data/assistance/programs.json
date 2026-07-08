@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Iligan City Mayor's Scholarship Program",
+        "provider": "City Government of Iligan — CMO Scholarship & OJT Division / City HRMO",
+        "scope": "city",
+        "category": "scholarship",
+        "forWho": "College students who are Iligan City residents (at least 10 years), high-school graduates from an Iligan school (or AET passers), with a passing average (around 80% GWA) and family income within the program cap, and who are not holding another scholarship.",
+        "howToApply": "Get the form and full list of requirements from the CMO Scholarship & OJT Division, City Hall (Buhanginan Hills, Pala-o); submit to the City Human Resource Management Office, 2nd Floor, Main Building.",
+        "timing": "Annual. Applications for SY 2026–2027 ran 1–30 April 2026 and have closed; the next window typically opens around April. Watch the city's official announcements for exact dates.",
+        "officialUrl": "https://iligan.gov.ph/",
+        "verifiedAt": "2026-07-08"
+    },
+    {
+        "name": "CHED Tulong Dunong Program (TDP)",
+        "provider": "Commission on Higher Education (CHED)",
+        "scope": "national",
+        "category": "financial-assistance",
+        "forWho": "Undergraduates (1st–4th year) enrolled at CHED-recognized higher education institutions, with a household income of about ₱400,000 per year or less; prioritizes economically disadvantaged students.",
+        "howToApply": "Apply through CHED / your school's UniFAST focal person. A DSWD Certificate of Indigency or case study is usually required.",
+        "timing": "Grant of about ₱7,500 per semester (₱15,000 per year). Now administered directly by CHED (from SY 2026–2027). Application timing varies — check the CHED / UniFAST page for the current cycle.",
+        "officialUrl": "https://ched.gov.ph/unifast/",
+        "verifiedAt": "2026-07-08"
+    },
+    {
+        "name": "CHED–UniFAST Tertiary Education Subsidy (TES)",
+        "provider": "CHED — Unified Student Financial Assistance System (UniFAST)",
+        "scope": "national",
+        "category": "financial-assistance",
+        "forWho": "Students enrolled in SUCs, LUCs, state-run technical-vocational institutions, and eligible private HEIs; prioritized using the DSWD Listahanan / 4Ps list.",
+        "howToApply": "School-based — apply through your college or university's UniFAST focal person or registrar. There is no single national online deadline.",
+        "timing": "Rolling and managed per school. Confirm the current cycle and slots with your HEI's UniFAST focal person.",
+        "officialUrl": "https://unifast.gov.ph/tes.html",
+        "verifiedAt": "2026-07-08"
+    },
+    {
+        "name": "DOST-SEI Undergraduate S&T Scholarships",
+        "provider": "Department of Science and Technology — Science Education Institute (DOST-SEI)",
+        "scope": "national",
+        "category": "scholarship",
+        "forWho": "Incoming college freshmen pursuing priority science, technology, engineering, and mathematics (STEM) degrees who pass the DOST-SEI qualifying examination.",
+        "howToApply": "Apply online at the DOST-SEI scholarship portal during the annual application window, then take the qualifying exam.",
+        "timing": "Annual. The AY 2026–2027 cycle has concluded (online application Oct–Nov 2025, exam Feb 2026). The next cycle typically opens around October — check the DOST-SEI site.",
+        "officialUrl": "https://www.sei.dost.gov.ph/",
+        "verifiedAt": "2026-07-08"
+    },
+    {
+        "name": "TESDA Scholarship Programs",
+        "provider": "Technical Education and Skills Development Authority (TESDA)",
+        "scope": "national",
+        "category": "training",
+        "forWho": "Individuals seeking free technical-vocational training and national assessment (e.g., TWSP, PESFA, and STEP programs).",
+        "howToApply": "Enroll through a TESDA-accredited training institution, or inquire at the TESDA Provincial/District Office serving Iligan.",
+        "timing": "Rolling — depends on the course offering and provider. Check TESDA's scholarship page or your local TESDA office for open courses.",
+        "officialUrl": "https://www.tesda.gov.ph/About/TESDA/1279",
+        "verifiedAt": "2026-07-08"
+    },
+    {
+        "name": "DSWD AICS — Assistance to Individuals in Crisis Situations",
+        "provider": "Department of Social Welfare and Development (DSWD)",
+        "scope": "national",
+        "category": "financial-assistance",
+        "forWho": "Individuals and families in crisis. Covers educational, medical, burial, transportation, and food assistance for those who qualify after assessment.",
+        "howToApply": "Walk in to the DSWD Field Office / Social Welfare and Development office with a valid ID and supporting documents (e.g., an enrollment assessment for educational aid, hospital bill for medical aid).",
+        "timing": "Year-round / walk-in, subject to social-worker assessment and availability of funds.",
+        "officialUrl": "https://aics.dswd.gov.ph/educational-assistance/",
+        "verifiedAt": "2026-07-08"
+    }
+]

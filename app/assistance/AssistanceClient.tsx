@@ -1,0 +1,186 @@
+'use client'
+
+import { useMemo, useState } from 'react';
+import {
+    Search, GraduationCap, Coins, Wrench, ExternalLink, Users,
+    CalendarClock, Building2, TriangleAlert, ClipboardList,
+} from 'lucide-react';
+import SubpageNav from '@/components/ui/SubpageNav';
+import SubpageHero from '@/components/ui/SubpageHero';
+import ReferencesFooter from '@/components/ui/ReferencesFooter';
+import type { AssistanceProgram } from '@/validations/assistanceSchema';
+
+type Category = AssistanceProgram['category'];
+
+const CATEGORY_META: Record<Category, { label: string; color: string; Icon: typeof Coins }> = {
+    scholarship: { label: 'Scholarship', color: '#2563eb', Icon: GraduationCap },
+    'financial-assistance': { label: 'Financial Assistance', color: '#059669', Icon: Coins },
+    training: { label: 'Training', color: '#d97706', Icon: Wrench },
+};
+
+const FILTERS: { key: 'all' | Category; label: string }[] = [
+    { key: 'all', label: 'All' },
+    { key: 'scholarship', label: 'Scholarships' },
+    { key: 'financial-assistance', label: 'Financial Assistance' },
+    { key: 'training', label: 'Training' },
+];
+
+const REFERENCES = [
+    { title: 'Iligan City Government', url: 'https://iligan.gov.ph/' },
+    { title: 'CHED – UniFAST (TES & Tulong Dunong)', url: 'https://ched.gov.ph/unifast/' },
+    { title: 'DOST-SEI – Science Education Institute', url: 'https://www.sei.dost.gov.ph/' },
+    { title: 'TESDA – Scholarship & Student Assistance Programs', url: 'https://www.tesda.gov.ph/About/TESDA/1279' },
+    { title: 'DSWD – AICS (Assistance to Individuals in Crisis Situations)', url: 'https://aics.dswd.gov.ph/educational-assistance/' },
+];
+
+export default function AssistanceClient({ programs }: { programs: AssistanceProgram[] }) {
+    const [query, setQuery] = useState('');
+    const [filter, setFilter] = useState<'all' | Category>('all');
+
+    const visible = useMemo(() => {
+        const q = query.trim().toLowerCase();
+        return programs.filter(
+            (p) =>
+                (filter === 'all' || p.category === filter) &&
+                (q === '' ||
+                    p.name.toLowerCase().includes(q) ||
+                    p.provider.toLowerCase().includes(q) ||
+                    p.forWho.toLowerCase().includes(q)),
+        );
+    }, [programs, query, filter]);
+
+    return (
+        <main className="min-h-screen bg-slate-50 font-sans pb-24">
+            <SubpageNav href="/" text="Go Home" />
+            <SubpageHero>
+                <SubpageHero.Title>Scholarships &amp; Assistance</SubpageHero.Title>
+                <SubpageHero.Description>
+                    Scholarships and financial-assistance programs open to Iligan
+                    residents — from the city government and national agencies.
+                </SubpageHero.Description>
+            </SubpageHero>
+
+            <div className="container mx-auto px-4 md:px-6 py-8 space-y-6">
+                {/* Trust disclaimer — this is not an official channel and cycles change. */}
+                <div
+                    role="note"
+                    className="flex gap-3 items-start bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-900"
+                >
+                    <TriangleAlert className="w-5 h-5 shrink-0 mt-0.5 text-amber-600" aria-hidden />
+                    <p>
+                        Community-maintained — <strong>not an official channel</strong>.
+                        Deadlines, amounts, and requirements change every cycle, so always
+                        confirm the current details on the official page or with the office
+                        before applying. Last checked <strong>8 July 2026</strong>.
+                    </p>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="relative max-w-sm w-full">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" aria-hidden />
+                        <input
+                            type="search"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="Search programs…"
+                            aria-label="Search programs"
+                            className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-slate-300 bg-white text-sm text-slate-900 placeholder:text-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
+                        />
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        {FILTERS.map(({ key, label }) => (
+                            <button
+                                key={key}
+                                onClick={() => setFilter(key)}
+                                aria-pressed={filter === key}
+                                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${
+                                    filter === key
+                                        ? 'bg-slate-800 text-white border-transparent'
+                                        : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                                }`}
+                            >
+                                {label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="grid gap-6 lg:grid-cols-2">
+                    {visible.map((p) => {
+                        const { label, color, Icon } = CATEGORY_META[p.category];
+                        return (
+                            <article
+                                key={p.name}
+                                className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+                            >
+                                <div className="flex items-start justify-between gap-3">
+                                    <div className="flex items-center gap-3">
+                                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: `${color}1a` }}>
+                                            <Icon className="h-6 w-6" style={{ color }} aria-hidden />
+                                        </span>
+                                        <span
+                                            className="inline-block text-[10px] font-bold uppercase tracking-wider text-white rounded px-2 py-0.5"
+                                            style={{ backgroundColor: color }}
+                                        >
+                                            {label}
+                                        </span>
+                                    </div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                        {p.scope === 'city' ? 'Iligan City' : 'National'}
+                                    </span>
+                                </div>
+
+                                <h2 className="text-lg font-bold text-slate-900 mt-3">{p.name}</h2>
+                                <p className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 mt-1">
+                                    <Building2 className="w-3.5 h-3.5 shrink-0" aria-hidden /> {p.provider}
+                                </p>
+
+                                <dl className="mt-4 space-y-3 text-sm">
+                                    <div>
+                                        <dt className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
+                                            <Users className="w-3.5 h-3.5" aria-hidden /> Who it&apos;s for
+                                        </dt>
+                                        <dd className="text-slate-600 leading-relaxed mt-1">{p.forWho}</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
+                                            <ClipboardList className="w-3.5 h-3.5" aria-hidden /> How to apply
+                                        </dt>
+                                        <dd className="text-slate-600 leading-relaxed mt-1">{p.howToApply}</dd>
+                                    </div>
+                                    <div>
+                                        <dt className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
+                                            <CalendarClock className="w-3.5 h-3.5" aria-hidden /> Timing &amp; status
+                                        </dt>
+                                        <dd className="text-slate-600 leading-relaxed mt-1">{p.timing}</dd>
+                                    </div>
+                                </dl>
+
+                                <div className="mt-auto pt-4 flex items-center justify-between gap-3">
+                                    <a
+                                        href={p.officialUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-colors"
+                                    >
+                                        <ExternalLink className="w-3.5 h-3.5" aria-hidden /> Official page
+                                    </a>
+                                    <span className="text-[10px] text-slate-400">verified {p.verifiedAt}</span>
+                                </div>
+                            </article>
+                        );
+                    })}
+                </div>
+
+                {visible.length === 0 && (
+                    <p className="text-center text-slate-400 py-8">No programs match your search.</p>
+                )}
+
+                <ReferencesFooter
+                    references={REFERENCES}
+                    disclaimer="Program details were compiled from the official pages above and last checked on 8 July 2026. This directory points you to each program and its official source; it does not process applications. Requirements, amounts, and deadlines change every cycle — always verify on the official page or with the administering office."
+                />
+            </div>
+        </main>
+    );
+}

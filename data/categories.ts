@@ -112,5 +112,6 @@ export const serviceCategories = [
 // You can still export your dropdown list for the Header here if you want!
 export const headerDropdown = [
     { name: 'All Services', href: '/services' },
+    { name: 'Scholarships & Assistance', href: '/assistance' },
     ...serviceCategories.map(cat => ({ name: cat.name, href: cat.href }))
 ];
