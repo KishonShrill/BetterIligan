@@ -20,17 +20,18 @@ export default function TopBanner({ className }: ClassName) {
         fetch(
             `https://api.open-meteo.com/v1/forecast?latitude=${ILIGAN_LAT}&longitude=${ILIGAN_LNG}&current=temperature_2m,weather_code`
         )
-            .then((r) => r.json())
+            .then((r) => r.json() as Promise<{ current?: { temperature_2m: number; weather_code: number } }>)
             .then((data) => {
+                if (!data.current) return;
                 setWeather({
-                    temp: Math.round(data.current?.temperature_2m),
-                    code: data.current?.weather_code,
+                    temp: Math.round(data.current.temperature_2m),
+                    code: data.current.weather_code,
                 });
             })
             .catch(() => { });
 
         fetch('https://api.exchangerate-api.com/v4/latest/PHP')
-            .then((r) => r.json())
+            .then((r) => r.json() as Promise<{ rates?: Record<string, number> }>)
             .then((data) => setRates(data.rates || {}))
             .catch(() => { });
     }, []);
