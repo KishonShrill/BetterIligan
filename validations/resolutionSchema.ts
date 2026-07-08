@@ -4,11 +4,13 @@ export const ResolutionCategorySchema = z.enum([
     'General Public Services',
     'Social Services',
     'Economic Services',
+    'Financial Services',
     'Debt Service',
+    'Infrastructure and Transport'
 ]); // New string literals — not reused from validations/budgetSchema.ts, whose expenditure
-    // fields are camelCase (generalPublicServices, etc.) with no matching enum. These display
-    // strings just match the labels BudgetClient.tsx renders for that page's four categories,
-    // so the two transparency pages read as one shared taxonomy without actually sharing code.
+// fields are camelCase (generalPublicServices, etc.) with no matching enum. These display
+// strings just match the labels BudgetClient.tsx renders for that page's four categories,
+// so the two transparency pages read as one shared taxonomy without actually sharing code.
 
 export const ResolutionSchema = z.object({
     number: z.string(),

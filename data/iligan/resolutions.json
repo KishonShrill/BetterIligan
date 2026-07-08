@@ -1,6 +1,57 @@
 {
-    "years": [2022],
+    "years": [
+        2022
+    ],
     "entries": [
+        {
+            "number": "22-7182",
+            "type": "ordinance",
+            "title": "AN ORDINANCE AUTHORIZING CITY VICE MAYOR MARIANITO D. ALEMANIA, TO SIGN CHECKS, VOUCHERS, PAYROLLS, AND OTHER NEGOTIABLE INSTRUMENTS, AMONG OTHERS FOR THE SANGGUNIANG PANLUNGSOD, AND TO FURNISH COPY OF THE SPECIMEN OF HIS SIGNATURE TO ALL DEPOSITORY BANKS WHERE THERE ARE DEPOSITS OF THE CITY GOVERNMENT, AS A MEANS OF DISBURSING PUBLIC FUNDS FOR THE SANGGUNIANG PANLUNGSOD",
+            "summary": "Authorizes City Vice Mayor Marianito D. Alemania to sign financial documents such as checks and vouchers, and provide his specimen signature to depository banks for the disbursement of Sangguniang Panlungsod funds.",
+            "category": "General Public Services",
+            "sessionDate": "2022-07-05",
+            "approvalDate": "2022-07-07",
+            "sourceUrl": "https://iligan.gov.ph/assets/img/ordinance/Ord.%20no.%2022-7182.pdf"
+        },
+        {
+            "number": "22-7181",
+            "type": "ordinance",
+            "title": "AN ORDINANCE AUTHORIZING CITY MAYOR FREDERICK W. SIAO, TO SIGN CHECKS, VOUCHERS, PAYROLLS AND OTHER FINANCIAL DOCUMENTS/NEGOTIABLE INSTRUMENTS, FOR ALL ACCOUNTS FOR AND IN BEHALF OF THE CITY GOVERNMENT OF ILIGAN, AND TO FURNISH COPY OF THE SPECIMEN OF HIS SIGNATURE TO ALL DEPOSITORY BANKS WHERE THERE ARE DEPOSITS OF THE CITY GOVERNMENT, AS A MEANS OF DISBURSING THE CITY GOVERNMENT PUBLIC FUNDS",
+            "summary": "Grants authority to City Mayor Frederick W. Siao to sign financial documents and furnish his specimen signature to banks to facilitate the disbursement of the city government's public funds.",
+            "category": "General Public Services",
+            "sessionDate": "2022-07-05",
+            "approvalDate": "2022-07-07",
+            "sourceUrl": "https://iligan.gov.ph/assets/img/ordinance/Ordinance%20no.%2022-7181.pdf"
+        },
+        {
+            "number": "22-7183",
+            "type": "ordinance",
+            "title": "AN ORDINANCE AUTHORIZING FOR THE TEMPORARY CLOSURE OF MARIANO BADELLES SR. STREET SPECIFICALLY ALONG THE BASLAYAN CREEK AND ROXAS AVE FROM INTERSECTION OF QUEZON AVENUE TO GENENERAL WOOD STREET, DUE TO THE IMPLEMENTATION BY THE DEPARTMENT OF PUBLIC WORKS AND HIGHWAYS (DPWH) OF PROJECT \"22KF0004 - REPLACEMENT OF PERMANENT WEAK BRIDGE AT BASLAYAN BRIDGE 1 ALONG TIBANGA ROAD-PALA-O JUNCTION\" WHICH WAS STARTED ON JULY 4, 2022, UNTIL THE COMPLETION OF THE PROJECT.",
+            "summary": "Authorizes the temporary road closure of Mariano Badelles Sr. Street and parts of Roxas Ave to allow for the DPWH replacement of the Baslayan Bridge 1, and establishes traffic rerouting schemes.",
+            "category": "Infrastructure and Transport",
+            "sessionDate": "2022-07-12",
+            "approvalDate": "2022-07-19",
+            "sourceUrl": "https://iligan.gov.ph/assets/img/ordinance/Ordinance%20no.%2022-7183.pdf"
+        },
+        {
+            "number": "22-7207",
+            "type": "ordinance",
+            "title": "AN ORDINANCE AUTHORIZING CITY COUNCILOR BERNARD Y. PACAÑA, FIRST COUNCILOR OF THE 18TH COUNCIL, TO SIGN AND APPROVE DISBURSEMENT VOUCHERS, CHECKS, PAYROLLS AND OTHER NEGOTIABLE INSTRUMENTS, AMONG OTHERS OF OFFICIALS AND EMPLOYEES IN THE SANGGUNIANG PANLUNGSOD, WHILE CITY VICE MAYOR MARIANITO D. ALEMANIA IS ON OFFICIAL BUSINESS, AND TO FURNISH COPY OF THE SPECIMEN OF HIS SIGNATURE TO ALL DEPOSITORY BANKS WHERE THERE ARE DEPOSITS OF THE CITY GOVERNMENT, AS A MEANS OF DISBURSING THE SANGGUNIANG PANLUNGSOD FUNDS",
+            "summary": "Temporarily authorizes Councilor Bernard Y. Pacaña to sign financial documents and approve disbursements for the Sangguniang Panlungsod while Vice Mayor Marianito D. Alemania is away on official business.",
+            "category": "General Public Services",
+            "sessionDate": "2022-09-01",
+            "approvalDate": "2022-09-06",
+            "sourceUrl": "https://iligan.gov.ph/assets/img/ordinance/Ordinance%20no.%2022-7207.pdf"
+        },
+        {
+            "number": "AO 22-7209-35",
+            "type": "ordinance",
+            "title": "AN ORDINANCE AUTHORIZING CITY MAYOR FREDERICK W. SIAO TO TRANSFER THE SALARIES AND PREMIUMS SAVINGS COVERING THE PERIOD FROM JANUARY 1-JULY 2022 TO \"OTHER PERSONNEL BENEFITS\" UNDER THE \"CITY MAYOR'S OFFICE-RETIREMENT AND OTHER PERSONNEL BENEFITS\" AS SOURCE OF FUNDS FOR THE GRANT OF ECONOMIC WELFARE ASSISTANCE (EWA) IN THE AMOUNT OF SEVENTY THOUSAND PESOS (P70,000) AND AUTHORIZING FURTHER CITY MAYOR FREDERICK W. SIAO, TO PARTIALLY RELEASE THE AMOUNT OF TWENTY THOUSAND PESOS (P20,000) FROM THE EWA, BEFORE SEPTEMBER 29, 2022",
+            "summary": "Allows the transfer of salary savings to fund an Economic Welfare Assistance (EWA) grant and authorizes the Mayor to partially release P20,000 from the EWA to qualified city employees.",
+            "category": "Financial Services",
+            "sessionDate": "2022-09-09",
+            "sourceUrl": "https://iligan.gov.ph/assets/img/ordinance/Ordinance%20no.%20AO%2022-7209-35.pdf"
+        },
         {
             "number": "22-385",
             "type": "resolution",
