@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/iligan/city-officials', freq: 'monthly', prio: 0.8 },
         { path: '/iligan/barangays', freq: 'monthly', prio: 0.8 },
         { path: '/assistance', freq: 'weekly', prio: 0.8 },
+        { path: '/travel/waterfalls', freq: 'monthly', prio: 0.8 },
         { path: '/transparency/budget', freq: 'monthly', prio: 0.8 },
         { path: '/about', freq: 'yearly', prio: 0.7 },
         { path: '/volunteer', freq: 'yearly', prio: 0.7 },

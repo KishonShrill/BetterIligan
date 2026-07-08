@@ -66,6 +66,12 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'avatars.githubusercontent.com',
             },
+            {
+                // Wikimedia Commons photos for the waterfalls directory
+                protocol: 'https',
+                hostname: 'upload.wikimedia.org',
+                pathname: '/**',
+            },
         ],
     },
     async headers() {
