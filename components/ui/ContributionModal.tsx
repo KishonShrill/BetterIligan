@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { X, Send, AlertCircle, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { submitContribution } from '@/actions/contribute';
 import { headerDropdown } from '@/data/categories';
 
@@ -13,7 +14,6 @@ interface ContributionModalProps {
 
 export default function ContributionModal({ isOpen, onClose }: ContributionModalProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const recaptchaRef = useRef<ReCAPTCHA>(null);
 
     if (!isOpen) return null;
@@ -21,31 +21,31 @@ export default function ContributionModal({ isOpen, onClose }: ContributionModal
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
-        setStatus('idle');
 
-        const captchaToken = recaptchaRef.current?.getValue();
-        if (!captchaToken) {
-            setStatus('error');
-            setIsSubmitting(false);
-            return;
-        }
+        try {
+            const captchaToken = recaptchaRef.current?.getValue();
+            if (!captchaToken) {
+                toast.error("Please complete the CAPTCHA.");
+                return;
+            }
 
-        const formData = new FormData(e.currentTarget);
-        const result = await submitContribution(formData, captchaToken);
+            const formData = new FormData(e.currentTarget);
+            const result = await submitContribution(formData, captchaToken);
 
-        if (result.success) {
-            setStatus('success');
-            // Auto-close after a few seconds
-            setTimeout(() => {
+            if (result?.success) {
+                toast.success("Sent Successfully! Our moderators will review this shortly.");
                 onClose();
-                setStatus('idle');
-            }, 3000);
-        } else {
-            setStatus('error');
-            recaptchaRef.current?.reset(); // Reset captcha on error
+            } else {
+                toast.error(result?.error as any || "Failed to submit.");
+                recaptchaRef.current?.reset();
+            }
+        } catch (error) {
+            console.error("Contribution submission failed:", error);
+            toast.error("An unexpected error occurred.");
+            recaptchaRef.current?.reset();
+        } finally {
+            setIsSubmitting(false);
         }
-
-        setIsSubmitting(false);
     };
 
     return (
