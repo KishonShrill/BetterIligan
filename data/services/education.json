@@ -1,0 +1,12 @@
+[
+    {
+        "title": "Scholarships",
+        "category": "Education and Scholarships",
+        "description": "Access information on local government scholarship programs, national tertiary education subsidies, STEM grants, and emergency financial assistance for students in Iligan City.",
+        "source": "community",
+        "isWalkIn": true,
+        "isOnline": true,
+        "type": "custom_link",
+        "href": "/assistance"
+    }
+]

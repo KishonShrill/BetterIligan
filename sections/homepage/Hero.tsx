@@ -204,11 +204,13 @@ export default function HeroSection() {
                                                         href={
                                                             service.type === "external"
                                                                 ? service.externalUrl
-                                                                : service.type === "internal" && !service.internalUrl
-                                                                    ? `/community/${service.slug}`
-                                                                    : service.type === "internal" && service.internalUrl
-                                                                        ? service.internalUrl
-                                                                        : `/services/${service.slug}`
+                                                                : service.type === "custom_link"
+                                                                    ? service.href // <-- Routes directly to your custom path
+                                                                    : service.type === "internal" && !service.internalUrl
+                                                                        ? `/community/${service.slug}`
+                                                                        : service.type === "internal" && service.internalUrl
+                                                                            ? service.internalUrl
+                                                                            : `/services/${service.slug}`
                                                         }
                                                         className="flex items-center justify-between p-3 md:p-4 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset rounded-lg transition-all group/item"
                                                         onClick={() => setIsDropdownOpen(false)}
@@ -218,14 +220,16 @@ export default function HeroSection() {
                                                                 {service.title}
                                                             </span>
                                                             <span className="text-xs md:text-xs text-slate-500 mb-0.5">
-                                                                {service.type !== "internal" && `${service.department} • `} {service.category}
+                                                                {service.type !== "internal" && service.type !== "custom_link" && `${service.department} • `} {service.category}
                                                             </span>
                                                             <span className='text-xs md:text-sm text-blue-700 line-clamp-1'>
                                                                 {service.type === 'standard'
                                                                     ? `betteriligancity.org/services/${service.slug}`
                                                                     : service.type === 'internal'
                                                                         ? `betteriligancity.org/community/${service.slug}`
-                                                                        : service.externalUrl}
+                                                                        : service.type === 'custom_link'
+                                                                            ? `betteriligancity.org${service.href}` // <-- Displays the custom path
+                                                                            : service.externalUrl}
                                                             </span>
                                                         </div>
                                                     </Link>
