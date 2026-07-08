@@ -4,24 +4,15 @@ const LOCAL_IP = process.env.DEVELOPMENT_IP;
 
 const securityHeaders = [
     {
-        // Start with Report-Only to shake out violations before enforcing.
-        // Switch to 'Content-Security-Policy' once the report stream is clean.
         key: 'Content-Security-Policy-Report-Only',
         value: [
             "default-src 'self'",
-            // reCAPTCHA loads from google.com + gstatic.com; 'unsafe-inline' for JSON-LD and reCAPTCHA init
-            "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google.com https://www.gstatic.com",
-            // Google Fonts CSS + inline styles used by Next.js
+            "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://www.recaptcha.net",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-            // Broad https: covers GitHub avatars, Facebook CDN, CartoDB tiles, and any future image source
             "img-src 'self' data: blob: https:",
-            // Google Fonts font files
             "font-src 'self' https://fonts.gstatic.com",
-            // Google Maps embed, reCAPTCHA iframe, Facebook post embed
-            "frame-src https://www.google.com https://www.recaptcha.net https://www.facebook.com",
-            // Client-side fetches: weather API + currency API (server-only calls not listed)
-            "connect-src 'self' https://api.open-meteo.com https://api.exchangerate-api.com",
-            // Prevent the page from being embedded in any iframe
+            "frame-src https://www.google.com https://www.recaptcha.net https://www.facebook.com https://www.gstatic.com",
+            "connect-src 'self' https://api.open-meteo.com https://api.exchangerate-api.com https://www.gstatic.com https://www.recaptcha.net https://www.google.com",
             "frame-ancestors 'none'",
         ].join('; '),
     },
