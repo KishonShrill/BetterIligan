@@ -6,7 +6,23 @@ import dynamic from 'next/dynamic';
 import { Search, MapPin, Navigation, ExternalLink, Ruler, Droplets } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
 import SubpageHero from '@/components/ui/SubpageHero';
+import ReferencesFooter from '@/components/ui/ReferencesFooter';
 import type { Waterfall } from '@/validations/waterfallSchema';
+
+const REFERENCES = [
+    {
+        title: "Traveler's Tour — The 23 Majestic Waterfalls of Iligan City",
+        url: 'https://travelerstourdotcom.wordpress.com/2018/05/10/the-23-majestic-waterfalls-of-iligan-city-the-tourist-destination/',
+    },
+    {
+        title: 'GoIligan — Iligan City Waterfalls: A Complete Guide',
+        url: 'https://goiligan.com/iligan-city-waterfalls-complete-guide-20-hidden-gems/',
+    },
+    {
+        title: 'OpenStreetMap — Iligan City boundary & waterfall locations',
+        url: 'https://www.openstreetmap.org/relation/3818838',
+    },
+];
 
 const WaterfallsMap = dynamic(() => import('./WaterfallsMap'), {
     ssr: false,
@@ -159,11 +175,10 @@ export default function WaterfallsClient({ falls }: { falls: Waterfall[] }) {
                     <p className="text-center text-slate-400 py-8">No waterfalls match “{query}”.</p>
                 )}
 
-                <p className="text-xs text-slate-400 border-t border-slate-100 pt-4">
-                    Coordinates are community-sourced from OpenStreetMap and are approximate — always travel with a
-                    local guide, especially to the upland falls. Photos are from Wikimedia Commons and Flickr,
-                    credited per card under their respective Creative Commons / public-domain licenses.
-                </p>
+                <ReferencesFooter
+                    references={REFERENCES}
+                    disclaimer="Waterfalls are drawn from OpenStreetMap and verified to fall within Iligan City's administrative boundary, then cross-checked against the local guides above. A few falls named in those guides are not yet mapped with coordinates, so they are omitted rather than guessed. Coordinates are approximate — always travel with a local guide, especially to the upland falls. Photos are from Wikimedia Commons and Flickr, credited per card under their respective licenses."
+                />
             </div>
         </main>
     );

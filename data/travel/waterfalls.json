@@ -98,13 +98,6 @@
         "verifiedAt": "2026-07-08"
     },
     {
-        "name": "Aya-aya Falls",
-        "lat": 8.344769,
-        "lon": 124.285253,
-        "source": "https://www.openstreetmap.org/node/4832174223",
-        "verifiedAt": "2026-07-08"
-    },
-    {
         "name": "Languyon Falls",
         "lat": 8.208849,
         "lon": 124.308866,
@@ -165,27 +158,6 @@
         "lat": 8.299038,
         "lon": 124.312158,
         "source": "https://www.openstreetmap.org/node/4832202422",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Kanapulan Falls",
-        "lat": 8.413018,
-        "lon": 124.351377,
-        "source": "https://www.openstreetmap.org/node/4832205321",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Tagbalugo Falls",
-        "lat": 8.405264,
-        "lon": 124.36685,
-        "source": "https://www.openstreetmap.org/node/4832214822",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Abaga ni Kulas Falls",
-        "lat": 8.410453,
-        "lon": 124.360927,
-        "source": "https://www.openstreetmap.org/node/4832214921",
         "verifiedAt": "2026-07-08"
     },
     {
