@@ -87,7 +87,7 @@ export default function WaterfallsClient({ falls }: { falls: Waterfall[] }) {
                             key={f.name}
                             className="group flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-md"
                         >
-                            <div className="relative aspect-[4/3] bg-cyan-50">
+                            <div className="relative aspect-4/3 bg-cyan-50">
                                 {f.photo ? (
                                     <Image
                                         src={f.photo.url}
@@ -95,6 +95,7 @@ export default function WaterfallsClient({ falls }: { falls: Waterfall[] }) {
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         className="object-cover"
+                                        unoptimized={f.photo.url.startsWith("https://upload.wikimedia.org/")}
                                     />
                                 ) : (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-cyan-600/70">

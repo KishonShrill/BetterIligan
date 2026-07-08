@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { kapwaSans, kapwaMono } from "./fonts";
+import { Toaster } from 'react-hot-toast';
 import "./globals.css";
 
 import Header from "@/components/layout/Header";
@@ -44,8 +45,20 @@ export default function RootLayout({
                 <TopBanner />
                 <Header />
                 <ScrollToTop />
-                <div className="flex-grow flex flex-col">{children}</div>
+                <div className="grow flex flex-col">{children}</div>
                 <Footer />
+                <Toaster
+                    position="top-center"
+                    containerClassName="max-sm:!items-center max-sm:!justify-start"
+                    toastOptions={{
+                        duration: 4000,
+                        style: {
+                            borderRadius: '12px',
+                            background: '#333',
+                            color: '#fff',
+                        },
+                    }}
+                />
             </body>
         </html>
     );
