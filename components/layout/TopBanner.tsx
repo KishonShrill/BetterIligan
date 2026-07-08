@@ -53,7 +53,7 @@ export default function TopBanner({ className }: ClassName) {
     const rate = rates[curr] ? (1 / rates[curr]).toFixed(2) : null;
 
     return (
-        <div className={`${className} ${pathname === "/travel/transportation" && "hidden"} bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans`}>
+        <div className={`${className} ${(pathname === "/travel/transportation" || pathname === "/bangon-iligan") && "hidden"} bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans`}>
             <div className="container mx-auto px-4 py-1 sm:py-2 flex items-center justify-between sm:justify-end sm:gap-4">
                 <div className="flex items-center gap-3 text-slate-600">
                     <span className="text-slate-500">

@@ -77,7 +77,7 @@ export default function BangonLivePanel({
     }
 
     return (
-        <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden flex flex-col h-[32rem]">
+        <div className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
             {/* Tabs */}
             <div className="flex items-center border-b border-slate-100 bg-slate-50/70">
                 <TabButton active={tab === 'reports'} onClick={() => setTab('reports')} icon={Activity}>
