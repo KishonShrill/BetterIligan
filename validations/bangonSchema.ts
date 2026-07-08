@@ -122,6 +122,32 @@ export const BoardMessageRowSchema = z.object({
     updated_at: z.string(),
 });
 
+// ── Page configuration (data/bangon/incident.json) ──────────────────
+// Drives the standby↔active switch. When `active` is false the page renders a
+// preparedness/standby surface and the activeIncident + donation blocks stay
+// hidden — which is why their TODO placeholders never reach the public UI.
+export const BangonConfigSchema = z.object({
+    active: z.boolean(),
+    standby: z.object({
+        headline: z.string(),
+        message: z.string(),
+        preparednessHref: z.string(),
+    }),
+    boardEnabled: z.boolean(),
+    hazardReportsEnabled: z.boolean(),
+    activeIncident: z.object({
+        title: z.string(),
+        summary: z.string(),
+        declaredAt: z.string(),
+    }),
+    donation: z.object({
+        gcash: z.object({ name: z.string(), number: z.string() }),
+        bank: z.object({ bank: z.string(), accountName: z.string(), accountNumber: z.string() }),
+        dropOff: z.array(z.object({ name: z.string(), address: z.string() })),
+        inKindNeeds: z.array(z.string()),
+    }),
+});
+
 // ── Inferred types ──────────────────────────────────────────────────
 export type NeedType = z.infer<typeof NeedTypeSchema>;
 export type RequestStatus = z.infer<typeof RequestStatusSchema>;
@@ -136,3 +162,5 @@ export type IncidentReportRow = z.infer<typeof IncidentReportRowSchema>;
 export type BoardStatus = z.infer<typeof BoardStatusSchema>;
 export type BoardMessageInput = z.infer<typeof BoardMessageInputSchema>;
 export type BoardMessageRow = z.infer<typeof BoardMessageRowSchema>;
+
+export type BangonConfig = z.infer<typeof BangonConfigSchema>;
