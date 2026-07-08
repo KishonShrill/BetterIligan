@@ -22,6 +22,17 @@
     "observability": {
         "enabled": true
     },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "betteriligan-bangon",
+            // Local dev (`wrangler d1 ... --local`) works with any id.
+            // Before deploying, run `npx wrangler d1 create betteriligan-bangon`
+            // and paste the returned database_id here.
+            "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+            "migrations_dir": "migrations"
+        }
+    ],
     "vars": {
         "NEXT_PUBLIC_WEATHER_CITY_ID": "1711082",
     }
