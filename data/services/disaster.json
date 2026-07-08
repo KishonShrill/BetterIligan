@@ -1,14 +1,14 @@
 [
     {
-        "title": "List of Iligan City Hotline Numbers",
+        "title": "Disaster Preparedness Hub",
         "category": "Disaster Preparedness",
-        "description": "Get your certificate from PSA. Request these documents online from the PSA (NSO), for delivery anywhere in the Philippines or abroad.",
+        "description": "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City — all on one page.",
         "source": "community",
         "isWalkIn": false,
         "isOnline": true,
-        "department": "BetterGov.ph",
+        "department": "BetterIligan",
         "type": "external",
-        "externalUrl": "https://hotlines.bettergov.ph/?province=lanao%20del%20norte&city=iligan%20city",
+        "externalUrl": "/disaster",
         "tags": [
             "disaster",
             "emergency",

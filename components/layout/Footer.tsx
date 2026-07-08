@@ -32,6 +32,7 @@ const footerSections: FooterSection[] = [
         title: 'Services',
         links: [
             { label: 'All Services', href: '/services' },
+            { label: 'Disaster Preparedness', href: '/disaster' },
             { label: 'Business and Trade', href: '/services?category=Business%2C+Trade+and+Investment' },
             { label: 'Certificates and Vital Records', href: '/services?category=Certificates+and+Vital+Records' },
             { label: 'Health', href: '/services?category=Health+and+Wellness' },
