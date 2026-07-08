@@ -40,25 +40,27 @@ export default function EmergencyQuickCall() {
                     key={label}
                     href={telHref(number)}
                     aria-label={`Call ${label} at ${number}`}
-                    className="group flex h-full items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md active:scale-[0.98] active:bg-slate-50"
+                    className="group flex h-full items-center gap-2.5 overflow-hidden rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md active:scale-[0.98] active:bg-slate-50"
                 >
                     <span
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
                         style={{ backgroundColor: `${color}1a` }}
                     >
-                        <Icon className="h-6 w-6" style={{ color }} aria-hidden />
+                        <Icon className="h-5 w-5" style={{ color }} aria-hidden />
                     </span>
                     <span className="flex min-w-0 flex-col leading-tight">
                         <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                             {label}
                         </span>
                         {/* Phone icon + colored number reads as a tap-to-call action,
-                            not a static div — the mobile affordance the review asked for. */}
+                            not a static div — the mobile affordance the review asked for.
+                            Sized to fit "221-0081" on one line at phone widths; the tile
+                            also clips so nothing spills past its rounded border. */}
                         <span
-                            className="flex items-center gap-1.5 whitespace-nowrap text-base font-extrabold sm:text-lg"
+                            className="flex items-center gap-1.5 whitespace-nowrap text-sm font-extrabold sm:text-base"
                             style={{ color }}
                         >
-                            <Phone className="h-4 w-4 shrink-0" aria-hidden />
+                            <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
                             {number}
                         </span>
                         <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
