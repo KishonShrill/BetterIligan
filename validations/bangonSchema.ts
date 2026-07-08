@@ -122,6 +122,32 @@ export const BoardMessageRowSchema = z.object({
     updated_at: z.string(),
 });
 
+// ── Ingested feed (official sources) ────────────────────────────────
+// Normalized output of a feed adapter (see lib/bangon/feeds.ts).
+export const FeedItemSchema = z.object({
+    source: z.string().min(1),
+    externalId: z.string().min(1),
+    category: z.string().min(1),
+    title: z.string().min(1).max(300),
+    summary: z.string().max(1000).optional(),
+    url: z.string().url().optional(),
+    magnitude: z.number().optional(),
+    publishedAt: z.string().min(1),
+});
+
+export const FeedRowSchema = z.object({
+    id: z.string(),
+    source: z.string(),
+    external_id: z.string(),
+    category: z.string(),
+    title: z.string(),
+    summary: z.string().nullable(),
+    url: z.string().nullable(),
+    magnitude: z.number().nullable(),
+    published_at: z.string(),
+    created_at: z.string(),
+});
+
 // ── Page configuration (data/bangon/incident.json) ──────────────────
 // Drives the standby↔active switch. When `active` is false the page renders a
 // preparedness/standby surface and the activeIncident + donation blocks stay
@@ -164,3 +190,6 @@ export type BoardMessageInput = z.infer<typeof BoardMessageInputSchema>;
 export type BoardMessageRow = z.infer<typeof BoardMessageRowSchema>;
 
 export type BangonConfig = z.infer<typeof BangonConfigSchema>;
+
+export type FeedItem = z.infer<typeof FeedItemSchema>;
+export type FeedRow = z.infer<typeof FeedRowSchema>;

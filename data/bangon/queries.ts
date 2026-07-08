@@ -8,8 +8,10 @@ import { getDb } from "@/lib/db";
 import {
     BoardMessageRowSchema,
     IncidentReportRowSchema,
+    FeedRowSchema,
     type BoardMessageRow,
     type IncidentReportRow,
+    type FeedRow,
 } from "@/validations/bangonSchema";
 
 // Approved community-board messages, newest first.
@@ -61,6 +63,24 @@ export async function getVerifiedIncidents(limit = 50, mask = true): Promise<Inc
         });
     } catch (err) {
         console.error("getVerifiedIncidents failed:", err);
+        return [];
+    }
+}
+
+// Ingested official-source feed items (earthquakes, advisories…), newest first.
+export async function getFeedItems(limit = 30): Promise<FeedRow[]> {
+    try {
+        const db = await getDb();
+        const { results } = await db
+            .prepare("SELECT * FROM bangon_feed ORDER BY published_at DESC LIMIT ?1")
+            .bind(limit)
+            .all();
+        return (results ?? []).flatMap((row) => {
+            const parsed = FeedRowSchema.safeParse(row);
+            return parsed.success ? [parsed.data] : [];
+        });
+    } catch (err) {
+        console.error("getFeedItems failed:", err);
         return [];
     }
 }
