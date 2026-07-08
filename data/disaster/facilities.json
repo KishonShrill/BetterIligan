@@ -1,0 +1,548 @@
+[
+    {
+        "name": "Iligan City Hall (CDRRMO seat)",
+        "category": "government",
+        "lat": 8.2260416,
+        "lon": 124.2518045,
+        "address": "City Hall Road, Pala-o, Iligan City",
+        "tel": "811",
+        "source": "https://www.openstreetmap.org/way/141725259",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Gregorio T. Lluch Memorial Hospital",
+        "category": "medical",
+        "lat": 8.2262547,
+        "lon": 124.2546239,
+        "address": "Gregorio T. Lluch Sr. Avenue, Pala-o, Iligan City",
+        "tel": "223-0602",
+        "source": "https://www.openstreetmap.org/way/296611822",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Adventist Medical Center",
+        "category": "medical",
+        "lat": 8.2409437,
+        "lon": 124.2472961,
+        "address": "Andres Bonifacio Avenue, San Miguel, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.2409437/124.2472961",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Iligan City Police Office (ICPO)",
+        "category": "police",
+        "lat": 8.1986898,
+        "lon": 124.2498076,
+        "address": "Tipanoy, Iligan City",
+        "tel": "167",
+        "source": "https://www.openstreetmap.org/#map=18/8.1986898/124.2498076",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Iligan City Fire Station (BFP)",
+        "category": "fire",
+        "lat": 8.2287438,
+        "lon": 124.236534,
+        "address": "Marcelo H. Del Pilar Street, Tambacan, Iligan City",
+        "tel": "160",
+        "source": "https://www.openstreetmap.org/#map=18/8.2287438/124.2365340",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Iligan Light and Power, Inc. (ILPI)",
+        "category": "utility",
+        "lat": 8.2290067,
+        "lon": 124.2459427,
+        "address": "Brother Raymund Jeffrey Road, Villa Verde, Iligan City",
+        "tel": "(063) 221-5708",
+        "source": "https://www.openstreetmap.org/#map=18/8.2290067/124.2459427",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Iligan City Waterworks System",
+        "category": "utility",
+        "lat": 8.2292355,
+        "lon": 124.2536091,
+        "address": "Lanao Chung Hua Road, Pala-o, Iligan City",
+        "tel": "223-3233",
+        "source": "https://www.openstreetmap.org/#map=18/8.2292355/124.2536091",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "MSU-IIT Gymnasium",
+        "category": "evacuation",
+        "lat": 8.2426516,
+        "lon": 124.2440963,
+        "address": "MSU-IIT, Tibanga, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.2426516/124.2440963",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Dr. Uy Hospital",
+        "category": "medical",
+        "lat": 8.227282,
+        "lon": 124.240532,
+        "source": "https://www.openstreetmap.org/#map=18/8.227282/124.240532",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Mercy Community Hospital",
+        "category": "medical",
+        "lat": 8.214999,
+        "lon": 124.231169,
+        "source": "https://www.openstreetmap.org/#map=18/8.214999/124.231169",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Iligan City National High School",
+        "category": "evacuation",
+        "lat": 8.225511,
+        "lon": 124.239355,
+        "source": "https://www.openstreetmap.org/#map=18/8.225511/124.239355",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Iligan East National High School",
+        "category": "evacuation",
+        "lat": 8.250304,
+        "lon": 124.2667,
+        "source": "https://www.openstreetmap.org/#map=18/8.250304/124.2667",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Barangay Abuno",
+        "category": "barangay",
+        "lat": 8.184697,
+        "lon": 124.256959,
+        "address": "Abuno, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.184697/124.256959",
+        "verifiedAt": "2026-07-07",
+        "tel": "0948-935-8458"
+    },
+    {
+        "name": "Barangay Acmac",
+        "category": "barangay",
+        "lat": 8.273758,
+        "lon": 124.265068,
+        "address": "Acmac, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.273758/124.265068",
+        "verifiedAt": "2026-07-07",
+        "tel": "0915-057-9240"
+    },
+    {
+        "name": "Barangay Bagong Silang",
+        "category": "barangay",
+        "lat": 8.241625,
+        "lon": 124.251969,
+        "address": "Bagong Silang, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.241625/124.251969",
+        "verifiedAt": "2026-07-07",
+        "tel": "0926-426-0288"
+    },
+    {
+        "name": "Barangay Bonbonon",
+        "category": "barangay",
+        "lat": 8.267662,
+        "lon": 124.290299,
+        "address": "Bonbonon, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.267662/124.290299",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Barangay Bunawan",
+        "category": "barangay",
+        "lat": 8.303333,
+        "lon": 124.303922,
+        "address": "Bunawan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.303333/124.303922",
+        "verifiedAt": "2026-07-07",
+        "tel": "0936-887-3623"
+    },
+    {
+        "name": "Barangay Buru-un",
+        "category": "barangay",
+        "lat": 8.188072,
+        "lon": 124.172216,
+        "address": "Buru-un, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.188072/124.172216",
+        "verifiedAt": "2026-07-07",
+        "tel": "0927-134-4852"
+    },
+    {
+        "name": "Barangay Dalipuga",
+        "category": "barangay",
+        "lat": 8.30596,
+        "lon": 124.258587,
+        "address": "Dalipuga, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.30596/124.258587",
+        "verifiedAt": "2026-07-07",
+        "tel": "0936-773-5722"
+    },
+    {
+        "name": "Barangay Del Carmen",
+        "category": "barangay",
+        "lat": 8.232228,
+        "lon": 124.258058,
+        "address": "Del Carmen, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.232228/124.258058",
+        "verifiedAt": "2026-07-07",
+        "tel": "063-221-4736"
+    },
+    {
+        "name": "Barangay Digkilaan",
+        "category": "barangay",
+        "lat": 8.313922,
+        "lon": 124.372466,
+        "address": "Digkilaan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.313922/124.372466",
+        "verifiedAt": "2026-07-07",
+        "tel": "0918-712-0567"
+    },
+    {
+        "name": "Barangay Ditucalan",
+        "category": "barangay",
+        "lat": 8.176033,
+        "lon": 124.192768,
+        "address": "Ditucalan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.176033/124.192768",
+        "verifiedAt": "2026-07-07",
+        "tel": "0955-854-1612"
+    },
+    {
+        "name": "Barangay Dulag",
+        "category": "barangay",
+        "lat": 8.205348,
+        "lon": 124.368826,
+        "address": "Dulag, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.205348/124.368826",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Barangay Hinaplanon",
+        "category": "barangay",
+        "lat": 8.246596,
+        "lon": 124.259474,
+        "address": "Hinaplanon, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.246596/124.259474",
+        "verifiedAt": "2026-07-07",
+        "tel": "0966-994-9708"
+    },
+    {
+        "name": "Barangay Hindang",
+        "category": "barangay",
+        "lat": 8.303563,
+        "lon": 124.353225,
+        "address": "Hindang, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.303563/124.353225",
+        "verifiedAt": "2026-07-07",
+        "tel": "0906-353-0085"
+    },
+    {
+        "name": "Barangay Kabacsanan",
+        "category": "barangay",
+        "lat": 8.28125,
+        "lon": 124.308865,
+        "address": "Kabacsanan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.28125/124.308865",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Barangay Kalilangan",
+        "category": "barangay",
+        "lat": 8.154576,
+        "lon": 124.391046,
+        "address": "Kalilangan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.154576/124.391046",
+        "verifiedAt": "2026-07-07",
+        "tel": "0947-108-4872"
+    },
+    {
+        "name": "Barangay Kiwalan",
+        "category": "barangay",
+        "lat": 8.281893,
+        "lon": 124.266195,
+        "address": "Kiwalan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.281893/124.266195",
+        "verifiedAt": "2026-07-07",
+        "tel": "0956-210-8812"
+    },
+    {
+        "name": "Barangay Lanipao",
+        "category": "barangay",
+        "lat": 8.227227,
+        "lon": 124.340547,
+        "address": "Lanipao, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.227227/124.340547",
+        "verifiedAt": "2026-07-07",
+        "tel": "0918-736-6548"
+    },
+    {
+        "name": "Barangay Luinab",
+        "category": "barangay",
+        "lat": 8.247049,
+        "lon": 124.267966,
+        "address": "Luinab, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.247049/124.267966",
+        "verifiedAt": "2026-07-07",
+        "tel": "0975-144-7503"
+    },
+    {
+        "name": "Barangay Mahayahay",
+        "category": "barangay",
+        "lat": 8.224316,
+        "lon": 124.238313,
+        "address": "Mahayahay, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.224316/124.238313",
+        "verifiedAt": "2026-07-07",
+        "tel": "0995-631-9635"
+    },
+    {
+        "name": "Barangay Mainit",
+        "category": "barangay",
+        "lat": 8.297809,
+        "lon": 124.387679,
+        "address": "Mainit, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.297809/124.387679",
+        "verifiedAt": "2026-07-07"
+    },
+    {
+        "name": "Barangay Mandulog",
+        "category": "barangay",
+        "lat": 8.244349,
+        "lon": 124.306129,
+        "address": "Mandulog, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.244349/124.306129",
+        "verifiedAt": "2026-07-07",
+        "tel": "0965-548-0312"
+    },
+    {
+        "name": "Barangay Maria Cristina",
+        "category": "barangay",
+        "lat": 8.198912,
+        "lon": 124.193998,
+        "address": "Maria Cristina, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.198912/124.193998",
+        "verifiedAt": "2026-07-07",
+        "tel": "223-6765"
+    },
+    {
+        "name": "Barangay Palao",
+        "category": "barangay",
+        "lat": 8.229264,
+        "lon": 124.254059,
+        "address": "Palao, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.229264/124.254059",
+        "verifiedAt": "2026-07-07",
+        "tel": "0995-007-3982"
+    },
+    {
+        "name": "Barangay Panoroganan",
+        "category": "barangay",
+        "lat": 8.174503,
+        "lon": 124.424734,
+        "address": "Panoroganan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.174503/124.424734",
+        "verifiedAt": "2026-07-07",
+        "tel": "0951-944-9132"
+    },
+    {
+        "name": "Barangay Poblacion",
+        "category": "barangay",
+        "lat": 8.228898,
+        "lon": 124.234013,
+        "address": "Poblacion, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.228898/124.234013",
+        "verifiedAt": "2026-07-07",
+        "tel": "0917-710-0494"
+    },
+    {
+        "name": "Barangay Puga-an",
+        "category": "barangay",
+        "lat": 8.228983,
+        "lon": 124.274745,
+        "address": "Puga-an, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.228983/124.274745",
+        "verifiedAt": "2026-07-07",
+        "tel": "0970-877-8192"
+    },
+    {
+        "name": "Barangay Rogongon",
+        "category": "barangay",
+        "lat": 8.238865,
+        "lon": 124.411368,
+        "address": "Rogongon, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.238865/124.411368",
+        "verifiedAt": "2026-07-07",
+        "tel": "0938-478-1928"
+    },
+    {
+        "name": "Barangay San Miguel",
+        "category": "barangay",
+        "lat": 8.238596,
+        "lon": 124.248663,
+        "address": "San Miguel, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.238596/124.248663",
+        "verifiedAt": "2026-07-07",
+        "tel": "221-7110"
+    },
+    {
+        "name": "Barangay San Roque",
+        "category": "barangay",
+        "lat": 8.257546,
+        "lon": 124.261743,
+        "address": "San Roque, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.257546/124.261743",
+        "verifiedAt": "2026-07-07",
+        "tel": "0977-198-1569"
+    },
+    {
+        "name": "Barangay Santa Elena",
+        "category": "barangay",
+        "lat": 8.195303,
+        "lon": 124.226301,
+        "address": "Santa Elena, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.195303/124.226301",
+        "verifiedAt": "2026-07-07",
+        "tel": "0927-795-0730"
+    },
+    {
+        "name": "Barangay Santa Filomena",
+        "category": "barangay",
+        "lat": 8.269375,
+        "lon": 124.260689,
+        "address": "Santa Filomena, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.269375/124.260689",
+        "verifiedAt": "2026-07-07",
+        "tel": "225-9062"
+    },
+    {
+        "name": "Barangay Santiago",
+        "category": "barangay",
+        "lat": 8.25056,
+        "lon": 124.24446,
+        "address": "Santiago, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.25056/124.24446",
+        "verifiedAt": "2026-07-07",
+        "tel": "223-1786"
+    },
+    {
+        "name": "Barangay Santo Rosario",
+        "category": "barangay",
+        "lat": 8.242852,
+        "lon": 124.252966,
+        "address": "Santo Rosario, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.242852/124.252966",
+        "verifiedAt": "2026-07-07",
+        "tel": "0997-993-4760"
+    },
+    {
+        "name": "Barangay Saray",
+        "category": "barangay",
+        "lat": 8.235098,
+        "lon": 124.237157,
+        "address": "Saray, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.235098/124.237157",
+        "verifiedAt": "2026-07-07",
+        "tel": "0945-355-5068"
+    },
+    {
+        "name": "Barangay Suarez",
+        "category": "barangay",
+        "lat": 8.191592,
+        "lon": 124.217092,
+        "address": "Suarez, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.191592/124.217092",
+        "verifiedAt": "2026-07-07",
+        "tel": "0927-207-2677"
+    },
+    {
+        "name": "Barangay Tambacan",
+        "category": "barangay",
+        "lat": 8.223634,
+        "lon": 124.234526,
+        "address": "Tambacan, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.223634/124.234526",
+        "verifiedAt": "2026-07-07",
+        "tel": "0997-871-5348"
+    },
+    {
+        "name": "Barangay Tibanga",
+        "category": "barangay",
+        "lat": 8.239938,
+        "lon": 124.240781,
+        "address": "Tibanga, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.239938/124.240781",
+        "verifiedAt": "2026-07-07",
+        "tel": "0917-511-3422"
+    },
+    {
+        "name": "Barangay Tipanoy",
+        "category": "barangay",
+        "lat": 8.198544,
+        "lon": 124.250993,
+        "address": "Tipanoy, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.198544/124.250993",
+        "verifiedAt": "2026-07-07",
+        "tel": "223-0265"
+    },
+    {
+        "name": "Barangay Tomas Cabili",
+        "category": "barangay",
+        "lat": 8.208463,
+        "lon": 124.222318,
+        "address": "Tomas Cabili, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.208463/124.222318",
+        "verifiedAt": "2026-07-07",
+        "tel": "0927-234-1053"
+    },
+    {
+        "name": "Barangay Tubod",
+        "category": "barangay",
+        "lat": 8.213399,
+        "lon": 124.24302,
+        "address": "Tubod, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.213399/124.24302",
+        "verifiedAt": "2026-07-07",
+        "tel": "221-3437"
+    },
+    {
+        "name": "Barangay Ubaldo Laya",
+        "category": "barangay",
+        "lat": 8.224517,
+        "lon": 124.245393,
+        "address": "Ubaldo Laya, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.224517/124.245393",
+        "verifiedAt": "2026-07-07",
+        "tel": "0916-988-9742"
+    },
+    {
+        "name": "Barangay Upper Hinaplanon",
+        "category": "barangay",
+        "lat": 8.255802,
+        "lon": 124.268887,
+        "address": "Upper Hinaplanon, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.255802/124.268887",
+        "verifiedAt": "2026-07-07",
+        "tel": "0955-100-9045"
+    },
+    {
+        "name": "Barangay Upper Tominobo",
+        "category": "barangay",
+        "lat": 8.172752,
+        "lon": 124.224324,
+        "address": "Upper Tominobo, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.172752/124.224324",
+        "verifiedAt": "2026-07-07",
+        "tel": "0965-423-8406"
+    },
+    {
+        "name": "Barangay Villaverde",
+        "category": "barangay",
+        "lat": 8.234458,
+        "lon": 124.244422,
+        "address": "Villaverde, Iligan City",
+        "source": "https://www.openstreetmap.org/#map=18/8.234458/124.244422",
+        "verifiedAt": "2026-07-07",
+        "tel": "0936-242-8119"
+    }
+]

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" fill="none" role="img" aria-label="Flood">
+  <defs>
+    <linearGradient id="fldSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#155e75"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="140" fill="url(#fldSky)"/>
+  <!-- rain -->
+  <g stroke="#cffafe" stroke-width="2" stroke-linecap="round" opacity="0.4">
+    <line x1="60" y1="16" x2="52" y2="36"/>
+    <line x1="120" y1="10" x2="112" y2="30"/>
+    <line x1="200" y1="16" x2="192" y2="36"/>
+    <line x1="300" y1="12" x2="292" y2="32"/>
+    <line x1="350" y1="18" x2="342" y2="38"/>
+  </g>
+  <!-- house half-submerged -->
+  <g>
+    <rect x="250" y="60" width="70" height="46" fill="#0e7490"/>
+    <path d="M244 62 L285 34 L326 62 Z" fill="#0891b2"/>
+    <rect x="272" y="74" width="18" height="18" fill="#a5f3fc" opacity="0.8"/>
+  </g>
+  <!-- flood water bands -->
+  <path d="M0 92 C 60 82 120 100 200 92 C 280 84 340 100 400 92 L400 140 L0 140 Z" fill="#0891b2" opacity="0.85"/>
+  <path d="M0 104 C 70 96 140 112 220 104 C 300 96 360 110 400 104 L400 140 L0 140 Z" fill="#22d3ee" opacity="0.6"/>
+  <path d="M0 118 C 80 110 150 124 240 118 C 320 112 370 122 400 118 L400 140 L0 140 Z" fill="#a5f3fc" opacity="0.45"/>
+</svg>
