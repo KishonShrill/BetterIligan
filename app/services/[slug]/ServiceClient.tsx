@@ -228,7 +228,7 @@ export default function ServicePage({ service }: ServiceClientProps) {
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mb-1">
                                     <Building className="w-3.5 h-3.5" /> Department
                                 </p>
-                                {service.type !== 'internal' && (
+                                {service.type !== 'internal' && service.type !== 'custom_link' && (
                                     <p className="text-slate-800 text-sm font-medium leading-relaxed">
                                         {service.department}
                                     </p>
@@ -275,4 +275,3 @@ export default function ServicePage({ service }: ServiceClientProps) {
         </main>
     );
 }
-

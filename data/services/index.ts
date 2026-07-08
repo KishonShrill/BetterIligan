@@ -7,6 +7,7 @@ import infrastructure from './infrastructure.json';
 import transport from './transport.json';
 import animals from './animals.json';
 import disasters from './disaster.json';
+import education from './education.json';
 
 import betteriliganservices from './betteriligan-services.json';
 
@@ -18,6 +19,7 @@ const rawServices = [
     ...transport,
     ...animals,
     ...disasters,
+    ...education,
 
     ...betteriliganservices
 ]

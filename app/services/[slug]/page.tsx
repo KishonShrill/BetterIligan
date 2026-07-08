@@ -2,13 +2,13 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allServices } from '@/data/services';
 import { safeJsonLd } from '@/lib/utils';
-
 import ServiceClient from './ServiceClient';
+import { StandardService } from '@/validations/serviceSchema';
 
+// 1. STATIC PARAMS
 export async function generateStaticParams() {
-    // We only need to generate static pages for services that actually have internal pages
     const standardServices = allServices.filter(
-        (s) => s.type === "standard" || s.type === "internal"
+        (s): s is StandardService => s.type === "standard"
     );
 
     return standardServices.map((service) => ({
@@ -16,16 +16,17 @@ export async function generateStaticParams() {
     }));
 }
 
-// 1. DYNAMIC METADATA (Server Side)
+// 2. DYNAMIC METADATA (Server Side)
 export async function generateMetadata({
     params
 }: {
     params: Promise<{ slug: string }>
 }): Promise<Metadata> {
     const { slug } = await params;
-    const service = allServices.find((s) => s.type !== "external" && s.slug === slug);
 
-    if (!service || service.type === "internal") {
+    const service = allServices.find((s) => 'slug' in s && s.slug === slug);
+
+    if (!service || service.type !== "standard") {
         return { title: 'Service Not Found' };
     }
 
@@ -35,20 +36,21 @@ export async function generateMetadata({
     };
 }
 
-// 2. MAIN PAGE COMPONENT (Server Side)
 export default async function ServicePage({
     params
 }: {
     params: Promise<{ slug: string }>
 }) {
     const { slug } = await params;
-    const service = allServices.find((s) => s.type !== "external" && s.slug === slug);
 
-    if (!service || service.type === "internal") {
+    const foundService = allServices.find((s) => 'slug' in s && s.slug === slug);
+
+    if (!foundService || foundService.type !== "standard") {
         notFound();
     }
 
-    // Generate the Schema.org JSON-LD specifically for Government Services
+    const service: StandardService = foundService;
+
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "GovernmentService",
@@ -56,21 +58,18 @@ export default async function ServicePage({
         "description": service.description,
         "provider": {
             "@type": "GovernmentOrganization",
-            "name": service.type === "standard" || service.type === "external" ? service.department : "Local Government of Iligan City"
+            "name": service.department
         },
         "serviceType": service.category,
-        "url": service.type === "external" ? service.externalUrl : `https://betteriligancity.org/services/${service.slug}`
+        "url": `https://betteriligancity.org/services/${service.slug}`
     };
 
     return (
         <>
-            {/* Inject the invisible SEO script into the HTML */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
-
-            {/* Pass the fully type-safe data into your Client Component UI */}
             <ServiceClient service={service} />
         </>
     );

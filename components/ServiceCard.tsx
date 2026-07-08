@@ -17,7 +17,6 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         (c) => c.name === service.category || c.slug === service.category
     );
 
-    // 2. Extract the icon, or use a default fallback (FileText) if not found
     const CategoryIcon = matchedCategory?.icon || FileText;
 
     const CardContent = (
@@ -53,7 +52,6 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                     )}
 
                     {/* --- AVAILABILITY BADGES --- */}
-                    {/* Note: A service can have BOTH Walk-In and Online badges! */}
                     {service.isOnline && (
                         <span className="bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider">
                             Online
@@ -75,22 +73,30 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                 <h3 className="text-lg font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-600 transition-colors">
                     {service.title}
                 </h3>
-                {service.type !== "internal" && (
+
+                {/* Department is only on standard/external */}
+                {(service.type === "standard" || service.type === "external") && (
                     <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider line-clamp-1">
                         {service.department}
                     </p>
                 )}
-                {service.type === "internal" && (
+
+                {/* Internal and Custom Links show descriptions */}
+                {(service.type === "internal" || service.type === "custom_link") && (
                     <p className='text-xs font-semibold text-slate-500'>
                         {service.description}
                     </p>
                 )}
+
+                {/* UPDATED: Dynamic URL resolution display */}
                 <p className='text-xs text-blue-700 mt-0.5 w-full'>
                     {service.type === 'standard'
-                        ? `http://betteriligancity.org/services/${service.slug}`
+                        ? `betteriligancity.org/services/${service.slug}`
                         : service.type === 'internal'
-                            ? `http://betteriligancity.org/community/${service.slug}`
-                            : service.externalUrl}
+                            ? `betteriligancity.org/community/${service.slug}`
+                            : service.type === 'custom_link'
+                                ? `betteriligancity.org${service.href}`
+                                : service.externalUrl}
                 </p>
             </div>
 
@@ -141,7 +147,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         </div>
     );
 
-    // TypeScript now explicitly knows that `service.externalUrl` exists inside this block!
+    // 1. External Links
     if (service.type === 'external') {
         return (
             <a
@@ -155,21 +161,26 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         );
     }
 
-    if (isInternal && !service.internalUrl) {
+    // 2. NEW: Custom Internal Links
+    if (service.type === 'custom_link') {
         return (
-            <Link href={`/community/${service.slug}`} className="block h-full group">
-                {CardContent}
-            </Link>
-        );
-    } else if (isInternal && service.internalUrl) {
-        return (
-            <Link href={`${service.internalUrl}`} className="block h-full group">
+            <Link href={service.href} className="block h-full group">
                 {CardContent}
             </Link>
         );
     }
 
-    // If it's not external, TypeScript knows it's a "StandardService" so it must have a slug.
+    // 3. Community Profile Links
+    if (isInternal) {
+        const targetUrl = service.internalUrl ? service.internalUrl : `/community/${service.slug}`;
+        return (
+            <Link href={targetUrl} className="block h-full group">
+                {CardContent}
+            </Link>
+        );
+    }
+
+    // 4. Standard Service Links (Fallback)
     return (
         <Link href={`/services/${service.slug}`} className="block h-full group">
             {CardContent}

@@ -37,6 +37,11 @@ const BaseServiceSchema = z.object({
     isOnline: z.boolean(),
 });
 
+export const CustomLinkServiceSchema = BaseServiceSchema.extend({
+    type: z.literal("custom_link"),
+    href: z.string(),
+});
+
 // Used when BetterIligan hosts the step-by-step guide
 const StandardServiceSchema = BaseServiceSchema.extend({
     slug: z.string(),
@@ -76,7 +81,8 @@ export const CommunityProfileSchema = BaseServiceSchema.extend({
 export const ServiceSchema = z.discriminatedUnion("type", [
     StandardServiceSchema,
     ExternalServiceSchema,
-    CommunityProfileSchema
+    CommunityProfileSchema,
+    CustomLinkServiceSchema
 ]);
 
 export const ServicesArraySchema = z.array(ServiceSchema);
@@ -84,5 +90,6 @@ export const ServicesArraySchema = z.array(ServiceSchema);
 // Infer the TypeScript types
 export type StandardService = z.infer<typeof StandardServiceSchema>;
 export type ExternalService = z.infer<typeof ExternalServiceSchema>;
-export type AllService = z.infer<typeof ServiceSchema>;
+export type CustomLinkService = z.infer<typeof CustomLinkServiceSchema>;
 export type CommunityProfile = z.infer<typeof CommunityProfileSchema>;
+export type AllService = z.infer<typeof ServiceSchema>;

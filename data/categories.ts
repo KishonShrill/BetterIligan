@@ -1,7 +1,7 @@
 import {
     Building2, FileText, HeartPulse,
     HardHat, Car, PawPrint,
-    ShieldAlert
+    ShieldAlert, GraduationCap
 } from 'lucide-react';
 
 export const serviceCategories = [
@@ -25,6 +25,17 @@ export const serviceCategories = [
         secondaryColor: 'bg-amber-50',
         primaryColor: 'text-amber-600',
         hoverBorder: 'hover:border-amber-300',
+        subItems: []
+    },
+    {
+        name: 'Education and Scholarships',
+        slug: 'education-and-scholarships',
+        description: 'Information on public schools, local government scholarships, educational programs, and student financial assistance.',
+        href: '/services?category=Education+and+Scholarships',
+        icon: GraduationCap,
+        secondaryColor: 'bg-cyan-50',
+        primaryColor: 'text-cyan-600',
+        hoverBorder: 'hover:border-cyan-300',
         subItems: []
     },
     {
@@ -112,6 +123,5 @@ export const serviceCategories = [
 // You can still export your dropdown list for the Header here if you want!
 export const headerDropdown = [
     { name: 'All Services', href: '/services' },
-    { name: 'Scholarships & Assistance', href: '/assistance' },
     ...serviceCategories.map(cat => ({ name: cat.name, href: cat.href }))
 ];
