@@ -85,8 +85,8 @@ export default function BangonCommandCenter({
                         </span>
                     </Link>
                     <span className="h-6 w-px bg-slate-200" aria-hidden />
-                    <span className="text-sm font-bold tracking-tight text-slate-900">Bangon Iligan</span>
-                    <StatusPill active={active} label={active ? 'Active' : config.standby.headline} />
+                    <span className="whitespace-nowrap text-sm font-bold tracking-tight text-slate-900">Bangon Iligan</span>
+                    <StatusPill active={active} label={active ? 'Active' : 'Standby'} />
                 </div>
 
                 {/* Right: actions */}

@@ -109,16 +109,19 @@ export default function BangonLivePanel({
                     {reports.map((r) => (
                         <li key={r.id} className="px-4 py-3">
                             <div className="flex items-center gap-2">
-                                <span className="inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-700 border border-orange-100">
+                                <span className="inline-flex shrink-0 items-center rounded-full bg-orange-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-700 border border-orange-100">
                                     {INCIDENT_LABEL[r.incident_type]}
                                 </span>
-                                <span className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500">
-                                    <MapPin className="w-3 h-3" /> {r.barangay}
-                                    {r.landmark ? ` · ${r.landmark}` : ''}
+                                <span className="flex min-w-0 items-center gap-1 text-xs font-semibold text-slate-500">
+                                    <MapPin className="h-3 w-3 shrink-0" />
+                                    <span className="truncate">
+                                        {r.barangay}
+                                        {r.landmark ? ` · ${r.landmark}` : ''}
+                                    </span>
                                 </span>
-                                <span className="ml-auto text-[10px] text-slate-400">{relativeTime(r.created_at)}</span>
+                                <span className="ml-auto shrink-0 text-[10px] text-slate-400">{relativeTime(r.created_at)}</span>
                             </div>
-                            <p className="mt-1 text-sm text-slate-700 leading-snug">{r.description}</p>
+                            <p className="mt-1 break-words text-sm text-slate-700 leading-snug">{r.description}</p>
                         </li>
                     ))}
                 </ul>
@@ -134,15 +137,18 @@ export default function BangonLivePanel({
                         {messages.map((m) => (
                             <li key={m.id} className="px-4 py-3">
                                 <div className="flex items-center gap-2 text-xs">
-                                    <span className="font-bold text-slate-800">{m.author_name || 'Anonymous'}</span>
+                                    <span className="max-w-[45%] shrink-0 truncate font-bold text-slate-800">
+                                        {m.author_name || 'Anonymous'}
+                                    </span>
                                     {m.barangay && (
-                                        <span className="inline-flex items-center gap-1 text-slate-400">
-                                            <MapPin className="w-3 h-3" /> {m.barangay}
+                                        <span className="flex min-w-0 items-center gap-1 text-slate-400">
+                                            <MapPin className="h-3 w-3 shrink-0" />
+                                            <span className="truncate">{m.barangay}</span>
                                         </span>
                                     )}
-                                    <span className="ml-auto text-[10px] text-slate-400">{relativeTime(m.created_at)}</span>
+                                    <span className="ml-auto shrink-0 text-[10px] text-slate-400">{relativeTime(m.created_at)}</span>
                                 </div>
-                                <p className="mt-1 text-sm text-slate-700 leading-snug">{m.message}</p>
+                                <p className="mt-1 break-words text-sm text-slate-700 leading-snug">{m.message}</p>
                             </li>
                         ))}
                     </ul>

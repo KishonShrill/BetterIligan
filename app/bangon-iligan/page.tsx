@@ -25,6 +25,10 @@ export default async function BangonIliganPage() {
         getVerifiedIncidents(),
     ]);
 
+    // The 44 barangay admin pins sit at the city edges and blow out the map's
+    // fit-bounds; this is an emergency-facility map, so drop them.
+    const mapFacilities = disasterFacilities.filter((f) => f.category !== 'barangay');
+
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
@@ -38,7 +42,7 @@ export default async function BangonIliganPage() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
             <BangonCommandCenter
-                facilities={disasterFacilities}
+                facilities={mapFacilities}
                 messages={messages}
                 reports={reports}
                 config={config}
