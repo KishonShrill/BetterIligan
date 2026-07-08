@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" fill="none" role="img" aria-label="Typhoon">
+  <defs>
+    <linearGradient id="tphSky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="140" fill="url(#tphSky)"/>
+  <!-- drifting clouds -->
+  <ellipse cx="70" cy="34" rx="60" ry="18" fill="#ffffff" opacity="0.10"/>
+  <ellipse cx="150" cy="20" rx="70" ry="16" fill="#ffffff" opacity="0.07"/>
+  <!-- rain -->
+  <g stroke="#dbeafe" stroke-width="2" stroke-linecap="round" opacity="0.45">
+    <line x1="40" y1="80" x2="30" y2="104"/>
+    <line x1="78" y1="88" x2="68" y2="112"/>
+    <line x1="116" y1="82" x2="106" y2="106"/>
+    <line x1="150" y1="94" x2="140" y2="118"/>
+    <line x1="188" y1="86" x2="178" y2="110"/>
+  </g>
+  <!-- typhoon spiral -->
+  <g transform="translate(300,72)">
+    <g stroke="#ffffff" stroke-width="9" fill="none" stroke-linecap="round">
+      <path d="M0 0 C -8 -24 -44 -28 -58 -6" opacity="0.9"/>
+      <path d="M0 0 C -8 -24 -44 -28 -58 -6" opacity="0.75" transform="rotate(90)"/>
+      <path d="M0 0 C -8 -24 -44 -28 -58 -6" opacity="0.9" transform="rotate(180)"/>
+      <path d="M0 0 C -8 -24 -44 -28 -58 -6" opacity="0.75" transform="rotate(270)"/>
+    </g>
+    <circle r="11" fill="#ffffff"/>
+    <circle r="24" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.35"/>
+  </g>
+</svg>
