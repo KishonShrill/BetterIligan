@@ -1,0 +1,84 @@
+[
+    {
+        "hazard": "typhoon",
+        "phases": {
+            "before": [
+                "Monitor **PAGASA bulletins** and **Iligan CDRRMO advisories** once a storm enters PAR.",
+                "Prepare a **go-bag**: drinking water, ready-to-eat food for **3 days**, flashlight, power bank, whistle, first-aid kit, medicines, and copies of IDs in a waterproof pouch.",
+                "**Charge phones and power banks** while electricity is available.",
+                "**Secure or bring inside** loose objects that strong wind can blow away (roofing sheets, signage, potted plants).",
+                "Know your barangay's **designated evacuation center** and the safest route to it.",
+                "**Store drinking water** and fill containers — water service often stops during and after a storm.",
+                "If your home is in a **landslide- or flood-prone area**, **evacuate early**, before conditions worsen."
+            ],
+            "during": [
+                "**Stay indoors** and away from windows; do not go outside during the passage of the storm.",
+                "**Do not wade through floodwater** — it may be electrified by downed lines or hide open manholes.",
+                "**Turn off the main electrical switch** if flooding starts to enter your home.",
+                "If told to evacuate by barangay officials or CDRRMO, **go immediately** — do not wait for conditions to worsen.",
+                "Beware of the **calm 'eye'** of the typhoon; winds resume violently from the opposite direction."
+            ],
+            "after": [
+                "Wait for the **official all-clear** before returning home from an evacuation center.",
+                "**Do not touch downed power lines**; report them to the power utility.",
+                "**Boil or disinfect drinking water** until authorities confirm the supply is safe.",
+                "**Photograph damage** to your home before cleaning up, for assistance claims.",
+                "Check on **elderly neighbors** and **persons with disabilities**.",
+                "**Discard food** that came into contact with floodwater."
+            ]
+        }
+    },
+    {
+        "hazard": "flood",
+        "phases": {
+            "before": [
+                "Know whether your area is **flood-prone** — low-lying riverside barangays flood first during heavy rain.",
+                "**Move valuables, documents, and electronics** above expected flood height.",
+                "Prepare a **go-bag** (water, food, flashlight, medicines, IDs) that every family member can grab.",
+                "Agree on a **family meeting point** in case members are separated.",
+                "Monitor rainfall advisories: **yellow** means monitor, **orange** means prepare to evacuate, **red** means evacuate flood-prone areas."
+            ],
+            "during": [
+                "**Evacuate immediately** when water starts rising or when told to — floodwater rises faster than people expect.",
+                "**Never walk or drive through moving floodwater**; **15 cm** of moving water can knock an adult down.",
+                "**Avoid rivers and bridges** during heavy rain; flash floods arrive with little warning.",
+                "**Turn off electricity** at the main switch if water is entering the house.",
+                "**Keep children out of floodwater** — it carries debris, sewage, and disease."
+            ],
+            "after": [
+                "Return home **only when authorities say it is safe**.",
+                "Watch for **weakened roads, bridges, and riverbanks**.",
+                "**Clean and disinfect** everything that got wet; wear boots and gloves.",
+                "Watch for symptoms of **leptospirosis** (fever, muscle pain) after wading in floodwater and seek care early.",
+                "**Dispose of debris properly**; do not dump it into drainage canals."
+            ]
+        }
+    },
+    {
+        "hazard": "earthquake",
+        "phases": {
+            "before": [
+                "Identify **sturdy tables** and clear-of-shelves spots in each room for cover.",
+                "**Secure heavy furniture** and appliances to walls; move heavy objects to lower shelves.",
+                "Keep a **whistle and flashlight** within reach of your bed.",
+                "Practice **DUCK, COVER, and HOLD** with your family.",
+                "Know the **open spaces** near your home and workplace where you can assemble after shaking stops."
+            ],
+            "during": [
+                "**DUCK** under a sturdy table, **COVER** your head and neck, **HOLD ON** until shaking stops.",
+                "If outdoors, **move away from buildings**, power lines, and trees; stay in the open.",
+                "If driving, **pull over** away from bridges and overpasses and stay inside the vehicle.",
+                "**Do not rush to exits** or use elevators.",
+                "If near the coast and the shaking is strong or long, **move to high ground immediately** after it stops — do not wait for a tsunami warning."
+            ],
+            "after": [
+                "Expect **aftershocks**; each one can further weaken damaged structures.",
+                "**Check yourself and others for injuries** before moving.",
+                "**Evacuate a visibly damaged building** calmly; do not re-enter until it is inspected.",
+                "Check for **gas leaks**, electrical damage, and small fires — put them out if safe to do so.",
+                "**Use SMS instead of calls** to reach family; keep lines free for emergencies.",
+                "Listen to **official sources (PHIVOLCS, CDRRMO)** — do not spread unverified damage reports."
+            ]
+        }
+    }
+]
