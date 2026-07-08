@@ -51,3 +51,44 @@ export async function getVerifiedIncidents(limit = 50): Promise<IncidentReportRo
         return [];
     }
 }
+
+// ── Admin moderation reads ──────────────────────────────────────────
+// Board messages awaiting moderation, oldest first (FIFO review queue).
+export async function getPendingBoardMessages(limit = 100): Promise<BoardMessageRow[]> {
+    try {
+        const db = await getDb();
+        const { results } = await db
+            .prepare(
+                "SELECT * FROM bangon_board_messages WHERE status = 'pending' ORDER BY created_at ASC LIMIT ?1",
+            )
+            .bind(limit)
+            .all();
+        return (results ?? []).flatMap((row) => {
+            const parsed = BoardMessageRowSchema.safeParse(row);
+            return parsed.success ? [parsed.data] : [];
+        });
+    } catch (err) {
+        console.error("getPendingBoardMessages failed:", err);
+        return [];
+    }
+}
+
+// Incident/hazard reports awaiting verification, oldest first.
+export async function getUnverifiedIncidents(limit = 100): Promise<IncidentReportRow[]> {
+    try {
+        const db = await getDb();
+        const { results } = await db
+            .prepare(
+                "SELECT * FROM bangon_incidents WHERE verified = 0 AND status != 'dismissed' ORDER BY created_at ASC LIMIT ?1",
+            )
+            .bind(limit)
+            .all();
+        return (results ?? []).flatMap((row) => {
+            const parsed = IncidentReportRowSchema.safeParse(row);
+            return parsed.success ? [parsed.data] : [];
+        });
+    } catch (err) {
+        console.error("getUnverifiedIncidents failed:", err);
+        return [];
+    }
+}
