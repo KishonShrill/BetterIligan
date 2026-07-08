@@ -163,18 +163,18 @@ export default function BangonLivePanel({
                             placeholder="Post a message to the community…"
                             className="w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                         />
-                        <div className="flex flex-col sm:flex-row gap-2">
+                        <div className="grid grid-cols-2 gap-2">
                             <input
                                 name="authorName"
                                 maxLength={80}
                                 placeholder="Name (optional)"
-                                className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                                className="w-full min-w-0 rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                             />
                             <input
                                 name="barangay"
                                 maxLength={100}
                                 placeholder="Barangay (optional)"
-                                className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                                className="w-full min-w-0 rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                             />
                         </div>
                         {SITE_KEY && (
