@@ -6,6 +6,8 @@ const CATEGORY_STYLES: Record<Resolution['category'], { bg: string; text: string
     'Social Services': { bg: 'bg-rose-50', text: 'text-rose-600' },
     'Economic Services': { bg: 'bg-violet-50', text: 'text-violet-600' },
     'Debt Service': { bg: 'bg-amber-50', text: 'text-amber-600' },
+    'Financial Services': { bg: 'bg-emerald-50', text: 'text-emerald-600' },
+    'Infrastructure and Transport': { bg: 'bg-blue-50', text: 'text-blue-600' }
 };
 
 function formatDate(iso: string) {
@@ -37,12 +39,32 @@ export default function ResolutionCard({ resolution }: { resolution: Resolution 
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                         {resolution.category}
                     </p>
-                    <h3 className="text-base font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-600 transition-colors line-clamp-3">
-                        {resolution.title}
-                    </h3>
-                    <p className="text-sm text-slate-500 line-clamp-2">
-                        {resolution.summary}
-                    </p>
+                    <div className="relative group/title-tooltip cursor-help mb-2">
+                        <h3 className="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-600 transition-colors line-clamp-3">
+                            {resolution.title}
+                        </h3>
+
+                        {/* Title Tooltip Overlay (Blue Theme) */}
+                        <div className="absolute bottom-full left-0 mb-2 w-64 sm:w-72 p-3 bg-blue-600 text-white text-xs font-semibold leading-relaxed rounded-xl shadow-lg opacity-0 invisible group-hover/title-tooltip:opacity-100 group-hover/title-tooltip:visible transition-all duration-200 pointer-events-none z-50">
+                            {resolution.title}
+                            {/* Blue triangle arrow */}
+                            <div className="absolute top-full left-4 -mt-px border-[6px] border-transparent border-t-blue-600"></div>
+                        </div>
+                    </div>
+                    {/* ADDED: Tooltip Wrapper with a named group */}
+                    <div className="relative group/tooltip cursor-help">
+                        <p className="text-sm text-slate-500 line-clamp-2">
+                            {resolution.summary}
+                        </p>
+
+                        {/* ADDED: The Tooltip Overlay */}
+                        <div className="absolute bottom-full left-0 mb-2 w-64 sm:w-72 p-3 bg-slate-900 text-white text-xs leading-relaxed rounded-xl shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 pointer-events-none z-50">
+                            {resolution.summary}
+
+                            {/* Little triangle arrow pointing down */}
+                            <div className="absolute top-full left-4 -mt-px border-[6px] border-transparent border-t-slate-900"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">

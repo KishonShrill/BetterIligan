@@ -19,7 +19,9 @@ export default function ResolutionsClient() {
     const [searchQuery, setSearchQuery] = useState('');
 
     const categories = useMemo(() => {
-        const unique = Array.from(new Set(resolutionsData.entries.map((r) => r.category)));
+        const unique = Array.from(new Set(resolutionsData.entries
+            .sort((a, b) => b.sessionDate.localeCompare(a.sessionDate))
+            .map((r) => r.category)));
         return ['All', ...unique.sort()];
     }, []);
 
