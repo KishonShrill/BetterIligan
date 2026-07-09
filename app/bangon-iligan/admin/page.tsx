@@ -1,15 +1,22 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut, CheckCircle2, Trash2 } from 'lucide-react';
 import { isAdmin } from '@/lib/bangonAuth';
-import { getPendingBoardMessages, getUnverifiedIncidents, getActiveIncidents } from '@/data/bangon/queries';
+import {
+    getPendingBoardMessages,
+    getApprovedBoardMessages,
+    getUnverifiedIncidents,
+    getActiveIncidents,
+} from '@/data/bangon/queries';
 import {
     approveBoardMessage,
     hideBoardMessage,
+    deleteBoardMessage,
     verifyIncident,
     dismissIncident,
     resolveIncident,
+    deleteIncident,
     adminLogout,
 } from '@/actions/bangonAdmin';
 import type { IncidentReportRow } from '@/validations/bangonSchema';
@@ -31,8 +38,9 @@ const INCIDENT_LABEL: Record<IncidentReportRow['incident_type'], string> = {
 export default async function AdminPage() {
     if (!(await isAdmin())) redirect('/bangon-iligan/admin/login');
 
-    const [pending, unverified, active] = await Promise.all([
+    const [pending, approved, unverified, active] = await Promise.all([
         getPendingBoardMessages(),
+        getApprovedBoardMessages(),
         getUnverifiedIncidents(),
         getActiveIncidents(),
     ]);
@@ -172,10 +180,59 @@ export default async function AdminPage() {
                                     </div>
                                     <p className="mt-2 text-sm text-slate-800">{r.description}</p>
                                     <p className="mt-1 text-xs text-slate-400">Contact: {r.contact_number}</p>
-                                    <div className="mt-3">
+                                    <div className="mt-3 flex flex-wrap gap-2">
                                         <form action={resolveIncident.bind(null, r.id)}>
                                             <ActionButton tone="approve">
                                                 <CheckCircle2 className="h-4 w-4" /> Mark resolved
+                                            </ActionButton>
+                                        </form>
+                                        <form action={dismissIncident.bind(null, r.id)}>
+                                            <ActionButton tone="reject">
+                                                <EyeOff className="h-4 w-4" /> Unverify
+                                            </ActionButton>
+                                        </form>
+                                        <form action={deleteIncident.bind(null, r.id)}>
+                                            <ActionButton tone="danger">
+                                                <Trash2 className="h-4 w-4" /> Delete
+                                            </ActionButton>
+                                        </form>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
+
+                {/* Approved (live) board posts — un-publish or delete accidental ones */}
+                <section className="lg:col-span-2">
+                    <div className="mb-4 flex items-center gap-2">
+                        <MessageSquare className="h-5 w-5 text-slate-600" />
+                        <h2 className="text-lg font-bold text-slate-900">Live board posts</h2>
+                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-600">
+                            {approved.length} public
+                        </span>
+                    </div>
+
+                    {approved.length === 0 ? (
+                        <Empty text="No approved posts are live yet." />
+                    ) : (
+                        <ul className="grid gap-3 sm:grid-cols-2">
+                            {approved.map((m) => (
+                                <li key={m.id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                                    <p className="text-sm text-slate-800">{m.message}</p>
+                                    <p className="mt-1 text-xs text-slate-400">
+                                        {m.author_name || 'Anonymous'}
+                                        {m.barangay ? ` · ${m.barangay}` : ''}
+                                    </p>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <form action={hideBoardMessage.bind(null, m.id)}>
+                                            <ActionButton tone="reject">
+                                                <EyeOff className="h-4 w-4" /> Un-publish
+                                            </ActionButton>
+                                        </form>
+                                        <form action={deleteBoardMessage.bind(null, m.id)}>
+                                            <ActionButton tone="danger">
+                                                <Trash2 className="h-4 w-4" /> Delete
                                             </ActionButton>
                                         </form>
                                     </div>
@@ -189,11 +246,13 @@ export default async function AdminPage() {
     );
 }
 
-function ActionButton({ tone, children }: { tone: 'approve' | 'reject'; children: React.ReactNode }) {
+function ActionButton({ tone, children }: { tone: 'approve' | 'reject' | 'danger'; children: React.ReactNode }) {
     const cls =
         tone === 'approve'
             ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-            : 'border border-slate-200 text-slate-600 hover:bg-slate-50';
+            : tone === 'danger'
+                ? 'border border-red-200 text-red-600 hover:bg-red-50'
+                : 'border border-slate-200 text-slate-600 hover:bg-slate-50';
     return (
         <button
             type="submit"

@@ -62,6 +62,16 @@ export async function hideBoardMessage(id: string): Promise<void> {
     await setBoardStatus(id, 'hidden');
 }
 
+// Hard-deletes a board message — for accidentally-approved or abusive posts.
+export async function deleteBoardMessage(id: string): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db.prepare('DELETE FROM bangon_board_messages WHERE id = ?1').bind(id).run();
+    await audit('board:deleted', 'board_message', id);
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
+}
+
 async function setIncident(id: string, verified: 0 | 1, status: 'reviewing' | 'dismissed'): Promise<void> {
     await assertAdmin();
     const db = await getDb();
@@ -80,6 +90,16 @@ export async function verifyIncident(id: string): Promise<void> {
 
 export async function dismissIncident(id: string): Promise<void> {
     await setIncident(id, 0, 'dismissed');
+}
+
+// Hard-deletes a report — for accidentally-verified or bogus reports.
+export async function deleteIncident(id: string): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db.prepare('DELETE FROM bangon_incidents WHERE id = ?1').bind(id).run();
+    await audit('incident:deleted', 'incident', id);
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
 }
 
 // Marks an already-verified report as resolved ("cleared"). Stays verified so
