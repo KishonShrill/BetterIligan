@@ -28,11 +28,17 @@ export default function BangonCommandCenter({
     facilities,
     messages,
     reports,
+    pendingMessages,
+    pendingReports,
+    isAdmin,
     config,
 }: {
     facilities: DisasterFacility[];
     messages: BoardMessageRow[];
     reports: IncidentReportRow[];
+    pendingMessages: BoardMessageRow[];
+    pendingReports: IncidentReportRow[];
+    isAdmin: boolean;
     config: BangonConfig;
 }) {
     const [selected, setSelected] = useState<DisasterFacility | null>(null);
@@ -177,7 +183,14 @@ export default function BangonCommandCenter({
                     >
                         <X className="h-4 w-4" />
                     </button>
-                    <BangonLivePanel reports={reports} messages={messages} boardEnabled={config.boardEnabled} />
+                    <BangonLivePanel
+                        reports={reports}
+                        messages={messages}
+                        pendingReports={pendingReports}
+                        pendingMessages={pendingMessages}
+                        isAdmin={isAdmin}
+                        boardEnabled={config.boardEnabled}
+                    />
                     <button
                         onClick={() => setPanelOpen(false)}
                         className="mt-2 hidden shrink-0 items-center justify-center gap-1.5 rounded-lg bg-white/90 py-1.5 text-xs font-bold text-slate-500 shadow-sm backdrop-blur transition-colors hover:text-slate-800 sm:inline-flex"

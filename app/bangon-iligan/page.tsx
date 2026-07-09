@@ -1,7 +1,13 @@
 import { Metadata } from 'next';
 import { disasterFacilities } from '@/data/disaster';
 import { bangonConfig } from '@/data/bangon';
-import { getApprovedBoardMessages, getVerifiedIncidents } from '@/data/bangon/queries';
+import {
+    getApprovedBoardMessages,
+    getVerifiedIncidents,
+    getPendingBoardMessages,
+    getUnverifiedIncidents,
+} from '@/data/bangon/queries';
+import { isAdmin } from '@/lib/bangonAuth';
 import { safeJsonLd } from '@/lib/utils';
 import BangonCommandCenter from './BangonCommandCenter';
 
@@ -20,9 +26,14 @@ export const metadata: Metadata = {
 
 export default async function BangonIliganPage() {
     const config = bangonConfig;
-    const [messages, reports] = await Promise.all([
+    // Moderators moderate inline (no /admin round-trip): when signed in, they
+    // also get the pending queues and unmasked contacts.
+    const admin = await isAdmin();
+    const [messages, reports, pendingMessages, pendingReports] = await Promise.all([
         config.boardEnabled ? getApprovedBoardMessages() : Promise.resolve([]),
-        getVerifiedIncidents(),
+        getVerifiedIncidents(50, !admin),
+        admin && config.boardEnabled ? getPendingBoardMessages() : Promise.resolve([]),
+        admin ? getUnverifiedIncidents() : Promise.resolve([]),
     ]);
 
     // The 44 barangay admin pins sit at the city edges and blow out the map's
@@ -45,6 +56,9 @@ export default async function BangonIliganPage() {
                 facilities={mapFacilities}
                 messages={messages}
                 reports={reports}
+                pendingMessages={pendingMessages}
+                pendingReports={pendingReports}
+                isAdmin={admin}
                 config={config}
             />
         </>

@@ -43,8 +43,9 @@ function maskPhone(raw: string): string {
 }
 
 // Verified incident/hazard reports for the public "Reports" tab. Active reports
-// sort above resolved ("cleared") ones; contact numbers are masked.
-export async function getVerifiedIncidents(limit = 50): Promise<IncidentReportRow[]> {
+// sort above resolved ("cleared") ones. Contact numbers are masked for the
+// public; pass mask=false for the admin/inline-moderation view.
+export async function getVerifiedIncidents(limit = 50, mask = true): Promise<IncidentReportRow[]> {
     try {
         const db = await getDb();
         const { results } = await db
@@ -55,7 +56,8 @@ export async function getVerifiedIncidents(limit = 50): Promise<IncidentReportRo
             .all();
         return (results ?? []).flatMap((row) => {
             const parsed = IncidentReportRowSchema.safeParse(row);
-            return parsed.success ? [{ ...parsed.data, contact_number: maskPhone(parsed.data.contact_number) }] : [];
+            if (!parsed.success) return [];
+            return [mask ? { ...parsed.data, contact_number: maskPhone(parsed.data.contact_number) } : parsed.data];
         });
     } catch (err) {
         console.error("getVerifiedIncidents failed:", err);
