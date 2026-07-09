@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import toast from 'react-hot-toast';
-import { Activity, MessageSquare, Send, Loader2, MapPin } from 'lucide-react';
+import { Activity, MessageSquare, Send, Loader2, MapPin, Phone, CheckCircle2 } from 'lucide-react';
 import { postBoardMessage } from '@/actions/bangon';
 import type { BoardMessageRow, IncidentReportRow } from '@/validations/bangonSchema';
 
@@ -106,24 +106,37 @@ export default function BangonLivePanel({
                             body="Verified hazard and incident reports will stream in here."
                         />
                     )}
-                    {reports.map((r) => (
-                        <li key={r.id} className="px-4 py-3">
-                            <div className="flex items-center gap-2">
-                                <span className="inline-flex shrink-0 items-center rounded-full bg-orange-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-700 border border-orange-100">
-                                    {INCIDENT_LABEL[r.incident_type]}
-                                </span>
-                                <span className="flex min-w-0 items-center gap-1 text-xs font-semibold text-slate-500">
-                                    <MapPin className="h-3 w-3 shrink-0" />
-                                    <span className="truncate">
-                                        {r.barangay}
-                                        {r.landmark ? ` · ${r.landmark}` : ''}
+                    {reports.map((r) => {
+                        const cleared = r.status === 'resolved';
+                        return (
+                            <li key={r.id} className={`px-4 py-3 ${cleared ? 'opacity-60' : ''}`}>
+                                <div className="flex items-center gap-2">
+                                    <span className="inline-flex shrink-0 items-center rounded-full bg-orange-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-700 border border-orange-100">
+                                        {INCIDENT_LABEL[r.incident_type]}
                                     </span>
-                                </span>
-                                <span className="ml-auto shrink-0 text-[10px] text-slate-400">{relativeTime(r.created_at)}</span>
-                            </div>
-                            <p className="mt-1 break-words text-sm text-slate-700 leading-snug">{r.description}</p>
-                        </li>
-                    ))}
+                                    {cleared && (
+                                        <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-100">
+                                            <CheckCircle2 className="h-3 w-3" /> Cleared
+                                        </span>
+                                    )}
+                                    <span className="flex min-w-0 items-center gap-1 text-xs font-semibold text-slate-500">
+                                        <MapPin className="h-3 w-3 shrink-0" />
+                                        <span className="truncate">
+                                            {r.barangay}
+                                            {r.landmark ? ` · ${r.landmark}` : ''}
+                                        </span>
+                                    </span>
+                                    <span className="ml-auto shrink-0 text-[10px] text-slate-400">{relativeTime(r.created_at)}</span>
+                                </div>
+                                <p className={`mt-1 break-words text-sm leading-snug ${cleared ? 'text-slate-500 line-through decoration-slate-300' : 'text-slate-700'}`}>
+                                    {r.description}
+                                </p>
+                                <p className="mt-1 flex items-center gap-1 text-[11px] text-slate-400">
+                                    <Phone className="h-3 w-3 shrink-0" /> {r.contact_number}
+                                </p>
+                            </li>
+                        );
+                    })}
                 </ul>
             ) : (
                 <>
@@ -161,20 +174,20 @@ export default function BangonLivePanel({
                             rows={2}
                             maxLength={280}
                             placeholder="Post a message to the community…"
-                            className="w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                            className="w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                         />
                         <div className="grid grid-cols-2 gap-2">
                             <input
                                 name="authorName"
                                 maxLength={80}
                                 placeholder="Name (optional)"
-                                className="w-full min-w-0 rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                                className="w-full min-w-0 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                             />
                             <input
                                 name="barangay"
                                 maxLength={100}
                                 placeholder="Barangay (optional)"
-                                className="w-full min-w-0 rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+                                className="w-full min-w-0 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
                             />
                         </div>
                         {SITE_KEY && (

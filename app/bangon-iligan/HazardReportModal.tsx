@@ -96,7 +96,7 @@ export default function HazardReportModal() {
                                     name="barangay"
                                     required
                                     placeholder="e.g. Tibanga"
-                                    className="w-full rounded-xl border border-slate-200 px-4 py-3 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+                                    className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                                 />
                             </Field>
 
@@ -104,7 +104,7 @@ export default function HazardReportModal() {
                                 <input
                                     name="landmark"
                                     placeholder="Nearby landmark to help locate it"
-                                    className="w-full rounded-xl border border-slate-200 px-4 py-3 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+                                    className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                                 />
                             </Field>
 
@@ -115,7 +115,7 @@ export default function HazardReportModal() {
                                     rows={4}
                                     maxLength={1000}
                                     placeholder="e.g. Clogged canal that floods during heavy rain; broken warning siren at the barangay hall."
-                                    className="w-full resize-none rounded-xl border border-slate-200 px-4 py-3 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+                                    className="w-full resize-none rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                                 />
                             </Field>
 
@@ -125,7 +125,7 @@ export default function HazardReportModal() {
                                     required
                                     inputMode="tel"
                                     placeholder="09XX XXX XXXX"
-                                    className="w-full rounded-xl border border-slate-200 px-4 py-3 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+                                    className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder:text-slate-400 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                                 />
                             </Field>
 

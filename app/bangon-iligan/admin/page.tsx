@@ -1,14 +1,15 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut } from 'lucide-react';
+import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut, CheckCircle2 } from 'lucide-react';
 import { isAdmin } from '@/lib/bangonAuth';
-import { getPendingBoardMessages, getUnverifiedIncidents } from '@/data/bangon/queries';
+import { getPendingBoardMessages, getUnverifiedIncidents, getActiveIncidents } from '@/data/bangon/queries';
 import {
     approveBoardMessage,
     hideBoardMessage,
     verifyIncident,
     dismissIncident,
+    resolveIncident,
     adminLogout,
 } from '@/actions/bangonAdmin';
 import type { IncidentReportRow } from '@/validations/bangonSchema';
@@ -30,9 +31,10 @@ const INCIDENT_LABEL: Record<IncidentReportRow['incident_type'], string> = {
 export default async function AdminPage() {
     if (!(await isAdmin())) redirect('/bangon-iligan/admin/login');
 
-    const [pending, unverified] = await Promise.all([
+    const [pending, unverified, active] = await Promise.all([
         getPendingBoardMessages(),
         getUnverifiedIncidents(),
+        getActiveIncidents(),
     ]);
 
     return (
@@ -134,6 +136,46 @@ export default async function AdminPage() {
                                         <form action={dismissIncident.bind(null, r.id)}>
                                             <ActionButton tone="reject">
                                                 <X className="h-4 w-4" /> Dismiss
+                                            </ActionButton>
+                                        </form>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
+
+                {/* Active (verified) reports — mark resolved when cleared */}
+                <section className="lg:col-span-2">
+                    <div className="mb-4 flex items-center gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                        <h2 className="text-lg font-bold text-slate-900">Active reports</h2>
+                        <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700">
+                            {active.length} live
+                        </span>
+                    </div>
+
+                    {active.length === 0 ? (
+                        <Empty text="No active reports on the public tab." />
+                    ) : (
+                        <ul className="grid gap-3 sm:grid-cols-2">
+                            {active.map((r) => (
+                                <li key={r.id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                                    <div className="flex items-center gap-2">
+                                        <span className="inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-orange-700 border border-orange-100">
+                                            {INCIDENT_LABEL[r.incident_type]}
+                                        </span>
+                                        <span className="text-xs font-semibold text-slate-500">
+                                            {r.barangay}
+                                            {r.landmark ? ` · ${r.landmark}` : ''}
+                                        </span>
+                                    </div>
+                                    <p className="mt-2 text-sm text-slate-800">{r.description}</p>
+                                    <p className="mt-1 text-xs text-slate-400">Contact: {r.contact_number}</p>
+                                    <div className="mt-3">
+                                        <form action={resolveIncident.bind(null, r.id)}>
+                                            <ActionButton tone="approve">
+                                                <CheckCircle2 className="h-4 w-4" /> Mark resolved
                                             </ActionButton>
                                         </form>
                                     </div>

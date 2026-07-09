@@ -41,7 +41,7 @@ export default function LoginForm() {
                     type="password"
                     required
                     autoFocus
-                    className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
+                    className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20"
                 />
             </div>
             {error && <p className="text-sm font-medium text-red-600">{error}</p>}

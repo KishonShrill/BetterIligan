@@ -32,19 +32,30 @@ export async function getApprovedBoardMessages(limit = 50): Promise<BoardMessage
     }
 }
 
-// Verified incident/hazard reports, newest first — the "Reports" feed tab.
+// Partially masks a contact number for public display — keeps the first 4 and
+// last 4 digits so it's recognizable without publishing the full number.
+// Masking happens here (server-side) so the full number never reaches the
+// public client payload; the admin queries keep the raw value.
+function maskPhone(raw: string): string {
+    const digits = raw.replace(/\D/g, "");
+    if (digits.length < 8) return "•••";
+    return `${digits.slice(0, 4)}•••${digits.slice(-4)}`;
+}
+
+// Verified incident/hazard reports for the public "Reports" tab. Active reports
+// sort above resolved ("cleared") ones; contact numbers are masked.
 export async function getVerifiedIncidents(limit = 50): Promise<IncidentReportRow[]> {
     try {
         const db = await getDb();
         const { results } = await db
             .prepare(
-                "SELECT * FROM bangon_incidents WHERE verified = 1 ORDER BY created_at DESC LIMIT ?1",
+                "SELECT * FROM bangon_incidents WHERE verified = 1 ORDER BY (status = 'resolved') ASC, created_at DESC LIMIT ?1",
             )
             .bind(limit)
             .all();
         return (results ?? []).flatMap((row) => {
             const parsed = IncidentReportRowSchema.safeParse(row);
-            return parsed.success ? [parsed.data] : [];
+            return parsed.success ? [{ ...parsed.data, contact_number: maskPhone(parsed.data.contact_number) }] : [];
         });
     } catch (err) {
         console.error("getVerifiedIncidents failed:", err);
@@ -69,6 +80,27 @@ export async function getPendingBoardMessages(limit = 100): Promise<BoardMessage
         });
     } catch (err) {
         console.error("getPendingBoardMessages failed:", err);
+        return [];
+    }
+}
+
+// Verified, still-active reports (not resolved/dismissed) — the admin's
+// "mark resolved" queue. Keeps the full (unmasked) contact number.
+export async function getActiveIncidents(limit = 100): Promise<IncidentReportRow[]> {
+    try {
+        const db = await getDb();
+        const { results } = await db
+            .prepare(
+                "SELECT * FROM bangon_incidents WHERE verified = 1 AND status NOT IN ('resolved', 'dismissed') ORDER BY created_at ASC LIMIT ?1",
+            )
+            .bind(limit)
+            .all();
+        return (results ?? []).flatMap((row) => {
+            const parsed = IncidentReportRowSchema.safeParse(row);
+            return parsed.success ? [parsed.data] : [];
+        });
+    } catch (err) {
+        console.error("getActiveIncidents failed:", err);
         return [];
     }
 }

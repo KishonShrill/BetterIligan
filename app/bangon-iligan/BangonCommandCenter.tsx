@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -40,6 +40,20 @@ export default function BangonCommandCenter({
     const [locating, setLocating] = useState(false);
     const [panelOpen, setPanelOpen] = useState(true);
 
+    // Standby notice: dismiss persists for the browser session (survives refresh,
+    // returns on a fresh open) — per maintainer request. Read after mount so SSR
+    // and first client render agree.
+    const [standbyDismissed, setStandbyDismissed] = useState(false);
+    useEffect(() => {
+        // Read after mount so SSR and first client render agree (no hydration flash).
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        if (sessionStorage.getItem('bangon-standby-dismissed')) setStandbyDismissed(true);
+    }, []);
+    function dismissStandby() {
+        sessionStorage.setItem('bangon-standby-dismissed', '1');
+        setStandbyDismissed(true);
+    }
+
     function locateMe() {
         if (!('geolocation' in navigator)) return;
         setLocating(true);
@@ -68,8 +82,8 @@ export default function BangonCommandCenter({
                 />
             </div>
 
-            {/* ── Top bar ── */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 z-[600] flex items-start justify-between gap-3 p-3 sm:p-4">
+            {/* ── Top bar (above the feed panel so its actions stay clickable) ── */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-[700] flex items-start justify-between gap-3 p-3 sm:p-4">
                 {/* Left: BetterIligan branding + page context + status */}
                 <div className="pointer-events-auto flex items-center gap-2 rounded-xl bg-white/95 px-2.5 py-2 shadow-md backdrop-blur sm:gap-3 sm:px-3">
                     <Link href="/" aria-label="BetterIligan home" className="flex items-center gap-2 transition-opacity hover:opacity-80">
@@ -101,12 +115,19 @@ export default function BangonCommandCenter({
                 </div>
             </div>
 
-            {/* ── Standby message ribbon (only when not active) ── */}
-            {!active && (
+            {/* ── Standby message ribbon (dismissible, session-persisted) ── */}
+            {!active && !standbyDismissed && (
                 <div className="pointer-events-none absolute inset-x-0 top-16 z-[550] flex justify-center px-3 sm:top-20">
-                    <p className="pointer-events-auto max-w-2xl rounded-xl bg-emerald-900/85 px-4 py-2 text-center text-xs text-emerald-50 shadow-lg backdrop-blur sm:text-sm">
-                        {config.standby.message}
-                    </p>
+                    <div className="pointer-events-auto flex max-w-2xl items-start gap-2 rounded-xl bg-emerald-900/85 py-2 pl-4 pr-2 text-xs text-emerald-50 shadow-lg backdrop-blur sm:text-sm">
+                        <p className="py-0.5 text-center">{config.standby.message}</p>
+                        <button
+                            onClick={dismissStandby}
+                            aria-label="Dismiss notice"
+                            className="shrink-0 rounded-md p-1 text-emerald-200 transition-colors hover:bg-white/10 hover:text-white"
+                        >
+                            <X className="h-4 w-4" />
+                        </button>
+                    </div>
                 </div>
             )}
 
@@ -138,15 +159,17 @@ export default function BangonCommandCenter({
                 </button>
             )}
 
-            {/* ── Live feed floating panel ── */}
+            {/* ── Live feed floating panel ──
+                Wrapper is pointer-events-none so its transparent top spacer never
+                blocks the top-bar actions; only the card itself is interactive. */}
             <div
-                className={`absolute right-0 top-0 z-[650] flex h-[100dvh] w-full flex-col p-3 transition-transform duration-300 sm:w-[380px] sm:p-4 ${
-                    panelOpen ? 'translate-x-0' : 'pointer-events-none translate-x-full'
+                className={`pointer-events-none absolute right-0 top-0 z-[650] flex h-[100dvh] w-full flex-col p-3 transition-transform duration-300 sm:w-[380px] sm:p-4 ${
+                    panelOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}
             >
                 {/* Spacer clears the top bar */}
                 <div className="h-14 shrink-0 sm:h-16" />
-                <div className="relative flex min-h-0 flex-1 flex-col">
+                <div className="pointer-events-auto relative flex min-h-0 flex-1 flex-col">
                     <button
                         onClick={() => setPanelOpen(false)}
                         aria-label="Close live feed"

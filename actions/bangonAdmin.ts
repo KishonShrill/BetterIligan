@@ -81,3 +81,17 @@ export async function verifyIncident(id: string): Promise<void> {
 export async function dismissIncident(id: string): Promise<void> {
     await setIncident(id, 0, 'dismissed');
 }
+
+// Marks an already-verified report as resolved ("cleared"). Stays verified so
+// it remains on the public tab, just sorted below active ones and dimmed.
+export async function resolveIncident(id: string): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db
+        .prepare("UPDATE bangon_incidents SET status = 'resolved', updated_at = datetime('now') WHERE id = ?1")
+        .bind(id)
+        .run();
+    await audit('incident:resolved', 'incident', id);
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
+}
