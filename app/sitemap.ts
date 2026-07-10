@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '', freq: 'weekly', prio: 1 },
         { path: '/services', freq: 'daily', prio: 0.9 },
         { path: '/disaster', freq: 'weekly', prio: 0.9 },
+        { path: '/bangon-iligan', freq: 'daily', prio: 0.9 },
         { path: '/iligan/city-stats', freq: 'weekly', prio: 0.8 },
         { path: '/iligan/electricity', freq: 'monthly', prio: 0.8 },
         { path: '/iligan/city-officials', freq: 'monthly', prio: 0.8 },

@@ -20,17 +20,18 @@ export default function TopBanner({ className }: ClassName) {
         fetch(
             `https://api.open-meteo.com/v1/forecast?latitude=${ILIGAN_LAT}&longitude=${ILIGAN_LNG}&current=temperature_2m,weather_code`
         )
-            .then((r) => r.json())
+            .then((r) => r.json() as Promise<{ current?: { temperature_2m: number; weather_code: number } }>)
             .then((data) => {
+                if (!data.current) return;
                 setWeather({
-                    temp: Math.round(data.current?.temperature_2m),
-                    code: data.current?.weather_code,
+                    temp: Math.round(data.current.temperature_2m),
+                    code: data.current.weather_code,
                 });
             })
             .catch(() => { });
 
         fetch('https://api.exchangerate-api.com/v4/latest/PHP')
-            .then((r) => r.json())
+            .then((r) => r.json() as Promise<{ rates?: Record<string, number> }>)
             .then((data) => setRates(data.rates || {}))
             .catch(() => { });
     }, []);
@@ -53,7 +54,7 @@ export default function TopBanner({ className }: ClassName) {
     const rate = rates[curr] ? (1 / rates[curr]).toFixed(2) : null;
 
     return (
-        <div className={`${className} ${pathname === "/travel/transportation" && "hidden"} bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans`}>
+        <div className={`${className} ${(pathname === "/travel/transportation" || pathname === "/bangon-iligan") && "hidden"} bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans`}>
             <div className="container mx-auto px-4 py-1 sm:py-2 flex items-center justify-between sm:justify-end sm:gap-4">
                 <div className="flex items-center gap-3 text-slate-600">
                     <span className="text-slate-500">

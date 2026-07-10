@@ -17,7 +17,7 @@ function HazardLayer({ hazard }: { hazard: HazardKey }) {
     useEffect(() => {
         let cancelled = false;
         fetch(url)
-            .then((r) => r.json())
+            .then((r) => r.json() as Promise<GeoJsonObject>)
             .then((j) => { if (!cancelled) setData(j); })
             .catch(() => {});
         return () => { cancelled = true; };

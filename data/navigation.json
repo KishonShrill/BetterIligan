@@ -38,6 +38,11 @@
                 "name": "Disaster Preparedness Hub",
                 "description": "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City.",
                 "href": "/disaster"
+            },
+            {
+                "name": "Bangon Iligan",
+                "description": "Community relief command center — evacuation map, hazard reports, and a community board. Standby until an emergency.",
+                "href": "/bangon-iligan"
             }
         ]
     },
