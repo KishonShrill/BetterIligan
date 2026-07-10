@@ -55,9 +55,9 @@ export default function HazardReportModal() {
         <>
             <button
                 onClick={() => setOpen(true)}
-                className="inline-flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50 px-4 py-2.5 text-sm font-bold text-amber-800 transition-colors hover:bg-amber-100"
+                className="inline-flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50 px-2 min-[450px]:px-4 py-1.5 min-[450px]:py-2.5 text-xs min-[450px]:text-sm font-bold text-amber-800 transition-colors hover:bg-amber-100"
             >
-                <TriangleAlert className="w-4 h-4" />
+                <TriangleAlert className="w-4 h-4 max-[450px]:hidden" />
                 Report a hazard
             </button>
 

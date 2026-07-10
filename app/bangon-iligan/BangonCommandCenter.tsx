@@ -171,20 +171,12 @@ export default function BangonCommandCenter({
                 Wrapper is pointer-events-none so its transparent top spacer never
                 blocks the top-bar actions; only the card itself is interactive. */}
             <div
-                className={`pointer-events-none absolute right-0 top-0 z-[650] flex h-[100dvh] w-full flex-col p-3 transition-transform duration-300 sm:w-[380px] sm:p-4 ${
-                    panelOpen ? 'translate-x-0' : 'translate-x-full'
-                }`}
+                className={`pointer-events-none absolute right-0 top-0 z-[650] flex h-[100dvh] w-full flex-col p-3 transition-transform duration-300 sm:w-[380px] sm:p-4 ${panelOpen ? 'translate-x-0' : 'translate-x-full'
+                    }`}
             >
                 {/* Spacer clears the top bar */}
                 <div className="h-14 shrink-0 sm:h-16" />
                 <div className="pointer-events-auto relative flex min-h-0 flex-1 flex-col">
-                    <button
-                        onClick={() => setPanelOpen(false)}
-                        aria-label="Close live feed"
-                        className="absolute -top-1 right-1 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white text-slate-500 shadow-md transition-colors hover:text-slate-900 sm:hidden"
-                    >
-                        <X className="h-4 w-4" />
-                    </button>
                     <BangonLivePanel
                         feed={feed}
                         reports={reports}
@@ -196,7 +188,7 @@ export default function BangonCommandCenter({
                     />
                     <button
                         onClick={() => setPanelOpen(false)}
-                        className="mt-2 hidden shrink-0 items-center justify-center gap-1.5 rounded-lg bg-white/90 py-1.5 text-xs font-bold text-slate-500 shadow-sm backdrop-blur transition-colors hover:text-slate-800 sm:inline-flex"
+                        className="mt-2 inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg bg-white/90 py-1.5 text-xs font-bold text-slate-500 shadow-sm backdrop-blur transition-colors hover:text-slate-800"
                     >
                         <X className="h-3.5 w-3.5" /> Hide panel
                     </button>
@@ -214,9 +206,8 @@ export default function BangonCommandCenter({
 function StatusPill({ active, label }: { active: boolean; label: string }) {
     return (
         <span
-            className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                active ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'
-            }`}
+            className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${active ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'
+                }`}
         >
             {active ? <Siren className="h-3 w-3" /> : <ShieldCheck className="h-3 w-3" />}
             {label}
