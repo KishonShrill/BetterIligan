@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { disasterFacilities } from '@/data/disaster';
-import { bangonConfig } from '@/data/bangon';
+import { getEffectiveBangonConfig } from '@/data/bangon/state';
 import {
     getApprovedBoardMessages,
     getVerifiedIncidents,
@@ -18,10 +18,11 @@ export const metadata: Metadata = {
 };
 
 export default async function BangonIliganPage() {
-    const config = bangonConfig;
-    // Moderators moderate inline (no /admin round-trip): when signed in, they
-    // also get the pending queues and unmasked contacts.
-    const admin = await isAdmin();
+    // Effective config overlays the runtime D1 incident state (activate/deactivate
+    // from /admin) onto the committed static config. Moderators moderate inline
+    // (no /admin round-trip): when signed in, they also get the pending queues
+    // and unmasked contacts.
+    const [config, admin] = await Promise.all([getEffectiveBangonConfig(), isAdmin()]);
     const [messages, reports, pendingMessages, pendingReports, feed] = await Promise.all([
         config.boardEnabled ? getApprovedBoardMessages() : Promise.resolve([]),
         getVerifiedIncidents(50, !admin),

@@ -9,9 +9,11 @@ import {
     BoardMessageRowSchema,
     IncidentReportRowSchema,
     FeedRowSchema,
+    IncidentStateRowSchema,
     type BoardMessageRow,
     type IncidentReportRow,
     type FeedRow,
+    type IncidentStateRow,
 } from "@/validations/bangonSchema";
 
 // Approved community-board messages, newest first.
@@ -144,5 +146,24 @@ export async function getUnverifiedIncidents(limit = 100): Promise<IncidentRepor
     } catch (err) {
         console.error("getUnverifiedIncidents failed:", err);
         return [];
+    }
+}
+
+// Runtime incident-activation state (single row, id = 'current'). Returns null
+// when the row / table / binding is unavailable, so callers fall back to the
+// committed static config instead of 500-ing.
+export async function getIncidentState(): Promise<IncidentStateRow | null> {
+    try {
+        const db = await getDb();
+        const { results } = await db
+            .prepare("SELECT * FROM bangon_incident_state WHERE id = 'current' LIMIT 1")
+            .all();
+        const row = (results ?? [])[0];
+        if (!row) return null;
+        const parsed = IncidentStateRowSchema.safeParse(row);
+        return parsed.success ? parsed.data : null;
+    } catch (err) {
+        console.error("getIncidentState failed:", err);
+        return null;
     }
 }

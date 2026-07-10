@@ -1,16 +1,17 @@
 import Link from 'next/link';
 import { Siren, ArrowRight } from 'lucide-react';
-import { bangonConfig } from '@/data/bangon';
+import { getEffectiveBangonConfig } from '@/data/bangon/state';
 
 // Emergency entry point pinned to the top of the homepage — but ONLY while an
-// incident is active (data/bangon/incident.json `active`). On standby it renders
-// nothing, so the homepage is unchanged day-to-day; the moment a disaster is
-// declared it surfaces a prominent link into the Bangon Iligan command center.
+// incident is active. Activation is a runtime D1 flag a moderator toggles from
+// /admin (see getEffectiveBangonConfig); on standby it renders nothing, so the
+// homepage is unchanged day-to-day.
 //
-// Server component: reads the server-only bangonConfig directly, no props.
-export default function ActiveIncidentBanner() {
-    if (!bangonConfig.active) return null;
-    const { activeIncident } = bangonConfig;
+// Server component: resolves the effective (D1-overlaid) config, no props.
+export default async function ActiveIncidentBanner() {
+    const config = await getEffectiveBangonConfig();
+    if (!config.active) return null;
+    const { activeIncident } = config;
 
     return (
         <aside role="alert" className="bg-red-600 text-white">

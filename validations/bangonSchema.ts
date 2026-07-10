@@ -175,6 +175,18 @@ export const BangonConfigSchema = z.object({
     }),
 });
 
+// ── Runtime incident-activation state (bangon_incident_state) ────────
+// A single-row table (id = 'current') that overrides the committed JSON's
+// `active` + `activeIncident` so a moderator can toggle it without a redeploy.
+export const IncidentStateRowSchema = z.object({
+    id: z.string(),
+    active: z.union([z.literal(0), z.literal(1)]),
+    title: z.string(),
+    summary: z.string(),
+    declared_at: z.string(),
+    updated_at: z.string(),
+});
+
 // ── Inferred types ──────────────────────────────────────────────────
 export type NeedType = z.infer<typeof NeedTypeSchema>;
 export type RequestStatus = z.infer<typeof RequestStatusSchema>;
@@ -191,6 +203,8 @@ export type BoardMessageInput = z.infer<typeof BoardMessageInputSchema>;
 export type BoardMessageRow = z.infer<typeof BoardMessageRowSchema>;
 
 export type BangonConfig = z.infer<typeof BangonConfigSchema>;
+
+export type IncidentStateRow = z.infer<typeof IncidentStateRowSchema>;
 
 export type FeedItem = z.infer<typeof FeedItemSchema>;
 export type FeedRow = z.infer<typeof FeedRowSchema>;
