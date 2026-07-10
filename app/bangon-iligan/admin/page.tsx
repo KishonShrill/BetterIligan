@@ -15,6 +15,7 @@ import {
     deleteBoardMessage,
     verifyIncident,
     dismissIncident,
+    unverifyIncident,
     resolveIncident,
     deleteIncident,
     adminLogout,
@@ -186,7 +187,7 @@ export default async function AdminPage() {
                                                 <CheckCircle2 className="h-4 w-4" /> Mark resolved
                                             </ActionButton>
                                         </form>
-                                        <form action={dismissIncident.bind(null, r.id)}>
+                                        <form action={unverifyIncident.bind(null, r.id)}>
                                             <ActionButton tone="reject">
                                                 <EyeOff className="h-4 w-4" /> Unverify
                                             </ActionButton>

@@ -92,6 +92,22 @@ export async function dismissIncident(id: string): Promise<void> {
     await setIncident(id, 0, 'dismissed');
 }
 
+// Undoes a verification — clears the verified flag and returns the report to
+// the "Hazard & incident reports" review queue (status 'reviewing', not
+// 'dismissed', so it stays visible to moderators). Distinct from dismiss
+// (rejects out of the queue) and delete (drops the row).
+export async function unverifyIncident(id: string): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db
+        .prepare("UPDATE bangon_incidents SET verified = 0, status = 'reviewing', updated_at = datetime('now') WHERE id = ?1")
+        .bind(id)
+        .run();
+    await audit('incident:unverified', 'incident', id);
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
+}
+
 // Hard-deletes a report — for accidentally-verified or bogus reports.
 export async function deleteIncident(id: string): Promise<void> {
     await assertAdmin();
