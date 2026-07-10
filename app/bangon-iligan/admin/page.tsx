@@ -12,6 +12,7 @@ import {
 import {
     approveBoardMessage,
     hideBoardMessage,
+    unpublishBoardMessage,
     deleteBoardMessage,
     verifyIncident,
     dismissIncident,
@@ -226,7 +227,7 @@ export default async function AdminPage() {
                                         {m.barangay ? ` · ${m.barangay}` : ''}
                                     </p>
                                     <div className="mt-3 flex flex-wrap gap-2">
-                                        <form action={hideBoardMessage.bind(null, m.id)}>
+                                        <form action={unpublishBoardMessage.bind(null, m.id)}>
                                             <ActionButton tone="reject">
                                                 <EyeOff className="h-4 w-4" /> Un-publish
                                             </ActionButton>

@@ -62,6 +62,21 @@ export async function hideBoardMessage(id: string): Promise<void> {
     await setBoardStatus(id, 'hidden');
 }
 
+// Un-publishes an approved message — returns it to the pending review board
+// (status 'pending', not 'hidden') so a moderator can re-review it. Distinct
+// from hide (rejects out of the queue) and delete (drops the row).
+export async function unpublishBoardMessage(id: string): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db
+        .prepare("UPDATE bangon_board_messages SET status = 'pending', updated_at = datetime('now') WHERE id = ?1")
+        .bind(id)
+        .run();
+    await audit('board:unpublished', 'board_message', id);
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
+}
+
 // Hard-deletes a board message — for accidentally-approved or abusive posts.
 export async function deleteBoardMessage(id: string): Promise<void> {
     await assertAdmin();
