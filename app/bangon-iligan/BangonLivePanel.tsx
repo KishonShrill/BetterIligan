@@ -5,14 +5,14 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import toast from 'react-hot-toast';
 import {
     Activity, MessageSquare, Send, Loader2, MapPin, Phone, CheckCircle2,
-    Check, EyeOff, Trash2, ShieldCheck,
+    Check, EyeOff, Trash2, ShieldCheck, Radio, ExternalLink,
 } from 'lucide-react';
 import { postBoardMessage } from '@/actions/bangon';
 import {
     approveBoardMessage, unpublishBoardMessage, deleteBoardMessage,
     verifyIncident, resolveIncident, deleteIncident,
 } from '@/actions/bangonAdmin';
-import type { BoardMessageRow, IncidentReportRow } from '@/validations/bangonSchema';
+import type { BoardMessageRow, IncidentReportRow, FeedRow } from '@/validations/bangonSchema';
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
@@ -38,9 +38,10 @@ function relativeTime(iso: string): string {
     return `${Math.floor(h / 24)}d ago`;
 }
 
-type Tab = 'reports' | 'board';
+type Tab = 'alerts' | 'reports' | 'board';
 
 export default function BangonLivePanel({
+    feed,
     reports,
     messages,
     pendingReports,
@@ -48,6 +49,7 @@ export default function BangonLivePanel({
     isAdmin,
     boardEnabled,
 }: {
+    feed: FeedRow[];
     reports: IncidentReportRow[];
     messages: BoardMessageRow[];
     pendingReports: IncidentReportRow[];
@@ -55,7 +57,7 @@ export default function BangonLivePanel({
     isAdmin: boolean;
     boardEnabled: boolean;
 }) {
-    const [tab, setTab] = useState<Tab>(boardEnabled ? 'board' : 'reports');
+    const [tab, setTab] = useState<Tab>('alerts');
     const [submitting, setSubmitting] = useState(false);
     const formRef = useRef<HTMLFormElement>(null);
     const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -93,6 +95,9 @@ export default function BangonLivePanel({
         <div className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
             {/* Tabs */}
             <div className="flex items-center border-b border-slate-100 bg-slate-50/70">
+                <TabButton active={tab === 'alerts'} onClick={() => setTab('alerts')} icon={Radio}>
+                    Alerts
+                </TabButton>
                 <TabButton active={tab === 'reports'} onClick={() => setTab('reports')} icon={Activity} badge={isAdmin ? pendingReports.length : 0}>
                     Reports
                 </TabButton>
@@ -117,7 +122,42 @@ export default function BangonLivePanel({
             </div>
 
             {/* Body */}
-            {tab === 'reports' ? (
+            {tab === 'alerts' ? (
+                <ul className="flex-1 overflow-y-auto divide-y divide-slate-50">
+                    {feed.length === 0 && (
+                        <EmptyState
+                            title="No active alerts"
+                            body="Official earthquake and hazard alerts near Iligan will appear here."
+                        />
+                    )}
+                    {feed.map((f) => {
+                        const url = f.url && /^https?:\/\//i.test(f.url) ? f.url : undefined;
+                        const Row = url ? 'a' : 'div';
+                        return (
+                            <li key={f.id}>
+                                <Row
+                                    {...(url ? { href: url, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                    className={`block px-4 py-3 ${url ? 'transition-colors hover:bg-slate-50' : ''}`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className="inline-flex shrink-0 items-center rounded-full bg-rose-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-rose-700 border border-rose-100">
+                                            {f.category}
+                                        </span>
+                                        {f.magnitude != null && (
+                                            <span className="shrink-0 text-xs font-bold text-rose-700">M{f.magnitude.toFixed(1)}</span>
+                                        )}
+                                        <span className="ml-auto shrink-0 text-[10px] text-slate-400">{relativeTime(f.published_at)}</span>
+                                    </div>
+                                    <p className="mt-1 flex items-start gap-1 break-words text-sm text-slate-700 leading-snug">
+                                        <span className="min-w-0">{f.title}</span>
+                                        {url && <ExternalLink className="mt-0.5 h-3 w-3 shrink-0 text-slate-400" />}
+                                    </p>
+                                </Row>
+                            </li>
+                        );
+                    })}
+                </ul>
+            ) : tab === 'reports' ? (
                 <ul className="flex-1 overflow-y-auto divide-y divide-slate-50">
                     {isAdmin && pendingReports.length > 0 && (
                         <>

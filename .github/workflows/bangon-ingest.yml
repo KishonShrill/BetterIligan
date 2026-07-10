@@ -1,0 +1,34 @@
+# Scheduled trigger for the Bangon Iligan feed ingester.
+#
+# Every 30 minutes it POSTs to the deployed /api/bangon/ingest endpoint, which
+# pulls official feeds (USGS earthquakes to start) into Cloudflare D1.
+#
+# Configure two repository secrets to activate it (until then it no-ops):
+#   BANGON_INGEST_URL   e.g. https://betteriligancity.org/api/bangon/ingest
+#   INGEST_SECRET       the same value set on the Worker (Authorization bearer)
+#
+# Alternative: a Cloudflare Cron Trigger calling the same endpoint.
+name: bangon-ingest
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger ingest
+        env:
+          URL: ${{ secrets.BANGON_INGEST_URL }}
+          SECRET: ${{ secrets.INGEST_SECRET }}
+        run: |
+          if [ -z "$URL" ] || [ -z "$SECRET" ]; then
+            echo "BANGON_INGEST_URL / INGEST_SECRET not set — skipping."
+            exit 0
+          fi
+          code=$(curl -s -o /tmp/out.json -w '%{http_code}' -X POST "$URL" \
+            -H "Authorization: Bearer $SECRET")
+          echo "HTTP $code"; cat /tmp/out.json
+          [ "$code" = "200" ]
