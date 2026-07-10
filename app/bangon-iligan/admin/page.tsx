@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut, CheckCircle2, Trash2 } from 'lucide-react';
+import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut, CheckCircle2, Trash2, BookOpen } from 'lucide-react';
 import { isAdmin } from '@/lib/bangonAuth';
 import {
     getPendingBoardMessages,
@@ -61,6 +61,14 @@ export default async function AdminPage() {
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
                             <ShieldCheck className="h-3.5 w-3.5" /> Moderator
                         </span>
+                        <a
+                            href="https://github.com/KishonShrill/BetterIligan/blob/main/docs/bangon-iligan.md"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+                        >
+                            <BookOpen className="h-4 w-4" /> Docs
+                        </a>
                         <form action={adminLogout}>
                             <button className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-50">
                                 <LogOut className="h-4 w-4" /> Sign out
