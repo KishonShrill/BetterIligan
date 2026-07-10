@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { postBoardMessage } from '@/actions/bangon';
 import {
-    approveBoardMessage, hideBoardMessage, deleteBoardMessage,
+    approveBoardMessage, unpublishBoardMessage, deleteBoardMessage,
     verifyIncident, resolveIncident, deleteIncident,
 } from '@/actions/bangonAdmin';
 import type { BoardMessageRow, IncidentReportRow } from '@/validations/bangonSchema';
@@ -188,7 +188,7 @@ export default function BangonLivePanel({
                                 <p className="mt-1 break-words text-sm text-slate-700 leading-snug">{m.message}</p>
                                 {isAdmin && (
                                     <div className="mt-2 flex flex-wrap gap-1.5">
-                                        <ModButton action={hideBoardMessage.bind(null, m.id)} tone="warn"><EyeOff className="h-3.5 w-3.5" /> Un-publish</ModButton>
+                                        <ModButton action={unpublishBoardMessage.bind(null, m.id)} tone="warn"><EyeOff className="h-3.5 w-3.5" /> Un-publish</ModButton>
                                         <ModButton action={deleteBoardMessage.bind(null, m.id)} tone="danger"><Trash2 className="h-3.5 w-3.5" /> Delete</ModButton>
                                     </div>
                                 )}

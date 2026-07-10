@@ -29,9 +29,9 @@
             // Local dev (`wrangler d1 ... --local`) works with any id.
             // Before deploying, run `npx wrangler d1 create betteriligan-bangon`
             // and paste the returned database_id here.
-            "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+            "database_id": "d63d85bc-25b5-4f27-a406-a6d28dfcc4e2",
             "migrations_dir": "migrations"
-        }
+        },
     ],
     "vars": {
         "NEXT_PUBLIC_WEATHER_CITY_ID": "1711082",

@@ -12,9 +12,11 @@ import {
 import {
     approveBoardMessage,
     hideBoardMessage,
+    unpublishBoardMessage,
     deleteBoardMessage,
     verifyIncident,
     dismissIncident,
+    unverifyIncident,
     resolveIncident,
     deleteIncident,
     adminLogout,
@@ -186,7 +188,7 @@ export default async function AdminPage() {
                                                 <CheckCircle2 className="h-4 w-4" /> Mark resolved
                                             </ActionButton>
                                         </form>
-                                        <form action={dismissIncident.bind(null, r.id)}>
+                                        <form action={unverifyIncident.bind(null, r.id)}>
                                             <ActionButton tone="reject">
                                                 <EyeOff className="h-4 w-4" /> Unverify
                                             </ActionButton>
@@ -225,7 +227,7 @@ export default async function AdminPage() {
                                         {m.barangay ? ` · ${m.barangay}` : ''}
                                     </p>
                                     <div className="mt-3 flex flex-wrap gap-2">
-                                        <form action={hideBoardMessage.bind(null, m.id)}>
+                                        <form action={unpublishBoardMessage.bind(null, m.id)}>
                                             <ActionButton tone="reject">
                                                 <EyeOff className="h-4 w-4" /> Un-publish
                                             </ActionButton>

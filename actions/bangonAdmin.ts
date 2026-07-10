@@ -62,6 +62,21 @@ export async function hideBoardMessage(id: string): Promise<void> {
     await setBoardStatus(id, 'hidden');
 }
 
+// Un-publishes an approved message — returns it to the pending review board
+// (status 'pending', not 'hidden') so a moderator can re-review it. Distinct
+// from hide (rejects out of the queue) and delete (drops the row).
+export async function unpublishBoardMessage(id: string): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db
+        .prepare("UPDATE bangon_board_messages SET status = 'pending', updated_at = datetime('now') WHERE id = ?1")
+        .bind(id)
+        .run();
+    await audit('board:unpublished', 'board_message', id);
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
+}
+
 // Hard-deletes a board message — for accidentally-approved or abusive posts.
 export async function deleteBoardMessage(id: string): Promise<void> {
     await assertAdmin();
@@ -90,6 +105,22 @@ export async function verifyIncident(id: string): Promise<void> {
 
 export async function dismissIncident(id: string): Promise<void> {
     await setIncident(id, 0, 'dismissed');
+}
+
+// Undoes a verification — clears the verified flag and returns the report to
+// the "Hazard & incident reports" review queue (status 'reviewing', not
+// 'dismissed', so it stays visible to moderators). Distinct from dismiss
+// (rejects out of the queue) and delete (drops the row).
+export async function unverifyIncident(id: string): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db
+        .prepare("UPDATE bangon_incidents SET verified = 0, status = 'reviewing', updated_at = datetime('now') WHERE id = ?1")
+        .bind(id)
+        .run();
+    await audit('incident:unverified', 'incident', id);
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
 }
 
 // Hard-deletes a report — for accidentally-verified or bogus reports.
