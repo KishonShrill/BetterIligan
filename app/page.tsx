@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { safeJsonLd } from '@/lib/utils';
+import ActiveIncidentBanner from "@/sections/homepage/ActiveIncidentBanner";
 import HeroSection from "@/sections/homepage/Hero";
 import ServicesSection from "@/sections/homepage/Services";
 import EmergencyHotlines from "@/sections/homepage/EmergencyHotlines";
@@ -26,6 +27,7 @@ export default function Home() {
                 dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
             />
 
+            <ActiveIncidentBanner />
             <HeroSection />
             <ServicesSection />
             <EmergencyHotlines />
