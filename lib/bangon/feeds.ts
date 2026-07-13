@@ -31,7 +31,10 @@ export async function fetchUsgsEarthquakes(sinceIso: string, minMagnitude = 4): 
     url.searchParams.set("maxlongitude", String(MINDANAO_BBOX.maxLon));
     url.searchParams.set("orderby", "time");
 
-    const res = await fetch(url, { headers: { "User-Agent": "BetterIligan/bangon-ingester" } });
+    const res = await fetch(url, {
+        cache: 'no-store',
+        headers: { "User-Agent": "BetterIligan/bangon-ingester" }
+    });
     if (!res.ok) throw new Error(`USGS request failed: ${res.status}`);
     const data = (await res.json()) as { features?: UsgsFeature[] };
 
