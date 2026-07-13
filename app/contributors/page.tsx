@@ -11,7 +11,7 @@ import communityVolunteers from '@/data/community-volunteers.json';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-    title: 'Contributors | BetterIliganCity',
+    title: 'Contributors',
     description: 'Meet the developers, maintainers, and community volunteers building BetterIliganCity.',
 };
 

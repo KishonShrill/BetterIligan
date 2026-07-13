@@ -9,7 +9,7 @@ import iliganDirectories from '@/data/navigation.json';
 const section = iliganDirectories.find((item) => item.name === 'Transparency')!;
 
 export const metadata: Metadata = {
-    title: 'Transparency & Open Data | BetterIliganCity',
+    title: 'Transparency & Open Data',
     description: 'Explore Iligan City\'s public records, budget allocations, city resolutions, and open data initiatives for accountable and transparent governance.',
 };
 

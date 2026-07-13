@@ -9,16 +9,8 @@ import GuidesSection from "./GuidesSection";
 import EmergencyQuickCall from "./EmergencyQuickCall";
 
 export const metadata: Metadata = {
-    title: "Disaster Preparedness",
-    description:
-        "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City.",
-    openGraph: {
-        title: "Iligan City Disaster Preparedness Hub",
-        description:
-            "Emergency hotlines and disaster preparedness guides for Iligan City.",
-        url: "https://betteriligancity.org/disaster",
-        type: "website",
-    },
+    title: "Iligan City Disaster Preparedness Hub",
+    description: "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City.",
 };
 
 const REFERENCES = [

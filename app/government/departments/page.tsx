@@ -4,14 +4,8 @@ import DepartmentClient from './DepartmentClient';
 
 // 1. STATIC METADATA (Server Side)
 export const metadata: Metadata = {
-    title: 'City Departments Directory',
-    description: 'Explore the official directory of Iligan City local government departments, offices, and administrative units. Find contact details, department heads, and locations.',
-    openGraph: {
-        title: 'Iligan City Departments Directory',
-        description: 'Official contact directory for all local government departments and offices within Iligan City Hall.',
-        url: 'https://betteriligancity.org/government/departments',
-        type: 'website',
-    },
+    title: 'Iligan City Departments Directory',
+    description: 'Official contact directory for all local government departments and offices within Iligan City Hall.',
 };
 
 // 2. MAIN PAGE COMPONENT (Server Side)
