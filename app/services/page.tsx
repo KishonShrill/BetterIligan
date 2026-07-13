@@ -4,14 +4,8 @@ import ServicesClient from './ServicesClient';
 
 // 1. STATIC METADATA (Server Side)
 export const metadata: Metadata = {
-    title: 'Services Directory',
+    title: 'Iligan City Services Directory',
     description: 'Explore official municipal services, Citizens Charter procedures, and community contributions for Iligan City.',
-    openGraph: {
-        title: 'Iligan City Services Directory',
-        description: 'Explore official municipal services, Citizens Charter procedures, and community contributions.',
-        url: 'https://betteriligancity.org/services',
-        type: 'website',
-    },
 };
 
 // 2. MAIN PAGE COMPONENT (Server Side)

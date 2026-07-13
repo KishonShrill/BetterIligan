@@ -5,11 +5,6 @@ import CityOfficialsClient from "./CityOfficialsClient";
 export const metadata: Metadata = {
     title: "City Officials",
     description: "Meet the elected leaders of Iligan City, including the Mayor, Vice Mayor, and the members of the Sangguniang Panlungsod (City Council).",
-    openGraph: {
-        title: "City Officials | BetterIligan City",
-        description: "Meet the elected leaders of Iligan City, including the Mayor, Vice Mayor, and the members of the Sangguniang Panlungsod (City Council).",
-        url: "https://betteriligancity.org/iligan/city-officials",
-    }
 };
 
 export default function CityOfficialsPage() {

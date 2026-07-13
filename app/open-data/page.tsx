@@ -5,7 +5,7 @@ import SubpageHero from '@/components/ui/SubpageHero';
 import { Code, Terminal, Database, ShieldAlert } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Open Data API | BetterIliganCity',
+    title: 'Open Data API',
     description: 'Documentation for the BetterIliganCity Open Data API. Access our directory of local government units, services, and public facilities.',
 };
 

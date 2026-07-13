@@ -13,16 +13,8 @@ import { safeJsonLd } from '@/lib/utils';
 import BangonCommandCenter from './BangonCommandCenter';
 
 export const metadata: Metadata = {
-    title: 'Bangon Iligan',
-    description:
-        "Iligan's community relief command center — a live map with hazard reports and a community board. On standby until an emergency, then live coordination when it counts.",
-    openGraph: {
-        title: 'Bangon Iligan — Community Relief Command Center',
-        description:
-            'A live command map with hazard reports and a community board for Iligan City. Standby until an emergency, then live relief coordination.',
-        url: 'https://betteriligancity.org/bangon-iligan',
-        type: 'website',
-    },
+    title: 'Community Relief Command Center',
+    description: "Iligan's community relief command center — a live map with hazard reports and a community board. On standby until an emergency, then live coordination when it counts.",
 };
 
 export default async function BangonIliganPage() {

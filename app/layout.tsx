@@ -16,17 +16,12 @@ export const metadata: Metadata = {
     },
     description: 'A modernized, volunteer-driven portal to access government services, public data, and resources for the people of Iligan.',
     openGraph: {
-        title: 'BetterIligan City',
-        description: 'A modernized, volunteer-driven portal to access government services...',
-        url: 'https://betteriligancity.org',
         siteName: 'BetterIligan',
         locale: 'en_PH',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'BetterIligan City',
-        description: 'A modernized, volunteer-driven portal to access government services...',
     },
 };
 

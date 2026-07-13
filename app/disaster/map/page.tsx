@@ -5,16 +5,8 @@ import { disasterFacilities } from "@/data/disaster";
 import DisasterMapView from "./DisasterMapView";
 
 export const metadata: Metadata = {
-    title: "Emergency Facilities Map",
-    description:
-        "Interactive map of hospitals, fire and police stations, utilities, and evacuation landmarks across Iligan City.",
-    openGraph: {
-        title: "Iligan City Emergency Facilities Map",
-        description:
-            "Find the nearest hospital, fire station, police station, or evacuation landmark in Iligan City.",
-        url: "https://betteriligancity.org/disaster/map",
-        type: "website",
-    },
+    title: "Iligan City Emergency Facilities Map",
+    description: "Interactive map of hospitals, fire and police stations, utilities, and evacuation landmarks across Iligan City.",
 };
 
 export default function DisasterMapPage() {

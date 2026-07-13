@@ -9,7 +9,7 @@ import iliganDirectories from '@/data/navigation.json';
 const section = iliganDirectories.find((item) => item.name === 'Iligan City')!;
 
 export const metadata: Metadata = {
-    title: 'Iligan Directory | BetterIliganCity',
+    title: 'Iligan Directory',
     description: 'Browse essential information about Iligan City, from local profiles and officials to barangays and public services.',
 };
 

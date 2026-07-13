@@ -3,13 +3,8 @@ import { safeJsonLd } from '@/lib/utils';
 import BarangaysClient from "./BarangaysClient";
 
 export const metadata: Metadata = {
-    title: "Barangays",
+    title: "Barangay Directory",
     description: "Explore the official directory of Iligan City's 44 barangays, including contact information for local offices and Punong Barangays.",
-    openGraph: {
-        title: "Barangay Directory | BetterIligan City",
-        description: "Explore the official directory of Iligan City's 44 barangays, including contact information for local offices and Punong Barangays.",
-        url: "https://betteriligancity.org/iligan/barangays", // Update this if your route is different
-    }
 };
 
 export default function BarangaysPage() {

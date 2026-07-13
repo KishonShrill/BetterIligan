@@ -3,14 +3,8 @@ import { safeJsonLd } from '@/lib/utils';
 import VolunteerClient from './VolunteerClient';
 
 export const metadata: Metadata = {
-    title: 'Volunteer | BetterIliganCity',
+    title: 'Volunteer',
     description: 'Join our volunteer-led civic tech initiative to make Iligan City’s government more transparent and accessible.',
-    openGraph: {
-        title: 'Volunteer | BetterIliganCity',
-        description: 'Join our volunteer-led civic tech initiative to make Iligan City’s government more transparent and accessible. Developers, designers, and citizens welcome.',
-        url: 'https://betteriligancity.org/volunteer',
-        type: 'website',
-    }
 };
 
 export default function VolunteerPage() {

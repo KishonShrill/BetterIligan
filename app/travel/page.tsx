@@ -9,7 +9,7 @@ import iliganDirectories from '@/data/navigation.json';
 const section = iliganDirectories.find((item) => item.name === 'Travel')!;
 
 export const metadata: Metadata = {
-    title: 'Travel & Transportation | BetterIliganCity',
+    title: 'Travel & Transportation',
     description: 'Navigate Iligan City with ease. Find essential information on local transportation, terminals, jeepney routes, and travel guidelines for residents and visitors.',
 };
 

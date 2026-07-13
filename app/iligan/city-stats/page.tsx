@@ -5,14 +5,8 @@ import CityStatsClient from './CityStatsClient';
 // 1. STATIC METADATA (Server Side)
 // Because this page isn't dynamic (it's always Iligan City), we don't need generateMetadata.
 export const metadata: Metadata = {
-    title: 'City Statistics & Demographics',
+    title: 'Iligan City Statistics & Demographics',
     description: 'Explore official statistics, demographics, infrastructure, and economic data for Iligan City, the City of Majestic Waterfalls.',
-    openGraph: {
-        title: 'Iligan City Statistics & Demographics',
-        description: 'Explore official statistics, demographics, infrastructure, and economic data for Iligan City.',
-        url: 'https://betteriligancity.org/iligan/city-stats',
-        type: 'website',
-    },
 };
 
 // 2. MAIN PAGE COMPONENT (Server Side)

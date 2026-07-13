@@ -4,14 +4,8 @@ import DirectoryClient from './DirectoryClient';
 
 // 1. STATIC METADATA (Server Side)
 export const metadata: Metadata = {
-    title: 'Government Directory',
-    description: 'A comprehensive directory of local and national government agencies, GOCCs, and constitutional commissions operating in Iligan City.',
-    openGraph: {
-        title: 'Iligan City Government Directory',
-        description: 'Find contact information, addresses, and maps for government offices and agencies in Iligan City.',
-        url: 'https://betteriligancity.org/government/directory',
-        type: 'website',
-    },
+    title: 'Iligan City Government Directory',
+    description: 'Find contact information, addresses, and maps for government offices and agencies in Iligan City.',
 };
 
 // 2. MAIN PAGE COMPONENT (Server Side)

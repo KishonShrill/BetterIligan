@@ -5,15 +5,7 @@ import AssistanceClient from "./AssistanceClient";
 
 export const metadata: Metadata = {
     title: "Scholarships & Assistance",
-    description:
-        "Scholarships and financial-assistance programs open to Iligan City residents — the City Mayor's Scholarship plus national programs from CHED, DOST-SEI, TESDA, and DSWD.",
-    openGraph: {
-        title: "Scholarships & Assistance | BetterIligan City",
-        description:
-            "Find scholarships and financial-assistance programs for Iligan residents, with official links and how to apply.",
-        url: "https://betteriligancity.org/assistance",
-        type: "website",
-    },
+    description: "Scholarships and financial-assistance programs open to Iligan City residents — the City Mayor's Scholarship plus national programs from CHED, DOST-SEI, TESDA, and DSWD.",
 };
 
 export default function AssistancePage() {

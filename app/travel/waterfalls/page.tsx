@@ -9,15 +9,7 @@ const waterfalls = WaterfallsArraySchema.parse(rawWaterfalls);
 
 export const metadata: Metadata = {
     title: "Waterfalls",
-    description:
-        "A directory of Iligan City's waterfalls — Maria Cristina, Tinago, Limunsudan and more — with locations, photos, and directions.",
-    openGraph: {
-        title: "Waterfalls | BetterIligan City",
-        description:
-            "Explore the waterfalls of Iligan, the City of Majestic Waterfalls: locations, photos, and directions.",
-        url: "https://betteriligancity.org/travel/waterfalls",
-        type: "website",
-    },
+    description: "A directory of Iligan City's waterfalls — Maria Cristina, Tinago, Limunsudan and more — with locations, photos, and directions.",
 };
 
 export default function WaterfallsPage() {

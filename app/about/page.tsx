@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'About | BetterIliganCity',
+    title: 'About',
     description: 'Learn about our volunteer-led civic tech initiative to make Iligan City’s government more transparent and accessible.',
 };
 

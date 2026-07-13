@@ -6,7 +6,7 @@ import SubpageHero from '@/components/ui/SubpageHero';
 
 export const metadata: Metadata = {
     title: 'Sitemap',
-    description: 'Complete sitemap of BetterIliganCity.org — find all pages, services, and resources for Iligan City.',
+    description: 'Complete sitemap of BetterIliganCity.org - find all pages, services, and resources for Iligan City.',
 };
 
 interface SitemapLink {
