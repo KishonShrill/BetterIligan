@@ -8,6 +8,8 @@ import { Github, Users, ShieldCheck, Heart, User } from 'lucide-react';
 // Import the static community volunteers
 import communityVolunteers from '@/data/community-volunteers.json';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
     title: 'Contributors | BetterIliganCity',
     description: 'Meet the developers, maintainers, and community volunteers building BetterIliganCity.',
@@ -33,13 +35,20 @@ interface CommunityVolunteer {
 // 1. CACHED FETCH FUNCTION
 async function getGithubContributors(): Promise<GitHubContributor[]> {
     try {
+        const headers: HeadersInit = {
+            'User-Agent': 'BetterIligan-Contributors-Page',
+            'Accept': 'application/vnd.github.v3+json'
+        };
+
+        if (process.env.GITHUB_TOKEN) {
+            headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+        }
+
         // We use your exact repo path. 
         // 'next: { revalidate: 3600 }' caches this fetch for 1 hour (3600 seconds)!
         const res = await fetch('https://api.github.com/repos/KishonShrill/BetterIligan/contributors', {
             next: { revalidate: 3600 },
-            headers: {
-                'User-Agent': 'BetterIligan-Contributors-Page',
-            }
+            headers
         });
 
         if (!res.ok) {
@@ -55,7 +64,10 @@ async function getGithubContributors(): Promise<GitHubContributor[]> {
 }
 
 export default async function ContributorsPage() {
-    const allContributors = await getGithubContributors();
+    const rawContributors = await getGithubContributors();
+
+    // 2. DEFENSIVE CHECK: Prevents fatal exceptions if GitHub returns an object instead of an array
+    const allContributors = Array.isArray(rawContributors) ? rawContributors : [];
 
     // 2. SEPARATE OWNER FROM CONTRIBUTORS
     // Filter you out specifically using your GitHub handle
