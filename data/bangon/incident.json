@@ -12,10 +12,23 @@
         "summary": "TODO: what happened, when, and the current situation. Filled in only when active is true.",
         "declaredAt": "TODO: YYYY-MM-DD"
     },
+    "displayDonation": false,
     "donation": {
-        "gcash": { "name": "TODO_GCASH_NAME", "number": "TODO_GCASH_NUMBER" },
-        "bank": { "bank": "TODO_BANK", "accountName": "TODO_ACCOUNT_NAME", "accountNumber": "TODO_ACCOUNT_NUMBER" },
+        "gcash": {
+            "name": "TODO_GCASH_NAME",
+            "number": "TODO_GCASH_NUMBER"
+        },
+        "bank": {
+            "bank": "TODO_BANK",
+            "accountName": "TODO_ACCOUNT_NAME",
+            "accountNumber": "TODO_ACCOUNT_NUMBER"
+        },
         "dropOff": [],
-        "inKindNeeds": ["Drinking water", "Ready-to-eat food", "Blankets", "Hygiene kits"]
+        "inKindNeeds": [
+            "Drinking water",
+            "Ready-to-eat food",
+            "Blankets",
+            "Hygiene kits"
+        ]
     }
 }

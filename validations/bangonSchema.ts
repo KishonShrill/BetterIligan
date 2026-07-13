@@ -166,6 +166,7 @@ export const BangonConfigSchema = z.object({
         summary: z.string(),
         declaredAt: z.string(),
     }),
+    displayDonation: z.boolean(),
     donation: z.object({
         gcash: z.object({ name: z.string(), number: z.string() }),
         bank: z.object({ bank: z.string(), accountName: z.string(), accountNumber: z.string() }),

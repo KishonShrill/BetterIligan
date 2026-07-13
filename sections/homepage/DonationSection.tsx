@@ -1,12 +1,16 @@
+import Section from '@/components/ui/Section';
 import { HeartHandshake, Wallet, Landmark, PackageOpen, MapPin } from 'lucide-react';
+import donationJSON from '@/data/bangon/incident.json';
 import type { BangonConfig } from '@/validations/bangonSchema';
-
 // Rendered only when an operation is active. Values come from
 // data/bangon/incident.json — replace the TODO_ placeholders with the real,
 // official donation channels before flipping `active` to true.
-export default function DonationSection({ donation }: { donation: BangonConfig['donation'] }) {
+
+export default function DonationSection() {
+    const donation: BangonConfig['donation'] = donationJSON.donation;
+    if (!donationJSON.active || !donationJSON.displayDonation) return null;
     return (
-        <section aria-labelledby="donate-heading">
+        <Section aria-labelledby="donate-heading" className='bg-red-50'>
             <div className="mb-4 flex items-center gap-2">
                 <HeartHandshake className="h-6 w-6 text-emerald-600" />
                 <h2 id="donate-heading" className="text-2xl font-bold text-slate-900">
@@ -74,7 +78,7 @@ export default function DonationSection({ donation }: { donation: BangonConfig['
                     </ul>
                 </div>
             )}
-        </section>
+        </Section>
     );
 }
 
