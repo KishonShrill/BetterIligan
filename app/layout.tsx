@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
     },
+    facebook: {
+        appId: '1036061575471786',
+    },
 };
 
 export default function RootLayout({
