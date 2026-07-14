@@ -106,10 +106,11 @@ export default async function ContributorsPage() {
 
                         <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-6 max-w-2xl">
                             <Image
-                                src={owner.avatar_url}
+                                src={`${owner.avatar_url}&s=128`}
                                 alt={owner.login}
                                 width={128}
                                 height={128}
+                                unoptimized
                                 priority
                                 className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-slate-50 shadow-md"
                             />
@@ -155,10 +156,11 @@ export default async function ContributorsPage() {
                                 >
                                     <Github className="w-4 h-4 text-slate-300 group-hover:text-blue-500 absolute top-4 right-4 transition-colors" />
                                     <Image
-                                        src={contributor.avatar_url}
+                                        src={`${contributor.avatar_url}&s=128`}
                                         alt={contributor.login}
                                         width={128}
                                         height={128}
+                                        unoptimized
                                         className="w-18 h-18 rounded-full mb-3 shadow-sm group-hover:ring-2 group-hover:ring-blue-100 transition-all"
                                     />
                                     <h3 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
