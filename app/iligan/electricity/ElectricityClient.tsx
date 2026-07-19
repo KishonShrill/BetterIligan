@@ -7,7 +7,7 @@ import { Calculator, Zap, Globe, Facebook } from 'lucide-react';
 import ReferencesFooter from '@/components/ui/ReferencesFooter';
 
 export default function ElectricityClient() {
-    const facebookElectricityPriceLink = "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Filiganlight%2Fposts%2Fpfbid0PjxDUqwHKkZ2ZS9jhzmYXtjzLN1oMpuBg5c6EGvARQcJrPrj3kb9yt2DJpb8tdsMl&show_text=true&width=500"
+    const facebookElectricityPriceLink = "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Filiganlight%2Fposts%2Fpfbid02LuAtCSNLQWVfiNDnuGSgPfJjRXivGqLNDeJQ9d4eD6ZFJ1e5yFRY2Q4i43yLf3Lul&show_text=true&width=500"
     const electricityReferences = [
         {
             title: "Official Website of Iligan Light & Power, Inc. (ILPI)",

@@ -2,7 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Calculator, Zap, Calendar, CalendarDays, HelpCircle } from 'lucide-react';
+import {
+    ArrowLeft, Calculator, Zap, Calendar,
+    CalendarDays, CalendarCheck, HelpCircle
+} from 'lucide-react';
 import SubpageHero from '@/components/ui/SubpageHero';
 
 // Quick preset appliances for user convenience
@@ -20,7 +23,7 @@ const APPLIANCE_PRESETS = [
 export default function ElectricityCalculatorPage() {
     // --- STATE ---
     // Update the default rate here based on the exact Residential rate from your ILPI images
-    const [ratePerKWh, setRatePerKWh] = useState<number | string>(13.3948);
+    const [ratePerKWh, setRatePerKWh] = useState<number | string>(13.6098);
     const [wattage, setWattage] = useState<number | string>('');
     const [hoursPerDay, setHoursPerDay] = useState<number | string>(8);
 
@@ -44,14 +47,18 @@ export default function ElectricityCalculatorPage() {
         <main className="min-h-screen bg-slate-50 font-sans pb-24">
 
             <SubpageHero>
-                <div className="mb-4">
+                <SubpageHero.Badges>
                     <Link
                         href="/iligan/electricity"
                         className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" /> Back to Electricity
                     </Link>
-                </div>
+                    <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold uppercase tracking-wider rounded-full border border-emerald-200 flex items-center gap-1.5 w-fit shadow-sm">
+                        <CalendarCheck className="w-3.5 h-3.5" />
+                        Recently Updated: July 15, 2026
+                    </span>
+                </SubpageHero.Badges>
                 <SubpageHero.Title>Appliance Cost Calculator</SubpageHero.Title>
                 <SubpageHero.Description>
                     Estimate how much an appliance adds to your monthly ILPI bill based on its power consumption and your usage habits.
@@ -78,9 +85,9 @@ export default function ElectricityCalculatorPage() {
                             <div>
                                 <label className="block text-sm font-bold text-slate-700 mb-1.5 flex justify-between items-center">
                                     <span>ILPI Rate per kWh (₱)</span>
-                                    <span className="text-xs font-normal text-slate-400 flex items-center gap-1 cursor-help" title="Check your latest ILPI bill for the exact blended rate">
+                                    <Link href='/iligan/electricity#ilpi' className="hover:underline cursor-pointer text-xs font-normal text-slate-400 flex items-center gap-1 cursor-help" title="Check your latest ILPI bill for the exact blended rate">
                                         <HelpCircle className="w-3.5 h-3.5" /> Where to find this?
-                                    </span>
+                                    </Link>
                                 </label>
                                 <input
                                     type="number"
@@ -89,6 +96,10 @@ export default function ElectricityCalculatorPage() {
                                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-slate-900 font-medium"
                                     placeholder="e.g. 11.50"
                                 />
+                                <p className="text-[11px] text-slate-500 mt-2 font-medium flex items-center gap-1.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                    Default rate based on ILPI billing for <strong className="text-slate-700">July 2026</strong>
+                                </p>
                             </div>
 
                             {/* Appliance Presets */}

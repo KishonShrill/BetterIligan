@@ -42,7 +42,7 @@ export default function RootLayout({
             <body className="min-h-full flex flex-col">
                 <TopBanner />
                 <Header />
-                <ScrollToTop />
+                {/*<ScrollToTop />*/}
                 <div className="grow flex flex-col">{children}</div>
                 <Footer />
                 <Toaster
