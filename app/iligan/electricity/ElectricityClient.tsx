@@ -190,7 +190,7 @@ export default function ElectricityClient() {
                     </div>
 
                     {/* Right Side: Utility Sidebar (Takes up 4 columns) */}
-                    <div className="lg:col-span-3 lg:sticky lg:top-24">
+                    <div className="lg:col-span-3 lg:sticky lg:top-24 max-lg:mx-auto">
                         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm p-6">
 
                             {/* Utility Header */}

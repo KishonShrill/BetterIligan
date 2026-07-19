@@ -9,7 +9,7 @@
                 "href": "/iligan"
             },
             {
-                "name": "Profile",
+                "name": "City Profile",
                 "description": "Key facts, demographics, and statistical data about Iligan City.",
                 "href": "/iligan/city-stats"
             },
@@ -57,21 +57,20 @@
                 "upcoming": true
             },
             {
-                "name": "Transportation",
-                "description": "Guide to getting around Iligan, including routes and transport options.",
-                "href": "/travel/transportation",
+                "name": "Transportation Map",
+                "description": "Navigate Iligan with our interactive guide to local jeepney routes and commuting paths.",
+                "href": "/travel/transportation/map",
                 "upcoming": true
+            },
+            {
+                "name": "Bus Schedules",
+                "description": "Check daily departure times for provincial routes and local co-op charter services.",
+                "href": "/travel/transportation/bus"
             },
             {
                 "name": "Waterfalls",
                 "description": "Explore Iligan’s famous waterfalls and natural attractions.",
                 "href": "/travel/waterfalls"
-            },
-            {
-                "name": "Accommodations",
-                "description": "Find hotels, inns, and places to stay in Iligan City.",
-                "href": "#",
-                "upcoming": true
             }
         ]
     },

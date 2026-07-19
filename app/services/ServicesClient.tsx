@@ -89,7 +89,8 @@ function ServicesDirectoryContent() {
         return allServices.filter((service) => {
             const matchesSearch =
                 service.title.toLowerCase().includes(query) ||
-                service.description.toLowerCase().includes(query);
+                service.description.toLowerCase().includes(query) ||
+                (service.tags && service.tags.some(tag => tag.toLowerCase().includes(query)));
 
             const matchesCategory =
                 selectedCategory === 'All Services' ||
