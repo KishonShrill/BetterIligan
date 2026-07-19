@@ -71,6 +71,7 @@ export default function Header({ className }: ClassName) {
                             alt="BetterIligan Logo"
                             width={75}
                             height={75}
+                            loading='eager'
                             className="w-12 h-12 sm:w-18 sm:h-18 object-cover"
                         />
                         <div className="block leading-[0.25]">

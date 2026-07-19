@@ -191,6 +191,12 @@ export default function BusScheduleClient() {
                                                     }`}>
                                                     {isPast ? 'Departed' : trip.type}
                                                 </div>
+
+                                                {trip.remarks && (
+                                                    <div className={`text-[9px] mt-1.5 leading-tight font-medium ${isPast ? 'text-slate-400' : 'text-slate-500'}`}>
+                                                        {trip.remarks}
+                                                    </div>
+                                                )}
                                             </div>
                                         )
                                     })}

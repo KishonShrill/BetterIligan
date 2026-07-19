@@ -83,7 +83,7 @@ export default function ContributorsClient() {
                             width={128}
                             height={128}
                             unoptimized
-                            priority
+                            loading='lazy'
                             className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-slate-50 shadow-md"
                         />
                         <div className="text-center sm:text-left flex-1">
@@ -132,6 +132,7 @@ export default function ContributorsClient() {
                                         alt={contributor.login}
                                         width={128}
                                         height={128}
+                                        loading='lazy'
                                         unoptimized
                                         className="w-18 h-18 rounded-full mb-3 shadow-sm group-hover:ring-2 group-hover:ring-blue-100 transition-all"
                                     />

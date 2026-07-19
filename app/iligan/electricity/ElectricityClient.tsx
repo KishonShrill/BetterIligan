@@ -117,7 +117,7 @@ export default function ElectricityClient() {
                         </div>
 
                         {/* Section: ILPI */}
-                        <div id="ilpi" className="md:bg-white md:border md:border-slate-200 md:rounded-2xl md:p-8 md:shadow-sm">
+                        <div id="ilpi" className="md:bg-white md:border md:border-slate-200 md:rounded-2xl md:p-8 md:shadow-sm scroll-mt-24">
 
                             {/* Header */}
                             <div className="flex items-center gap-3 mb-4">

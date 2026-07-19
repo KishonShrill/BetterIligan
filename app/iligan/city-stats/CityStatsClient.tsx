@@ -28,7 +28,7 @@ export default function CityStatsFullPage() {
     ]
 
     return (
-        <main className="min-h-screen bg-slate-50 font-sans">
+        <main className="min-h-screen bg-slate-50 font-sans scroll-mt-0">
             <h2 className="sr-only">Iligan City official profile — demographics, government, economy, environment, and infrastructure.</h2>
 
             {/* --- HERO SECTION --- */}
