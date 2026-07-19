@@ -28,7 +28,7 @@ export default function CityStatsFullPage() {
     ]
 
     return (
-        <main className="min-h-screen bg-slate-50 font-sans">
+        <main className="min-h-screen bg-slate-50 font-sans scroll-mt-0">
             <h2 className="sr-only">Iligan City official profile — demographics, government, economy, environment, and infrastructure.</h2>
 
             {/* --- HERO SECTION --- */}
@@ -48,7 +48,7 @@ export default function CityStatsFullPage() {
                     </span>
                 </SubpageHero.Badges>
                 <SubpageHero.Title className='text-white'>{cityData.header.name}</SubpageHero.Title>
-                <SubpageHero.Description className='text-[#85B7EB]'>
+                <SubpageHero.Description className='text-[#85B7EB]!'>
                     {cityData.header.description} <span className="text-[#B5D4F4] font-medium">{cityData.header.highlight}</span>{cityData.header.descriptionEnd}
                 </SubpageHero.Description>
 

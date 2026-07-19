@@ -36,7 +36,6 @@ export default function RootLayout({
     return (
         <html
             lang="en"
-            data-scroll-behavior="smooth"
             className={`${kapwaSans.variable} ${kapwaMono.variable} scroll-smooth h-full antialiased`}
         >
             <body className="min-h-full flex flex-col">

@@ -26,6 +26,8 @@ const sections: SitemapSection[] = [
         links: [
             { label: 'Home', href: '/' },
             { label: 'About Us', href: '/about' },
+            { label: 'Privacy Policy', href: '/privacy-policy' },
+            { label: 'Terms of Service', href: '/terms-of-service' },
             { label: 'Volunteer', href: '/volunteer' },
         ],
     },
@@ -37,6 +39,31 @@ const sections: SitemapSection[] = [
             { label: 'City Officials', href: '/iligan/city-officials' },
             { label: 'Barangays', href: '/iligan/barangays' },
             { label: 'Electricity', href: '/iligan/electricity' },
+        ],
+    },
+    {
+        title: 'Travel',
+        links: [
+            {
+                label: "Explore Travel",
+                href: "travel",
+            },
+            {
+                label: "Transportation Guide",
+                href: "/travel/transportation",
+            },
+            {
+                label: "Transportation Map",
+                href: "/travel/transportation/map",
+            },
+            {
+                label: "Bus Schedules",
+                href: "/travel/transportation/bus"
+            },
+            {
+                label: "Waterfalls",
+                href: "/travel/waterfalls"
+            }
         ],
     },
     {
@@ -68,8 +95,6 @@ const sections: SitemapSection[] = [
         title: 'Resources',
         links: [
             { label: 'Open Data', href: '/open-data' },
-            { label: 'Privacy Policy', href: '/privacy-policy' },
-            { label: 'Terms of Service', href: '/terms-of-service' },
             { label: 'iligan.gov.ph', href: 'https://iligan.gov.ph/', external: true },
         ],
     },

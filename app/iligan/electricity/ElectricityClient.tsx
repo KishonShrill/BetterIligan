@@ -7,7 +7,7 @@ import { Calculator, Zap, Globe, Facebook } from 'lucide-react';
 import ReferencesFooter from '@/components/ui/ReferencesFooter';
 
 export default function ElectricityClient() {
-    const facebookElectricityPriceLink = "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Filiganlight%2Fposts%2Fpfbid0PjxDUqwHKkZ2ZS9jhzmYXtjzLN1oMpuBg5c6EGvARQcJrPrj3kb9yt2DJpb8tdsMl&show_text=true&width=500"
+    const facebookElectricityPriceLink = "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Filiganlight%2Fposts%2Fpfbid02LuAtCSNLQWVfiNDnuGSgPfJjRXivGqLNDeJQ9d4eD6ZFJ1e5yFRY2Q4i43yLf3Lul&show_text=true&width=500"
     const electricityReferences = [
         {
             title: "Official Website of Iligan Light & Power, Inc. (ILPI)",
@@ -117,7 +117,7 @@ export default function ElectricityClient() {
                         </div>
 
                         {/* Section: ILPI */}
-                        <div id="ilpi" className="md:bg-white md:border md:border-slate-200 md:rounded-2xl md:p-8 md:shadow-sm">
+                        <div id="ilpi" className="md:bg-white md:border md:border-slate-200 md:rounded-2xl md:p-8 md:shadow-sm scroll-mt-24">
 
                             {/* Header */}
                             <div className="flex items-center gap-3 mb-4">
@@ -190,7 +190,7 @@ export default function ElectricityClient() {
                     </div>
 
                     {/* Right Side: Utility Sidebar (Takes up 4 columns) */}
-                    <div className="lg:col-span-3 lg:sticky lg:top-24">
+                    <div className="lg:col-span-3 lg:sticky lg:top-24 max-lg:mx-auto">
                         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm p-6">
 
                             {/* Utility Header */}

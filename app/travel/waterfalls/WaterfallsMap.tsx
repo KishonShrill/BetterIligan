@@ -41,7 +41,7 @@ function FixResize() {
 
 export default function WaterfallsMap({ falls }: { falls: Waterfall[] }) {
     return (
-        <MapContainer center={[8.2, 124.25]} zoom={11} className="w-full h-full" scrollWheelZoom={false}>
+        <MapContainer center={[8.2, 124.25]} zoom={11} className="w-full h-full z-30" scrollWheelZoom={false}>
             <FixResize />
             <FitToFalls falls={falls} />
             <TileLayer

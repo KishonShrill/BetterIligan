@@ -1,5 +1,4 @@
-'use client'
-
+import Link from 'next/link';
 import {
     Users, Calendar, Map, Droplets,
     Layers, TrendingUp, Compass
@@ -30,6 +29,7 @@ export default function CityStatsSummary() {
             label: "Natural Wonders",
             value: "23 Waterfalls",
             subtext: "Plus 8 springs & 15 caves",
+            href: "/travel/waterfalls",
         },
         {
             icon: <Layers className="w-5 h-5 text-purple-600" />,
@@ -37,6 +37,7 @@ export default function CityStatsSummary() {
             label: "Political Subdivisions",
             value: "44 Barangays",
             subtext: "Highly Urbanized City class",
+            href: "/iligan/barangays",
         },
     ];
 
@@ -57,7 +58,7 @@ export default function CityStatsSummary() {
                     </Text>
                 </div>
 
-                {/* CTA Button - Solid blue pops beautifully against blue-50 */}
+                {/* CTA Button */}
                 <Button3D
                     text='Explore Full City Profile'
                     href='/iligan/city-stats'
@@ -69,32 +70,47 @@ export default function CityStatsSummary() {
 
             {/* Main Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-10">
-                {quickStats.map((stat, idx) => (
-                    <div
-                        key={idx}
-                        // Changed to pure white with a soft shadow and blue-tinted hover borders
-                        className="bg-white border border-blue-100/50 shadow-sm rounded-2xl p-5 md:p-6 flex flex-col hover:shadow-md hover:border-blue-300 transition-all duration-200 group"
-                    >
-                        <div className="flex items-center gap-4 mb-3 md:w-fit md:block md:mb-4">
-                            <div className={`p-2.5 rounded-xl border ${stat.bgIcon} shrink-0`}>
-                                {stat.icon}
+                {quickStats.map((stat, idx) => {
+                    const innerContent = (
+                        <>
+                            <div className="flex items-center gap-4 mb-3 md:w-fit md:block md:mb-4">
+                                <div className={`p-2.5 rounded-xl border ${stat.bgIcon} shrink-0`}>
+                                    {stat.icon}
+                                </div>
+                                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider md:hidden">
+                                    {stat.label}
+                                </p>
                             </div>
-                            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider md:hidden">
+
+                            <p className="hidden md:block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
                                 {stat.label}
                             </p>
-                        </div>
+                            <h3 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight mb-1 md:mb-1.5 group-hover:text-blue-600 transition-colors">
+                                {stat.value}
+                            </h3>
+                            <p className="text-xs font-medium text-slate-500 mt-auto">
+                                {stat.subtext}
+                            </p>
+                        </>
+                    );
 
-                        <p className="hidden md:block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
-                            {stat.label}
-                        </p>
-                        <h3 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight mb-1 md:mb-1.5 group-hover:text-blue-600 transition-colors">
-                            {stat.value}
-                        </h3>
-                        <p className="text-xs font-medium text-slate-500 mt-auto">
-                            {stat.subtext}
-                        </p>
-                    </div>
-                ))}
+                    const cardClasses = "bg-white border border-blue-100/50 shadow-sm rounded-2xl p-5 md:p-6 flex flex-col hover:shadow-md hover:border-blue-300 transition-all duration-200 group h-full block";
+
+                    // Conditionally render as a Next.js Link or a standard div
+                    if (stat.href) {
+                        return (
+                            <Link key={idx} href={stat.href} className={cardClasses}>
+                                {innerContent}
+                            </Link>
+                        );
+                    }
+
+                    return (
+                        <div key={idx} className={cardClasses}>
+                            {innerContent}
+                        </div>
+                    );
+                })}
             </div>
 
             {/* Quick Historic Fact Banner */}

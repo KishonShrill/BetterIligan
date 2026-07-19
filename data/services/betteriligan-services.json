@@ -13,7 +13,7 @@
         "source": "community",
         "isWalkIn": false,
         "isOnline": true,
-        "type": "internal",
-        "internalUrl": "/iligan/electricity/calculator"
+        "type": "custom_link",
+        "href": "/iligan/electricity/calculator"
     }
 ]

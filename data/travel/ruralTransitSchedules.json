@@ -1,0 +1,400 @@
+{
+    "cdo_iligan": {
+        "cdo_to_iligan": [
+            {
+                "time": "4:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "4:30 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "5:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "5:30 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "6:00 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "6:20 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "6:40 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "7:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "7:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "8:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "8:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "9:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "9:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "10:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "10:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "11:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "11:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "12:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "12:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "1:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "1:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "2:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "2:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "3:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "3:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "4:00 PM",
+                "type": "3-Stop",
+                "remarks": "Last Round Tripper"
+            },
+            {
+                "time": "4:20 PM",
+                "type": "Non-Stop",
+                "remarks": "1st sleeping"
+            },
+            {
+                "time": "4:40 PM",
+                "type": "3-Stop",
+                "remarks": "2nd sleeping"
+            },
+            {
+                "time": "5:00 PM",
+                "type": "Non-Stop",
+                "remarks": "3rd sleeping"
+            },
+            {
+                "time": "5:20 PM",
+                "type": "3-Stop",
+                "remarks": "4th sleeping"
+            },
+            {
+                "time": "5:40 PM",
+                "type": "3-Stop",
+                "remarks": "5th sleeping"
+            },
+            {
+                "time": "6:00 PM",
+                "type": "Non-Stop",
+                "remarks": "6th sleeping"
+            },
+            {
+                "time": "6:30 PM",
+                "type": "3-Stop",
+                "remarks": "7th sleeping"
+            },
+            {
+                "time": "7:00 PM",
+                "type": "3-Stop",
+                "remarks": "8th sleeping"
+            },
+            {
+                "time": "7:30 PM",
+                "type": "3-Stop",
+                "remarks": "9th sleeping"
+            },
+            {
+                "time": "8:00 PM",
+                "type": "3-Stop",
+                "remarks": "10th sleeping"
+            },
+            {
+                "time": "9:00 PM",
+                "type": "3-Stop",
+                "remarks": "11th sleeping"
+            }
+        ],
+        "iligan_to_cdo": [
+            {
+                "time": "4:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "4:30 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "5:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "5:30 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "6:00 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "6:20 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "6:40 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "7:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "7:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "8:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "8:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "9:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "9:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "10:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "10:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "11:00 AM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "11:30 AM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "12:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "12:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "1:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "1:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "2:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "2:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "3:00 PM",
+                "type": "3-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "3:30 PM",
+                "type": "Non-Stop",
+                "remarks": "Round tripper"
+            },
+            {
+                "time": "4:00 PM",
+                "type": "3-Stop",
+                "remarks": "Last Round Tripper"
+            },
+            {
+                "time": "4:20 PM",
+                "type": "Non-Stop",
+                "remarks": "1st sleeping"
+            },
+            {
+                "time": "4:40 PM",
+                "type": "3-Stop",
+                "remarks": "2nd sleeping"
+            },
+            {
+                "time": "5:00 PM",
+                "type": "Non-Stop",
+                "remarks": "3rd sleeping"
+            },
+            {
+                "time": "5:20 PM",
+                "type": "3-Stop",
+                "remarks": "4th sleeping"
+            },
+            {
+                "time": "5:40 PM",
+                "type": "3-Stop",
+                "remarks": "5th sleeping"
+            },
+            {
+                "time": "6:00 PM",
+                "type": "Non-Stop",
+                "remarks": "6th sleeping"
+            },
+            {
+                "time": "6:30 PM",
+                "type": "3-Stop",
+                "remarks": "7th sleeping"
+            },
+            {
+                "time": "7:00 PM",
+                "type": "3-Stop",
+                "remarks": "8th sleeping"
+            },
+            {
+                "time": "7:30 PM",
+                "type": "3-Stop",
+                "remarks": "9th sleeping"
+            },
+            {
+                "time": "8:00 PM",
+                "type": "3-Stop",
+                "remarks": "10th sleeping"
+            },
+            {
+                "time": "9:00 PM",
+                "type": "3-Stop",
+                "remarks": "11th sleeping"
+            }
+        ]
+    },
+    "cdo_marawi": {
+        "cdo_to_marawi": [
+            {
+                "time": "1:30 PM",
+                "label": "1st Trip"
+            },
+            {
+                "time": "4:00 PM",
+                "label": "2nd Trip"
+            }
+        ],
+        "marawi_to_cdo": [
+            {
+                "time": "6:00 AM",
+                "label": "1st Trip"
+            },
+            {
+                "time": "7:30 AM",
+                "label": "2nd Trip"
+            }
+        ]
+    }
+}

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Navigation, HardHat } from 'lucide-react';
+import { ArrowRight, Navigation } from 'lucide-react';
 import SubpageNav from '@/components/ui/SubpageNav';
 import SubpageHero from '@/components/ui/SubpageHero';
 import FilterGrid from '@/components/ui/FilterGrid';
@@ -19,11 +19,6 @@ export default function IliganDirectories() {
 
             <SubpageNav href='/' text='Go Home' />
             <SubpageHero>
-                <SubpageHero.Badges>
-                    <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 px-2 py-1 rounded text-xs font-semibold border border-amber-200">
-                        <HardHat className="w-3.5 h-3.5" /> Page is Under Construction
-                    </span>
-                </SubpageHero.Badges>
                 <SubpageHero.Title>Travel Directory</SubpageHero.Title>
                 <SubpageHero.Description>
                     Discover places to visit, ways to get around, and where to stay while exploring Iligan City.

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ResultAsync, ok, err } from 'neverthrow';
 import {
     CloudSun, Wind, Droplets, ThermometerSun, MapPin, X,
