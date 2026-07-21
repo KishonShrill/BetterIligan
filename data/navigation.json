@@ -57,9 +57,9 @@
                 "upcoming": true
             },
             {
-                "name": "Transportation Map",
+                "name": "Jeepney Routes",
                 "description": "Navigate Iligan with our interactive guide to local jeepney routes and commuting paths.",
-                "href": "/travel/transportation/map",
+                "href": "/travel/transportation/jeepney",
                 "upcoming": true
             },
             {

@@ -53,8 +53,8 @@ const sections: SitemapSection[] = [
                 href: "/travel/transportation",
             },
             {
-                label: "Transportation Map",
-                href: "/travel/transportation/map",
+                label: "Jeepney Routes",
+                href: "/travel/transportation/jeepney",
             },
             {
                 label: "Bus Schedules",
