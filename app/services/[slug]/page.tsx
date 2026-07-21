@@ -33,6 +33,22 @@ export async function generateMetadata({
     return {
         title: service.title,
         description: service.description,
+        openGraph: {
+            images: [
+                {
+                    url: `/images/opengraph-image/${slug}.webp`,
+                    width: 1200,
+                    height: 630,
+                },
+            ],
+            siteName: 'BetterIligan',
+            locale: 'en_PH',
+            type: 'website',
+        },
+        twitter: {
+            images: [`/images/opengraph-image/${slug}.webp`],
+            card: 'summary_large_image',
+        },
     };
 }
 

@@ -12,7 +12,9 @@
         "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
         "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
         "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-        "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+        "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+        "generate-og": "tsx scripts/generate-og-images.tsx",
+        "generate-og:force": "tsx scripts/generate-og-images.tsx --force"
     },
     "dependencies": {
         "@bettergov/kapwa": "^1.2.4",
@@ -27,6 +29,8 @@
         "react-hot-toast": "^2.6.0",
         "react-leaflet": "^5.0.0",
         "recharts": "^2.15.0",
+        "satori": "^0.28.1",
+        "sharp": "^0.35.3",
         "tailwind-merge": "^3.6.0",
         "zod": "^4.4.3"
     },
@@ -46,6 +50,7 @@
         "exceljs": "^4.4.0",
         "husky": "^9.1.7",
         "tailwindcss": "^4",
+        "tsx": "^4.23.1",
         "typescript": "^5",
         "wrangler": "^4.95.0"
     }
