@@ -29,8 +29,6 @@
         "react-hot-toast": "^2.6.0",
         "react-leaflet": "^5.0.0",
         "recharts": "^2.15.0",
-        "satori": "^0.28.1",
-        "sharp": "^0.35.3",
         "tailwind-merge": "^3.6.0",
         "zod": "^4.4.3"
     },
@@ -49,6 +47,8 @@
         "eslint-config-next": "16.2.6",
         "exceljs": "^4.4.0",
         "husky": "^9.1.7",
+        "satori": "^0.28.1",
+        "sharp": "^0.35.3",
         "tailwindcss": "^4",
         "tsx": "^4.23.1",
         "typescript": "^5",
