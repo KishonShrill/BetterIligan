@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Text } from '@/components/ui/Text';
 import Section from '@/components/ui/Section';
 import Button3D from '@/components/ui/Button3D';
@@ -39,20 +39,26 @@ export default function ServicesSection() {
                         <Link
                             key={category.name}
                             href={category.href}
-                            className={`group border border-slate-200 rounded-xl p-6 flex flex-col h-full ${category.hoverBorder} hover:shadow-md transition-all duration-300`}
+                            // ADDED: 'relative' to keep the absolute icon contained
+                            className={`group relative border border-slate-200 rounded-xl p-6 flex flex-col h-full ${category.hoverBorder} hover:shadow-md transition-all duration-300`}
                         >
+                            {/* --- NEW: Mobile-only top-right icon --- */}
+                            <div className="md:hidden absolute top-5 right-5 text-slate-300 group-hover:text-blue-500 transition-colors duration-200">
+                                <ArrowUpRight className="w-5 h-5" />
+                            </div>
+
                             {/* Icon & Title */}
                             <div className="flex items-center gap-4 mb-4 sm:mb-6">
                                 <div className={`${category.secondaryColor} ${category.primaryColor} p-3 rounded-xl transition-colors shrink-0`}>
                                     <Icon className="w-6 h-6" />
                                 </div>
-                                <h3 className="text-lg font-bold text-slate-900 leading-tight">
+                                <h3 className="text-lg font-bold text-slate-900 leading-tight pr-6">
                                     {category.name}
                                 </h3>
                             </div>
 
                             {category.description && (
-                                <p className={`text-sm text-slate-600 leading-relaxed ${category.subItems.length > 0 ? 'mb-5' : 'mb-4 flex-1'}`}>
+                                <p className={`text-sm text-slate-600 leading-relaxed ${category.subItems.length > 0 ? 'mb-5' : 'mb-0 flex-1'}`}>
                                     {category.description}
                                 </p>
                             )}
@@ -67,9 +73,9 @@ export default function ServicesSection() {
                                 ))}
                             </ul>}
 
-                            {/* Action Link */}
+                            {/* Action Link (Hidden on mobile, visible on desktop) */}
                             <span
-                                className="text-blue-600 self-end font-semibold text-sm flex items-center gap-1.5 w-fit"
+                                className="hidden md:flex text-blue-600 self-end font-semibold text-sm items-center gap-1.5 w-fit"
                             >
                                 View More
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

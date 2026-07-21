@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {
     Users, Calendar, Map, Droplets,
-    Layers, TrendingUp, Compass
+    Layers, TrendingUp, Compass, ArrowUpRight
 } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import { Text } from '@/components/ui/Text';
@@ -73,6 +73,13 @@ export default function CityStatsSummary() {
                 {quickStats.map((stat, idx) => {
                     const innerContent = (
                         <>
+                            {/* --- NEW: Visual indicator for clickable cards --- */}
+                            {stat.href && (
+                                <div className="absolute top-5 right-5 text-slate-300 group-hover:text-blue-500 transition-colors duration-200">
+                                    <ArrowUpRight className="w-5 h-5" />
+                                </div>
+                            )}
+
                             <div className="flex items-center gap-4 mb-3 md:w-fit md:block md:mb-4">
                                 <div className={`p-2.5 rounded-xl border ${stat.bgIcon} shrink-0`}>
                                     {stat.icon}
@@ -88,13 +95,14 @@ export default function CityStatsSummary() {
                             <h3 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight mb-1 md:mb-1.5 group-hover:text-blue-600 transition-colors">
                                 {stat.value}
                             </h3>
-                            <p className="text-xs font-medium text-slate-500 mt-auto">
+                            <p className="text-xs font-medium text-slate-500 mt-auto pr-6">
                                 {stat.subtext}
                             </p>
                         </>
                     );
 
-                    const cardClasses = "bg-white border border-blue-100/50 shadow-sm rounded-2xl p-5 md:p-6 flex flex-col hover:shadow-md hover:border-blue-300 transition-all duration-200 group h-full block";
+                    // Added 'relative' to the base classes
+                    const cardClasses = "relative bg-white border border-blue-100/50 shadow-sm rounded-2xl p-5 md:p-6 flex flex-col hover:shadow-md hover:border-blue-300 transition-all duration-200 group h-full block";
 
                     // Conditionally render as a Next.js Link or a standard div
                     if (stat.href) {
