@@ -5,6 +5,8 @@ import { safeJsonLd } from '@/lib/utils';
 import ServiceClient from './ServiceClient';
 import { StandardService } from '@/validations/serviceSchema';
 
+export const dynamicParams = false;
+const SITE_URL = 'https://betteriligancity.org';
 // 1. STATIC PARAMS
 export async function generateStaticParams() {
     const standardServices = allServices.filter(
@@ -36,7 +38,7 @@ export async function generateMetadata({
         openGraph: {
             images: [
                 {
-                    url: `/images/opengraph-image/${slug}.webp`,
+                    url: `${SITE_URL}/images/opengraph-image/${slug}.webp`,
                     width: 1200,
                     height: 630,
                 },
@@ -46,7 +48,7 @@ export async function generateMetadata({
             type: 'website',
         },
         twitter: {
-            images: [`/images/opengraph-image/${slug}.webp`],
+            images: [`${SITE_URL}/images/opengraph-image/${slug}.webp`],
             card: 'summary_large_image',
         },
     };

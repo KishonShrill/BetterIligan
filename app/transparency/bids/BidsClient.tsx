@@ -7,10 +7,10 @@ import SubpageHero from '@/components/ui/SubpageHero';
 import FilterGrid from '@/components/ui/FilterGrid';
 import ReferencesFooter from '@/components/ui/ReferencesFooter';
 import BidCard from '@/components/BidCard';
-import { BidsSchema, getBidStatus } from '@/validations/bidSchema';
+import { BidsData, getBidStatus } from '@/validations/bidSchema';
 import rawBidsData from '@/data/iligan/bids.json';
 
-const bidsData = BidsSchema.parse(rawBidsData);
+const bidsData = rawBidsData as BidsData;
 
 type StatusFilter = 'All' | 'Open for Bidding' | 'Awarded' | 'Ongoing';
 

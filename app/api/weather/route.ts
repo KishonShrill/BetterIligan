@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { OpenWeatherResponse } from '@/types/weather';
 
+export const revalidate = 900;
+
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const cityId = searchParams.get('cityId') || process.env.NEXT_PUBLIC_WEATHER_CITY_ID;
@@ -13,8 +15,7 @@ export async function GET(request: Request) {
     try {
         const url = `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}&units=metric`;
 
-        // next: { revalidate: 300 } caches the response for 5 minutes so you don't spam the API
-        const response = await fetch(url, { next: { revalidate: 300 } });
+        const response = await fetch(url);
 
         if (!response.ok) throw new Error('Failed to fetch weather');
 
