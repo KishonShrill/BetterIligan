@@ -1,14 +1,18 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
-    "main": ".open-next/worker.js",
+    "main": "vinext/server/fetch-handler",
     "name": "betteriligan",
     "compatibility_date": "2026-05-29",
     "compatibility_flags": [
         "nodejs_compat"
     ],
     "assets": {
-        "directory": ".open-next/assets",
+        "directory": "dist/client",
+        "not_found_handling": "none",
         "binding": "ASSETS"
+    },
+    "cache": {
+        "enabled": true
     },
     "services": [
         {
@@ -35,5 +39,11 @@
     ],
     "vars": {
         "NEXT_PUBLIC_WEATHER_CITY_ID": "1711082",
-    }
+    },
+    "kv_namespaces": [
+        {
+            "binding": "VINEXT_KV_CACHE",
+            "id": "1ade0e8ba40547f887581e768548bd3b"
+        }
+    ]
 }

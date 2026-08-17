@@ -23,8 +23,8 @@ if (!fiscalYearArg || !statusArg || !xlsxUrl) {
 
 const fiscalYear = Number(fiscalYearArg);
 const status = statusArg;
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const budgetJsonPath = path.join(__dirname, '../data/iligan/budget.json');
+//const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const budgetJsonPath = path.join(import.meta.dirname, '../data/iligan/budget.json');
 
 const ILIGAN_ROW = 215; // Confirmed for FY2024/FY2025 files; verify column D ("LGU NAME") still reads "Iligan City" for new years.
 

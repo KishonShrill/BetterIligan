@@ -18,6 +18,10 @@
         "jsx": "react-jsx",
         "jsxImportSource": "react",
         "incremental": true,
+        "types": [
+            "vinext/types",
+            "node"
+        ],
         "plugins": [
             {
                 "name": "next"
