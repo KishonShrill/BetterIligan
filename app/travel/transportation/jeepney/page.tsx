@@ -23,7 +23,7 @@ export default function TransportationPage() {
                 </SubpageHero.Badges>
                 <SubpageHero.Title>Transportation Routes</SubpageHero.Title>
                 <SubpageHero.Description>
-                    Get the community gathered jeepney routes of Iligan City and never get lost while exploring.
+                    Find your way around Iligan City with our community jeepney route guide and always know the right fare
                 </SubpageHero.Description>
             </SubpageHero>
 
