@@ -1,0 +1,47 @@
+[
+  {
+    "routeId": "R6RIKIicEvnDJ0H7VDot",
+    "routeCode": "C1",
+    "routeColor": "#EC4899",
+    "routeFare": {
+      "regular": 15,
+      "discounted": 11
+    }
+  },
+  {
+    "routeId": "XQ5bhgssD32XClIdYJnO",
+    "routeCode": "C2",
+    "routeColor": "#3B82F6",
+    "routeFare": {
+      "regular": 15,
+      "discounted": 12
+    }
+  },
+  {
+    "routeId": "ZmjuY6b14Dk6TzUMOImG",
+    "routeCode": "D3",
+    "routeColor": "#EF4444",
+    "routeFare": {
+      "regular": 30,
+      "discounted": 25
+    }
+  },
+  {
+    "routeId": "jNmHoIfaRrK1BLxlwCan",
+    "routeCode": "C4",
+    "routeColor": "#F97316",
+    "routeFare": {
+      "regular": 13,
+      "discounted": 11
+    }
+  },
+  {
+    "routeId": "uZbmqjE8DbPaRqh8qdbk",
+    "routeCode": "TB-GR",
+    "routeColor": "#8B5CF6",
+    "routeFare": {
+      "regular": 14,
+      "discounted": 11.2
+    }
+  }
+]
