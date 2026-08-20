@@ -57,48 +57,42 @@ const footerSections: FooterSection[] = [
 
 export default function Footer({ className }: ClassName) {
     const pathname = usePathname();
-    return (
-        <footer className={`${className} ${(pathname === "/travel/transportation/map" || pathname === "/bangon-iligan") && "hidden"} bg-slate-900 text-white font-sans`}>
-            <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10">
-                    <div className='col-span-1 sm:col-span-2'>
-                        <div className="flex items-center gap-3 mb-4">
-                            <Image
-                                src="/images/logos/betteriligan-logo.png"
-                                alt="BetterIligan Logo"
-                                width={75}
-                                height={75}
-                                className="w-12 h-12 rounded-md object-cover"
-                            />
-                            <div className="font-bold">BetterIligan</div>
-                        </div>
-                        <p className="text-slate-400 text-sm mb-5 leading-relaxed">
-                            Open-source civic tech initiative making government information
-                            accessible for Iliganons.
-                        </p>
-                        <div className="flex gap-3">
-                            <a
-                                href="https://www.facebook.com/BetterIliganCity.org"
-                                className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Facebook className="h-4 w-4" />
-                            </a>
-                            <a
-                                href="https://github.com/KishonShrill/BetterIligan"
-                                className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Github className="h-4 w-4" />
-                            </a>
-                        </div>
-                    </div>
 
+    return (
+        <footer className={`${className} ${(pathname === "/travel/transportation/map" || pathname === "/bangon-iligan") && "hidden"} bg-slate-900 text-white font-sans overflow-hidden`}>
+            <div className="container mx-auto px-4 pt-16 pb-8 flex flex-col min-h-full">
+
+                {/* Description & Socials nested right above the giant logo */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-6 md:mb-8">
+                    <p className="text-slate-400 text-sm max-w-sm leading-relaxed">
+                        Open-source civic tech initiative making government information
+                        accessible for Iliganons.
+                    </p>
+                    <div className="flex gap-3 shrink-0">
+                        <a
+                            href="https://www.facebook.com/BetterIliganCity.org"
+                            className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Facebook className="h-4 w-4" />
+                        </a>
+                        <a
+                            href="https://github.com/KishonShrill/BetterIligan"
+                            className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Github className="h-4 w-4" />
+                        </a>
+                    </div>
+                </div>
+
+                {/* 1. TOP: Links Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16 md:mb-24">
                     {footerSections.map((section) => (
                         <div key={section.title}>
-                            <h3 className="font-semibold mb-4">{section.title}</h3>
+                            <h3 className="font-semibold mb-4 text-slate-100">{section.title}</h3>
                             <ul className="space-y-2.5">
                                 {section.links.map((link) =>
                                     link.external ? (
@@ -128,15 +122,34 @@ export default function Footer({ className }: ClassName) {
                     ))}
                 </div>
 
-                <div className="border-t border-slate-800 mt-10 pt-6">
+                {/* 2. MIDDLE: Description, Socials, and Expanding Branding */}
+                <div className="flex flex-col mt-auto border-b border-slate-800 pb-8 mb-8">
+
+                    {/* The Dynamically Expanding Logo & Name */}
+                    <div className="w-full flex items-center justify-center gap-3 sm:gap-6">
+                        <Image
+                            src="/images/logos/betteriligan-logo.png"
+                            alt="BetterIliganCity Logo"
+                            width={200}
+                            height={200}
+                            className="w-[12vw] max-w-[140px] min-w-[50px] h-auto rounded-xl sm:rounded-2xl object-cover shrink-0 select-none"
+                        />
+                        <div className="font-black text-[clamp(2rem,9vw,10rem)] leading-none tracking-tighter text-white select-none text-right truncate">
+                            BetterIliganCity
+                        </div>
+                    </div>
+                </div>
+
+                {/* 3. BOTTOM: Copyright & Sitemap */}
+                <div>
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <p className="text-slate-500 text-sm">
-                            &copy; {new Date().getFullYear()} BetterIligan · Not an official
+                        <p className="text-slate-500 text-sm text-center sm:text-left">
+                            &copy; {new Date().getFullYear()} BetterIliganCity · Not an official
                             government website
                         </p>
                         <Link
                             href="/site-map"
-                            className="text-slate-500 hover:text-white text-sm transition-colors"
+                            className="text-slate-500 hover:text-white text-sm transition-colors shrink-0"
                         >
                             Sitemap
                         </Link>

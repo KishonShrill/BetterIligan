@@ -4,9 +4,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import {
     ArrowLeft, Calculator, Zap, Calendar,
-    CalendarDays, CalendarCheck, HelpCircle
+    CalendarDays, CalendarCheck, HelpCircle, AlertTriangle
 } from 'lucide-react';
 import SubpageHero from '@/components/ui/SubpageHero';
+
+// --- CONFIGURATION ---
+// Change these values whenever you update the rates!
+const ILPI_DATA = {
+    rate: 15.1326,
+    lastUpdated: '2026-08-20', // Use YYYY-MM-DD format
+};
 
 // Quick preset appliances for user convenience
 const APPLIANCE_PRESETS = [
@@ -22,10 +29,22 @@ const APPLIANCE_PRESETS = [
 
 export default function ElectricityCalculatorPage() {
     // --- STATE ---
-    // Update the default rate here based on the exact Residential rate from your ILPI images
-    const [ratePerKWh, setRatePerKWh] = useState<number | string>(13.6098);
+    const [ratePerKWh, setRatePerKWh] = useState<number | string>(ILPI_DATA.rate);
     const [wattage, setWattage] = useState<number | string>('');
     const [hoursPerDay, setHoursPerDay] = useState<number | string>(8);
+
+    // --- DATE LOGIC ---
+    const updatedDate = new Date(ILPI_DATA.lastUpdated);
+    const currentDate = new Date();
+
+    // Calculate if it has been more than 30 days
+    const timeDifference = currentDate.getTime() - updatedDate.getTime();
+    const daysSinceUpdate = timeDifference / (1000 * 3600 * 24);
+    const isStale = daysSinceUpdate > 30;
+
+    // Formatting for the UI
+    const formattedFullDate = updatedDate.toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric' });
+    const formattedBillingMonth = updatedDate.toLocaleDateString('en-PH', { month: 'long', year: 'numeric' });
 
     // --- CALCULATIONS ---
     const watts = Number(wattage) || 0;
@@ -54,9 +73,17 @@ export default function ElectricityCalculatorPage() {
                     >
                         <ArrowLeft className="w-4 h-4" /> Back to Electricity
                     </Link>
-                    <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold uppercase tracking-wider rounded-full border border-emerald-200 flex items-center gap-1.5 w-fit shadow-sm">
-                        <CalendarCheck className="w-3.5 h-3.5" />
-                        Recently Updated: July 15, 2026
+
+                    {/* Dynamic Staleness Badge */}
+                    <span
+                        suppressHydrationWarning
+                        className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full border flex items-center gap-1.5 w-fit shadow-sm ${isStale
+                                ? 'bg-amber-50 text-amber-700 border-amber-200'
+                                : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                            }`}
+                    >
+                        {isStale ? <AlertTriangle className="w-3.5 h-3.5" /> : <CalendarCheck className="w-3.5 h-3.5" />}
+                        {isStale ? 'Stale Information:' : 'Recently Updated:'} {formattedFullDate}
                     </span>
                 </SubpageHero.Badges>
                 <SubpageHero.Title>Appliance Cost Calculator</SubpageHero.Title>
@@ -96,9 +123,9 @@ export default function ElectricityCalculatorPage() {
                                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-slate-900 font-medium"
                                     placeholder="e.g. 11.50"
                                 />
-                                <p className="text-[11px] text-slate-500 mt-2 font-medium flex items-center gap-1.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                    Default rate based on ILPI billing for <strong className="text-slate-700">July 2026</strong>
+                                <p suppressHydrationWarning className="text-[11px] text-slate-500 mt-2 font-medium flex items-center gap-1.5">
+                                    <span className={`w-1.5 h-1.5 rounded-full ${isStale ? 'bg-amber-500' : 'bg-emerald-500'}`}></span>
+                                    Default rate based on ILPI billing for <strong className="text-slate-700">{formattedBillingMonth}</strong>
                                 </p>
                             </div>
 
