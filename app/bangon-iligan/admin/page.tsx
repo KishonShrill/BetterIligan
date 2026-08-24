@@ -1,13 +1,14 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut, CheckCircle2, Trash2, BookOpen } from 'lucide-react';
+import { ArrowLeft, Check, EyeOff, ShieldCheck, X, MessageSquare, TriangleAlert, LogOut, CheckCircle2, Trash2, BookOpen, Siren } from 'lucide-react';
 import { isAdmin } from '@/lib/bangonAuth';
 import {
     getPendingBoardMessages,
     getApprovedBoardMessages,
     getUnverifiedIncidents,
     getActiveIncidents,
+    getIncidentState,
 } from '@/data/bangon/queries';
 import {
     approveBoardMessage,
@@ -19,9 +20,11 @@ import {
     unverifyIncident,
     resolveIncident,
     deleteIncident,
+    activateIncident,
+    deactivateIncident,
     adminLogout,
 } from '@/actions/bangonAdmin';
-import type { IncidentReportRow } from '@/validations/bangonSchema';
+import type { IncidentReportRow, IncidentStateRow } from '@/validations/bangonSchema';
 
 export const metadata: Metadata = {
     title: 'Bangon Iligan — Moderation',
@@ -40,12 +43,14 @@ const INCIDENT_LABEL: Record<IncidentReportRow['incident_type'], string> = {
 export default async function AdminPage() {
     if (!(await isAdmin())) redirect('/bangon-iligan/admin/login');
 
-    const [pending, approved, unverified, active] = await Promise.all([
+    const [pending, approved, unverified, active, incidentState] = await Promise.all([
         getPendingBoardMessages(),
         getApprovedBoardMessages(),
         getUnverifiedIncidents(),
         getActiveIncidents(),
+        getIncidentState(),
     ]);
+    const incidentActive = incidentState?.active === 1;
 
     return (
         <main className="min-h-screen bg-slate-50 pb-24 font-sans">
@@ -77,6 +82,11 @@ export default async function AdminPage() {
                     </div>
                 </div>
             </header>
+
+            {/* Incident activation — runtime standby↔active switch (D1-backed, no redeploy) */}
+            <div className="container mx-auto px-4 pt-8 md:px-6">
+                <IncidentStatusPanel state={incidentState} active={incidentActive} />
+            </div>
 
             <div className="container mx-auto grid gap-8 px-4 py-8 md:px-6 lg:grid-cols-2">
                 {/* Pending board posts */}
@@ -278,5 +288,86 @@ function Empty({ text }: { text: string }) {
         <div className="rounded-xl border border-dashed border-slate-200 bg-white p-8 text-center text-sm text-slate-400">
             {text}
         </div>
+    );
+}
+
+// Runtime standby↔active switch. When active, shows the live incident + a
+// "Stand down" button; otherwise a form to declare one. Both persist to D1 and
+// revalidate the homepage banner + command center, so no redeploy is needed.
+function IncidentStatusPanel({ state, active }: { state: IncidentStateRow | null; active: boolean }) {
+    if (active && state) {
+        return (
+            <section className="rounded-2xl border border-red-200 bg-red-50 p-5">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div className="min-w-0">
+                        <p className="flex flex-wrap items-center gap-x-2 text-[11px] font-bold uppercase tracking-widest text-red-700">
+                            <Siren className="h-4 w-4" /> Incident active
+                            {state.declared_at && (
+                                <span className="font-semibold normal-case tracking-normal text-red-500">
+                                    · since {state.declared_at}
+                                </span>
+                            )}
+                        </p>
+                        <p className="mt-1 text-base font-extrabold text-slate-900">{state.title}</p>
+                        {state.summary && <p className="mt-0.5 text-sm text-slate-600">{state.summary}</p>}
+                        <p className="mt-2 text-xs text-slate-400">
+                            The homepage banner and command center are showing the active state now.
+                        </p>
+                    </div>
+                    <form action={deactivateIncident}>
+                        <button className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-800">
+                            <ShieldCheck className="h-4 w-4" /> Stand down
+                        </button>
+                    </form>
+                </div>
+            </section>
+        );
+    }
+
+    const inputCls =
+        'w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200';
+    return (
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="mb-3 flex items-center gap-2">
+                <Siren className="h-5 w-5 text-red-600" />
+                <h2 className="text-lg font-bold text-slate-900">Declare an incident</h2>
+                <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700">Standby</span>
+            </div>
+            <p className="mb-4 text-sm text-slate-500">
+                Activating flips the homepage banner and the command center to active immediately — no redeploy.
+            </p>
+            <form action={activateIncident} className="space-y-3">
+                <input
+                    name="title"
+                    required
+                    maxLength={120}
+                    defaultValue={state?.title ?? ''}
+                    placeholder="Incident title (e.g. Bangon Iligan — Typhoon Response)"
+                    className={inputCls}
+                />
+                <textarea
+                    name="summary"
+                    rows={2}
+                    maxLength={400}
+                    defaultValue={state?.summary ?? ''}
+                    placeholder="Short summary — what happened and the current situation."
+                    className={`${inputCls} resize-none`}
+                />
+                <div className="flex flex-wrap items-center gap-3">
+                    <label className="inline-flex items-center gap-2 text-sm text-slate-500">
+                        Declared
+                        <input
+                            type="date"
+                            name="declaredAt"
+                            defaultValue={state?.declared_at || ''}
+                            className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900"
+                        />
+                    </label>
+                    <button className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700">
+                        <Siren className="h-4 w-4" /> Activate incident
+                    </button>
+                </div>
+            </form>
+        </section>
     );
 }

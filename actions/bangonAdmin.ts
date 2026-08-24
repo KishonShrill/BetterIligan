@@ -146,3 +146,48 @@ export async function resolveIncident(id: string): Promise<void> {
     revalidatePath('/bangon-iligan');
     revalidatePath('/bangon-iligan/admin');
 }
+
+// ── Incident activation (runtime standby↔active switch) ──────────────
+// Declares an active incident: the homepage banner + command center flip to
+// active immediately via revalidatePath — no redeploy. Persisted in D1
+// (bangon_incident_state, single row), overriding the committed incident.json.
+export async function activateIncident(formData: FormData): Promise<void> {
+    await assertAdmin();
+    const title = String(formData.get('title') ?? '').trim();
+    const summary = String(formData.get('summary') ?? '').trim();
+    const declaredAt = String(formData.get('declaredAt') ?? '').trim();
+    if (!title) return; // title is required (the form enforces it too)
+
+    const db = await getDb();
+    await db
+        .prepare(
+            `INSERT INTO bangon_incident_state (id, active, title, summary, declared_at, updated_at)
+             VALUES ('current', 1, ?1, ?2, ?3, datetime('now'))
+             ON CONFLICT (id) DO UPDATE SET
+                active = 1,
+                title = excluded.title,
+                summary = excluded.summary,
+                declared_at = excluded.declared_at,
+                updated_at = datetime('now')`,
+        )
+        .bind(title, summary, declaredAt)
+        .run();
+    await audit('incident_state:activated', 'incident_state', 'current');
+    revalidatePath('/');
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
+}
+
+// Stands the incident down — back to standby. Keeps the last title/summary in
+// the row (hidden while inactive) so re-activating is one click.
+export async function deactivateIncident(): Promise<void> {
+    await assertAdmin();
+    const db = await getDb();
+    await db
+        .prepare("UPDATE bangon_incident_state SET active = 0, updated_at = datetime('now') WHERE id = 'current'")
+        .run();
+    await audit('incident_state:deactivated', 'incident_state', 'current');
+    revalidatePath('/');
+    revalidatePath('/bangon-iligan');
+    revalidatePath('/bangon-iligan/admin');
+}
