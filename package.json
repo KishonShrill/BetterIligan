@@ -20,7 +20,9 @@
         "dev": "vinext dev --port 3001",
         "build": "vinext build",
         "start": "wrangler dev --config dist/server/wrangler.json",
-        "deploy": "vinext-cloudflare deploy --config dist/server/wrangler.json"
+        "db:migrate:local": "wrangler d1 migrations apply betteriligan-bangon --local --persist-to dist/server/.wrangler/state",
+        "db:migrate": "wrangler d1 migrations apply betteriligan-bangon --remote",
+        "deploy": "npm run db:migrate && vinext-cloudflare deploy --config dist/server/wrangler.json"
     },
     "dependencies": {
         "@bettergov/kapwa": "^1.2.4",

@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { getDb } from '@/lib/db';
 import { createAdminSession, destroyAdminSession, isAdmin } from '@/lib/bangonAuth';
 
-type ActionResult = { success: true } | { success: false; error: string };
+export type ActionResult = { success: true } | { success: false; error: string };
 
 // Records a moderation action in the append-only audit trail. Best-effort:
 // a logging failure must not block the moderation action itself.
@@ -151,43 +151,73 @@ export async function resolveIncident(id: string): Promise<void> {
 // Declares an active incident: the homepage banner + command center flip to
 // active immediately via revalidatePath — no redeploy. Persisted in D1
 // (bangon_incident_state, single row), overriding the committed incident.json.
-export async function activateIncident(formData: FormData): Promise<void> {
+//
+// Returns a result instead of throwing so a missing table (migration 0003 not
+// applied to the remote D1) surfaces as an actionable message in the admin UI
+// rather than a silent form failure — see docs/bangon-iligan.md troubleshooting.
+export async function activateIncident(
+    _prev: ActionResult,
+    formData: FormData,
+): Promise<ActionResult> {
     await assertAdmin();
     const title = String(formData.get('title') ?? '').trim();
     const summary = String(formData.get('summary') ?? '').trim();
     const declaredAt = String(formData.get('declaredAt') ?? '').trim();
-    if (!title) return; // title is required (the form enforces it too)
+    if (!title) return { success: false, error: 'A title is required to declare an incident.' };
 
-    const db = await getDb();
-    await db
-        .prepare(
-            `INSERT INTO bangon_incident_state (id, active, title, summary, declared_at, updated_at)
-             VALUES ('current', 1, ?1, ?2, ?3, datetime('now'))
-             ON CONFLICT (id) DO UPDATE SET
-                active = 1,
-                title = excluded.title,
-                summary = excluded.summary,
-                declared_at = excluded.declared_at,
-                updated_at = datetime('now')`,
-        )
-        .bind(title, summary, declaredAt)
-        .run();
+    try {
+        const db = await getDb();
+        await db
+            .prepare(
+                `INSERT INTO bangon_incident_state (id, active, title, summary, declared_at, updated_at)
+                 VALUES ('current', 1, ?1, ?2, ?3, datetime('now'))
+                 ON CONFLICT (id) DO UPDATE SET
+                    active = 1,
+                    title = excluded.title,
+                    summary = excluded.summary,
+                    declared_at = excluded.declared_at,
+                    updated_at = datetime('now')`,
+            )
+            .bind(title, summary, declaredAt)
+            .run();
+    } catch (err) {
+        console.error('activateIncident failed:', err);
+        return {
+            success: false,
+            error:
+                'Could not save the incident state. If this persists, apply pending database ' +
+                'migrations with `npm run db:migrate` (the bangon_incident_state table may be missing).',
+        };
+    }
     await audit('incident_state:activated', 'incident_state', 'current');
     revalidatePath('/');
     revalidatePath('/bangon-iligan');
     revalidatePath('/bangon-iligan/admin');
+    return { success: true };
 }
 
 // Stands the incident down — back to standby. Keeps the last title/summary in
-// the row (hidden while inactive) so re-activating is one click.
-export async function deactivateIncident(): Promise<void> {
+// the row (hidden while inactive) so re-activating is one click. Bound via
+// useActionState, which supplies (prevState, FormData); neither is needed here.
+export async function deactivateIncident(): Promise<ActionResult> {
     await assertAdmin();
-    const db = await getDb();
-    await db
-        .prepare("UPDATE bangon_incident_state SET active = 0, updated_at = datetime('now') WHERE id = 'current'")
-        .run();
+    try {
+        const db = await getDb();
+        await db
+            .prepare("UPDATE bangon_incident_state SET active = 0, updated_at = datetime('now') WHERE id = 'current'")
+            .run();
+    } catch (err) {
+        console.error('deactivateIncident failed:', err);
+        return {
+            success: false,
+            error:
+                'Could not stand down the incident. If this persists, apply pending database ' +
+                'migrations with `npm run db:migrate` (the bangon_incident_state table may be missing).',
+        };
+    }
     await audit('incident_state:deactivated', 'incident_state', 'current');
     revalidatePath('/');
     revalidatePath('/bangon-iligan');
     revalidatePath('/bangon-iligan/admin');
+    return { success: true };
 }
