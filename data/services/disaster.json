@@ -7,8 +7,8 @@
         "isWalkIn": false,
         "isOnline": true,
         "department": "BetterIligan",
-        "type": "external",
-        "externalUrl": "/disaster",
+        "type": "custom_link",
+        "href": "/disaster",
         "tags": [
             "disaster",
             "emergency",
