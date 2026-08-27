@@ -6,7 +6,7 @@ export default function TransportationCharters() {
         <main className="min-h-screen bg-slate-50 font-sans pb-24">
             <SubpageHero>
                 <SubpageHero.Badges>
-                    <div className='mx-auto flex gap-4'>
+                    <div className='lg:mx-auto flex gap-4'>
                         <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 px-2 py-1 rounded text-xs font-semibold border border-amber-200">
                             <HardHat className="w-3.5 h-3.5" /> Page is Under Construction
                         </span>
@@ -16,10 +16,10 @@ export default function TransportationCharters() {
                         </span>
                     </div>
                 </SubpageHero.Badges>
-                <SubpageHero.Title className='text-center'>Transportation</SubpageHero.Title>
+                <SubpageHero.Title className='lg:text-center'>Transportation</SubpageHero.Title>
             </SubpageHero>
 
-            <section className="container mt-16 mx-auto">
+            <section className="container mt-16 mx-auto px-4">
                 <div className="mb-6 border-b border-slate-200 pb-4">
                     <h2 className="text-2xl font-bold text-slate-900">Charters & Vehicle Rentals</h2>
                     <p className="text-slate-500 mt-1">Private transport options for group events, outings, and company trips.</p>
@@ -68,7 +68,7 @@ export default function TransportationCharters() {
                                     <Phone className="w-3.5 h-3.5" />
                                     +63 994 226 9218
                                 </a>
-                                <a href="tel:369924898199" className="inline-flex items-center gap-2 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200 hover:border-blue-200 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors">
+                                <a href="tel:+639924898199" className="inline-flex items-center gap-2 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200 hover:border-blue-200 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors">
                                     <Phone className="w-3.5 h-3.5" />
                                     369924898199
                                 </a>
