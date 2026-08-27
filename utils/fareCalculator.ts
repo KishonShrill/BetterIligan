@@ -1,14 +1,14 @@
 export const LTFRB_RATES = {
-  baseKm: 4,
-  regular: {
-    baseFare: 11.0,
-    succeedingKm: 1.9,
-  },
-  discounted: {
-    // 20% off for Students, Seniors, PWDs
-    baseFare: 8.75,
-    succeedingKm: 1.5,
-  },
+    baseKm: 4,
+    regular: {
+        baseFare: 11.0,
+        succeedingKm: 1.9,
+    },
+    discounted: {
+        // 20% off for Students, Seniors, PWDs
+        baseFare: 8.75,
+        succeedingKm: 1.5,
+    },
 };
 
 /**
@@ -20,27 +20,27 @@ export const LTFRB_RATES = {
  * @returns The calculated fare in PHP
  */
 export function calculateLTFRBFare(
-  distanceKm: number,
-  isDiscounted: boolean = false,
+    distanceKm: number,
+    isDiscounted: boolean = false,
 ): number {
-  // Return 0 for invalid distances
-  if (distanceKm <= 0) return 0;
+    // Return 0 for invalid distances
+    if (distanceKm <= 0) return 0;
 
-  const rates = isDiscounted ? LTFRB_RATES.discounted : LTFRB_RATES.regular;
+    const rates = isDiscounted ? LTFRB_RATES.discounted : LTFRB_RATES.regular;
 
-  // If the trip is within the first 4km, charge only the base fare
-  if (distanceKm <= LTFRB_RATES.baseKm) {
-    return rates.baseFare;
-  }
+    // If the trip is within the first 4km, charge only the base fare
+    if (distanceKm <= LTFRB_RATES.baseKm) {
+        return rates.baseFare;
+    }
 
-  // Calculate the excess kilometers
-  const excessKm = distanceKm - LTFRB_RATES.baseKm;
+    // Calculate the excess kilometers
+    const excessKm = distanceKm - LTFRB_RATES.baseKm;
 
-  // Calculate exact fare
-  const exactFare = rates.baseFare + excessKm * rates.succeedingKm;
+    // Calculate exact fare
+    const exactFare = rates.baseFare + excessKm * rates.succeedingKm;
 
-  // LTFRB matrices usually round to the nearest 0.25 (25 centavos)
-  const roundedFare = Math.round(exactFare * 4) / 4;
+    // LTFRB matrices usually round to the nearest 0.25 (25 centavos)
+    const roundedFare = Math.round(exactFare * 4) / 4;
 
-  return roundedFare;
+    return roundedFare;
 }
