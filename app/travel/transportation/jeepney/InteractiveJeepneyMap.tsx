@@ -91,7 +91,7 @@ export default function InteractiveJeepneyMap() {
         <div className={containerClasses}>
 
             {/* LEFT SIDEBAR: The Route List */}
-            <div className={`border-r border-slate-100 rounded-r-2xl flex flex-col bg-white ${isFullscreen ? 'w-full lg:w-80 h-1/3 lg:h-full shrink-0' : 'lg:col-span-4 h-[300px] lg:h-[600px]'}`}>
+            <div className={`border-r border-slate-100 rounded-r-2xl flex flex-col bg-white ${isFullscreen ? 'w-full lg:w-80 h-1/3 lg:h-full shrink-0' : 'lg:col-span-2 h-[300px] lg:h-[600px]'}`}>
                 <div className="p-4 border-b border-slate-100 rounded-r-2xl bg-slate-50 flex justify-between items-center shrink-0">
                     <div>
                         <h2 className="text-lg font-bold text-slate-900">Jeepney Routes</h2>
@@ -175,7 +175,7 @@ export default function InteractiveJeepneyMap() {
             </div>
 
             {/* RIGHT MAP: OpenStreetMap via Leaflet */}
-            <div className={`relative z-0 bg-slate-100 isolate ${isFullscreen ? 'w-full h-2/3 lg:h-full flex-1' : 'lg:col-span-8 h-[500px] lg:h-[600px]'}`}>
+            <div className={`relative z-0 bg-slate-100 isolate ${isFullscreen ? 'w-full h-2/3 lg:h-full flex-1' : 'w-full lg:col-span-10 h-full'}`}>
 
                 {/* --- FLOATING CONTROLS --- */}
                 <div className="absolute top-4 right-4 z-[1000] pointer-events-auto flex flex-col gap-2">
@@ -220,7 +220,7 @@ export default function InteractiveJeepneyMap() {
                     <FitToRoute activeRouteId={activeRouteId} />
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_2cjc_1_7bf841ba32475572565a719f"
                     />
 
                     <GeoJSON

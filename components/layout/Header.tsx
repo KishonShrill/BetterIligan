@@ -9,6 +9,7 @@ import { headerDropdown } from '@/data/categories';
 import navigationJson from '@/data/navigation.json';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import Button3D from '../ui/Button3D';
+import { HIDDEN_HEADER_PATHS } from '@/utils/variables';
 
 interface SubItem {
     name: string;
@@ -39,6 +40,7 @@ export default function Header({ className }: ClassName) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
     const pathname = usePathname();
+    const hideHeader = HIDDEN_HEADER_PATHS.includes(pathname);
 
     // Prevent background scrolling when mobile menu is open
     useEffect(() => {
@@ -60,7 +62,7 @@ export default function Header({ className }: ClassName) {
     };
 
     return (
-        <header className={`${className} ${(pathname === "/travel/transportation/map" || pathname === "/bangon-iligan") && "hidden"} px-4 font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200`}>
+        <header className={`${className} ${hideHeader && "hidden"} px-4 font-sans sticky top-0 z-40 w-full bg-white border-b border-slate-200`}>
             <div className={`container relative mx-auto p-0}`}>
                 <div className="flex items-center justify-between h-20 sm:px-4">
 

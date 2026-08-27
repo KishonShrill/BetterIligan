@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Github } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { HIDDEN_HEADER_PATHS } from '@/utils/variables';
 
 interface FooterLink {
     label: string;
@@ -57,9 +58,10 @@ const footerSections: FooterSection[] = [
 
 export default function Footer({ className }: ClassName) {
     const pathname = usePathname();
+    const hideHeader = HIDDEN_HEADER_PATHS.includes(pathname);
 
     return (
-        <footer className={`${className} ${(pathname === "/travel/transportation/map" || pathname === "/bangon-iligan") && "hidden"} bg-slate-900 text-white font-sans overflow-hidden`}>
+        <footer className={`${className} ${hideHeader && "hidden"} bg-slate-900 text-white font-sans overflow-hidden`}>
             <div className="container mx-auto px-4 pt-16 pb-8 flex flex-col min-h-full">
 
                 {/* Description & Socials nested right above the giant logo */}

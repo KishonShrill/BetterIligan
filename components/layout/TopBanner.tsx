@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Cloud, CloudRain, Sun, CloudLightning, Phone } from 'lucide-react';
+import { HIDDEN_HEADER_PATHS } from '@/utils/variables';
 
 const ILIGAN_LAT = 8.2280;
 const ILIGAN_LNG = 124.2452;
@@ -15,6 +16,7 @@ export default function TopBanner({ className }: ClassName) {
     const [rates, setRates] = useState<Record<string, number>>({});
     const [currIdx, setCurrIdx] = useState(0);
     const pathname = usePathname();
+    const hideHeader = HIDDEN_HEADER_PATHS.includes(pathname);
 
     useEffect(() => {
         fetch(
@@ -54,7 +56,7 @@ export default function TopBanner({ className }: ClassName) {
     const rate = rates[curr] ? (1 / rates[curr]).toFixed(2) : null;
 
     return (
-        <div className={`${className} ${(pathname === "/travel/transportation" || pathname === "/bangon-iligan") && "hidden"} bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans`}>
+        <div className={`${className} ${hideHeader && "hidden"} bg-slate-50 border-b border-slate-200 text-[10px] sm:text-xs font-sans`}>
             <div className="container mx-auto px-4 py-1 sm:py-2 flex items-center justify-between sm:justify-end sm:gap-4">
                 <div className="flex items-center gap-3 text-slate-600">
                     <span className="text-slate-500">
