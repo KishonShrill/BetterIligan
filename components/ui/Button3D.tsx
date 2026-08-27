@@ -10,7 +10,8 @@ interface Button3DProps {
     ref?: Ref<HTMLAnchorElement | HTMLButtonElement>;
     hasArrow?: boolean;
     iconPosition?: 'left' | 'right';
-    variant?: 'white' | 'blue' | 'slate';
+    animateIcon?: boolean;
+    variant?: 'white' | 'blue' | 'slate' | 'orange';
     size?: 'sm' | 'md' | 'lg';
     className?: string; // For passing extra classes like w-full
 }
@@ -23,6 +24,7 @@ export default function Button3D({
     ref,
     iconPosition = 'right',
     hasArrow = false,
+    animateIcon = true,
     variant = 'white',
     size = 'md',
     className = '',
@@ -55,6 +57,12 @@ export default function Button3D({
             shadow-[0_4px_0_0_#0f172a] 
             hover:bg-slate-700 hover:shadow-[0_8px_0_0_#0f172a] 
             active:shadow-[0_0px_0_0_#0f172a]
+        `,
+        orange: `
+            bg-orange-500 text-white 
+            shadow-[0_4px_0_0_#c2410c] 
+            hover:bg-orange-400 hover:shadow-[0_8px_0_0_#c2410c] 
+            active:shadow-[0_0px_0_0_#c2410c]
         `
     };
 
@@ -69,7 +77,9 @@ export default function Button3D({
     // Combine them all together safely
     const finalClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`.trim().replace(/\s+/g, ' ');
     const iconSizeClass = size === 'sm' ? 'w-3.5 h-3.5' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4';
-    const hoverTranslateClass = iconPosition === 'right' ? 'group-hover:translate-x-1' : 'group-hover:-translate-x-1';
+    const hoverTranslateClass = animateIcon
+        ? (iconPosition === 'right' ? 'group-hover:translate-x-1' : 'group-hover:-translate-x-1')
+        : '';
 
     const renderIcon = IconComponent
         ? <IconComponent className={`transition-transform ${hoverTranslateClass} ${iconSizeClass}`} />

@@ -24,13 +24,13 @@ export default function ContributionModal({ isOpen, onClose }: ContributionModal
 
         try {
             const captchaToken = recaptchaRef.current?.getValue();
-            if (!captchaToken) {
+            if (!captchaToken && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
                 toast.error("Please complete the CAPTCHA.");
                 return;
             }
 
             const formData = new FormData(e.currentTarget);
-            const result = await submitContribution(formData, captchaToken);
+            const result = await submitContribution(formData, captchaToken as string);
 
             if (result?.success) {
                 toast.success("Sent Successfully! Our moderators will review this shortly.");
@@ -116,12 +116,14 @@ export default function ContributionModal({ isOpen, onClose }: ContributionModal
                         </div>
 
                         {/* Google reCAPTCHA */}
-                        <div className="flex justify-center pt-2">
-                            <ReCAPTCHA
-                                ref={recaptchaRef}
-                                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                            />
-                        </div>
+                        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                            <div className="flex justify-center pt-2">
+                                <ReCAPTCHA
+                                    ref={recaptchaRef}
+                                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                                />
+                            </div>
+                        )}
 
                         {status === 'error' && (
                             <div className="flex items-center gap-2 text-red-600 bg-red-50 p-3 rounded-lg text-sm font-medium">
