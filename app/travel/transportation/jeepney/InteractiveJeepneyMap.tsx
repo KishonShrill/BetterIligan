@@ -1,13 +1,15 @@
 'use client'
 
 import { useState, useEffect, useMemo, useRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import MapGL, { Source, Layer, NavigationControl } from 'react-map-gl/maplibre';
 import type { MapRef, MapLayerMouseEvent } from 'react-map-gl/maplibre';
 import bbox from '@turf/bbox';
 import type { GeoJsonObject } from 'geojson';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Search, X } from 'lucide-react';
 import jeepneyCodesData from '@/data/travel/jeepneyCoding.json';
 import jeepneyRoutesData from '@/data/travel/jeepney-routes.json';
 import iliganBoundaryData from '@/data/travel/iligan-city-boundary.json'
@@ -65,7 +67,11 @@ function FitToRoute({
 export default function InteractiveJeepneyMap() {
     const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
     const [showAllRoutes, setShowAllRoutes] = useState(true);
+    const [searchQuery, setSearchQuery] = useState(''); // --- NEW: Search State ---
+
+
     const mapRef = useRef<MapRef>(null);
+
     // --- NEW: 3-Phase Animation State ---
     const [sidebarPhase, setSidebarPhase] = useState<'closed' | 'peek' | 'open'>('open');
     const [isClosing, setIsClosing] = useState(false);
@@ -121,12 +127,6 @@ export default function InteractiveJeepneyMap() {
         setShowAllRoutes(false);
     };
 
-    // Track the phase in a ref to avoid stale closures inside useEffects
-    const phaseRef = useRef(sidebarPhase);
-    useEffect(() => {
-        phaseRef.current = sidebarPhase;
-    }, [sidebarPhase]);
-
     const toggleSidebar = () => {
         if (sidebarPhase === 'closed') {
             setIsClosing(false);
@@ -139,7 +139,23 @@ export default function InteractiveJeepneyMap() {
         }
     };
 
-    // --- NEW: Safe opening mechanism avoiding Leaflet stale closures ---
+    // --- NEW: Dynamic Style for the Search Bar ---
+    // Mirrors the exact timing of the sidebar's width transition
+    const searchStyle = {
+        transitionProperty: "transform",
+        transitionDuration: (sidebarPhase === 'peek' && !isClosing) || (sidebarPhase === 'closed' && isClosing)
+            ? "250ms"
+            : "350ms",
+        transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+        // 12rem = w-48 (closed), 20rem = w-80 (open), plus 1rem gap
+        transform: sidebarPhase === 'closed' ? 'translateX(calc(12rem + 1rem))' : 'translateX(calc(20rem + 1rem))'
+    };
+
+    const phaseRef = useRef(sidebarPhase);
+    useEffect(() => {
+        phaseRef.current = sidebarPhase;
+    }, [sidebarPhase]);
+
     useEffect(() => {
         if (activeRouteId && phaseRef.current === 'closed') {
             setIsClosing(false);
@@ -149,7 +165,7 @@ export default function InteractiveJeepneyMap() {
     }, [activeRouteId]);
 
     return (
-        <div className="fixed inset-0 z-[100]">
+        <div className="fixed inset-0 z-[100] bg-slate-50">
 
             {/* --- MAP LAYER (Background) --- */}
             <MapGL
@@ -157,7 +173,7 @@ export default function InteractiveJeepneyMap() {
                 initialViewState={{
                     longitude: 124.2452,
                     latitude: 8.2280,
-                    zoom: 18,
+                    zoom: 16,
                     pitch: 60,
                     bearing: -20,
                 }}
@@ -260,16 +276,53 @@ export default function InteractiveJeepneyMap() {
                 setActiveRouteId={setActiveRouteId}
                 codeLookup={codeLookup}
                 getRouteColor={getRouteColor}
+                searchQuery={searchQuery}
             />
+            <div
+                className="max-md:hidden absolute top-4 left-4 z-[999] pointer-events-auto bg-white shadow-xl border border-slate-200 rounded-2xl flex items-center px-4 h-[56px] w-64"
+                style={searchStyle}
+            >
+                <Search className="w-4 h-4 text-slate-400 mr-2 shrink-0" />
+                <input
+                    type="text"
+                    placeholder="Search routes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    // Opens the sidebar automatically if they type while it's closed
+                    onFocus={() => sidebarPhase === 'closed' && toggleSidebar()}
+                    className="outline-none text-sm bg-transparent w-full text-slate-700 placeholder:text-slate-400 font-medium"
+                />
+                {searchQuery && (
+                    <button onClick={() => setSearchQuery('')} className="p-1 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors">
+                        <X className="w-3.5 h-3.5" />
+                    </button>
+                )}
+            </div>
+
+            <div className='absolute bottom-4 left-4 p-2 rounded-2xl shadow-xl pointer-events-auto bg-slate-50'>
+                <Link href="/" aria-label="BetterIligan home" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+                    <Image
+                        src="/images/logos/betteriligan-logo.png"
+                        alt="BetterIligan"
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 shrink-0 object-contain"
+                    />
+                    <span className="hidden text-sm font-extrabold tracking-tight text-slate-900 sm:inline">
+                        BetterIligan
+                    </span>
+                </Link>
+
+
+            </div>
 
             <div className="absolute top-4 right-4 z-[1000] pointer-events-auto flex flex-col gap-2">
-
                 <button
                     onClick={() => {
                         setShowAllRoutes(!showAllRoutes);
                         if (!showAllRoutes) setActiveRouteId(null);
                     }}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-md border font-bold text-xs sm:text-sm transition-all ${showAllRoutes
+                    className={`flex items-center gap-2 px-4 py-2.5 sm:h-[56px] rounded-xl shadow-md border font-bold text-xs sm:text-sm transition-all ${showAllRoutes
                         ? 'bg-slate-800 text-white border-slate-700'
                         : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                         }`}
@@ -277,7 +330,6 @@ export default function InteractiveJeepneyMap() {
                     {showAllRoutes ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     <span className="hidden sm:inline">{showAllRoutes ? 'Hide' : 'Show'} All Routes</span>
                 </button>
-
             </div>
         </div >
     );
