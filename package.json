@@ -5,7 +5,7 @@
     "private": true,
     "packageManager": "npm@11.16.0",
     "scripts": {
-        "dev": "npm run db:migrate:dev && vinext dev --port 3001",
+        "dev": "npm run db:migrate:dev && vinext dev --port 3001 --hostname 0.0.0.0",
         "prebuild": "npm run cf-typegen",
         "build": "vinext build",
         "start": "npm run db:migrate:start && wrangler dev --config dist/server/wrangler.json",

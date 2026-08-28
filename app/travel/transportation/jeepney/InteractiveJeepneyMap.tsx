@@ -15,6 +15,7 @@ import jeepneyRoutesData from '@/data/travel/jeepney-routes.json';
 import iliganBoundaryData from '@/data/travel/iligan-city-boundary.json'
 
 import DesktopJeepneySidebar from './DesktopJeepneySidebar';
+import JeepneyRouteDetails from './JeepneyRouteDetails';
 
 const geoJsonData = jeepneyRoutesData as GeoJsonObject;
 const boundaryGeoJsonData = iliganBoundaryData as GeoJsonObject;
@@ -67,8 +68,7 @@ function FitToRoute({
 export default function InteractiveJeepneyMap() {
     const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
     const [showAllRoutes, setShowAllRoutes] = useState(true);
-    const [searchQuery, setSearchQuery] = useState(''); // --- NEW: Search State ---
-
+    const [searchQuery, setSearchQuery] = useState('');
 
     const mapRef = useRef<MapRef>(null);
 
@@ -108,6 +108,55 @@ export default function InteractiveJeepneyMap() {
 
         return expression;
     }, [codeLookup]);
+
+    const selectedRoute = useMemo(() => {
+        if (!activeRouteId) return null;
+
+        const feature = jeepneyRoutesData.features.find(
+            feature => feature.properties.routeId === activeRouteId
+        );
+
+        const codeEntry = codeLookup.get(
+            activeRouteId.toLowerCase()
+        );
+
+        if (feature) {
+            return {
+                routeId: feature.properties.routeId,
+                routeCode:
+                    codeEntry?.routeCode ??
+                    feature.properties.routeId,
+                name:
+                    feature.properties.name ??
+                    `Route ${feature.properties.routeId}`,
+                routeColor:
+                    codeEntry?.routeColor ??
+                    feature.properties.stroke,
+                routeFare: codeEntry?.routeFare,
+                hasGeoJson: true,
+                codeEntry,
+            };
+        }
+
+        /*
+         * Route exists in the directory/code data,
+         * but does not have GeoJSON yet.
+         */
+        if (codeEntry) {
+            return {
+                routeId: codeEntry.routeId,
+                routeCode: codeEntry.routeCode,
+                name: `Route ${codeEntry.routeId}`,
+                routeColor: codeEntry.routeColor,
+                routeFare: codeEntry.routeFare,
+                hasGeoJson: false,
+                codeEntry,
+            };
+        }
+
+        return null;
+    }, [activeRouteId, codeLookup]);
+    const isDetailsOpen = selectedRoute !== null;
 
     const handleMapClick = (event: MapLayerMouseEvent) => {
         const features = event.target.queryRenderedFeatures(
@@ -157,6 +206,7 @@ export default function InteractiveJeepneyMap() {
     }, [sidebarPhase]);
 
     useEffect(() => {
+        if (activeRouteId !== null) setShowAllRoutes(false); else setShowAllRoutes(true);
         if (activeRouteId && phaseRef.current === 'closed') {
             setIsClosing(false);
             setSidebarPhase('peek');
@@ -183,8 +233,11 @@ export default function InteractiveJeepneyMap() {
             >
                 <NavigationControl
                     position="bottom-right"
+                    visualizeRoll
+                    visualizePitch
                     showCompass
                     showZoom
+
                 />
                 <FitToRoute activeRouteId={activeRouteId} mapRef={mapRef} />
 
@@ -299,7 +352,21 @@ export default function InteractiveJeepneyMap() {
                 )}
             </div>
 
-            <div className='absolute bottom-4 left-4 p-2 rounded-2xl shadow-xl pointer-events-auto bg-slate-50'>
+            {/* --- FLOATING RIGHT SIDEBAR --- */}
+            <JeepneyRouteDetails
+                route={selectedRoute}
+                codeEntry={selectedRoute?.codeEntry}
+                getRouteColor={getRouteColor}
+                onClose={() => setActiveRouteId(null)}
+            />
+            <div
+                className='absolute top-4 right-4 z-1000 p-2 rounded-2xl shadow-xl pointer-events-auto transition-transform duration-300 ease-in-out bg-slate-50'
+                style={{
+                    transform: isDetailsOpen
+                        ? 'translateX(calc(-20rem - 1rem))'
+                        : 'translateX(0)',
+                }}
+            >
                 <Link href="/" aria-label="BetterIligan home" className="flex items-center gap-2 transition-opacity hover:opacity-80">
                     <Image
                         src="/images/logos/betteriligan-logo.png"
@@ -312,24 +379,6 @@ export default function InteractiveJeepneyMap() {
                         BetterIligan
                     </span>
                 </Link>
-
-
-            </div>
-
-            <div className="absolute top-4 right-4 z-[1000] pointer-events-auto flex flex-col gap-2">
-                <button
-                    onClick={() => {
-                        setShowAllRoutes(!showAllRoutes);
-                        if (!showAllRoutes) setActiveRouteId(null);
-                    }}
-                    className={`flex items-center gap-2 px-4 py-2.5 sm:h-[56px] rounded-xl shadow-md border font-bold text-xs sm:text-sm transition-all ${showAllRoutes
-                        ? 'bg-slate-800 text-white border-slate-700'
-                        : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
-                        }`}
-                >
-                    {showAllRoutes ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    <span className="hidden sm:inline">{showAllRoutes ? 'Hide' : 'Show'} All Routes</span>
-                </button>
             </div>
         </div >
     );

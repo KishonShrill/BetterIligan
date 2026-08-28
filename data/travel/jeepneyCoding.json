@@ -1,25 +1,22 @@
 [
     {
         "routeId": "9F",
-        "routeCode": "9F",
         "routeColor": "#EC4899",
         "routeFare": {
             "regular": 15,
-            "discounted": 11
+            "discounted": 13
         }
     },
     {
         "routeId": "1B",
-        "routeCode": "1B",
         "routeColor": "#3B82F6",
         "routeFare": {
             "regular": 15,
-            "discounted": 12
+            "discounted": 13
         }
     },
     {
         "routeId": "9B-9C",
-        "routeCode": "9B-9C",
         "routeColor": "#EF4444",
         "routeFare": {
             "regular": 30,
@@ -28,20 +25,18 @@
     },
     {
         "routeId": "7G",
-        "routeCode": "C4",
         "routeColor": "#F97316",
         "routeFare": {
-            "regular": 13,
-            "discounted": 11
+            "regular": 15,
+            "discounted": 13
         }
     },
     {
         "routeId": "7A",
-        "routeCode": "7A",
         "routeColor": "#8B5CF6",
         "routeFare": {
-            "regular": 14,
-            "discounted": 11.2
+            "regular": 15,
+            "discounted": 13
         }
     }
 ]
