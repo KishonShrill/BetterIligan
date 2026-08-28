@@ -19,7 +19,7 @@ function HazardLayer({ hazard }: { hazard: HazardKey }) {
         fetch(url)
             .then((r) => r.json() as Promise<GeoJsonObject>)
             .then((j) => { if (!cancelled) setData(j); })
-            .catch(() => {});
+            .catch(() => { });
         return () => { cancelled = true; };
     }, [url]);
 
@@ -116,7 +116,7 @@ export default function DisasterMapLeaflet({
             <FlyToSelected selected={selected} />
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> · Hazards: <a href="https://noah.up.edu.ph/">UP NOAH</a> (ODbL)'
-                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_2cjc_1_7bf841ba32475572565a719f"
             />
 
             {activeHazards.map((h) => (

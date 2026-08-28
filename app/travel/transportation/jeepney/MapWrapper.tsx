@@ -7,7 +7,7 @@ const InteractiveJeepneyMap = dynamic(
     {
         ssr: false,
         loading: () => (
-            <div className="h-[600px] w-full bg-slate-100 animate-pulse rounded-2xl flex items-center justify-center text-slate-500 font-medium">
+            <div className="h-dvh w-full bg-slate-100 animate-pulse rounded-2xl flex items-center justify-center text-slate-500 font-medium">
                 Loading Map...
             </div>
         )

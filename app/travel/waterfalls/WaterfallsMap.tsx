@@ -46,7 +46,7 @@ export default function WaterfallsMap({ falls }: { falls: Waterfall[] }) {
             <FitToFalls falls={falls} />
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_2cjc_1_7bf841ba32475572565a719f"
             />
             {falls.map((f) => (
                 <Marker key={f.name} position={[f.lat, f.lon]} icon={pinIcon()}>

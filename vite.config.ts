@@ -25,4 +25,7 @@ export default defineConfig({
             "sharp": path.resolve(import.meta.dirname, "empty-stub.js"),
         },
     },
+    optimizeDeps: {
+        exclude: ['maplibre-gl'],
+    },
 });
