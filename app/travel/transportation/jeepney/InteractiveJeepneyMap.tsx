@@ -8,6 +8,10 @@ import type { MapRef, MapLayerMouseEvent } from "react-map-gl/maplibre";
 import bbox from "@turf/bbox";
 import type { GeoJsonObject } from "geojson";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { setWorkerUrl } from "maplibre-gl";
+import workerUrl from "maplibre-gl/dist/maplibre-gl-worker?worker&url";
+
+setWorkerUrl(workerUrl);
 
 import { Search, X } from "lucide-react";
 import { ROUTE_DIRECTORY_CODES } from "@/utils/variables";

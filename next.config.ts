@@ -12,7 +12,7 @@ const securityHeaders = [
       "img-src 'self' data: blob: https:",
       "font-src 'self' https://fonts.gstatic.com",
       "frame-src https://www.google.com https://www.recaptcha.net https://www.facebook.com https://www.gstatic.com",
-      "connect-src 'self' https://api.open-meteo.com https://api.exchangerate-api.com https://www.gstatic.com https://www.recaptcha.net https://www.google.com",
+      "connect-src 'self' https://api.open-meteo.com https://api.exchangerate-api.com https://www.gstatic.com https://www.recaptcha.net https://www.google.com https://tiles.openfreemap.org",
       "frame-ancestors 'none'",
     ].join("; "),
   },
