@@ -380,6 +380,8 @@ export default function InteractiveJeepneyMap() {
       <MobileJeepneyHeader
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        filteredRoutes={filteredRoutes}
+        setActiveRouteId={setActiveRouteId}
       />
 
       <MobileJeepneyRouteSelector
