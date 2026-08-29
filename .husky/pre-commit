@@ -1,1 +1,1 @@
-npm run format && git add . && git status
+npm run format
