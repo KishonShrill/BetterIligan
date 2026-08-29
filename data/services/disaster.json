@@ -1,22 +1,22 @@
 [
-    {
-        "title": "Disaster Preparedness Hub",
-        "category": "Disaster Preparedness",
-        "description": "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City — all on one page.",
-        "source": "community",
-        "isWalkIn": false,
-        "isOnline": true,
-        "department": "BetterIligan",
-        "type": "custom_link",
-        "href": "/disaster",
-        "tags": [
-            "disaster",
-            "emergency",
-            "fire",
-            "ambulance",
-            "police",
-            "hospital",
-            "sunog"
-        ]
-    }
+  {
+    "title": "Disaster Preparedness Hub",
+    "category": "Disaster Preparedness",
+    "description": "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City — all on one page.",
+    "source": "community",
+    "isWalkIn": false,
+    "isOnline": true,
+    "department": "BetterIligan",
+    "type": "custom_link",
+    "href": "/disaster",
+    "tags": [
+      "disaster",
+      "emergency",
+      "fire",
+      "ambulance",
+      "police",
+      "hospital",
+      "sunog"
+    ]
+  }
 ]

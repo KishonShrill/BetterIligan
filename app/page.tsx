@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { safeJsonLd } from '@/lib/utils';
+import { safeJsonLd } from "@/lib/utils";
 import ActiveIncidentBanner from "@/sections/homepage/ActiveIncidentBanner";
 import HeroSection from "@/sections/homepage/Hero";
 import ServicesSection from "@/sections/homepage/Services";
@@ -10,33 +10,33 @@ import DonationSection from "@/sections/homepage/DonationSection";
 import ReportIssueSection from "@/sections/homepage/ReportIssue";
 
 export const metadata: Metadata = {
-    title: { absolute: "BetterIligan City | Civic Tech Portal" }
-}
+  title: { absolute: "BetterIligan City | Civic Tech Portal" },
+};
 
 export default function Home() {
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "BetterIligan",
-        "alternateName": ["BetterIligan City", "Better Iligan City"],
-        "url": "https://betteriligancity.org/"
-    };
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "BetterIligan",
+    alternateName: ["BetterIligan City", "Better Iligan City"],
+    url: "https://betteriligancity.org/",
+  };
 
-    return (
-        <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-            />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
 
-            <ActiveIncidentBanner />
-            <HeroSection />
-            <DonationSection />
-            <ServicesSection />
-            <EmergencyHotlines />
-            <CityStatsSummary />
-            <WeatherAndMap />
-            <ReportIssueSection />
-        </>
-    );
+      <ActiveIncidentBanner />
+      <HeroSection />
+      <DonationSection />
+      <ServicesSection />
+      <EmergencyHotlines />
+      <CityStatsSummary />
+      <WeatherAndMap />
+      <ReportIssueSection />
+    </>
+  );
 }

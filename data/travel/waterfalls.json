@@ -1,219 +1,219 @@
 [
-    {
-        "name": "Maria Cristina Falls",
-        "lat": 8.18323,
-        "lon": 124.195059,
-        "area": "Barangay Maria Cristina",
-        "height": "≈98 m (320 ft)",
-        "description": "Iligan's iconic twin waterfall on the Agus River — the namesake 'Majestic Waterfall' and the source of the Agus VI hydroelectric plant that powers much of Mindanao. Flow is regulated, so it runs fullest during scheduled releases.",
-        "photo": {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Maria_Cristina_Falls_Iligan_City.jpg",
-            "credit": "Uayan Family",
-            "license": "CC BY-SA 3.0",
-            "source": "https://commons.wikimedia.org/wiki/File:Maria_Cristina_Falls_Iligan_City.jpg"
-        },
-        "reference": "https://en.wikipedia.org/wiki/Maria_Cristina_Falls",
-        "verifiedAt": "2026-07-08",
-        "source": "https://www.openstreetmap.org/node/1551430859"
+  {
+    "name": "Maria Cristina Falls",
+    "lat": 8.18323,
+    "lon": 124.195059,
+    "area": "Barangay Maria Cristina",
+    "height": "≈98 m (320 ft)",
+    "description": "Iligan's iconic twin waterfall on the Agus River — the namesake 'Majestic Waterfall' and the source of the Agus VI hydroelectric plant that powers much of Mindanao. Flow is regulated, so it runs fullest during scheduled releases.",
+    "photo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Maria_Cristina_Falls_Iligan_City.jpg",
+      "credit": "Uayan Family",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Maria_Cristina_Falls_Iligan_City.jpg"
     },
-    {
-        "name": "Tinago Falls",
-        "lat": 8.159209,
-        "lon": 124.185936,
-        "area": "Barangay Tominobo / Ditucalan",
-        "height": "≈73 m (240 ft)",
-        "description": "A 'hidden' falls (tinago means hidden) reached by a long stairway down a lush ravine, cascading into a deep blue basin that's popular for swimming.",
-        "photo": {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Tinago_falls.jpg",
-            "credit": "Andrei Martin",
-            "license": "Public domain",
-            "source": "https://commons.wikimedia.org/wiki/File:Tinago_falls.jpg"
-        },
-        "reference": "https://en.wikipedia.org/wiki/Tinago_Falls",
-        "verifiedAt": "2026-07-08",
-        "source": "https://www.openstreetmap.org/node/1556612699"
+    "reference": "https://en.wikipedia.org/wiki/Maria_Cristina_Falls",
+    "verifiedAt": "2026-07-08",
+    "source": "https://www.openstreetmap.org/node/1551430859"
+  },
+  {
+    "name": "Tinago Falls",
+    "lat": 8.159209,
+    "lon": 124.185936,
+    "area": "Barangay Tominobo / Ditucalan",
+    "height": "≈73 m (240 ft)",
+    "description": "A 'hidden' falls (tinago means hidden) reached by a long stairway down a lush ravine, cascading into a deep blue basin that's popular for swimming.",
+    "photo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Tinago_falls.jpg",
+      "credit": "Andrei Martin",
+      "license": "Public domain",
+      "source": "https://commons.wikimedia.org/wiki/File:Tinago_falls.jpg"
     },
-    {
-        "name": "Limunsudan Falls",
-        "lat": 8.112781,
-        "lon": 124.52342,
-        "area": "Barangay Rogongon",
-        "height": "≈265 m (870 ft), two-tier",
-        "description": "A remote two-tier waterfall deep in upland Barangay Rogongon — among the tallest in the Philippines. Reaching it requires a guided trek, so plan ahead.",
-        "photo": {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Limunsudan_Falls.jpg",
-            "credit": "Floresa816 (English Wikipedia)",
-            "license": "Public domain",
-            "source": "https://commons.wikimedia.org/wiki/File:Limunsudan_Falls.jpg"
-        },
-        "reference": "https://en.wikipedia.org/wiki/Limunsudan_Falls",
-        "verifiedAt": "2026-07-08",
-        "source": "https://www.openstreetmap.org/node/6283757248"
+    "reference": "https://en.wikipedia.org/wiki/Tinago_Falls",
+    "verifiedAt": "2026-07-08",
+    "source": "https://www.openstreetmap.org/node/1556612699"
+  },
+  {
+    "name": "Limunsudan Falls",
+    "lat": 8.112781,
+    "lon": 124.52342,
+    "area": "Barangay Rogongon",
+    "height": "≈265 m (870 ft), two-tier",
+    "description": "A remote two-tier waterfall deep in upland Barangay Rogongon — among the tallest in the Philippines. Reaching it requires a guided trek, so plan ahead.",
+    "photo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Limunsudan_Falls.jpg",
+      "credit": "Floresa816 (English Wikipedia)",
+      "license": "Public domain",
+      "source": "https://commons.wikimedia.org/wiki/File:Limunsudan_Falls.jpg"
     },
-    {
-        "name": "Dodiongan Falls",
-        "lat": 8.272042,
-        "lon": 124.313173,
-        "area": "Barangay Bonbonon",
-        "description": "A scenic curtain falls in Barangay Bonbonon with a cool plunge pool, reached by a short trek through farmland and forest.",
-        "photo": {
-            "url": "/images/waterfalls/dodiongan.jpg",
-            "credit": "Ace Reston",
-            "license": "CC BY-NC-SA 2.0",
-            "source": "https://www.flickr.com/photos/26795611@N08/4321653858"
-        },
-        "verifiedAt": "2026-07-08",
-        "source": "https://www.openstreetmap.org/node/3079610923"
+    "reference": "https://en.wikipedia.org/wiki/Limunsudan_Falls",
+    "verifiedAt": "2026-07-08",
+    "source": "https://www.openstreetmap.org/node/6283757248"
+  },
+  {
+    "name": "Dodiongan Falls",
+    "lat": 8.272042,
+    "lon": 124.313173,
+    "area": "Barangay Bonbonon",
+    "description": "A scenic curtain falls in Barangay Bonbonon with a cool plunge pool, reached by a short trek through farmland and forest.",
+    "photo": {
+      "url": "/images/waterfalls/dodiongan.jpg",
+      "credit": "Ace Reston",
+      "license": "CC BY-NC-SA 2.0",
+      "source": "https://www.flickr.com/photos/26795611@N08/4321653858"
     },
-    {
-        "name": "Kalubihon Falls",
-        "lat": 8.309337,
-        "lon": 124.277698,
-        "area": "Northern uplands",
-        "description": "A hidden falls-and-gorge formation known for its narrow rock passage and small emerald pool — an off-the-beaten-path spot for adventurous visitors.",
-        "verifiedAt": "2026-07-08",
-        "source": "https://www.openstreetmap.org/node/4832430622"
-    },
-    {
-        "name": "Pampam Falls",
-        "lat": 8.309527,
-        "lon": 124.275939,
-        "area": "Northern uplands",
-        "description": "A lesser-known cascade in the northern uplands near Kalubihon, popular with local day-trippers.",
-        "verifiedAt": "2026-07-08",
-        "source": "https://www.openstreetmap.org/node/4832498622"
-    },
-    {
-        "name": "Mimbalot Falls",
-        "lat": 8.180575,
-        "lon": 124.168466,
-        "source": "https://www.openstreetmap.org/node/1564891617",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Hindang Falls",
-        "lat": 8.30669,
-        "lon": 124.341627,
-        "source": "https://www.openstreetmap.org/node/3073496361",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Languyon Falls",
-        "lat": 8.208849,
-        "lon": 124.308866,
-        "source": "https://www.openstreetmap.org/node/4832174224",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Lumbatin Falls",
-        "lat": 8.211003,
-        "lon": 124.2842,
-        "source": "https://www.openstreetmap.org/node/4832174225",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Upper Langilanon Falls",
-        "lat": 8.218231,
-        "lon": 124.269393,
-        "source": "https://www.openstreetmap.org/node/4832174226",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Secret Falls",
-        "lat": 8.207434,
-        "lon": 124.284739,
-        "source": "https://www.openstreetmap.org/node/4832174227",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "San Antonio Falls",
-        "lat": 8.312925,
-        "lon": 124.317783,
-        "source": "https://www.openstreetmap.org/node/4832180022",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Ruruanga Falls",
-        "lat": 8.21275,
-        "lon": 124.30505,
-        "source": "https://www.openstreetmap.org/node/4832180023",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Lino Falls",
-        "lat": 8.219262,
-        "lon": 124.30356,
-        "source": "https://www.openstreetmap.org/node/4832180421",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Linanot Falls",
-        "lat": 8.30195,
-        "lon": 124.30846,
-        "source": "https://www.openstreetmap.org/node/4832196121",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Kalubi Falls",
-        "lat": 8.299038,
-        "lon": 124.312158,
-        "source": "https://www.openstreetmap.org/node/4832202422",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Dalipuga Falls",
-        "lat": 8.309182,
-        "lon": 124.274585,
-        "source": "https://www.openstreetmap.org/node/4832472831",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Gollum Falls",
-        "lat": 8.272161,
-        "lon": 124.312981,
-        "source": "https://www.openstreetmap.org/node/4832483221",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Charito Falls",
-        "lat": 8.21717,
-        "lon": 124.300392,
-        "source": "https://www.openstreetmap.org/node/4832498322",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Kawa Falls",
-        "lat": 8.218859,
-        "lon": 124.259958,
-        "source": "https://www.openstreetmap.org/node/4832498624",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Lower Hadjing Falls",
-        "lat": 8.222638,
-        "lon": 124.29659,
-        "source": "https://www.openstreetmap.org/node/4832508421",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Upper Hadjing Falls",
-        "lat": 8.222544,
-        "lon": 124.296114,
-        "source": "https://www.openstreetmap.org/node/4832508621",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Taluntonan Calawag Falls",
-        "lat": 8.219509,
-        "lon": 124.298761,
-        "source": "https://www.openstreetmap.org/node/4832508622",
-        "verifiedAt": "2026-07-08"
-    },
-    {
-        "name": "Lower Langilanon Falls",
-        "lat": 8.218365,
-        "lon": 124.269171,
-        "source": "https://www.openstreetmap.org/node/4832509821",
-        "verifiedAt": "2026-07-08"
-    }
+    "verifiedAt": "2026-07-08",
+    "source": "https://www.openstreetmap.org/node/3079610923"
+  },
+  {
+    "name": "Kalubihon Falls",
+    "lat": 8.309337,
+    "lon": 124.277698,
+    "area": "Northern uplands",
+    "description": "A hidden falls-and-gorge formation known for its narrow rock passage and small emerald pool — an off-the-beaten-path spot for adventurous visitors.",
+    "verifiedAt": "2026-07-08",
+    "source": "https://www.openstreetmap.org/node/4832430622"
+  },
+  {
+    "name": "Pampam Falls",
+    "lat": 8.309527,
+    "lon": 124.275939,
+    "area": "Northern uplands",
+    "description": "A lesser-known cascade in the northern uplands near Kalubihon, popular with local day-trippers.",
+    "verifiedAt": "2026-07-08",
+    "source": "https://www.openstreetmap.org/node/4832498622"
+  },
+  {
+    "name": "Mimbalot Falls",
+    "lat": 8.180575,
+    "lon": 124.168466,
+    "source": "https://www.openstreetmap.org/node/1564891617",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Hindang Falls",
+    "lat": 8.30669,
+    "lon": 124.341627,
+    "source": "https://www.openstreetmap.org/node/3073496361",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Languyon Falls",
+    "lat": 8.208849,
+    "lon": 124.308866,
+    "source": "https://www.openstreetmap.org/node/4832174224",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Lumbatin Falls",
+    "lat": 8.211003,
+    "lon": 124.2842,
+    "source": "https://www.openstreetmap.org/node/4832174225",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Upper Langilanon Falls",
+    "lat": 8.218231,
+    "lon": 124.269393,
+    "source": "https://www.openstreetmap.org/node/4832174226",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Secret Falls",
+    "lat": 8.207434,
+    "lon": 124.284739,
+    "source": "https://www.openstreetmap.org/node/4832174227",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "San Antonio Falls",
+    "lat": 8.312925,
+    "lon": 124.317783,
+    "source": "https://www.openstreetmap.org/node/4832180022",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Ruruanga Falls",
+    "lat": 8.21275,
+    "lon": 124.30505,
+    "source": "https://www.openstreetmap.org/node/4832180023",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Lino Falls",
+    "lat": 8.219262,
+    "lon": 124.30356,
+    "source": "https://www.openstreetmap.org/node/4832180421",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Linanot Falls",
+    "lat": 8.30195,
+    "lon": 124.30846,
+    "source": "https://www.openstreetmap.org/node/4832196121",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Kalubi Falls",
+    "lat": 8.299038,
+    "lon": 124.312158,
+    "source": "https://www.openstreetmap.org/node/4832202422",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Dalipuga Falls",
+    "lat": 8.309182,
+    "lon": 124.274585,
+    "source": "https://www.openstreetmap.org/node/4832472831",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Gollum Falls",
+    "lat": 8.272161,
+    "lon": 124.312981,
+    "source": "https://www.openstreetmap.org/node/4832483221",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Charito Falls",
+    "lat": 8.21717,
+    "lon": 124.300392,
+    "source": "https://www.openstreetmap.org/node/4832498322",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Kawa Falls",
+    "lat": 8.218859,
+    "lon": 124.259958,
+    "source": "https://www.openstreetmap.org/node/4832498624",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Lower Hadjing Falls",
+    "lat": 8.222638,
+    "lon": 124.29659,
+    "source": "https://www.openstreetmap.org/node/4832508421",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Upper Hadjing Falls",
+    "lat": 8.222544,
+    "lon": 124.296114,
+    "source": "https://www.openstreetmap.org/node/4832508621",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Taluntonan Calawag Falls",
+    "lat": 8.219509,
+    "lon": 124.298761,
+    "source": "https://www.openstreetmap.org/node/4832508622",
+    "verifiedAt": "2026-07-08"
+  },
+  {
+    "name": "Lower Langilanon Falls",
+    "lat": 8.218365,
+    "lon": 124.269171,
+    "source": "https://www.openstreetmap.org/node/4832509821",
+    "verifiedAt": "2026-07-08"
+  }
 ]

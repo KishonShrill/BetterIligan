@@ -7,25 +7,25 @@ import { imagesOptimizer } from "@vinext/cloudflare/images/images-optimizer";
 import path from "node:path";
 
 export default defineConfig({
-    plugins: [
-        vinext({
-            cache: { data: kvDataAdapter(), cdn: cdnAdapter() },
-            images: { optimizer: imagesOptimizer() },
-        }),
-        cloudflare({
-            viteEnvironment: {
-                name: "rsc",
-                childEnvironments: ["ssr"],
-            },
-        }),
-    ],
-    resolve: {
-        alias: {
-            "satori": path.resolve(import.meta.dirname, "empty-stub.js"),
-            "sharp": path.resolve(import.meta.dirname, "empty-stub.js"),
-        },
+  plugins: [
+    vinext({
+      cache: { data: kvDataAdapter(), cdn: cdnAdapter() },
+      images: { optimizer: imagesOptimizer() },
+    }),
+    cloudflare({
+      viteEnvironment: {
+        name: "rsc",
+        childEnvironments: ["ssr"],
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      satori: path.resolve(import.meta.dirname, "empty-stub.js"),
+      sharp: path.resolve(import.meta.dirname, "empty-stub.js"),
     },
-    optimizeDeps: {
-        exclude: ['maplibre-gl'],
-    },
+  },
+  optimizeDeps: {
+    exclude: ["maplibre-gl"],
+  },
 });
