@@ -1,42 +1,15 @@
 'use client'
 
 import { Map as MapIcon, X } from 'lucide-react';
-import jeepneyRoutesData from '@/data/travel/jeepney-routes.json';
-import { ROUTE_DIRECTORY_CODES } from '@/utils/variables';
-
-type JeepneyFare = {
-    regular: number;
-    discounted: number;
-};
-
-type JeepneyCodeEntry = {
-    routeId: string;
-    routeColor?: string;
-    routeFare?: JeepneyFare;
-
-    image?: string;
-    places?: string[];
-
-    description?: string;
-    operatingHours?: string;
-    estimatedTravelTime?: string;
-};
-
-type JeepneyRoute = {
-    routeId: string;
-    name: string;
-    routeColor?: string;
-    routeFare?: JeepneyFare;
-    hasGeoJson: boolean;
-};
+import type { JeepneyRoute } from './types';
 
 interface DesktopJeepneySidebarProps {
     sidebarPhase: 'closed' | 'peek' | 'open';
     isClosing: boolean;
     toggleSidebar: () => void;
+    routes: JeepneyRoute[];
     activeRouteId: string | null;
     setActiveRouteId: (id: string | null) => void;
-    codeLookup: Map<string, JeepneyCodeEntry>;
     getRouteColor: (routeId: string, fallbackStroke?: string) => string;
     searchQuery: string;
 }
@@ -45,9 +18,9 @@ export default function DesktopJeepneySidebar({
     sidebarPhase,
     isClosing,
     toggleSidebar,
+    routes,
     activeRouteId,
     setActiveRouteId,
-    codeLookup,
     getRouteColor,
     searchQuery
 }: DesktopJeepneySidebarProps) {
@@ -64,77 +37,6 @@ export default function DesktopJeepneySidebar({
     // Helper booleans for clean rendering
     const isExpanded = sidebarPhase !== 'closed';
     const isFullyOpen = sidebarPhase === 'open';
-
-    const routeMap = new Map<string, JeepneyRoute>();
-
-    for (const routeCode of ROUTE_DIRECTORY_CODES) {
-        const key = routeCode.toLowerCase();
-        const codeEntry = codeLookup.get(key);
-
-        routeMap.set(key, {
-            routeId: codeEntry?.routeId ?? routeCode,
-            name: `Route ${routeCode}`,
-            routeColor: codeEntry?.routeColor,
-            routeFare: codeEntry?.routeFare,
-            hasGeoJson: false,
-        });
-    }
-
-    for (const feature of jeepneyRoutesData.features) {
-        const routeId = feature.properties.routeId;
-        const key = routeId.toLowerCase();
-
-        const existing = routeMap.get(key);
-        const codeEntry = codeLookup.get(key);
-
-        routeMap.set(key, {
-            routeId: existing?.routeId ?? codeEntry?.routeId ?? routeId,
-            name: feature.properties.name || existing?.name || `Route ${routeId}`,
-            routeColor:
-                existing?.routeColor ??
-                codeEntry?.routeColor ??
-                feature.properties.stroke,
-            routeFare: existing?.routeFare ?? codeEntry?.routeFare,
-            hasGeoJson: true,
-        });
-    }
-
-    for (const codeEntry of codeLookup.values()) {
-        const key = codeEntry.routeId.toLowerCase();
-
-        if (!routeMap.has(key)) {
-            routeMap.set(key, {
-                routeId: codeEntry.routeId,
-                name: `Route ${codeEntry.routeId}`,
-                routeColor: codeEntry.routeColor,
-                routeFare: codeEntry.routeFare,
-                hasGeoJson: false,
-            });
-        }
-    }
-
-    const allRoutes = Array.from(routeMap.values());
-    const sortedRoutes = allRoutes.sort((a, b) => {
-        // Available routes first
-        if (a.hasGeoJson !== b.hasGeoJson) {
-            return a.hasGeoJson ? -1 : 1;
-        }
-
-        // Then sort by route code
-        return a.routeId.localeCompare(b.routeId, undefined, {
-            numeric: true,
-        });
-    });
-    const filteredRoutes = sortedRoutes.filter((route) => {
-        if (!searchQuery) return true;
-
-        const searchLower = searchQuery.toLowerCase();
-
-        return (
-            route.name.toLowerCase().includes(searchLower) ||
-            route.routeId.toLowerCase().includes(searchLower)
-        );
-    });
 
     return (
         <div
@@ -203,9 +105,9 @@ export default function DesktopJeepneySidebar({
                     : 'opacity-0 invisible delay-0'
                     }`}
             >
-                {filteredRoutes.length > 0 ? (
+                {routes.length > 0 ? (
                     <ul className="p-3 space-y-2">
-                        {filteredRoutes.map((route) => {
+                        {routes.map((route) => {
                             const isActive = activeRouteId === route.routeId;
 
                             /*

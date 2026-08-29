@@ -5,26 +5,8 @@ import {
     Banknote, Clock, GraduationCap,
     MapPin, Route, X,
 } from 'lucide-react';
+import type { JeepneyFare, JeepneyCodeEntry } from './types';
 
-type JeepneyFare = {
-    regular: number;
-    discounted: number;
-};
-
-type JeepneyCodeEntry = {
-    routeId: string;
-    routeCode: string;
-    routeColor?: string;
-
-    routeFare?: JeepneyFare;
-
-    image?: string;
-    places?: string[];
-
-    description?: string;
-    operatingHours?: string;
-    estimatedTravelTime?: string;
-};
 
 interface JeepneyRouteDetailsProps {
     route: {

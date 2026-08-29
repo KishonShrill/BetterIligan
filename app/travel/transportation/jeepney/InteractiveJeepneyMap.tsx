@@ -9,28 +9,21 @@ import bbox from '@turf/bbox';
 import type { GeoJsonObject } from 'geojson';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import { Eye, EyeOff, Search, X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
+import { ROUTE_DIRECTORY_CODES } from '@/utils/variables';
+import type { JeepneyRoute, JeepneyCodeEntry } from './types';
 import jeepneyCodesData from '@/data/travel/jeepneyCoding.json';
 import jeepneyRoutesData from '@/data/travel/jeepney-routes.json';
 import iliganBoundaryData from '@/data/travel/iligan-city-boundary.json'
 
+import JeepneyMapControls from './JeepneyMapControls';
 import DesktopJeepneySidebar from './DesktopJeepneySidebar';
 import JeepneyRouteDetails from './JeepneyRouteDetails';
+import MobileJeepneyHeader from './MobileJeepneyHeader';
+import MobileJeepneyRouteSelector from './MobileJeepneyRouteSelector';
 
 const geoJsonData = jeepneyRoutesData as GeoJsonObject;
 const boundaryGeoJsonData = iliganBoundaryData as GeoJsonObject;
-
-type JeepneyFare = {
-    regular: number;
-    discounted: number; // student / PWD / senior citizen rate
-};
-
-type JeepneyCodeEntry = {
-    routeId: string;        // must match the routeId used in jeepney-routes.json
-    routeCode: string;      // short display code, e.g. "SF-AC"
-    routeColor?: string;    // customizable color for this route's badge/border — overrides the geojson's own "stroke"
-    routeFare?: JeepneyFare;
-};
 
 function FitToRoute({
     activeRouteId,
@@ -123,9 +116,6 @@ export default function InteractiveJeepneyMap() {
         if (feature) {
             return {
                 routeId: feature.properties.routeId,
-                routeCode:
-                    codeEntry?.routeCode ??
-                    feature.properties.routeId,
                 name:
                     feature.properties.name ??
                     `Route ${feature.properties.routeId}`,
@@ -145,7 +135,6 @@ export default function InteractiveJeepneyMap() {
         if (codeEntry) {
             return {
                 routeId: codeEntry.routeId,
-                routeCode: codeEntry.routeCode,
                 name: `Route ${codeEntry.routeId}`,
                 routeColor: codeEntry.routeColor,
                 routeFare: codeEntry.routeFare,
@@ -214,6 +203,91 @@ export default function InteractiveJeepneyMap() {
         }
     }, [activeRouteId]);
 
+
+    const allRoutes = useMemo(() => {
+        const routeMap = new Map<string, JeepneyRoute>();
+
+        for (const routeCode of ROUTE_DIRECTORY_CODES) {
+            const key = routeCode.toLowerCase();
+            const codeEntry = codeLookup.get(key);
+
+            routeMap.set(key, {
+                routeId: codeEntry?.routeId ?? routeCode,
+                name: `Route ${routeCode}`,
+                routeColor: codeEntry?.routeColor,
+                routeFare: codeEntry?.routeFare,
+                hasGeoJson: false,
+            });
+        }
+
+        for (const feature of jeepneyRoutesData.features) {
+            const routeId = feature.properties.routeId;
+            const key = routeId.toLowerCase();
+
+            const existing = routeMap.get(key);
+            const codeEntry = codeLookup.get(key);
+
+            routeMap.set(key, {
+                routeId: existing?.routeId ?? codeEntry?.routeId ?? routeId,
+                name:
+                    feature.properties.name ||
+                    existing?.name ||
+                    `Route ${routeId}`,
+                routeColor:
+                    existing?.routeColor ??
+                    codeEntry?.routeColor ??
+                    feature.properties.stroke,
+                routeFare:
+                    existing?.routeFare ??
+                    codeEntry?.routeFare,
+                hasGeoJson: true,
+            });
+        }
+
+        for (const codeEntry of codeLookup.values()) {
+            const key = codeEntry.routeId.toLowerCase();
+
+            if (!routeMap.has(key)) {
+                routeMap.set(key, {
+                    routeId: codeEntry.routeId,
+                    name: `Route ${codeEntry.routeId}`,
+                    routeColor: codeEntry.routeColor,
+                    routeFare: codeEntry.routeFare,
+                    hasGeoJson: false,
+                });
+            }
+        }
+
+        return Array.from(routeMap.values());
+    }, [codeLookup]);
+
+    const sortedRoutes = useMemo(() => {
+        return [...allRoutes].sort((a, b) => {
+            // Available routes first
+            if (a.hasGeoJson !== b.hasGeoJson) {
+                return a.hasGeoJson ? -1 : 1;
+            }
+
+            // Then sort by route code
+            return a.routeId.localeCompare(b.routeId, undefined, {
+                numeric: true,
+            });
+        });
+    }, [allRoutes]);
+
+    const filteredRoutes = useMemo(() => {
+        if (!searchQuery) {
+            return sortedRoutes;
+        }
+
+        const searchLower = searchQuery.toLowerCase();
+
+        return sortedRoutes.filter((route) =>
+            route.name.toLowerCase().includes(searchLower) ||
+            route.routeId.toLowerCase().includes(searchLower)
+        );
+    }, [sortedRoutes, searchQuery]);
+
     return (
         <div className="fixed inset-0 z-[100] bg-slate-50">
 
@@ -231,14 +305,7 @@ export default function InteractiveJeepneyMap() {
                 onClick={handleMapClick}
                 interactiveLayerIds={['jeepney-route-hitbox']}
             >
-                <NavigationControl
-                    position="bottom-right"
-                    visualizeRoll
-                    visualizePitch
-                    showCompass
-                    showZoom
-
-                />
+                <JeepneyMapControls mapRef={mapRef} />
                 <FitToRoute activeRouteId={activeRouteId} mapRef={mapRef} />
 
                 <Source
@@ -320,14 +387,30 @@ export default function InteractiveJeepneyMap() {
                 </Source>
             </MapGL>
 
+            {/* MOBILE */}
+            <MobileJeepneyHeader
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+            />
+
+            <MobileJeepneyRouteSelector
+                routes={filteredRoutes}
+                activeRouteId={activeRouteId}
+                setActiveRouteId={setActiveRouteId}
+                showAllRoutes={showAllRoutes}
+                setShowAllRoutes={setShowAllRoutes}
+                getRouteColor={getRouteColor}
+            />
+
+            {/* DESKTOP */}
             {/* --- FLOATING LEFT SIDEBAR --- */}
             <DesktopJeepneySidebar
                 sidebarPhase={sidebarPhase}
                 isClosing={isClosing}
                 toggleSidebar={toggleSidebar}
+                routes={filteredRoutes}
                 activeRouteId={activeRouteId}
                 setActiveRouteId={setActiveRouteId}
-                codeLookup={codeLookup}
                 getRouteColor={getRouteColor}
                 searchQuery={searchQuery}
             />
@@ -360,7 +443,7 @@ export default function InteractiveJeepneyMap() {
                 onClose={() => setActiveRouteId(null)}
             />
             <div
-                className='absolute top-4 right-4 z-1000 p-2 rounded-2xl shadow-xl pointer-events-auto transition-transform duration-300 ease-in-out bg-slate-50'
+                className='max-md:hidden absolute top-4 right-4 z-1000 p-2 rounded-2xl shadow-xl pointer-events-auto transition-transform duration-300 ease-in-out bg-slate-50'
                 style={{
                     transform: isDetailsOpen
                         ? 'translateX(calc(-20rem - 1rem))'
