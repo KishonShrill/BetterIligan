@@ -1,13 +1,7 @@
 "use client";
 
 import { Eye, EyeOff } from "lucide-react";
-
-type JeepneyRoute = {
-  routeId: string;
-  name: string;
-  routeColor?: string;
-  hasGeoJson: boolean;
-};
+import type { JeepneyRoute } from "./types";
 
 interface MobileJeepneyRouteSelectorProps {
   routes: JeepneyRoute[];

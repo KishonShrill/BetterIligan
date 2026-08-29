@@ -7,7 +7,6 @@ import type { JeepneyFare, JeepneyCodeEntry } from "./types";
 interface JeepneyRouteDetailsProps {
   route: {
     routeId: string;
-    routeCode: string;
     name: string;
     routeColor?: string;
     routeFare?: JeepneyFare;
@@ -84,7 +83,7 @@ export default function JeepneyRouteDetails({
                 backgroundColor: routeColor,
               }}
             >
-              {route.routeCode}
+              {route.routeId}
             </div>
 
             <div className="min-w-0">

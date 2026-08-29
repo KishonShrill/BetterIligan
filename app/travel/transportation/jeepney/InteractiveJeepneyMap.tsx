@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import MapGL, { Source, Layer, NavigationControl } from "react-map-gl/maplibre";
+import MapGL, { Source, Layer } from "react-map-gl/maplibre";
 import type { MapRef, MapLayerMouseEvent } from "react-map-gl/maplibre";
 import bbox from "@turf/bbox";
 import type { GeoJsonObject } from "geojson";
@@ -12,15 +12,22 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { Search, X } from "lucide-react";
 import { ROUTE_DIRECTORY_CODES } from "@/utils/variables";
 import type { JeepneyRoute, JeepneyCodeEntry } from "./types";
-import jeepneyCodesData from "@/data/travel/jeepneyCoding.json";
-import jeepneyRoutesData from "@/data/travel/jeepney-routes.json";
-import iliganBoundaryData from "@/data/travel/iligan-city-boundary.json";
 
 import JeepneyMapControls from "./JeepneyMapControls";
 import DesktopJeepneySidebar from "./DesktopJeepneySidebar";
 import JeepneyRouteDetails from "./JeepneyRouteDetails";
 import MobileJeepneyHeader from "./MobileJeepneyHeader";
 import MobileJeepneyRouteSelector from "./MobileJeepneyRouteSelector";
+
+const jeepneyRoutesData = await fetch("/data/travel/jeepney-routes.json").then(
+  (res) => res.json(),
+);
+const jeepneyCodesData = await fetch("/data/travel/jeepneyCoding.json").then(
+  (res) => res.json(),
+);
+const iliganBoundaryData = await fetch(
+  "/data/travel/iligan-city-boundary.json",
+).then((res) => res.json());
 
 const geoJsonData = jeepneyRoutesData as GeoJsonObject;
 const boundaryGeoJsonData = iliganBoundaryData as GeoJsonObject;
