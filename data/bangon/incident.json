@@ -1,34 +1,34 @@
 {
-    "active": false,
-    "standby": {
-        "headline": "Iligan is on standby",
-        "message": "No active emergency right now. This page becomes Iligan's live relief command center the moment a disaster strikes — for now, use it to get ready and stay connected with your neighbors.",
-        "preparednessHref": "/disaster"
+  "active": false,
+  "standby": {
+    "headline": "Iligan is on standby",
+    "message": "No active emergency right now. This page becomes Iligan's live relief command center the moment a disaster strikes — for now, use it to get ready and stay connected with your neighbors.",
+    "preparednessHref": "/disaster"
+  },
+  "boardEnabled": true,
+  "hazardReportsEnabled": true,
+  "activeIncident": {
+    "title": "TODO: incident title (e.g. \"Bangon Iligan — <event> Response\")",
+    "summary": "TODO: what happened, when, and the current situation. Filled in only when active is true.",
+    "declaredAt": "TODO: YYYY-MM-DD"
+  },
+  "displayDonation": false,
+  "donation": {
+    "gcash": {
+      "name": "TODO_GCASH_NAME",
+      "number": "TODO_GCASH_NUMBER"
     },
-    "boardEnabled": true,
-    "hazardReportsEnabled": true,
-    "activeIncident": {
-        "title": "TODO: incident title (e.g. \"Bangon Iligan — <event> Response\")",
-        "summary": "TODO: what happened, when, and the current situation. Filled in only when active is true.",
-        "declaredAt": "TODO: YYYY-MM-DD"
+    "bank": {
+      "bank": "TODO_BANK",
+      "accountName": "TODO_ACCOUNT_NAME",
+      "accountNumber": "TODO_ACCOUNT_NUMBER"
     },
-    "displayDonation": false,
-    "donation": {
-        "gcash": {
-            "name": "TODO_GCASH_NAME",
-            "number": "TODO_GCASH_NUMBER"
-        },
-        "bank": {
-            "bank": "TODO_BANK",
-            "accountName": "TODO_ACCOUNT_NAME",
-            "accountNumber": "TODO_ACCOUNT_NUMBER"
-        },
-        "dropOff": [],
-        "inKindNeeds": [
-            "Drinking water",
-            "Ready-to-eat food",
-            "Blankets",
-            "Hygiene kits"
-        ]
-    }
+    "dropOff": [],
+    "inKindNeeds": [
+      "Drinking water",
+      "Ready-to-eat food",
+      "Blankets",
+      "Hygiene kits"
+    ]
+  }
 }

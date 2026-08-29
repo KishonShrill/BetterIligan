@@ -1,74 +1,49 @@
 [
-    {
-        "slug": "dogs-camp-iligan",
-        "title": "Dogs Camp Iligan",
-        "category": "Animal Welfare",
-        "description": "Dogs Camp Iligan is a Non-Profit Organization aims to help and provide aid to stray animals.",
-        "source": "community",
-        "isWalkIn": false,
-        "isOnline": true,
-        "type": "internal",
-        "logoUrl": "https://scontent.fcgy1-3.fna.fbcdn.net/v/t39.30808-6/299997613_101617252679514_2824408077528911600_n.jpg?stp=dst-jpg_tt6&cstp=mx1080x1080&ctp=s1080x1080&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH1YBzOB9-rU1H0EY1F-X-emTcavfWw9ICZNxq99bD0gPCZIOveG-QCFTrwmuKYgxjnvXK0Oi8fmD12SQsWBqyC&_nc_ohc=2ePG2Dr60vcQ7kNvwGheRua&_nc_oc=AdrOgLef7MQHsceNo7ZTkLRlDZUh0Fbp5obvXonH_XKCrvsyOpbD3nFKJ9l4Stp3iSA&_nc_zt=23&_nc_ht=scontent.fcgy1-3.fna&_nc_gid=KEZTY42SG_jHBUJXfn8imQ&_nc_ss=7b2a8&oh=00_Af9OjwQmmA-2WpIutl_4O1Sa6bBZG27darD_GHZVkKkI5g&oe=6A3534B4",
-        "facebookUrl": "https://www.facebook.com/profile.php?id=100085008576116",
-        "tags": [
-            "cats",
-            "dogs",
-            "animals",
-            "pets"
-        ],
-        "offeredServices": [
-            "Non-profit Organization",
-            "Animal Rescue"
-        ]
+  {
+    "slug": "dogs-camp-iligan",
+    "title": "Dogs Camp Iligan",
+    "category": "Animal Welfare",
+    "description": "Dogs Camp Iligan is a Non-Profit Organization aims to help and provide aid to stray animals.",
+    "source": "community",
+    "isWalkIn": false,
+    "isOnline": true,
+    "type": "internal",
+    "logoUrl": "https://scontent.fcgy1-3.fna.fbcdn.net/v/t39.30808-6/299997613_101617252679514_2824408077528911600_n.jpg?stp=dst-jpg_tt6&cstp=mx1080x1080&ctp=s1080x1080&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH1YBzOB9-rU1H0EY1F-X-emTcavfWw9ICZNxq99bD0gPCZIOveG-QCFTrwmuKYgxjnvXK0Oi8fmD12SQsWBqyC&_nc_ohc=2ePG2Dr60vcQ7kNvwGheRua&_nc_oc=AdrOgLef7MQHsceNo7ZTkLRlDZUh0Fbp5obvXonH_XKCrvsyOpbD3nFKJ9l4Stp3iSA&_nc_zt=23&_nc_ht=scontent.fcgy1-3.fna&_nc_gid=KEZTY42SG_jHBUJXfn8imQ&_nc_ss=7b2a8&oh=00_Af9OjwQmmA-2WpIutl_4O1Sa6bBZG27darD_GHZVkKkI5g&oe=6A3534B4",
+    "facebookUrl": "https://www.facebook.com/profile.php?id=100085008576116",
+    "tags": ["cats", "dogs", "animals", "pets"],
+    "offeredServices": ["Non-profit Organization", "Animal Rescue"]
+  },
+  {
+    "slug": "part-iligan-pet-inc",
+    "title": "PART- Iligan (PET ADOPTION and RESCUE TEAM- Iligan), Inc.",
+    "category": "Animal Welfare",
+    "description": "A SEC Registered, Non- Profit Organization, based in Iligan City. It's rescue team was founded and created in December 2017.",
+    "source": "community",
+    "isWalkIn": false,
+    "isOnline": true,
+    "type": "internal",
+    "bannerUrl": "https://scontent.fcgy4-1.fna.fbcdn.net/v/t39.30808-6/313421192_6297476396936078_2084694095174316688_n.jpg?stp=dst-jpg_tt6&cstp=mx2896x1448&ctp=s960x960&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeFak9A1mV_EOEoVH6NTLs09j3m51rPwUgmPebnWs_BSCdMsyB--jOTlb6bb3rZiFAWLgil-DlBoVLuq7NnHpumM&_nc_ohc=ODVGbMSwRAEQ7kNvwHW9vwl&_nc_oc=AdpFrAcxU0YRDFXacRDOzttmRRUU3HuMicz4hIa2ot3pQzB7a1Dutn2CHOyX5wImuaee8_9oKLt8S1JuLBat7uke&_nc_zt=23&_nc_ht=scontent.fcgy4-1.fna&_nc_gid=PuSHrw5krEvxm9xnd8tNdA&_nc_ss=7b2a8&oh=00_Af-S8pyBHGt5RWoxgP0lG9Z3t6A8KVp0U8x9lGi7yOaB5g&oe=6A3F3A11",
+    "logoUrl": "https://scontent.fcgy4-1.fna.fbcdn.net/v/t39.30808-6/313421192_6297476396936078_2084694095174316688_n.jpg?stp=dst-jpg_tt6&cstp=mx2896x1448&ctp=s960x960&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeFak9A1mV_EOEoVH6NTLs09j3m51rPwUgmPebnWs_BSCdMsyB--jOTlb6bb3rZiFAWLgil-DlBoVLuq7NnHpumM&_nc_ohc=ODVGbMSwRAEQ7kNvwHW9vwl&_nc_oc=AdpFrAcxU0YRDFXacRDOzttmRRUU3HuMicz4hIa2ot3pQzB7a1Dutn2CHOyX5wImuaee8_9oKLt8S1JuLBat7uke&_nc_zt=23&_nc_ht=scontent.fcgy4-1.fna&_nc_gid=PuSHrw5krEvxm9xnd8tNdA&_nc_ss=7b2a8&oh=00_Af-S8pyBHGt5RWoxgP0lG9Z3t6A8KVp0U8x9lGi7yOaB5g&oe=6A3F3A11",
+    "facebookUrl": "https://www.facebook.com/groups/2077966912432711",
+    "tags": ["cats", "dogs", "animals", "pets"],
+    "offeredServices": ["Pet Adoption", "Animal Rescue", "Spaying & Neutering"]
+  },
+  {
+    "slug": "iligan-stray-feeders",
+    "title": "Iligan Stray Feeder",
+    "category": "Animal Welfare",
+    "description": "Iligan Stray Feeders is a community of animal lovers dedicated to caring for homeless and free-ranging dogs and cats in Iligan by providing food, compassion, and support for their welfare. Beyond feeding, the group works together to promote adoption, spay/neuter programs, and other initiatives that help give strays a healthier and brighter future. 🐶🐱❤️",
+    "source": "community",
+    "isWalkIn": false,
+    "isOnline": true,
+    "type": "internal",
+    "bannerUrl": "https://scontent.fcgy1-1.fna.fbcdn.net/v/t1.6435-9/147067562_3608802282489262_5308709362901480932_n.jpg?stp=dst-jpg_tt6&cstp=mx945x859&ctp=s945x859&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeGSoW6Zapw4aTl-BxEJbRrB37wiHQDYX83fvCIdANhfzbWvd1HMC_B_buMn_iG9a4plX-cdxuRgsJmCCvFTFldn&_nc_ohc=VqzHTES2-LcQ7kNvwFcRNsT&_nc_oc=AdrP9YEfmyEMDyrb1vhVbnNuLcJyKSmy-cDatnNyWrDInpjMaDYb9zpHlL2bVifbQ7U&_nc_zt=23&_nc_ht=scontent.fcgy1-1.fna&_nc_gid=9csKtppYnoKTs-cZnfEZ_Q&_nc_ss=7b2a8&oh=00_Af-3npu7J6CBQcdXHm5H2FZ7eCmnGDUsXfEU_GMtP38R-w&oe=6A56B902",
+    "logoUrl": "https://scontent.fcgy1-1.fna.fbcdn.net/v/t1.6435-9/147067562_3608802282489262_5308709362901480932_n.jpg?stp=dst-jpg_tt6&cstp=mx945x859&ctp=s945x859&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeGSoW6Zapw4aTl-BxEJbRrB37wiHQDYX83fvCIdANhfzbWvd1HMC_B_buMn_iG9a4plX-cdxuRgsJmCCvFTFldn&_nc_ohc=VqzHTES2-LcQ7kNvwFcRNsT&_nc_oc=AdrP9YEfmyEMDyrb1vhVbnNuLcJyKSmy-cDatnNyWrDInpjMaDYb9zpHlL2bVifbQ7U&_nc_zt=23&_nc_ht=scontent.fcgy1-1.fna&_nc_gid=9csKtppYnoKTs-cZnfEZ_Q&_nc_ss=7b2a8&oh=00_Af-3npu7J6CBQcdXHm5H2FZ7eCmnGDUsXfEU_GMtP38R-w&oe=6A56B902",
+    "representative": {
+      "name": "Leamarie Hempesao",
+      "messengerUrl": "https://www.facebook.com/leamarie.hempesao.2024"
     },
-    {
-        "slug": "part-iligan-pet-inc",
-        "title": "PART- Iligan (PET ADOPTION and RESCUE TEAM- Iligan), Inc.",
-        "category": "Animal Welfare",
-        "description": "A SEC Registered, Non- Profit Organization, based in Iligan City. It's rescue team was founded and created in December 2017.",
-        "source": "community",
-        "isWalkIn": false,
-        "isOnline": true,
-        "type": "internal",
-        "bannerUrl": "https://scontent.fcgy4-1.fna.fbcdn.net/v/t39.30808-6/313421192_6297476396936078_2084694095174316688_n.jpg?stp=dst-jpg_tt6&cstp=mx2896x1448&ctp=s960x960&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeFak9A1mV_EOEoVH6NTLs09j3m51rPwUgmPebnWs_BSCdMsyB--jOTlb6bb3rZiFAWLgil-DlBoVLuq7NnHpumM&_nc_ohc=ODVGbMSwRAEQ7kNvwHW9vwl&_nc_oc=AdpFrAcxU0YRDFXacRDOzttmRRUU3HuMicz4hIa2ot3pQzB7a1Dutn2CHOyX5wImuaee8_9oKLt8S1JuLBat7uke&_nc_zt=23&_nc_ht=scontent.fcgy4-1.fna&_nc_gid=PuSHrw5krEvxm9xnd8tNdA&_nc_ss=7b2a8&oh=00_Af-S8pyBHGt5RWoxgP0lG9Z3t6A8KVp0U8x9lGi7yOaB5g&oe=6A3F3A11",
-        "logoUrl": "https://scontent.fcgy4-1.fna.fbcdn.net/v/t39.30808-6/313421192_6297476396936078_2084694095174316688_n.jpg?stp=dst-jpg_tt6&cstp=mx2896x1448&ctp=s960x960&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeFak9A1mV_EOEoVH6NTLs09j3m51rPwUgmPebnWs_BSCdMsyB--jOTlb6bb3rZiFAWLgil-DlBoVLuq7NnHpumM&_nc_ohc=ODVGbMSwRAEQ7kNvwHW9vwl&_nc_oc=AdpFrAcxU0YRDFXacRDOzttmRRUU3HuMicz4hIa2ot3pQzB7a1Dutn2CHOyX5wImuaee8_9oKLt8S1JuLBat7uke&_nc_zt=23&_nc_ht=scontent.fcgy4-1.fna&_nc_gid=PuSHrw5krEvxm9xnd8tNdA&_nc_ss=7b2a8&oh=00_Af-S8pyBHGt5RWoxgP0lG9Z3t6A8KVp0U8x9lGi7yOaB5g&oe=6A3F3A11",
-        "facebookUrl": "https://www.facebook.com/groups/2077966912432711",
-        "tags": [
-            "cats",
-            "dogs",
-            "animals",
-            "pets"
-        ],
-        "offeredServices": [
-            "Pet Adoption",
-            "Animal Rescue",
-            "Spaying & Neutering"
-        ]
-    },
-    {
-        "slug": "iligan-stray-feeders",
-        "title": "Iligan Stray Feeder",
-        "category": "Animal Welfare",
-        "description": "Iligan Stray Feeders is a community of animal lovers dedicated to caring for homeless and free-ranging dogs and cats in Iligan by providing food, compassion, and support for their welfare. Beyond feeding, the group works together to promote adoption, spay/neuter programs, and other initiatives that help give strays a healthier and brighter future. 🐶🐱❤️",
-        "source": "community",
-        "isWalkIn": false,
-        "isOnline": true,
-        "type": "internal",
-        "bannerUrl": "https://scontent.fcgy1-1.fna.fbcdn.net/v/t1.6435-9/147067562_3608802282489262_5308709362901480932_n.jpg?stp=dst-jpg_tt6&cstp=mx945x859&ctp=s945x859&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeGSoW6Zapw4aTl-BxEJbRrB37wiHQDYX83fvCIdANhfzbWvd1HMC_B_buMn_iG9a4plX-cdxuRgsJmCCvFTFldn&_nc_ohc=VqzHTES2-LcQ7kNvwFcRNsT&_nc_oc=AdrP9YEfmyEMDyrb1vhVbnNuLcJyKSmy-cDatnNyWrDInpjMaDYb9zpHlL2bVifbQ7U&_nc_zt=23&_nc_ht=scontent.fcgy1-1.fna&_nc_gid=9csKtppYnoKTs-cZnfEZ_Q&_nc_ss=7b2a8&oh=00_Af-3npu7J6CBQcdXHm5H2FZ7eCmnGDUsXfEU_GMtP38R-w&oe=6A56B902",
-        "logoUrl": "https://scontent.fcgy1-1.fna.fbcdn.net/v/t1.6435-9/147067562_3608802282489262_5308709362901480932_n.jpg?stp=dst-jpg_tt6&cstp=mx945x859&ctp=s945x859&_nc_cat=106&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeGSoW6Zapw4aTl-BxEJbRrB37wiHQDYX83fvCIdANhfzbWvd1HMC_B_buMn_iG9a4plX-cdxuRgsJmCCvFTFldn&_nc_ohc=VqzHTES2-LcQ7kNvwFcRNsT&_nc_oc=AdrP9YEfmyEMDyrb1vhVbnNuLcJyKSmy-cDatnNyWrDInpjMaDYb9zpHlL2bVifbQ7U&_nc_zt=23&_nc_ht=scontent.fcgy1-1.fna&_nc_gid=9csKtppYnoKTs-cZnfEZ_Q&_nc_ss=7b2a8&oh=00_Af-3npu7J6CBQcdXHm5H2FZ7eCmnGDUsXfEU_GMtP38R-w&oe=6A56B902",
-        "representative": {
-            "name": "Leamarie Hempesao",
-            "messengerUrl": "https://www.facebook.com/leamarie.hempesao.2024"
-        },
-        "tags": [
-            "cats",
-            "dogs",
-            "animals",
-            "pets"
-        ],
-        "offeredServices": [
-            "Non-profit Organization",
-            "Animal Rescue"
-        ]
-    }
+    "tags": ["cats", "dogs", "animals", "pets"],
+    "offeredServices": ["Non-profit Organization", "Animal Rescue"]
+  }
 ]

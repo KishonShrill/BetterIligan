@@ -1,19 +1,16 @@
-'use client'
+"use client";
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const InteractiveJeepneyMap = dynamic(
-    () => import('./InteractiveJeepneyMap'),
-    {
-        ssr: false,
-        loading: () => (
-            <div className="h-[600px] w-full bg-slate-100 animate-pulse rounded-2xl flex items-center justify-center text-slate-500 font-medium">
-                Loading Map...
-            </div>
-        )
-    }
-);
+const InteractiveJeepneyMap = dynamic(() => import("./InteractiveJeepneyMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-dvh w-full animate-pulse items-center justify-center rounded-2xl bg-slate-100 font-medium text-slate-500">
+      Loading Map...
+    </div>
+  ),
+});
 
 export default function MapWrapper() {
-    return <InteractiveJeepneyMap />;
+  return <InteractiveJeepneyMap />;
 }

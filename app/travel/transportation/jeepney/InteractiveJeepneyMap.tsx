@@ -1,266 +1,466 @@
-'use client'
+"use client";
 
-import { useState, useEffect, useMemo } from 'react';
-import L from 'leaflet';
-import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
-import type { GeoJsonObject, Feature } from 'geojson';
-import { Maximize, Minimize, Eye, EyeOff, Banknote, GraduationCap } from 'lucide-react';
-import 'leaflet/dist/leaflet.css';
-import jeepneyCodesData from '@/data/travel/jeepneyCoding.json';
-import jeepneyRoutesData from '@/data/travel/jeepney-routes.json';
+import { useState, useEffect, useMemo, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import MapGL, { Source, Layer } from "react-map-gl/maplibre";
+import type { MapRef, MapLayerMouseEvent } from "react-map-gl/maplibre";
+import bbox from "@turf/bbox";
+import type { GeoJsonObject } from "geojson";
+import "maplibre-gl/dist/maplibre-gl.css";
+
+import { Search, X } from "lucide-react";
+import { ROUTE_DIRECTORY_CODES } from "@/utils/variables";
+import type { JeepneyRoute, JeepneyCodeEntry } from "./types";
+
+import JeepneyMapControls from "./JeepneyMapControls";
+import DesktopJeepneySidebar from "./DesktopJeepneySidebar";
+import JeepneyRouteDetails from "./JeepneyRouteDetails";
+import MobileJeepneyHeader from "./MobileJeepneyHeader";
+import MobileJeepneyRouteSelector from "./MobileJeepneyRouteSelector";
+
+const jeepneyRoutesData = await fetch("/data/travel/jeepney-routes.json").then(
+  (res) => res.json(),
+);
+const jeepneyCodesData = await fetch("/data/travel/jeepneyCoding.json").then(
+  (res) => res.json(),
+);
+const iliganBoundaryData = await fetch(
+  "/data/travel/iligan-city-boundary.json",
+).then((res) => res.json());
+
 const geoJsonData = jeepneyRoutesData as GeoJsonObject;
+const boundaryGeoJsonData = iliganBoundaryData as GeoJsonObject;
 
-type JeepneyFare = {
-    regular: number;
-    discounted: number; // student / PWD / senior citizen rate
-};
+function FitToRoute({
+  activeRouteId,
+  mapRef,
+}: {
+  activeRouteId: string | null;
+  mapRef: React.RefObject<MapRef | null>;
+}) {
+  useEffect(() => {
+    if (!activeRouteId || !mapRef.current) return;
 
-type JeepneyCodeEntry = {
-    routeId: string;        // must match the routeId used in jeepney-routes.json
-    routeCode: string;      // short display code, e.g. "SF-AC"
-    routeColor?: string;    // customizable color for this route's badge/border — overrides the geojson's own "stroke"
-    routeFare?: JeepneyFare;
-};
+    const selectedFeature = jeepneyRoutesData.features.find(
+      (f) => f.properties.routeId === activeRouteId,
+    );
 
+    if (!selectedFeature) return;
 
-function FixMapResize({ isFullscreen }: { isFullscreen: boolean }) {
-    const map = useMap();
+    const bounds = bbox(selectedFeature);
 
-    useEffect(() => {
-        setTimeout(() => {
-            map.invalidateSize();
-        }, 150);
-    }, [isFullscreen, map]);
+    mapRef.current.fitBounds(
+      [
+        [bounds[0], bounds[1]],
+        [bounds[2], bounds[3]],
+      ],
+      {
+        padding: 40,
+        duration: 500,
+      },
+    );
+  }, [activeRouteId, mapRef]);
 
-    return null;
-}
-
-function FitToRoute({ activeRouteId }: { activeRouteId: string | null }) {
-    const map = useMap();
-
-    useEffect(() => {
-        if (!activeRouteId) return;
-
-        const selectedFeature = jeepneyRoutesData.features.find(
-            (f) => f.properties.routeId === activeRouteId
-        );
-
-        if (!selectedFeature) return;
-
-        const layer = L.geoJSON(selectedFeature as Feature);
-        const bounds = layer.getBounds();
-
-        map.fitBounds(bounds, {
-            padding: [20, 20], // adds margin so route isn't touching edges
-            maxZoom: 15,        // optional: prevents over-zooming
-            animate: true,
-            duration: 0.5
-        });
-
-    }, [activeRouteId, map]);
-
-    return null;
+  return null;
 }
 
 export default function InteractiveJeepneyMap() {
-    const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
-    const [showAllRoutes, setShowAllRoutes] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
-    const containerClasses = isFullscreen
-        ? "fixed inset-0 z-[100] bg-slate-50 flex flex-col lg:flex-row h-[100dvh] w-screen"
-        : "grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-6 bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm h-[800px] lg:h-auto";
+  const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
+  const [showAllRoutes, setShowAllRoutes] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
-    // Lookup table: routeId (lowercased) -> full jeepneyCoding.json entry, built once.
-    // Lowercased on both sides so mismatched casing between the two JSON files never breaks the match.
-    const codeLookup = useMemo(() => {
-        const map = new Map<string, JeepneyCodeEntry>();
-        (jeepneyCodesData as JeepneyCodeEntry[]).forEach((entry) => {
-            map.set(entry.routeId.toLowerCase(), entry);
-        });
-        return map;
-    }, []);
+  const mapRef = useRef<MapRef>(null);
 
-    // Color lookup, shared between the sidebar list and the map layer, so both always agree.
-    // Priority: routeColor from jeepneyCoding.json (customizable) -> stroke from jeepney-routes.json -> default blue.
-    const getRouteColor = (routeId: string, fallbackStroke?: string) => {
-        const entry = codeLookup.get(routeId.toLowerCase());
-        return entry?.routeColor || fallbackStroke || '#3B82F6';
-    };
+  // --- NEW: 3-Phase Animation State ---
+  const [sidebarPhase, setSidebarPhase] = useState<"closed" | "peek" | "open">(
+    "open",
+  );
+  const [isClosing, setIsClosing] = useState(false);
 
-    return (
-        <div className={containerClasses}>
+  const codeLookup = useMemo(() => {
+    const lookup = new Map<string, JeepneyCodeEntry>();
 
-            {/* LEFT SIDEBAR: The Route List */}
-            <div className={`border-r border-slate-100 rounded-r-2xl flex flex-col bg-white ${isFullscreen ? 'w-full lg:w-80 h-1/3 lg:h-full shrink-0' : 'lg:col-span-4 h-[300px] lg:h-[600px]'}`}>
-                <div className="p-4 border-b border-slate-100 rounded-r-2xl bg-slate-50 flex justify-between items-center shrink-0">
-                    <div>
-                        <h2 className="text-lg font-bold text-slate-900">Jeepney Routes</h2>
-                        <p className="text-xs text-slate-500">Select a route to view it &amp; check the fare</p>
-                    </div>
-                </div>
+    (jeepneyCodesData as JeepneyCodeEntry[]).forEach((entry) => {
+      lookup.set(entry.routeId.toLowerCase(), entry);
+    });
 
-                <ul className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
-                    {jeepneyRoutesData.features.map((feature) => {
-                        const isActive = activeRouteId === feature.properties.routeId;
-                        const codeEntry = codeLookup.get(feature.properties.routeId.toLowerCase());
-                        const routeColor = getRouteColor(feature.properties.routeId, feature.properties.stroke);
-                        const displayId = codeEntry?.routeId || feature.properties.routeId;
-                        const displayCode = codeEntry?.routeCode || feature.properties.routeId;
-                        const fare = codeEntry?.routeFare;
+    return lookup;
+  }, []);
 
-                        return (
-                            <li key={feature.properties.routeId}>
-                                <button
-                                    onClick={() => setActiveRouteId(isActive ? null : feature.properties.routeId)}
-                                    style={{ borderLeftColor: routeColor, borderLeftWidth: 4 }}
-                                    className={`w-full text-left p-4 rounded-xl border transition-all ${isActive
-                                        ? 'bg-blue-50 border-blue-300 shadow-sm'
-                                        : 'bg-white border-slate-100 hover:border-blue-200 hover:bg-slate-50'
-                                        }`}
-                                >
-                                    <div className="flex items-center gap-3">
-                                        {/* Color badge with short code — color comes from jeepneyCoding.json, customizable per route */}
-                                        <div
-                                            className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-white text-[10px] font-bold shadow-sm px-1 text-center leading-none"
-                                            style={{ backgroundColor: routeColor }}
-                                        >
-                                            {displayCode}
-                                        </div>
-                                        <div className="min-w-0">
-                                            <div className="font-bold text-slate-900 leading-tight truncate">{feature.properties.name}</div>
-                                            <div
-                                                className="text-[10px] font-bold tracking-wider uppercase mt-0.5"
-                                                style={{ color: routeColor }}
-                                            >
-                                                Route {displayId}
-                                            </div>
-                                        </div>
-                                    </div>
+  const getRouteColor = (routeId: string, fallbackStroke?: string) => {
+    const entry = codeLookup.get(routeId.toLowerCase());
+    return entry?.routeColor || fallbackStroke || "#3B82F6";
+  };
 
-                                    {/* Fare shown only when this route is tapped/selected: regular + student/PWD/senior rate side by side */}
-                                    {isActive && (
-                                        fare ? (
-                                            <div className="mt-3 pt-3 border-t border-blue-100 grid grid-cols-2 gap-2">
-                                                <div className="rounded-lg bg-emerald-50 border border-emerald-100 px-2.5 py-2">
-                                                    <div className="flex items-center gap-1.5 text-emerald-700">
-                                                        <Banknote className="w-3.5 h-3.5 shrink-0" />
-                                                        <span className="text-[9px] font-bold uppercase tracking-wide">Regular</span>
-                                                    </div>
-                                                    <div className="text-base font-extrabold text-slate-900 mt-0.5">
-                                                        ₱{fare.regular}
-                                                    </div>
-                                                </div>
-                                                <div className="rounded-lg bg-indigo-50 border border-indigo-100 px-2.5 py-2">
-                                                    <div className="flex items-center gap-1.5 text-indigo-700">
-                                                        <GraduationCap className="w-3.5 h-3.5 shrink-0" />
-                                                        <span className="text-[9px] font-bold uppercase tracking-wide">Student / PWD</span>
-                                                    </div>
-                                                    <div className="text-base font-extrabold text-slate-900 mt-0.5">
-                                                        ₱{fare.discounted}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="mt-3 pt-3 border-t border-blue-100 flex items-center gap-2">
-                                                <Banknote className="w-4 h-4 text-slate-400 shrink-0" />
-                                                <span className="text-sm font-semibold text-slate-500">Fare not yet available</span>
-                                            </div>
-                                        )
-                                    )}
-                                </button>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
+  const routeColorExpression = useMemo(() => {
+    const expression: any[] = ["match", ["get", "routeId"]];
 
-            {/* RIGHT MAP: OpenStreetMap via Leaflet */}
-            <div className={`relative z-0 bg-slate-100 isolate ${isFullscreen ? 'w-full h-2/3 lg:h-full flex-1' : 'lg:col-span-8 h-[500px] lg:h-[600px]'}`}>
+    jeepneyRoutesData.features.forEach((feature) => {
+      const routeId = feature.properties.routeId;
+      const color = getRouteColor(routeId, feature.properties.stroke);
 
-                {/* --- FLOATING CONTROLS --- */}
-                <div className="absolute top-4 right-4 z-[1000] pointer-events-auto flex flex-col gap-2">
+      expression.push(routeId, color);
+    });
 
-                    {/* Toggle All Routes Button */}
-                    <button
-                        onClick={() => {
-                            setShowAllRoutes(!showAllRoutes);
-                            if (!showAllRoutes) setActiveRouteId(null); // Clear specific selection if showing all
-                        }}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-lg shadow-md border font-bold text-xs transition-all ${showAllRoutes
-                            ? 'bg-slate-800 text-white border-slate-700'
-                            : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
-                            }`}
-                    >
-                        {showAllRoutes ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        <span className="hidden sm:inline">{showAllRoutes ? 'Hide' : 'Show'} All Routes</span>
-                    </button>
+    expression.push("#3B82F6");
 
-                    {/* Fullscreen Toggle Button */}
-                    <button
-                        onClick={() => {
-                            setIsFullscreen(!isFullscreen);
-                            setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
-                        }}
-                        className="flex items-center justify-center w-10 h-10 bg-white text-slate-700 rounded-lg shadow-md border border-slate-200 hover:bg-slate-50 transition-all ml-auto"
-                        title="Toggle Fullscreen"
-                    >
-                        {isFullscreen ? <Minimize className="w-5 h-5" /> : <Maximize className="w-5 h-5" />}
-                    </button>
+    return expression;
+  }, [codeLookup]);
 
-                </div>
+  const selectedRoute = useMemo(() => {
+    if (!activeRouteId) return null;
 
-                {/* --- THE LEAFLET MAP --- */}
-                <MapContainer
-                    center={[8.2280, 124.2452]} // Iligan City Coordinates
-                    zoom={13}
-                    className="w-full h-full"
-                    zoomControl={false}
-                >
-                    <FixMapResize isFullscreen={isFullscreen} />
-                    <FitToRoute activeRouteId={activeRouteId} />
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                    />
-
-                    <GeoJSON
-                        data={geoJsonData}
-                        style={(feature) => {
-                            const routeId = feature?.properties.routeId as string;
-                            const isSpecificActive = routeId === activeRouteId;
-                            const lineColor = getRouteColor(routeId, feature?.properties.stroke);
-
-                            if (isSpecificActive) {
-                                return {
-                                    color: lineColor,
-                                    weight: 6,
-                                    opacity: 1,
-                                };
-                            } else if (showAllRoutes) {
-                                return {
-                                    color: lineColor,
-                                    weight: 3,
-                                    opacity: 0.6,
-                                };
-                            } else {
-                                return {
-                                    opacity: 0,
-                                    fillOpacity: 0,
-                                    weight: 0
-                                };
-                            }
-                        }}
-                        onEachFeature={(feature, layer) => {
-                            layer.on({
-                                click: () => {
-                                    setActiveRouteId(feature.properties.routeId);
-                                    setShowAllRoutes(false); // Focus strictly on this route when clicked
-                                }
-                            });
-                        }}
-                    />
-                </MapContainer>
-            </div>
-        </div>
+    const feature = jeepneyRoutesData.features.find(
+      (feature) => feature.properties.routeId === activeRouteId,
     );
+
+    const codeEntry = codeLookup.get(activeRouteId.toLowerCase());
+
+    if (feature) {
+      return {
+        routeId: feature.properties.routeId,
+        name: feature.properties.name ?? `Route ${feature.properties.routeId}`,
+        routeColor: codeEntry?.routeColor ?? feature.properties.stroke,
+        routeFare: codeEntry?.routeFare,
+        hasGeoJson: true,
+        codeEntry,
+      };
+    }
+
+    /*
+     * Route exists in the directory/code data,
+     * but does not have GeoJSON yet.
+     */
+    if (codeEntry) {
+      return {
+        routeId: codeEntry.routeId,
+        name: `Route ${codeEntry.routeId}`,
+        routeColor: codeEntry.routeColor,
+        routeFare: codeEntry.routeFare,
+        hasGeoJson: false,
+        codeEntry,
+      };
+    }
+
+    return null;
+  }, [activeRouteId, codeLookup]);
+  const isDetailsOpen = selectedRoute !== null;
+
+  const handleMapClick = (event: MapLayerMouseEvent) => {
+    const features = event.target.queryRenderedFeatures(event.point, {
+      layers: ["jeepney-route-hitbox"],
+    });
+
+    if (!features.length) return;
+
+    const routeId = features[0].properties?.routeId;
+
+    if (typeof routeId !== "string") return;
+
+    setActiveRouteId(routeId);
+    setShowAllRoutes(false);
+  };
+
+  const toggleSidebar = () => {
+    if (sidebarPhase === "closed") {
+      setIsClosing(false);
+      setSidebarPhase("peek");
+      setTimeout(() => setSidebarPhase("open"), 250);
+    } else if (sidebarPhase === "open") {
+      setIsClosing(true);
+      setSidebarPhase("peek");
+      setTimeout(() => setSidebarPhase("closed"), 350);
+    }
+  };
+
+  // --- NEW: Dynamic Style for the Search Bar ---
+  // Mirrors the exact timing of the sidebar's width transition
+  const searchStyle = {
+    transitionProperty: "transform",
+    transitionDuration:
+      (sidebarPhase === "peek" && !isClosing) ||
+      (sidebarPhase === "closed" && isClosing)
+        ? "250ms"
+        : "350ms",
+    transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+    // 12rem = w-48 (closed), 20rem = w-80 (open), plus 1rem gap
+    transform:
+      sidebarPhase === "closed"
+        ? "translateX(calc(12rem + 1rem))"
+        : "translateX(calc(20rem + 1rem))",
+  };
+
+  const phaseRef = useRef(sidebarPhase);
+  useEffect(() => {
+    phaseRef.current = sidebarPhase;
+  }, [sidebarPhase]);
+
+  useEffect(() => {
+    if (activeRouteId !== null) setShowAllRoutes(false);
+    else setShowAllRoutes(true);
+    if (activeRouteId && phaseRef.current === "closed") {
+      setIsClosing(false);
+      setSidebarPhase("peek");
+      setTimeout(() => setSidebarPhase("open"), 250);
+    }
+  }, [activeRouteId]);
+
+  const allRoutes = useMemo(() => {
+    const routeMap = new Map<string, JeepneyRoute>();
+
+    for (const routeCode of ROUTE_DIRECTORY_CODES) {
+      const key = routeCode.toLowerCase();
+      const codeEntry = codeLookup.get(key);
+
+      routeMap.set(key, {
+        routeId: codeEntry?.routeId ?? routeCode,
+        name: `Route ${routeCode}`,
+        routeColor: codeEntry?.routeColor,
+        routeFare: codeEntry?.routeFare,
+        hasGeoJson: false,
+      });
+    }
+
+    for (const feature of jeepneyRoutesData.features) {
+      const routeId = feature.properties.routeId;
+      const key = routeId.toLowerCase();
+
+      const existing = routeMap.get(key);
+      const codeEntry = codeLookup.get(key);
+
+      routeMap.set(key, {
+        routeId: existing?.routeId ?? codeEntry?.routeId ?? routeId,
+        name: feature.properties.name || existing?.name || `Route ${routeId}`,
+        routeColor:
+          existing?.routeColor ??
+          codeEntry?.routeColor ??
+          feature.properties.stroke,
+        routeFare: existing?.routeFare ?? codeEntry?.routeFare,
+        hasGeoJson: true,
+      });
+    }
+
+    for (const codeEntry of codeLookup.values()) {
+      const key = codeEntry.routeId.toLowerCase();
+
+      if (!routeMap.has(key)) {
+        routeMap.set(key, {
+          routeId: codeEntry.routeId,
+          name: `Route ${codeEntry.routeId}`,
+          routeColor: codeEntry.routeColor,
+          routeFare: codeEntry.routeFare,
+          hasGeoJson: false,
+        });
+      }
+    }
+
+    return Array.from(routeMap.values());
+  }, [codeLookup]);
+
+  const sortedRoutes = useMemo(() => {
+    return [...allRoutes].sort((a, b) => {
+      // Available routes first
+      if (a.hasGeoJson !== b.hasGeoJson) {
+        return a.hasGeoJson ? -1 : 1;
+      }
+
+      // Then sort by route code
+      return a.routeId.localeCompare(b.routeId, undefined, {
+        numeric: true,
+      });
+    });
+  }, [allRoutes]);
+
+  const filteredRoutes = useMemo(() => {
+    if (!searchQuery) {
+      return sortedRoutes;
+    }
+
+    const searchLower = searchQuery.toLowerCase();
+
+    return sortedRoutes.filter(
+      (route) =>
+        route.name.toLowerCase().includes(searchLower) ||
+        route.routeId.toLowerCase().includes(searchLower),
+    );
+  }, [sortedRoutes, searchQuery]);
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-slate-50">
+      {/* --- MAP LAYER (Background) --- */}
+      <MapGL
+        ref={mapRef}
+        initialViewState={{
+          longitude: 124.2452,
+          latitude: 8.228,
+          zoom: 16,
+          pitch: 60,
+          bearing: -20,
+        }}
+        mapStyle="https://tiles.openfreemap.org/styles/liberty"
+        onClick={handleMapClick}
+        interactiveLayerIds={["jeepney-route-hitbox"]}
+      >
+        <JeepneyMapControls mapRef={mapRef} />
+        <FitToRoute activeRouteId={activeRouteId} mapRef={mapRef} />
+
+        <Source id="iligan-boundary" type="geojson" data={boundaryGeoJsonData}>
+          <Layer
+            id="iligan-boundary-line"
+            type="line"
+            paint={{
+              "line-color": "#94a3b8",
+              "line-width": 2,
+              "line-dasharray": [4, 4],
+            }}
+          />
+
+          <Layer
+            id="iligan-boundary-fill"
+            type="fill"
+            paint={{
+              "fill-color": "#cbd5e1",
+              "fill-opacity": 0.05,
+            }}
+          />
+        </Source>
+
+        {/*
+                    <Layer
+                        id="3d-buildings"
+                        type="fill-extrusion"
+                        source="buildings"
+                        source-layer="building"
+                        minzoom={15}
+                        paint={{
+                            'fill-extrusion-height': ['get', 'height'],
+                            'fill-extrusion-base': ['get', 'min_height'],
+                            'fill-extrusion-opacity': 0.8,
+                        }}
+                    />
+                    */}
+
+        <Source id="jeepney-routes" type="geojson" data={geoJsonData}>
+          {/* Mobile-friendly invisible hitbox */}
+          <Layer
+            id="jeepney-route-hitbox"
+            type="line"
+            paint={{
+              "line-color": "#000000",
+              "line-width": 24,
+              "line-opacity": 0,
+            }}
+          />
+
+          {/* Visible routes */}
+          <Layer
+            id="jeepney-routes"
+            type="line"
+            paint={{
+              "line-color": routeColorExpression,
+              "line-width": [
+                "case",
+                ["==", ["get", "routeId"], activeRouteId ?? ""],
+                6,
+                3,
+              ],
+              "line-opacity": [
+                "case",
+                ["==", ["get", "routeId"], activeRouteId ?? ""],
+                1,
+                showAllRoutes ? 0.6 : 0,
+              ],
+            }}
+          />
+        </Source>
+      </MapGL>
+
+      {/* MOBILE */}
+      <MobileJeepneyHeader
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filteredRoutes={filteredRoutes}
+        setActiveRouteId={setActiveRouteId}
+      />
+
+      <MobileJeepneyRouteSelector
+        routes={filteredRoutes}
+        activeRouteId={activeRouteId}
+        setActiveRouteId={setActiveRouteId}
+        showAllRoutes={showAllRoutes}
+        setShowAllRoutes={setShowAllRoutes}
+        getRouteColor={getRouteColor}
+      />
+
+      {/* DESKTOP */}
+      {/* --- FLOATING LEFT SIDEBAR --- */}
+      <DesktopJeepneySidebar
+        sidebarPhase={sidebarPhase}
+        isClosing={isClosing}
+        toggleSidebar={toggleSidebar}
+        routes={filteredRoutes}
+        activeRouteId={activeRouteId}
+        setActiveRouteId={setActiveRouteId}
+        getRouteColor={getRouteColor}
+        searchQuery={searchQuery}
+      />
+      <div
+        className="pointer-events-auto absolute top-4 left-4 z-[999] flex h-[56px] w-64 items-center rounded-2xl border border-slate-200 bg-white px-4 shadow-xl max-md:hidden"
+        style={searchStyle}
+      >
+        <Search className="mr-2 h-4 w-4 shrink-0 text-slate-400" />
+        <input
+          type="text"
+          placeholder="Search routes..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          // Opens the sidebar automatically if they type while it's closed
+          onFocus={() => sidebarPhase === "closed" && toggleSidebar()}
+          className="w-full bg-transparent text-sm font-medium text-slate-700 outline-none placeholder:text-slate-400"
+        />
+        {searchQuery && (
+          <button
+            onClick={() => setSearchQuery("")}
+            className="rounded-full p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        )}
+      </div>
+
+      {/* --- FLOATING RIGHT SIDEBAR --- */}
+      <JeepneyRouteDetails
+        route={selectedRoute}
+        codeEntry={selectedRoute?.codeEntry}
+        getRouteColor={getRouteColor}
+        onClose={() => setActiveRouteId(null)}
+      />
+      <div
+        className="pointer-events-auto absolute top-4 right-4 z-1000 rounded-2xl bg-slate-50 p-2 shadow-xl transition-transform duration-300 ease-in-out max-md:hidden"
+        style={{
+          transform: isDetailsOpen
+            ? "translateX(calc(-20rem - 1rem))"
+            : "translateX(0)",
+        }}
+      >
+        <Link
+          href="/"
+          aria-label="BetterIligan home"
+          className="flex items-center gap-2 transition-opacity hover:opacity-80"
+        >
+          <Image
+            src="/images/logos/betteriligan-logo.png"
+            alt="BetterIligan"
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 object-contain"
+          />
+          <span className="hidden text-sm font-extrabold tracking-tight text-slate-900 sm:inline">
+            BetterIligan
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
 }

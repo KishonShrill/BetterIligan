@@ -13,17 +13,21 @@ import { getIncidentState } from "./queries";
 import type { BangonConfig } from "@/validations/bangonSchema";
 
 export async function getEffectiveBangonConfig(): Promise<BangonConfig> {
-    const state = await getIncidentState();
-    if (!state) return bangonConfig;
+  const state = await getIncidentState();
+  if (!state) return bangonConfig;
 
-    const active = state.active === 1;
-    return {
-        ...bangonConfig,
-        active,
-        // Only surface the D1 incident copy while active; otherwise keep the
-        // static default (never shown on standby anyway).
-        activeIncident: active
-            ? { title: state.title, summary: state.summary, declaredAt: state.declared_at }
-            : bangonConfig.activeIncident,
-    };
+  const active = state.active === 1;
+  return {
+    ...bangonConfig,
+    active,
+    // Only surface the D1 incident copy while active; otherwise keep the
+    // static default (never shown on standby anyway).
+    activeIncident: active
+      ? {
+          title: state.title,
+          summary: state.summary,
+          declaredAt: state.declared_at,
+        }
+      : bangonConfig.activeIncident,
+  };
 }

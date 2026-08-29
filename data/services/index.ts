@@ -1,27 +1,27 @@
-import { ServicesArraySchema } from '@/validations/serviceSchema';
+import { ServicesArraySchema } from "@/validations/serviceSchema";
 
-import business from './business.json';
-import certificates from './certificates.json';
-import health from './health.json';
-import infrastructure from './infrastructure.json';
-import transport from './transport.json';
-import animals from './animals.json';
-import disasters from './disaster.json';
-import education from './education.json';
+import business from "./business.json";
+import certificates from "./certificates.json";
+import health from "./health.json";
+import infrastructure from "./infrastructure.json";
+import transport from "./transport.json";
+import animals from "./animals.json";
+import disasters from "./disaster.json";
+import education from "./education.json";
 
-import betteriliganservices from './betteriligan-services.json';
+import betteriliganservices from "./betteriligan-services.json";
 
 const rawServices = [
-    ...business,
-    ...certificates,
-    ...health,
-    ...infrastructure,
-    ...transport,
-    ...animals,
-    ...disasters,
-    ...education,
+  ...business,
+  ...certificates,
+  ...health,
+  ...infrastructure,
+  ...transport,
+  ...animals,
+  ...disasters,
+  ...education,
 
-    ...betteriliganservices
-]
+  ...betteriliganservices,
+];
 
 export const allServices = ServicesArraySchema.parse(rawServices);
