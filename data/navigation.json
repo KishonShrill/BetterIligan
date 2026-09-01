@@ -1,148 +1,148 @@
 [
-    {
-        "name": "Iligan City",
-        "href": "/iligan",
-        "dropdown": [
-            {
-                "name": "All About Iligan",
-                "description": "Overview of Iligan City, including its culture, geography, and key highlights.",
-                "href": "/iligan"
-            },
-            {
-                "name": "City Profile",
-                "description": "Key facts, demographics, and statistical data about Iligan City.",
-                "href": "/iligan/city-stats"
-            },
-            {
-                "name": "History & Heritage",
-                "description": "Explore the rich history, traditions, and heritage of Iligan City.",
-                "href": "#",
-                "upcoming": true
-            },
-            {
-                "name": "City Officials",
-                "description": "Meet the elected officials and leaders serving Iligan City.",
-                "href": "/iligan/city-officials"
-            },
-            {
-                "name": "Barangays",
-                "description": "Directory of barangays with basic information and local details.",
-                "href": "/iligan/barangays"
-            },
-            {
-                "name": "Electricity",
-                "description": "Information about power providers, services, and utilities in the city.",
-                "href": "/iligan/electricity"
-            },
-            {
-                "name": "Disaster Preparedness Hub",
-                "description": "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City.",
-                "href": "/disaster"
-            },
-            {
-                "name": "Bangon Iligan",
-                "description": "Community relief command center — evacuation map, hazard reports, and a community board. Standby until an emergency.",
-                "href": "/bangon-iligan"
-            }
-        ]
-    },
-    {
-        "name": "Travel",
-        "href": "/travel",
-        "dropdown": [
-            {
-                "name": "Explore Travel",
-                "description": "Discover top destinations, attractions, and experiences in Iligan.",
-                "href": "/travel"
-            },
-            {
-                "name": "Mugna sa Iligan 2026",
-                "description": "A popular, month-long annual fiesta park and trade fair held every September as part of the grand Diyandi Festival honoring the city's patron saint, St. Michael the Archangel",
-                "href": "/travel/mugna"
-            },
-            {
-                "name": "Jeepney Routes",
-                "description": "Navigate Iligan with our interactive guide to local jeepney routes and commuting paths.",
-                "href": "/travel/transportation/jeepney"
-            },
-            {
-                "name": "Bus Schedules",
-                "description": "Check daily departure times for provincial routes and local co-op charter services.",
-                "href": "/travel/transportation/bus"
-            },
-            {
-                "name": "Waterfalls",
-                "description": "Explore Iligan’s famous waterfalls and natural attractions.",
-                "href": "/travel/waterfalls"
-            }
-        ]
-    },
-    {
-        "name": "Transparency",
-        "href": "/transparency",
-        "dropdown": [
-            {
-                "name": "Transparency Overview",
-                "description": "Fiscal accountability and governance documents for Iligan City.",
-                "href": "/transparency"
-            },
-            {
-                "name": "Budget & Finances",
-                "description": "See where the city's revenue comes from and where it's spent.",
-                "href": "/transparency/budget"
-            },
-            {
-                "name": "City Resolutions",
-                "description": "Browse resolutions and ordinances passed by the Sangguniang Panlungsod.",
-                "href": "/transparency/resolutions"
-            },
-            {
-                "name": "Bids & Procurement",
-                "description": "Track open, awarded, and in-progress procurement projects from the city.",
-                "href": "/transparency/bids"
-            }
-        ]
-    },
-    {
-        "name": "Government",
-        "href": "/government",
-        "dropdown": [
-            {
-                "name": "Government Overview",
-                "description": "Structure, roles, and functions of the local government of Iligan.",
-                "href": "/government"
-            },
-            {
-                "name": "National Agencies",
-                "description": "List of national government offices and agencies operating in Iligan.",
-                "href": "/government/directory"
-            },
-            {
-                "name": "Departments",
-                "description": "Overview of city departments and their services to the public.",
-                "href": "/government/departments"
-            }
-        ]
-    },
-    {
-        "name": "About",
-        "href": "/about",
-        "dropdown": [
-            {
-                "name": "About Us",
-                "description": "Learn more about this platform and its purpose.",
-                "href": "/about"
-            },
-            {
-                "name": "Volunteer",
-                "description": "Learn more about this platform and its purpose.",
-                "href": "/volunteer"
-            },
-            {
-                "name": "Contributors",
-                "description": "See who contributed to this community project.",
-                "href": "/contributors"
-            }
-        ]
-    }
+  {
+    "name": "Iligan City",
+    "href": "/iligan",
+    "dropdown": [
+      {
+        "name": "All About Iligan",
+        "description": "Overview of Iligan City, including its culture, geography, and key highlights.",
+        "href": "/iligan"
+      },
+      {
+        "name": "City Profile",
+        "description": "Key facts, demographics, and statistical data about Iligan City.",
+        "href": "/iligan/city-stats"
+      },
+      {
+        "name": "History & Heritage",
+        "description": "Explore the rich history, traditions, and heritage of Iligan City.",
+        "href": "#",
+        "upcoming": true
+      },
+      {
+        "name": "City Officials",
+        "description": "Meet the elected officials and leaders serving Iligan City.",
+        "href": "/iligan/city-officials"
+      },
+      {
+        "name": "Barangays",
+        "description": "Directory of barangays with basic information and local details.",
+        "href": "/iligan/barangays"
+      },
+      {
+        "name": "Electricity",
+        "description": "Information about power providers, services, and utilities in the city.",
+        "href": "/iligan/electricity"
+      },
+      {
+        "name": "Disaster Preparedness Hub",
+        "description": "Emergency hotlines and typhoon, flood, and earthquake preparedness guides for Iligan City.",
+        "href": "/disaster"
+      },
+      {
+        "name": "Bangon Iligan",
+        "description": "Community relief command center — evacuation map, hazard reports, and a community board. Standby until an emergency.",
+        "href": "/bangon-iligan"
+      }
+    ]
+  },
+  {
+    "name": "Travel",
+    "href": "/travel",
+    "dropdown": [
+      {
+        "name": "Explore Travel",
+        "description": "Discover top destinations, attractions, and experiences in Iligan.",
+        "href": "/travel"
+      },
+      {
+        "name": "Mugna sa Iligan 2026",
+        "description": "A popular, month-long annual fiesta park and trade fair held every September as part of the grand Diyandi Festival honoring the city's patron saint, St. Michael the Archangel",
+        "href": "/travel/mugna"
+      },
+      {
+        "name": "Jeepney Routes",
+        "description": "Navigate Iligan with our interactive guide to local jeepney routes and commuting paths.",
+        "href": "/travel/transportation/jeepney"
+      },
+      {
+        "name": "Bus Schedules",
+        "description": "Check daily departure times for provincial routes and local co-op charter services.",
+        "href": "/travel/transportation/bus"
+      },
+      {
+        "name": "Waterfalls",
+        "description": "Explore Iligan’s famous waterfalls and natural attractions.",
+        "href": "/travel/waterfalls"
+      }
+    ]
+  },
+  {
+    "name": "Transparency",
+    "href": "/transparency",
+    "dropdown": [
+      {
+        "name": "Transparency Overview",
+        "description": "Fiscal accountability and governance documents for Iligan City.",
+        "href": "/transparency"
+      },
+      {
+        "name": "Budget & Finances",
+        "description": "See where the city's revenue comes from and where it's spent.",
+        "href": "/transparency/budget"
+      },
+      {
+        "name": "City Resolutions",
+        "description": "Browse resolutions and ordinances passed by the Sangguniang Panlungsod.",
+        "href": "/transparency/resolutions"
+      },
+      {
+        "name": "Bids & Procurement",
+        "description": "Track open, awarded, and in-progress procurement projects from the city.",
+        "href": "/transparency/bids"
+      }
+    ]
+  },
+  {
+    "name": "Government",
+    "href": "/government",
+    "dropdown": [
+      {
+        "name": "Government Overview",
+        "description": "Structure, roles, and functions of the local government of Iligan.",
+        "href": "/government"
+      },
+      {
+        "name": "National Agencies",
+        "description": "List of national government offices and agencies operating in Iligan.",
+        "href": "/government/directory"
+      },
+      {
+        "name": "Departments",
+        "description": "Overview of city departments and their services to the public.",
+        "href": "/government/departments"
+      }
+    ]
+  },
+  {
+    "name": "About",
+    "href": "/about",
+    "dropdown": [
+      {
+        "name": "About Us",
+        "description": "Learn more about this platform and its purpose.",
+        "href": "/about"
+      },
+      {
+        "name": "Volunteer",
+        "description": "Learn more about this platform and its purpose.",
+        "href": "/volunteer"
+      },
+      {
+        "name": "Contributors",
+        "description": "See who contributed to this community project.",
+        "href": "/contributors"
+      }
+    ]
+  }
 ]

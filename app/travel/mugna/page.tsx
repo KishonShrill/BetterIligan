@@ -14,15 +14,23 @@ import {
     ILIGAN_CENTER,
     routesGeoJSON,
     mugnaZoneGeoJSON,
-    interiorDetailsGeoJSON
+    interiorDetailsGeoJSON,
 } from "./variables";
+import { setWorkerUrl } from "maplibre-gl";
+import workerUrl from "maplibre-gl/dist/maplibre-gl-worker?worker&url";
+
+setWorkerUrl(workerUrl);
+
 
 import ReferencesFooter from "@/components/ui/ReferencesFooter";
 
 const REFERENCES = [
-    { title: "City Government of Iligan - 𝐌𝐔𝐆𝐍𝐀 𝐒𝐀 𝐈𝐋𝐈𝐆𝐀𝐍 𝐓𝐑𝐀𝐅𝐅𝐈𝐂 𝐑𝐎𝐔𝐓𝐄𝐒 & 𝐏𝐀𝐑𝐊𝐈𝐍𝐆 𝐑𝐄𝐒𝐓𝐑𝐈𝐂𝐓𝐈𝐎𝐍𝐒", url: "https://www.facebook.com/photo?fbid=1075954835191568" }
-]
-
+    {
+        title:
+            "City Government of Iligan - 𝐌𝐔𝐆𝐍𝐀 𝐒𝐀 𝐈𝐋𝐈𝐆𝐀𝐍 𝐓𝐑𝐀𝐅𝐅𝐈𝐂 𝐑𝐎𝐔𝐓𝐄𝐒 & 𝐏𝐀𝐑𝐊𝐈𝐍𝐆 𝐑𝐄𝐒𝐓𝐑𝐈𝐂𝐓𝐈𝐎𝐍𝐒",
+        url: "https://www.facebook.com/photo?fbid=1075954835191568",
+    },
+];
 
 export default function MugnaMap() {
     const mapRef = useRef<MapRef | null>(null);
@@ -92,19 +100,18 @@ export default function MugnaMap() {
 
     return (
         <div className="bg-white">
-            <div className="relative h-[calc(100dvh-104px-32px)] sm:h-[calc(100dvh-80px-32px)] w-full overflow-hidden">
+            <div className="relative h-[calc(100dvh-104px-32px)] w-full overflow-hidden sm:h-[calc(100dvh-80px-32px)]">
                 {/* ------------------------------------------------------------------ */}
                 {/* HEADER */}
                 {/* ------------------------------------------------------------------ */}
 
-                <div className="absolute left-0 right-0 top-0 z-10 p-4">
+                <div className="absolute top-0 right-0 left-0 z-10 p-4">
                     <div
                         className={cn(
                             "mx-auto rounded-xl bg-white/95 p-4 shadow-lg backdrop-blur",
                             showInterior ? "w-fit" : "max-w-3xl",
                         )}
                     >
-
                         {!showInterior && (
                             <>
                                 <h1 className="text-xl font-bold text-gray-900">
@@ -319,7 +326,7 @@ export default function MugnaMap() {
                     <div className="absolute bottom-3 left-3 max-sm:right-3 sm:bottom-10 sm:left-10">
                         <div
                             className={cn(
-                                "overflow-hidden rounded-xl bg-white shadow-2xl transition-all duration-300 ease-in-out max-w-sm",
+                                "max-w-sm overflow-hidden rounded-xl bg-white shadow-2xl transition-all duration-300 ease-in-out",
                             )}
                         >
                             <button
@@ -345,17 +352,19 @@ export default function MugnaMap() {
                                     showLegend ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                                 )}
                             >
-                                <div className={cn(
-                                    "min-h-0 overflow-hidden px-5",
-                                    showLegend ? "mt-4 pb-5" : ""
-                                )}>
+                                <div
+                                    className={cn(
+                                        "min-h-0 overflow-hidden px-5",
+                                        showLegend ? "mt-4 pb-5" : "",
+                                    )}
+                                >
                                     {/* Green route */}
                                     <div className="mb-2 flex items-start gap-3">
                                         <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-green-500" />
 
                                         <p className="text-sm text-gray-700">
-                                            <strong>Entrance:</strong> One-way gikan sa Tambo Traffic Light
-                                            (kilid sa Floor Center) padulong sa Mugna.
+                                            <strong>Entrance:</strong> One-way gikan sa Tambo Traffic
+                                            Light (kilid sa Floor Center) padulong sa Mugna.
                                         </p>
                                     </div>
 
@@ -364,8 +373,8 @@ export default function MugnaMap() {
                                         <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-orange-500" />
 
                                         <p className="text-sm text-gray-700">
-                                            <strong>Entrance / Exit:</strong> Likod sa Hi-way 30 o agi sa
-                                            Franciscan Road (two-way).{" "}
+                                            <strong>Entrance / Exit:</strong> Likod sa Hi-way 30 o agi
+                                            sa Franciscan Road (two-way).{" "}
                                             <em>(Di pwede mu diretso sa MUGNA)</em>
                                         </p>
                                     </div>
@@ -373,8 +382,8 @@ export default function MugnaMap() {
                                     {/* No parking */}
                                     <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3">
                                         <p className="text-sm text-red-700">
-                                            <strong>NO PARKING:</strong> Gikan sa Tambo Traffic Light hangtod
-                                            sa Hi-way 30.
+                                            <strong>NO PARKING:</strong> Gikan sa Tambo Traffic Light
+                                            hangtod sa Hi-way 30.
                                         </p>
                                     </div>
                                 </div>
@@ -382,9 +391,8 @@ export default function MugnaMap() {
                         </div>
                     </div>
                 )}
-
             </div>
-            <div className="mx-auto container mb-8 px-4">
+            <div className="container mx-auto mb-8 px-4">
                 <ReferencesFooter
                     references={REFERENCES}
                     disclaimer="Information is gathered from official Facebook announcements and pages published by the Local Government Unit (LGU) of Iligan City. Details are based on publicly available information from these official sources and may be updated as new announcements are released."
