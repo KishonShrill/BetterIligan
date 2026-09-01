@@ -11,21 +11,26 @@ This doc is for newcomers to the feature and for anyone adding a new **feed adap
 
 ## 1. Routes
 
-| Route | File | Purpose |
-| --- | --- | --- |
-| `/bangon-iligan` | [`page.tsx`](../app/bangon-iligan/page.tsx) → [`BangonCommandCenter.tsx`](../app/bangon-iligan/BangonCommandCenter.tsx) | Public command center: full-viewport map + floating live-feed panel (Alerts / Reports / Board tabs). |
-| `/bangon-iligan/admin` | [`admin/page.tsx`](../app/bangon-iligan/admin/page.tsx) | Moderation console (also available inline on the public panel when signed in). |
-| `/bangon-iligan/admin/login` | [`admin/login/page.tsx`](../app/bangon-iligan/admin/login/page.tsx) | Shared-secret moderator login. |
-| `POST /api/bangon/ingest` | [`api/bangon/ingest/route.ts`](../app/api/bangon/ingest/route.ts) | Pulls official feeds and upserts them into `bangon_feed`. Called on a schedule. |
+| Route                        | File                                                                                                                    | Purpose                                                                                              |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `/bangon-iligan`             | [`page.tsx`](../app/bangon-iligan/page.tsx) → [`BangonCommandCenter.tsx`](../app/bangon-iligan/BangonCommandCenter.tsx) | Public command center: full-viewport map + floating live-feed panel (Alerts / Reports / Board tabs). |
+| `/bangon-iligan/admin`       | [`admin/page.tsx`](../app/bangon-iligan/admin/page.tsx)                                                                 | Moderation console (also available inline on the public panel when signed in).                       |
+| `/bangon-iligan/admin/login` | [`admin/login/page.tsx`](../app/bangon-iligan/admin/login/page.tsx)                                                     | Shared-secret moderator login.                                                                       |
+| `POST /api/bangon/ingest`    | [`api/bangon/ingest/route.ts`](../app/api/bangon/ingest/route.ts)                                                       | Pulls official feeds and upserts them into `bangon_feed`. Called on a schedule.                      |
 
 The global header/footer are hidden on `/bangon-iligan` (same as `/travel/transportation`).
 
 ## 2. Standby ↔ active switch
 
-Driven by [`data/bangon/incident.json`](../data/bangon/incident.json)'s `active` flag (parsed via
-`BangonConfigSchema`). When `active` is `false` the page shows a preparedness/standby surface and the
-incident banner + donation channels stay hidden — which is why their placeholder `TODO`s never reach
-the public UI. Flip `active` to `true` (and fill the incident summary + donation channels) to go live.
+Two layers control activation:
+
+1. **Static default** — [`data/bangon/incident.json`](../data/bangon/incident.json)'s `active` flag
+   (parsed via `BangonConfigSchema`). When `active` is `false` the page shows a preparedness/standby
+   surface and the incident banner + donation channels stay hidden.
+2. **Runtime override** — the single-row D1 table `bangon_incident_state` (migration `0003`). A
+   moderator can declare / stand down an incident from [`/bangon-iligan/admin`](../app/bangon-iligan/admin/page.tsx)
+   with no redeploy: `getEffectiveBangonConfig()` overlays the D1 row onto the JSON, and
+   `revalidatePath` refreshes the homepage banner + command center immediately.
 
 ## 3. Data model (Cloudflare D1, binding `DB`)
 
@@ -33,12 +38,13 @@ Tables created by the migrations in [`migrations/`](../migrations). Access goes 
 [`lib/db.ts`](../lib/db.ts) (`getDb()`); reads are validated by the zod row schemas in
 [`validations/bangonSchema.ts`](../validations/bangonSchema.ts) so malformed rows never reach the UI.
 
-| Table | Migration | What it holds |
-| --- | --- | --- |
-| `bangon_incidents` | `0001` | Crowd-sourced hazard/incident reports. |
-| `bangon_board_messages` | `0001` | Community-board posts. |
-| `bangon_audit_log` | `0001` | Append-only moderation trail (best-effort; a logging failure never blocks the action). |
-| `bangon_feed` | `0002` | Ingested official alerts (earthquakes, etc.). Unique on `(source, external_id)`. |
+| Table                   | Migration | What it holds                                                                                                  |
+| ----------------------- | --------- | -------------------------------------------------------------------------------------------------------------- |
+| `bangon_incidents`      | `0001`    | Crowd-sourced hazard/incident reports.                                                                         |
+| `bangon_board_messages` | `0001`    | Community-board posts.                                                                                         |
+| `bangon_audit_log`      | `0001`    | Append-only moderation trail (best-effort; a logging failure never blocks the action).                         |
+| `bangon_feed`           | `0002`    | Ingested official alerts (earthquakes, etc.). Unique on `(source, external_id)`.                               |
+| `bangon_incident_state` | `0003`    | Single-row runtime standby↔active switch (`id = 'current'`); overrides the JSON's `active` + `activeIncident`. |
 
 ### State machines
 
@@ -60,20 +66,20 @@ admin/inline-moderation reads keep the raw number.
 All live in [`actions/bangonAdmin.ts`](../actions/bangonAdmin.ts), each guarded by `assertAdmin()` and
 audit-logged. The key distinction is **reject vs. send-back-to-review vs. hard-delete**:
 
-| Entity | Action | Effect | Where it lands |
-| --- | --- | --- | --- |
-| Incident | Verify | `verified=1, status='reviewing'` | Public Reports tab |
-| Incident | Unverify | `verified=0, status='reviewing'` | **Back in the review queue** |
-| Incident | Dismiss | `verified=0, status='dismissed'` | Rejected (out of the queue) |
-| Incident | Resolve | `status='resolved'` (stays verified) | Public, dimmed as "Cleared" |
-| Incident | Delete | row removed | — |
-| Board | Approve | `status='approved'` | Public Board tab |
-| Board | Un-publish | `status='pending'` | **Back in the review queue** |
-| Board | Hide | `status='hidden'` | Rejected (out of the queue) |
-| Board | Delete | row removed | — |
+| Entity   | Action     | Effect                               | Where it lands               |
+| -------- | ---------- | ------------------------------------ | ---------------------------- |
+| Incident | Verify     | `verified=1, status='reviewing'`     | Public Reports tab           |
+| Incident | Unverify   | `verified=0, status='reviewing'`     | **Back in the review queue** |
+| Incident | Dismiss    | `verified=0, status='dismissed'`     | Rejected (out of the queue)  |
+| Incident | Resolve    | `status='resolved'` (stays verified) | Public, dimmed as "Cleared"  |
+| Incident | Delete     | row removed                          | —                            |
+| Board    | Approve    | `status='approved'`                  | Public Board tab             |
+| Board    | Un-publish | `status='pending'`                   | **Back in the review queue** |
+| Board    | Hide       | `status='hidden'`                    | Rejected (out of the queue)  |
+| Board    | Delete     | row removed                          | —                            |
 
-> **Note:** *Unverify* / *Un-publish* return an item to the pending review queue — they are **not**
-> the same as *Dismiss* / *Hide* (reject) or *Delete* (hard-remove).
+> **Note:** _Unverify_ / _Un-publish_ return an item to the pending review queue — they are **not**
+> the same as _Dismiss_ / _Hide_ (reject) or _Delete_ (hard-remove).
 
 Moderators moderate **inline** on the public panel (no `/admin` round-trip): when signed in, the panel
 shows the pending queues with count badges, full contacts, and the action buttons above.
@@ -83,9 +89,9 @@ shows the pending queues with count badges, full contacts, and the action button
 Single `ADMIN_PASSWORD` grants a signed, HttpOnly session cookie — no user accounts, no DB
 ([`lib/bangonAuth.ts`](../lib/bangonAuth.ts)). Designed to be swapped for Cloudflare Access later.
 
-| Env var | Purpose |
-| --- | --- |
-| `ADMIN_PASSWORD` | Moderator password (required in production). Dev fallback: `iligan-admin-dev`. |
+| Env var                | Purpose                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| `ADMIN_PASSWORD`       | Moderator password (required in production). Dev fallback: `iligan-admin-dev`.    |
 | `ADMIN_SESSION_SECRET` | HMAC key for the cookie. Falls back to `ADMIN_PASSWORD`, then a dev-only default. |
 
 ## 6. The feed ingester
@@ -108,14 +114,14 @@ Flow: **cron → `POST /api/bangon/ingest` → `collectFeedItems()` → upsert i
    (drop anything that fails). The `fetchUsgsEarthquakes` adapter is the template.
 2. A `FeedItem` is:
 
-   | field | notes |
-   | --- | --- |
-   | `source` | stable string unique to the adapter, e.g. `"pagasa"` |
-   | `externalId` | stable per-item id from the source — the dedupe key with `source` |
-   | `category` | short label shown as the alert pill, e.g. `"Earthquake"`, `"Typhoon"` |
-   | `title` | one-line headline |
-   | `summary?` `url?` `magnitude?` | optional |
-   | `publishedAt` | ISO 8601 string |
+   | field                          | notes                                                                 |
+   | ------------------------------ | --------------------------------------------------------------------- |
+   | `source`                       | stable string unique to the adapter, e.g. `"pagasa"`                  |
+   | `externalId`                   | stable per-item id from the source — the dedupe key with `source`     |
+   | `category`                     | short label shown as the alert pill, e.g. `"Earthquake"`, `"Typhoon"` |
+   | `title`                        | one-line headline                                                     |
+   | `summary?` `url?` `magnitude?` | optional                                                              |
+   | `publishedAt`                  | ISO 8601 string                                                       |
 
 3. Add it to the `adapters` array in `collectFeedItems()`. Done — the route handles upsert/dedupe and
    the Alerts tab renders it. No schema or migration change needed as long as you reuse `bangon_feed`.
@@ -127,10 +133,18 @@ Flow: **cron → `POST /api/bangon/ingest` → `collectFeedItems()` → upsert i
 
 1. `npx wrangler d1 create betteriligan-bangon` → paste the id into
    [`wrangler.jsonc`](../wrangler.jsonc) (`d1_databases[0].database_id`).
-2. `npx wrangler d1 migrations apply betteriligan-bangon` (add `--local` for dev) — applies `0001` + `0002`.
+2. Apply all pending D1 migrations — `npm run db:migrate` (remote; add `:local` for dev). This
+   applies `0001`–`0003` and any future migration. **`npm run deploy` runs this automatically**,
+   so a fresh table can never be missing in production again.
 3. Set `ADMIN_PASSWORD` (and optionally `ADMIN_SESSION_SECRET`) for moderator login.
 4. To activate the ingest cron, set repo secrets `BANGON_INGEST_URL` (the deployed
    `/api/bangon/ingest`) and `INGEST_SECRET`, and set the same `INGEST_SECRET` as a Cloudflare Worker
    env var so the route can verify the cron's requests.
 5. (Optional) Kick the ingester once:
    `curl -X POST <BANGON_INGEST_URL> -H "Authorization: Bearer <INGEST_SECRET>"`.
+
+## 8. Troubleshooting
+
+| Symptom                                                                                                                            | Cause                                                                                                                                                                                             | Fix                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Activate incident" does nothing on `/admin`, logs show `getIncidentState failed: ... D1DatabaseSessionAlwaysPrimary._sendOrThrow` | The production D1 database predates migration `0003`, so `bangon_incident_state` doesn't exist. Reads fail silently (defensive catch) and the activate/deactivate writes used to throw unhandled. | Run `npm run db:migrate` once, or redeploy with `npm run deploy` (applies migrations first). The admin panel now also shows this remediation inline instead of failing silently. |

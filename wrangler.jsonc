@@ -1,39 +1,44 @@
 {
-    "$schema": "node_modules/wrangler/config-schema.json",
-    "main": ".open-next/worker.js",
-    "name": "betteriligan",
-    "compatibility_date": "2026-05-29",
-    "compatibility_flags": [
-        "nodejs_compat"
-    ],
-    "assets": {
-        "directory": ".open-next/assets",
-        "binding": "ASSETS"
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": "vinext/server/fetch-handler",
+  "name": "betteriligan",
+  "compatibility_date": "2026-05-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+    "binding": "ASSETS",
+  },
+  "cache": {
+    "enabled": true,
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "betteriligan",
     },
-    "services": [
-        {
-            "binding": "WORKER_SELF_REFERENCE",
-            "service": "betteriligan"
-        }
-    ],
-    "images": {
-        "binding": "IMAGES"
+  ],
+  "images": {
+    "binding": "IMAGES",
+  },
+  "observability": {
+    "enabled": true,
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "betteriligan-bangon",
+      "database_id": "d63d85bc-25b5-4f27-a406-a6d28dfcc4e2",
+      "migrations_dir": "migrations",
     },
-    "observability": {
-        "enabled": true
+  ],
+  "vars": {
+    "NEXT_PUBLIC_WEATHER_CITY_ID": "1711082",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "VINEXT_KV_CACHE",
+      "id": "1ade0e8ba40547f887581e768548bd3b",
     },
-    "d1_databases": [
-        {
-            "binding": "DB",
-            "database_name": "betteriligan-bangon",
-            // Local dev (`wrangler d1 ... --local`) works with any id.
-            // Before deploying, run `npx wrangler d1 create betteriligan-bangon`
-            // and paste the returned database_id here.
-            "database_id": "d63d85bc-25b5-4f27-a406-a6d28dfcc4e2",
-            "migrations_dir": "migrations"
-        },
-    ],
-    "vars": {
-        "NEXT_PUBLIC_WEATHER_CITY_ID": "1711082",
-    }
+  ],
 }

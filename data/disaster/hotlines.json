@@ -1,66 +1,78 @@
 [
-    {
-        "name": "National Emergency Hotline",
-        "category": "government",
-        "numbers": ["911"],
-        "hours": "24/7",
-        "source": "https://ehotlines.e.gov.ph/",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Philippine Red Cross",
-        "category": "rescue",
-        "numbers": ["143", "(02) 8790-2300"],
-        "source": "https://redcross.org.ph/contact-us/",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Iligan City Disaster Risk Reduction and Management Office (CDRRMO)",
-        "category": "rescue",
-        "numbers": ["811", "812", "221-8459", "0997-726-2692", "0929-466-5777"],
-        "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Iligan City Police Office (ICPO)",
-        "category": "police",
-        "numbers": ["0917-712-7411", "0998-955-3538", "221-6699", "167"],
-        "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Iligan City Fire Department (BFP Iligan Fire Stations)",
-        "category": "fire",
-        "numbers": ["160", "161", "221-9055", "221-9056", "0930-116-5433", "0967-871-4388"],
-        "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Gregorio T. Lluch Memorial Hospital (Iligan City Hospital)",
-        "category": "medical",
-        "numbers": ["223-0602"],
-        "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Iligan City Ambulance (GTLMH)",
-        "category": "medical",
-        "numbers": ["221-0081", "221-6775"],
-        "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Iligan Light and Power, Inc. (ILPI)",
-        "category": "utility",
-        "numbers": ["(063) 221-5708", "(063) 221-5709", "(063) 223-1188", "(063) 222-2777"],
-        "source": "https://www.iliganlight.com/emergencies.php",
-        "verifiedAt": "2026-07-03"
-    },
-    {
-        "name": "Iligan City Waterworks System",
-        "category": "utility",
-        "numbers": ["223-3233", "09168358802"],
-        "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
-        "verifiedAt": "2026-07-03"
-    }
+  {
+    "name": "National Emergency Hotline",
+    "category": "government",
+    "numbers": ["911"],
+    "hours": "24/7",
+    "source": "https://ehotlines.e.gov.ph/",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Philippine Red Cross",
+    "category": "rescue",
+    "numbers": ["143", "(02) 8790-2300"],
+    "source": "https://redcross.org.ph/contact-us/",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Iligan City Disaster Risk Reduction and Management Office (CDRRMO)",
+    "category": "rescue",
+    "numbers": ["811", "812", "221-8459", "0997-726-2692", "0929-466-5777"],
+    "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Iligan City Police Office (ICPO)",
+    "category": "police",
+    "numbers": ["0917-712-7411", "0998-955-3538", "221-6699", "167"],
+    "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Iligan City Fire Department (BFP Iligan Fire Stations)",
+    "category": "fire",
+    "numbers": [
+      "160",
+      "161",
+      "221-9055",
+      "221-9056",
+      "0930-116-5433",
+      "0967-871-4388"
+    ],
+    "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Gregorio T. Lluch Memorial Hospital (Iligan City Hospital)",
+    "category": "medical",
+    "numbers": ["223-0602"],
+    "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Iligan City Ambulance (GTLMH)",
+    "category": "medical",
+    "numbers": ["221-0081", "221-6775"],
+    "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Iligan Light and Power, Inc. (ILPI)",
+    "category": "utility",
+    "numbers": [
+      "(063) 221-5708",
+      "(063) 221-5709",
+      "(063) 223-1188",
+      "(063) 222-2777"
+    ],
+    "source": "https://www.iliganlight.com/emergencies.php",
+    "verifiedAt": "2026-07-03"
+  },
+  {
+    "name": "Iligan City Waterworks System",
+    "category": "utility",
+    "numbers": ["223-3233", "09168358802"],
+    "source": "https://www.iligan.gov.ph/forresidents/hotelinedirectory",
+    "verifiedAt": "2026-07-03"
+  }
 ]
