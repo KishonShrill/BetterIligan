@@ -8,33 +8,37 @@ import WaterfallsClient from "./WaterfallsClient";
 const waterfalls = WaterfallsArraySchema.parse(rawWaterfalls);
 
 export const metadata: Metadata = {
-    title: "Waterfalls",
-    description: "A directory of Iligan City's waterfalls — Maria Cristina, Tinago, Limunsudan and more — with locations, photos, and directions.",
+  title: "Waterfalls",
+  description:
+    "A directory of Iligan City's waterfalls — Maria Cristina, Tinago, Limunsudan and more — with locations, photos, and directions.",
 };
 
 export default function WaterfallsPage() {
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        name: "Waterfalls of Iligan City",
-        description:
-            "Community-maintained directory of waterfalls in Iligan City, the City of Majestic Waterfalls.",
-        url: "https://betteriligancity.org/travel/waterfalls",
-        itemListElement: waterfalls.map((f, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            item: {
-                "@type": "TouristAttraction",
-                name: f.name,
-                geo: { "@type": "GeoCoordinates", latitude: f.lat, longitude: f.lon },
-            },
-        })),
-    };
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Waterfalls of Iligan City",
+    description:
+      "Community-maintained directory of waterfalls in Iligan City, the City of Majestic Waterfalls.",
+    url: "https://betteriligancity.org/travel/waterfalls",
+    itemListElement: waterfalls.map((f, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "TouristAttraction",
+        name: f.name,
+        geo: { "@type": "GeoCoordinates", latitude: f.lat, longitude: f.lon },
+      },
+    })),
+  };
 
-    return (
-        <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
-            <WaterfallsClient falls={waterfalls} />
-        </>
-    );
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
+      <WaterfallsClient falls={waterfalls} />
+    </>
+  );
 }

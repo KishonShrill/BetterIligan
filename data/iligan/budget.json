@@ -1,46 +1,46 @@
 {
-    "currency": "PHP",
-    "unit": "million",
-    "years": [
-        {
-            "fiscalYear": 2024,
-            "status": "preliminary",
-            "income": {
-                "localTax": 629.63,
-                "localNonTax": 212.03,
-                "nationalTaxAllotment": 2190.90,
-                "otherExternal": 30.30,
-                "total": 3062.86
-            },
-            "expenditure": {
-                "generalPublicServices": 1657.67,
-                "socialServices": 327.58,
-                "economicServices": 570.13,
-                "debtService": 2.50,
-                "total": 2557.88
-            },
-            "capitalOutlay": 311.74,
-            "netOperatingSurplus": 504.98
-        },
-        {
-            "fiscalYear": 2025,
-            "status": "preliminary",
-            "income": {
-                "localTax": 831.82,
-                "localNonTax": 238.20,
-                "nationalTaxAllotment": 2599.10,
-                "otherExternal": 44.61,
-                "total": 3713.73
-            },
-            "expenditure": {
-                "generalPublicServices": 1605.49,
-                "socialServices": 394.01,
-                "economicServices": 643.45,
-                "debtService": 0.18,
-                "total": 2643.12
-            },
-            "capitalOutlay": 354.56,
-            "netOperatingSurplus": 1070.61
-        }
-    ]
+  "currency": "PHP",
+  "unit": "million",
+  "years": [
+    {
+      "fiscalYear": 2024,
+      "status": "preliminary",
+      "income": {
+        "localTax": 629.63,
+        "localNonTax": 212.03,
+        "nationalTaxAllotment": 2190.9,
+        "otherExternal": 30.3,
+        "total": 3062.86
+      },
+      "expenditure": {
+        "generalPublicServices": 1657.67,
+        "socialServices": 327.58,
+        "economicServices": 570.13,
+        "debtService": 2.5,
+        "total": 2557.88
+      },
+      "capitalOutlay": 311.74,
+      "netOperatingSurplus": 504.98
+    },
+    {
+      "fiscalYear": 2025,
+      "status": "preliminary",
+      "income": {
+        "localTax": 831.82,
+        "localNonTax": 238.2,
+        "nationalTaxAllotment": 2599.1,
+        "otherExternal": 44.61,
+        "total": 3713.73
+      },
+      "expenditure": {
+        "generalPublicServices": 1605.49,
+        "socialServices": 394.01,
+        "economicServices": 643.45,
+        "debtService": 0.18,
+        "total": 2643.12
+      },
+      "capitalOutlay": 354.56,
+      "netOperatingSurplus": 1070.61
+    }
+  ]
 }

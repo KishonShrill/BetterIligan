@@ -1,4 +1,4 @@
-import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { env } from "cloudflare:workers";
 
 /**
  * Returns the Bangon Iligan D1 database (the `DB` binding from wrangler.jsonc).
@@ -10,13 +10,12 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
  * an opaque failure deeper in a query.
  */
 export async function getDb(): Promise<D1Database> {
-    const { env } = await getCloudflareContext({ async: true });
-    const db = env.DB;
-    if (!db) {
-        throw new Error(
-            'D1 binding "DB" is not available. Ensure wrangler.jsonc defines the ' +
-                "d1_databases[DB] binding and that migrations have been applied.",
-        );
-    }
-    return db;
+  const db = env.DB;
+  if (!db) {
+    throw new Error(
+      'D1 binding "DB" is not available. Ensure wrangler.jsonc defines the ' +
+        "d1_databases[DB] binding and that migrations have been applied.",
+    );
+  }
+  return db;
 }
