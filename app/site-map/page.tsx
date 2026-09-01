@@ -57,6 +57,10 @@ const sections: SitemapSection[] = [
                 href: "/travel/transportation/jeepney",
             },
             {
+                label: "Kalesa Routes",
+                href: "/travel/transportation/kalesa",
+            },
+            {
                 label: "Bus Schedules",
                 href: "/travel/transportation/bus"
             },

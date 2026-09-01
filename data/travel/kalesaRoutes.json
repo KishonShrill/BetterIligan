@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "routeId": "ALBERINA_TO_FIVEM",
+        "name": "Alberina Store to Five M Golden Mart",
+        "stroke": "#EC4899"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [124.2410, 8.2310],
+          [124.2411, 8.2305],
+          [124.2411, 8.2298],
+          [124.2412, 8.2292],
+          [124.2413, 8.2286]
+        ]
+      }
+    }
+  ]
+}

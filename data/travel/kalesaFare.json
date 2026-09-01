@@ -1,0 +1,17 @@
+[
+  {
+    "routeCode": "C1",
+    "routeColor": "#EC4899",
+    "routeFare": {
+      "regular": 15,
+      "discounted": 10
+    }
+  },
+  {
+    "routeColor": "#3B82F6",
+    "routeFare": {
+      "regular": 15,
+      "discounted": 10
+    }
+  }
+]

@@ -63,6 +63,12 @@
                 "upcoming": true
             },
             {
+                "name": "Kalesa Routes",
+                "description": "Navigate Iligan with our interactive guide to local kalesa routes and commuting paths.",
+                "href": "/travel/transportation/kalesa",
+                "upcoming": true
+            },
+            {
                 "name": "Bus Schedules",
                 "description": "Check daily departure times for provincial routes and local co-op charter services.",
                 "href": "/travel/transportation/bus"
