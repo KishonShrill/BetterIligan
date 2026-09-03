@@ -43,7 +43,7 @@ export default function RootLayout({
         <TopBanner />
         <Header />
         <ScrollToTop />
-        <div className="flex grow flex-col">{children}</div>
+        <main className="flex grow flex-col">{children}</main>
         <Footer />
         <Toaster
           position="top-center"
