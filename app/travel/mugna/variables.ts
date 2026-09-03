@@ -17,6 +17,20 @@ export const routesGeoJSON = {
           [124.2554573, 8.2458311],
           [124.2528083, 8.2464281],
           [124.2509091, 8.2476723],
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: "red-exit",
+        color: "#ff0000",
+        description: "Entrance from Tambo Traffic Light (One-way)",
+      },
+      geometry: {
+        type: "LineString" as const,
+        coordinates: [
+          [124.2509091, 8.2476723],
           [124.2494484, 8.2447412],
           [124.2488904, 8.24358],
           [124.2485545, 8.2425029],
@@ -34,9 +48,10 @@ export const routesGeoJSON = {
       geometry: {
         type: "LineString" as const,
         coordinates: [
-          [124.2512326, 8.2431871],
-          [124.2509437, 8.2437974],
-          [124.2494564, 8.2447408],
+          [124.2512232, 8.2431827],
+          [124.2509337, 8.2437873],
+          [124.2501901, 8.2442677],
+          [124.2494512, 8.2447327],
         ],
       },
     },
@@ -50,9 +65,46 @@ export const routesGeoJSON = {
       geometry: {
         type: "LineString" as const,
         coordinates: [
-          [124.2494564, 8.2447408],
-          [124.2509437, 8.2437974],
-          [124.2512326, 8.2431871],
+          [124.2494653, 8.2447501],
+          [124.2502142, 8.2442877],
+          [124.2509465, 8.2438037],
+          [124.2512447, 8.2431899],
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: "new-frontier-homeowners",
+        color: "#15fdfc",
+        description: "New Frontier Home Owners",
+      },
+      geometry: {
+        type: "LineString" as const,
+        coordinates: [
+          [124.2512337, 8.2431856],
+          [124.2509282, 8.2437881],
+          [124.2501965, 8.2442834],
+          [124.2494634, 8.2447428],
+          [124.2499089, 8.2455918],
+          [124.2484861, 8.2463324],
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: "new-frontier-homeowners-2",
+        color: "#15fdfc",
+        description: "New Frontier Home Owners",
+      },
+      geometry: {
+        type: "LineString" as const,
+        coordinates: [
+          [124.2494634, 8.2447428],
+          [124.2489395, 8.2436989],
+          [124.2485349, 8.2425022],
+          [124.2481446, 8.2420172],
         ],
       },
     },
@@ -97,8 +149,8 @@ export const interiorDetailsGeoJSON = {
     {
       type: "Feature" as const,
       properties: {
-        type: "food",
-        name: "Food Stalls",
+        type: "parking",
+        name: "Parking",
       },
       geometry: {
         type: "Point" as const,
@@ -109,11 +161,11 @@ export const interiorDetailsGeoJSON = {
       type: "Feature" as const,
       properties: {
         type: "food",
-        name: "Food Stalls",
+        name: "Parking",
       },
       geometry: {
         type: "Point" as const,
-        coordinates: [124.2509, 8.2483],
+        coordinates: [124.2497, 8.2492],
       },
     },
     {

@@ -18,23 +18,22 @@ import {
 } from "./variables";
 import { setWorkerUrl } from "maplibre-gl";
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker?worker&url";
+import bbox from "@turf/bbox";
 
 setWorkerUrl(workerUrl);
 
-import ReferencesFooter from "@/components/ui/ReferencesFooter";
-
-const REFERENCES = [
-  {
-    title:
-      "City Government of Iligan - 𝐌𝐔𝐆𝐍𝐀 𝐒𝐀 𝐈𝐋𝐈𝐆𝐀𝐍 𝐓𝐑𝐀𝐅𝐅𝐈𝐂 𝐑𝐎𝐔𝐓𝐄𝐒 & 𝐏𝐀𝐑𝐊𝐈𝐍𝐆 𝐑𝐄𝐒𝐓𝐑𝐈𝐂𝐓𝐈𝐎𝐍𝐒",
-    url: "https://www.facebook.com/photo?fbid=1075954835191568",
-  },
-];
+const ROUTE_GROUPS = {
+  green: ["green-entrance", "green-entrance-2"],
+  orange: ["orange-exit", "orange-exit-backwards"],
+  blue: ["new-frontier-homeowners", "new-frontier-homeowners-2"],
+  red: ["red-exit"],
+} as const;
 
 export default function MugnaMap() {
   const mapRef = useRef<MapRef | null>(null);
   const [showInterior, setShowInterior] = useState(false);
   const [showLegend, setShowLegend] = useState(true);
+  const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
   const [viewState, setViewState] = useState({
     longitude: ILIGAN_CENTER[0],
     latitude: ILIGAN_CENTER[1],
@@ -47,26 +46,11 @@ export default function MugnaMap() {
     (event: any) => {
       const features = event.features;
 
-      if (!features || features.length === 0) {
-        if (showInterior) {
-          setShowInterior(false);
-
-          mapRef.current?.flyTo({
-            center: ILIGAN_CENTER,
-            zoom: 15.5,
-            pitch: 0,
-            bearing: 0,
-            duration: 1000,
-          });
-        }
-
-        return;
-      }
-
-      const clickedFeature = features[0];
-
-      // User clicked the MUGNA polygon
-      if (clickedFeature.layer?.id === "mugna-fill") {
+      // Clicking the MUGNA polygon
+      if (
+        features?.some((feature: any) => feature.layer?.id === "mugna-fill")
+      ) {
+        setSelectedRoute(null);
         setShowInterior(true);
 
         mapRef.current?.flyTo({
@@ -76,10 +60,58 @@ export default function MugnaMap() {
           bearing: 0,
           duration: 1200,
         });
+
+        return;
+      }
+
+      // Clicking anywhere else restores all routes
+      setSelectedRoute(null);
+
+      if (showInterior) {
+        setShowInterior(false);
+
+        mapRef.current?.flyTo({
+          center: ILIGAN_CENTER,
+          zoom: 15.5,
+          pitch: 0,
+          bearing: 0,
+          duration: 1000,
+        });
       }
     },
     [showInterior],
   );
+
+  const selectRoute = useCallback((route: keyof typeof ROUTE_GROUPS) => {
+    setSelectedRoute(route);
+
+    const routeIds = ROUTE_GROUPS[route];
+
+    const selectedFeatures = routesGeoJSON.features.filter((feature) =>
+      routeIds.includes(feature.properties.id as never),
+    );
+
+    if (selectedFeatures.length === 0) return;
+
+    const featureCollection = {
+      type: "FeatureCollection" as const,
+      features: selectedFeatures,
+    };
+
+    const [minLng, minLat, maxLng, maxLat] = bbox(featureCollection);
+
+    mapRef.current?.fitBounds(
+      [
+        [minLng, minLat],
+        [maxLng, maxLat],
+      ],
+      {
+        padding: 100,
+        duration: 1000,
+        maxZoom: 17,
+      },
+    );
+  }, []);
 
   const handleMove = useCallback((event: ViewStateChangeEvent) => {
     setViewState(event.viewState);
@@ -158,101 +190,28 @@ export default function MugnaMap() {
         }}
       >
         {/* ================================================================ */}
-        {/* ROUTES */}
+        {/* MUGNA POLYGON */}
         {/* ================================================================ */}
-
-        <Source type="geojson" data={routesGeoJSON}>
-          {/* Main route lines */}
-          <Layer
-            id="route-lines"
-            type="line"
-            paint={{
-              "line-color": ["get", "color"],
-              "line-width": 6,
-              "line-opacity": showInterior ? 0.3 : 1,
-            }}
-          />
-
-          {/* One-way arrows */}
-          <Layer
-            id="route-arrows"
-            type="symbol"
-            layout={{
-              "symbol-placement": "line",
-              "symbol-spacing": 100,
-              "text-field": "➤",
-              "text-size": 20,
-              "text-keep-upright": false,
-            }}
-            paint={{
-              "text-color": "#ffffff",
-              "text-halo-color": "#000000",
-              "text-halo-width": 1,
-              "text-opacity": showInterior ? 0 : 1,
-            }}
-            filter={[
-              "any",
-              ["==", "id", "green-entrance"],
-              ["==", "id", "green-entrance-2"],
-            ]}
-          />
-
-          {/* Two-way arrows → */}
-          <Layer
-            id="route-arrows-forward"
-            type="symbol"
-            layout={{
-              "symbol-placement": "line",
-              "symbol-spacing": 50,
-              "text-field": "➤",
-              "text-size": 20,
-              "text-keep-upright": false,
-            }}
-            paint={{
-              "text-color": "#ffffff",
-              "text-halo-color": "#000000",
-              "text-halo-width": 1,
-              "text-opacity": showInterior ? 0 : 1,
-            }}
-            filter={["==", "id", "orange-exit"]}
-          />
-
-          {/* Two-way arrows ← */}
-          <Layer
-            id="route-arrows-backward"
-            type="symbol"
-            layout={{
-              "symbol-placement": "line",
-              "symbol-spacing": 50,
-              "text-field": "➤",
-              "text-size": 20,
-              "text-keep-upright": false,
-            }}
-            paint={{
-              "text-color": "#ffffff",
-              "text-halo-color": "#000000",
-              "text-halo-width": 1,
-              "text-opacity": showInterior ? 0 : 1,
-            }}
-            filter={["==", "id", "orange-exit-backwards"]}
-          />
-        </Source>
-
-        {/* ================================================================ */}
-        {/* MUGNA ZONE */}
-        {/* ================================================================ */}
-
         <Source type="geojson" data={mugnaZoneGeoJSON}>
-          {/* MUGNA polygon */}
+          {/* MUGNA area */}
           <Layer
             id="mugna-fill"
             type="fill"
             paint={{
-              "fill-color": "#FFD700",
-              "fill-opacity": showInterior ? 0.1 : 0.6,
+              "fill-color": "#a855f7",
+              "fill-opacity": showInterior ? 0.08 : 0.6,
             }}
           />
-
+          {/* MUGNA boundary */}
+          <Layer
+            id="mugna-outline"
+            type="line"
+            paint={{
+              "line-color": "#a855f7",
+              "line-width": showInterior ? 3 : 2,
+              "line-opacity": showInterior ? 0.8 : 1,
+            }}
+          />
           {/* MUGNA label */}
           <Layer
             id="mugna-label"
@@ -265,6 +224,126 @@ export default function MugnaMap() {
               "text-color": "#000000",
               "text-opacity": showInterior ? 0 : 1,
             }}
+          />
+        </Source>
+
+        {/* ================================================================ */}
+        {/* ROUTES */}
+        {/* ================================================================ */}
+
+        <Source type="geojson" data={routesGeoJSON}>
+          {/* ================================================================ */}
+          {/* ROUTE LINES (Rendered first, acts as background)                 */}
+          {/* ================================================================ */}
+
+          <Layer
+            id="route-lines"
+            type="line"
+            filter={
+              selectedRoute
+                ? ["in", "id", ...ROUTE_GROUPS[selectedRoute]]
+                : ["has", "id"] // <-- FIX: Explicit fallback to show all lines initially instead of undefined
+            }
+            paint={{
+              "line-color": ["get", "color"],
+              "line-width": 6,
+              "line-opacity": showInterior ? 0.3 : 1,
+            }}
+          />
+
+          {/* ================================================================ */}
+          {/* ARROWS (Rendered second, sits on top like a high z-index)        */}
+          {/* ================================================================ */}
+
+          {/* One-way arrows */}
+          <Layer
+            id="route-arrows"
+            type="symbol"
+            layout={{
+              "symbol-placement": "line",
+              "symbol-spacing": 100,
+              "text-field": "➤",
+              "text-size": 20,
+              "text-keep-upright": false,
+              "text-allow-overlap": true,
+              "text-ignore-placement": true,
+            }}
+            paint={{
+              "text-color": "#ffffff",
+              "text-halo-color": "#000000",
+              "text-halo-width": 1,
+              "text-opacity": showInterior ? 0 : 1,
+            }}
+            filter={[
+              "all",
+              [
+                "any",
+                ["==", "id", "green-entrance"],
+                ["==", "id", "green-entrance-2"],
+                ["==", "id", "red-exit"],
+                ["==", "id", "new-frontier-homeowners"],
+                ["==", "id", "new-frontier-homeowners-2"],
+              ],
+              ...(selectedRoute
+                ? [["in", "id", ...ROUTE_GROUPS[selectedRoute]]]
+                : []),
+            ]}
+          />
+
+          {/* Orange forward */}
+          <Layer
+            id="route-arrows-forward"
+            type="symbol"
+            layout={{
+              "symbol-placement": "line",
+              "symbol-spacing": 50,
+              "text-field": "➤",
+              "text-size": 20,
+              "text-keep-upright": false,
+              "text-allow-overlap": true,
+              "text-ignore-placement": true,
+            }}
+            paint={{
+              "text-color": "#ffffff",
+              "text-halo-color": "#000000",
+              "text-halo-width": 1,
+              "text-opacity": showInterior ? 0 : 1,
+            }}
+            filter={[
+              "all",
+              ["==", "id", "orange-exit"],
+              ...(selectedRoute
+                ? [["in", "id", ...ROUTE_GROUPS[selectedRoute]]]
+                : []),
+            ]}
+          />
+
+          {/* Orange backward */}
+          <Layer
+            id="route-arrows-backward"
+            type="symbol"
+            layout={{
+              "symbol-placement": "line",
+              "symbol-spacing": 50,
+              "text-field": "➤",
+              "text-size": 20,
+              "text-keep-upright": false,
+              "text-allow-overlap": true,
+              "text-ignore-placement": true,
+            }}
+            paint={{
+              "text-color": "#ffffff",
+              "text-halo-color": "#000000",
+              "text-halo-width": 1,
+              "text-opacity": showInterior ? 0 : 1,
+            }}
+            filter={[
+              "all",
+              ["==", "id", "orange-exit-backwards"],
+              ...(selectedRoute
+                ? [["in", "id", ...ROUTE_GROUPS[selectedRoute]]]
+                : []),
+            ]}
           />
         </Source>
 
@@ -289,6 +368,8 @@ export default function MugnaMap() {
                   "#3b82f6",
                   "stage",
                   "#a855f7",
+                  "parking",
+                  "#f0c404",
                   "#cccccc",
                 ],
                 "circle-stroke-width": 2,
@@ -357,33 +438,95 @@ export default function MugnaMap() {
                 )}
               >
                 {/* Green route */}
-                <div className="mb-2 flex items-start gap-3">
-                  <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-green-500" />
+                <button
+                  type="button"
+                  onClick={() => selectRoute("green")}
+                  className={cn(
+                    "mb-3 flex w-full cursor-pointer items-center gap-3 rounded-lg p-2 text-left transition-colors",
+                    selectedRoute === "green"
+                      ? "bg-green-50"
+                      : "hover:bg-gray-50",
+                  )}
+                >
+                  <div className="h-5 w-5 shrink-0 rounded-full bg-green-500" />
 
-                  <p className="text-sm text-gray-700">
-                    <strong>Entrance:</strong> One-way gikan sa Tambo Traffic
-                    Light (kilid sa Floor Center) padulong sa Mugna.
+                  <p className="text-sm leading-tight text-gray-700">
+                    <strong>Entrance from Tambo Trafficlight</strong>
                   </p>
-                </div>
+                </button>
 
                 {/* Orange route */}
-                <div className="mb-2 flex items-start gap-3">
-                  <div className="mt-1 h-5 w-5 shrink-0 rounded-full bg-orange-500" />
+                <button
+                  type="button"
+                  onClick={() => selectRoute("orange")}
+                  className={cn(
+                    "mb-3 flex w-full cursor-pointer items-center gap-3 rounded-lg p-2 text-left transition-colors",
+                    selectedRoute === "orange"
+                      ? "bg-orange-50"
+                      : "hover:bg-gray-50",
+                  )}
+                >
+                  <div className="h-5 w-5 shrink-0 rounded-full bg-orange-500" />
 
-                  <p className="text-sm text-gray-700">
-                    <strong>Entrance / Exit:</strong> Likod sa Hi-way 30 o agi
-                    sa Franciscan Road (two-way).{" "}
-                    <em>(Di pwede mu diretso sa MUGNA)</em>
+                  <p className="text-sm leading-tight text-gray-700">
+                    <strong>Entrance from Franciscan</strong>
+                    <br />
+                    <span className="text-xs">
+                      Exit to H30 <em>(Di pwede mu diretso sa MUGNA)</em>
+                    </span>
                   </p>
-                </div>
+                </button>
+
+                {/* Blue route */}
+                <button
+                  type="button"
+                  onClick={() => selectRoute("blue")}
+                  className={cn(
+                    "mb-3 flex w-full cursor-pointer items-center gap-3 rounded-lg p-2 text-left transition-colors",
+                    selectedRoute === "blue"
+                      ? "bg-blue-50"
+                      : "hover:bg-gray-50",
+                  )}
+                >
+                  <div className="h-5 w-5 shrink-0 rounded-full bg-blue-600" />
+
+                  <p className="text-sm leading-tight text-gray-700">
+                    <strong>New Frontier Home Owners</strong>
+                    <br />
+                    <span className="text-xs">Entrance ONLY</span>
+                  </p>
+                </button>
+
+                {/* Red route */}
+                <button
+                  type="button"
+                  onClick={() => selectRoute("red")}
+                  className={cn(
+                    "mb-3 flex w-full cursor-pointer items-center gap-3 rounded-lg p-2 text-left transition-colors",
+                    selectedRoute === "red" ? "bg-red-50" : "hover:bg-gray-50",
+                  )}
+                >
+                  <div className="h-5 w-5 shrink-0 rounded-full bg-red-600" />
+
+                  <p className="text-sm leading-tight text-gray-700">
+                    <strong>EXIT route (H30)</strong>
+                  </p>
+                </button>
 
                 {/* No parking */}
                 <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3">
-                  <p className="text-sm text-red-700">
+                  <p className="text-sm leading-tight text-red-700">
                     <strong>NO PARKING:</strong> Gikan sa Tambo Traffic Light
                     hangtod sa Hi-way 30.
                   </p>
                 </div>
+
+                {/* Traffic reminder */}
+                <p className="mt-3 text-center text-xs leading-tight text-gray-500 italic">
+                  Palihog sundon ang mga traffic signs ug billboards along sa
+                  <br className="hidden sm:block" />
+                  hapsay nga dagan sa trapiko.
+                </p>
               </div>
             </div>
           </div>
