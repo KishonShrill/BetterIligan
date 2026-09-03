@@ -1,280 +1,471 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
-import L from 'leaflet';
-import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
-import type { GeoJsonObject, Feature, LineString, MultiLineString } from 'geojson';
-import { Maximize, Minimize, Eye, EyeOff, Banknote, GraduationCap } from 'lucide-react';
-import 'leaflet/dist/leaflet.css';
-import kalesaRoutesData from '@/data/travel/kalesaRoutes.json';
-import kalesaFareData from '@/data/travel/kalesaFare.json';
+import { useState, useEffect, useMemo, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import MapGL, { Source, Layer } from "react-map-gl/maplibre";
+import type { MapRef, MapLayerMouseEvent } from "react-map-gl/maplibre";
+import bbox from "@turf/bbox";
+import "maplibre-gl/dist/maplibre-gl.css";
+import { setWorkerUrl } from "maplibre-gl";
+import workerUrl from "maplibre-gl/dist/maplibre-gl-worker?worker&url";
 
-const geoJsonData = kalesaRoutesData as GeoJsonObject;
+setWorkerUrl(workerUrl);
 
-interface FareDetail {
-    regular: number;
-    discounted: number;
-}
+import { Compass } from "lucide-react";
+import type { KalesaRoute, KalesaCodeEntry } from "./type";
 
-interface KalesaFareItem {
-    routeCode?: string;
-    routeColor?: string;
-    routeFare?: FareDetail;
-}
+import KalesaMapControls from "./KalesaMapControls";
+import DesktopKalesaSidebar from "./DesktopKalesaSidebar";
+import KalesaRouteDetails from "./KalesaRouteDetails";
+import MobileKalesaHeader from "./MobileKalesaHeader";
+import MobileKalesaRouteSelector from "./MobileKalesaRouteSelector";
 
-interface RouteProperties {
-    routeId: string;
-    name: string;
-    stroke?: string;
-    fare?: FareDetail;
-}
+function FitToRoute({
+  activeRouteId,
+  mapRef,
+  routesData,
+}: {
+  activeRouteId: string | null;
+  mapRef: React.RefObject<MapRef | null>;
+  routesData: any;
+}) {
+  useEffect(() => {
+    if (!activeRouteId || !mapRef.current || !routesData) return;
 
-function FixMapResize({ isFullscreen }: { isFullscreen: boolean }) {
-    const map = useMap();
+    // Look for LineString feature matching active route
+    const selectedFeature = routesData.features.find(
+      (f: any) =>
+        f.properties.routeId === activeRouteId &&
+        f.geometry.type === "LineString",
+    );
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            map.invalidateSize();
-        }, 150);
-        return () => clearTimeout(timer);
-    }, [isFullscreen, map]);
+    if (!selectedFeature) return;
 
-    return null;
-}
+    const [minX, minY, maxX, maxY] = bbox(selectedFeature);
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
 
-function FitToRoute({ activeRouteId }: { activeRouteId: string | null }) {
-    const map = useMap();
+    // Pan to target route center without zooming in/out
+    mapRef.current.easeTo({
+      center: [centerX, centerY],
+      duration: 500,
+    });
+  }, [activeRouteId, mapRef, routesData]);
 
-    useEffect(() => {
-        if (!activeRouteId) return;
-
-        const selectedFeature = kalesaRoutesData.features.find(
-            (f) => f.properties?.routeId === activeRouteId
-        ) as Feature<LineString | MultiLineString> | undefined;
-
-        if (!selectedFeature || !selectedFeature.geometry) return;
-
-        const coordinates: [number, number][] = [];
-        const geom = selectedFeature.geometry;
-
-        if (geom.type === 'LineString') {
-            geom.coordinates.forEach((coord) => coordinates.push([coord[1], coord[0]]));
-        } else if (geom.type === 'MultiLineString') {
-            geom.coordinates.forEach((line) =>
-                line.forEach((coord) => coordinates.push([coord[1], coord[0]]))
-            );
-        }
-
-        if (coordinates.length > 0) {
-            const bounds = L.latLngBounds(coordinates);
-            map.fitBounds(bounds, {
-                padding: [40, 40],
-                maxZoom: 15,
-                animate: true,
-                duration: 0.5
-            });
-        }
-    }, [activeRouteId, map]);
-
-    return null;
+  return null;
 }
 
 export default function InteractiveKalesaMap() {
-    const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
-    const [showAllRoutes, setShowAllRoutes] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
+  const [routesData, setRoutesData] = useState<any>(null);
+  const [codesData, setCodesData] = useState<any>(null);
+  const [boundaryData, setBoundaryData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const fareMap = useMemo(() => {
-        const map = new Map<string, KalesaFareItem>();
-        (kalesaFareData as KalesaFareItem[]).forEach((item) => {
-            if (item.routeCode) {
-                map.set(item.routeCode, item);
-            }
-        });
-        return map;
-    }, []);
+  const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
+  const [showAllRoutes, setShowAllRoutes] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
-    const containerClasses = isFullscreen
-        ? "fixed inset-0 z-[100] bg-slate-50 flex flex-col lg:flex-row h-[100dvh] w-screen"
-        : "grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-6 bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm h-[800px] lg:h-auto";
+  const mapRef = useRef<MapRef>(null);
 
-    return (
-        <div className={containerClasses}>
-            {/* LEFT SIDEBAR */}
-            <div className={`border-r border-slate-100 rounded-r-2xl flex flex-col bg-white ${isFullscreen ? 'w-full lg:w-80 h-1/3 lg:h-full shrink-0' : 'lg:col-span-4 h-[300px] lg:h-[600px]'}`}>
-                <div className="p-4 border-b border-slate-100 rounded-r-2xl bg-slate-50 flex justify-between items-center shrink-0">
-                    <div>
-                        <h2 className="text-lg font-bold text-slate-900">Kalesa Routes</h2>
-                        <p className="text-xs text-slate-500">Select a route to view it &amp; check the fare</p>
-                    </div>
-                </div>
+  const [sidebarPhase, setSidebarPhase] = useState<"closed" | "peek" | "open">(
+    "open",
+  );
+  const [isClosing, setIsClosing] = useState(false);
 
-                <ul className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
-                    {kalesaRoutesData.features.map((feature, idx) => {
-                        const props = feature.properties as unknown as RouteProperties;
-                        const routeId = props?.routeId || `route-${idx}`;
-                        const isActive = activeRouteId === routeId;
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [routesRes, codesRes, boundaryRes] = await Promise.all([
+          fetch("/data/travel/kalesa-routes.json").then((res) => res.json()),
+          fetch("/data/travel/kalesa-fare.json").then((res) => res.json()),
+          fetch("/data/travel/iligan-city-boundary.json").then((res) =>
+            res.json(),
+          ),
+        ]);
+        setRoutesData(routesRes);
+        setCodesData(codesRes);
+        setBoundaryData(boundaryRes);
+      } catch (error) {
+        console.error("Failed to load kalesa geospatial data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadData();
+  }, []);
 
-                        const fareData = fareMap.get(routeId);
-                        const routeColor = fareData?.routeColor || props?.stroke || '#3B82F6';
-                        const fare = fareData?.routeFare || props?.fare;
+  const codeLookup = useMemo(() => {
+    const lookup = new Map<string, KalesaCodeEntry>();
+    if (!codesData) return lookup;
 
-                        return (
-                            <li key={routeId}>
-                                <button
-                                    onClick={() => {
-                                        setActiveRouteId(isActive ? null : routeId);
-                                        if (!isActive) setShowAllRoutes(false);
-                                    }}
-                                    style={{ borderLeftColor: routeColor, borderLeftWidth: 4 }}
-                                    className={`w-full text-left p-4 rounded-xl border transition-all ${isActive
-                                        ? 'bg-blue-50 border-blue-300 shadow-sm'
-                                        : 'bg-white border-slate-100 hover:border-blue-200 hover:bg-slate-50'
-                                        }`}
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <div
-                                            className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-white text-[10px] font-bold shadow-sm px-1 text-center leading-none"
-                                            style={{ backgroundColor: routeColor }}
-                                        >
-                                            {routeId}
-                                        </div>
-                                        <div className="min-w-0">
-                                            <div className="font-bold text-slate-900 leading-tight truncate">{props?.name || 'Unnamed Route'}</div>
-                                            <div
-                                                className="text-[10px] font-bold tracking-wider uppercase mt-0.5"
-                                                style={{ color: routeColor }}
-                                            >
-                                                Route {routeId}
-                                            </div>
-                                        </div>
-                                    </div>
+    const entries = Array.isArray(codesData)
+      ? codesData
+      : codesData.entries || codesData.data || Object.values(codesData);
 
-                                    {isActive && (
-                                        fare ? (
-                                            <div className="mt-3 pt-3 border-t border-blue-100 grid grid-cols-2 gap-2">
-                                                <div className="rounded-lg bg-emerald-50 border border-emerald-100 px-2.5 py-2">
-                                                    <div className="flex items-center gap-1.5 text-emerald-700">
-                                                        <Banknote className="w-3.5 h-3.5 shrink-0" />
-                                                        <span className="text-[9px] font-bold uppercase tracking-wide">Regular</span>
-                                                    </div>
-                                                    <div className="text-base font-extrabold text-slate-900 mt-0.5">
-                                                        ₱{fare.regular}
-                                                    </div>
-                                                </div>
-                                                <div className="rounded-lg bg-indigo-50 border border-indigo-100 px-2.5 py-2">
-                                                    <div className="flex items-center gap-1.5 text-indigo-700">
-                                                        <GraduationCap className="w-3.5 h-3.5 shrink-0" />
-                                                        <span className="text-[9px] font-bold uppercase tracking-wide">Student / PWD</span>
-                                                    </div>
-                                                    <div className="text-base font-extrabold text-slate-900 mt-0.5">
-                                                        ₱{fare.discounted}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="mt-3 pt-3 border-t border-blue-100 flex items-center gap-2">
-                                                <Banknote className="w-4 h-4 text-slate-400 shrink-0" />
-                                                <span className="text-sm font-semibold text-slate-500">Fare not yet available</span>
-                                            </div>
-                                        )
-                                    )}
-                                </button>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
+    if (Array.isArray(entries)) {
+      (entries as KalesaCodeEntry[]).forEach((entry) => {
+        if (entry && entry.routeId) {
+          lookup.set(entry.routeId.toLowerCase(), entry);
+        }
+      });
+    }
 
-            {/* RIGHT MAP */}
-            <div className={`relative z-0 bg-slate-100 isolate ${isFullscreen ? 'w-full h-2/3 lg:h-full flex-1' : 'lg:col-span-8 h-[500px] lg:h-[600px]'}`}>
-                {/* FLOATING CONTROLS */}
-                <div className="absolute top-4 right-4 z-[1000] pointer-events-auto flex flex-col gap-2">
-                    <button
-                        onClick={() => {
-                            const nextState = !showAllRoutes;
-                            setShowAllRoutes(nextState);
-                            if (nextState) setActiveRouteId(null);
-                        }}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-lg shadow-md border font-bold text-xs transition-all ${showAllRoutes
-                            ? 'bg-slate-800 text-white border-slate-700'
-                            : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
-                            }`}
-                    >
-                        {showAllRoutes ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        <span className="hidden sm:inline">{showAllRoutes ? 'Hide' : 'Show'} All Routes</span>
-                    </button>
+    return lookup;
+  }, [codesData]);
 
-                    <button
-                        onClick={() => {
-                            setIsFullscreen(!isFullscreen);
-                            setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
-                        }}
-                        className="flex items-center justify-center w-10 h-10 bg-white text-slate-700 rounded-lg shadow-md border border-slate-200 hover:bg-slate-50 transition-all ml-auto"
-                        title="Toggle Fullscreen"
-                    >
-                        {isFullscreen ? <Minimize className="w-5 h-5" /> : <Maximize className="w-5 h-5" />}
-                    </button>
-                </div>
+  const getRouteColor = (routeId: string, fallbackStroke?: string) => {
+    const entry = codeLookup.get(routeId.toLowerCase());
+    return entry?.routeColor || fallbackStroke || "#033399";
+  };
 
-                {/* LEAFLET MAP */}
-                <MapContainer
-                    center={[8.2280, 124.2452]}
-                    zoom={13}
-                    className="w-full h-full"
-                    zoomControl={false}
-                >
-                    <FixMapResize isFullscreen={isFullscreen} />
-                    <FitToRoute activeRouteId={activeRouteId} />
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                    />
+  const routeColorExpression = useMemo(() => {
+    return ["coalesce", ["get", "routeColor"], ["get", "stroke"], "#033399"];
+  }, []);
 
-                    <GeoJSON
-                        key={`${activeRouteId}-${showAllRoutes}`}
-                        data={geoJsonData}
-                        style={(feature) => {
-                            const props = feature?.properties as unknown as RouteProperties | undefined;
-                            const routeId = props?.routeId || '';
-                            const isSpecificActive = routeId === activeRouteId;
-                            const fareData = fareMap.get(routeId);
-                            const lineColor = fareData?.routeColor || props?.stroke || '#3B82F6';
+  const selectedRoute = useMemo(() => {
+    if (!activeRouteId || !routesData) return null;
 
-                            if (isSpecificActive) {
-                                return {
-                                    color: lineColor,
-                                    weight: 6,
-                                    opacity: 1,
-                                };
-                            } else if (showAllRoutes) {
-                                return {
-                                    color: lineColor,
-                                    weight: 3,
-                                    opacity: 0.6,
-                                };
-                            } else {
-                                return {
-                                    opacity: 0,
-                                    fillOpacity: 0,
-                                    weight: 0
-                                };
-                            }
-                        }}
-                        onEachFeature={(feature, layer) => {
-                            layer.on({
-                                click: () => {
-                                    const props = feature.properties as unknown as RouteProperties;
-                                    if (props?.routeId) {
-                                        setActiveRouteId(props.routeId);
-                                        setShowAllRoutes(false);
-                                    }
-                                }
-                            });
-                        }}
-                    />
-                </MapContainer>
-            </div>
-        </div>
+    const feature = routesData.features.find(
+      (feature: any) =>
+        feature.properties.routeId === activeRouteId &&
+        feature.geometry.type === "LineString",
     );
+    const codeEntry = codeLookup.get(activeRouteId.toLowerCase());
+
+    if (feature) {
+      return {
+        routeId: feature.properties.routeId,
+        name: feature.properties.name ?? `${feature.properties.routeId}`,
+        routeColor:
+          feature.properties.routeColor ??
+          feature.properties.stroke ??
+          codeEntry?.routeColor,
+        routeFare: feature.properties.routeFare ?? codeEntry?.routeFare,
+        hasGeoJson: true,
+        codeEntry,
+      };
+    }
+
+    if (codeEntry) {
+      return {
+        routeId: codeEntry.routeId,
+        name: `${codeEntry.routeId}`,
+        routeColor: codeEntry.routeColor,
+        routeFare: codeEntry.routeFare,
+        hasGeoJson: false,
+        codeEntry,
+      };
+    }
+
+    return null;
+  }, [activeRouteId, codeLookup, routesData]);
+
+  const isDetailsOpen = selectedRoute !== null;
+
+  const handleMapClick = (event: MapLayerMouseEvent) => {
+    const mapInstance = mapRef.current;
+    if (!mapInstance) return;
+
+    const features = mapInstance.queryRenderedFeatures(event.point, {
+      layers: ["kalesa-route-hitbox"],
+    });
+
+    if (!features.length) return;
+    const routeId = features[0].properties?.routeId;
+    if (typeof routeId !== "string") return;
+
+    setActiveRouteId(routeId);
+    setShowAllRoutes(false);
+  };
+
+  const toggleSidebar = () => {
+    if (sidebarPhase === "closed") {
+      setIsClosing(false);
+      setSidebarPhase("peek");
+      setTimeout(() => setSidebarPhase("open"), 250);
+    } else if (sidebarPhase === "open") {
+      setIsClosing(true);
+      setSidebarPhase("peek");
+      setTimeout(() => setSidebarPhase("closed"), 350);
+    }
+  };
+
+  const phaseRef = useRef(sidebarPhase);
+  useEffect(() => {
+    phaseRef.current = sidebarPhase;
+  }, [sidebarPhase]);
+
+  useEffect(() => {
+    if (activeRouteId !== null) {
+      setShowAllRoutes(false);
+      if (phaseRef.current !== "open") {
+        setIsClosing(false);
+        setSidebarPhase("peek");
+        setTimeout(() => setSidebarPhase("open"), 250);
+      }
+    } else {
+      setShowAllRoutes(true);
+    }
+  }, [activeRouteId]);
+
+  const allRoutes = useMemo(() => {
+    const routeMap = new Map<string, KalesaRoute>();
+    if (!routesData) return [];
+
+    for (const feature of routesData.features) {
+      // Exclude Point features (terminals) from selectable sidebar routes
+      if (feature.geometry.type !== "LineString") continue;
+
+      const routeId = feature.properties.routeId;
+      const key = routeId.toLowerCase();
+
+      const existing = routeMap.get(key);
+      const codeEntry = codeLookup.get(key);
+
+      const rawName = feature.properties.name?.trim();
+      const validName = rawName
+        ? rawName.toLowerCase().startsWith("kalesa route")
+          ? rawName
+          : ` ${rawName}`
+        : null;
+
+      routeMap.set(key, {
+        routeId: existing?.routeId ?? codeEntry?.routeId ?? routeId,
+        name: validName || existing?.name || ` ${routeId}`,
+        routeColor:
+          feature.properties.routeColor ??
+          feature.properties.stroke ??
+          existing?.routeColor ??
+          codeEntry?.routeColor,
+        routeFare: feature.properties.routeFare ?? codeEntry?.routeFare,
+        hasGeoJson: true,
+      });
+    }
+
+    for (const codeEntry of codeLookup.values()) {
+      const key = codeEntry.routeId.toLowerCase();
+
+      if (!routeMap.has(key)) {
+        routeMap.set(key, {
+          routeId: codeEntry.routeId,
+          name: `${codeEntry.routeId}`,
+          routeColor: codeEntry.routeColor,
+          routeFare: codeEntry.routeFare,
+          hasGeoJson: false,
+        });
+      }
+    }
+
+    return Array.from(routeMap.values());
+  }, [codeLookup, routesData]);
+
+  const sortedRoutes = useMemo(() => {
+    return [...allRoutes].sort((a, b) => {
+      if (a.hasGeoJson !== b.hasGeoJson) {
+        return a.hasGeoJson ? -1 : 1;
+      }
+      return a.routeId.localeCompare(b.routeId, undefined, { numeric: true });
+    });
+  }, [allRoutes]);
+
+  const filteredRoutes = useMemo(() => {
+    if (!searchQuery) return sortedRoutes;
+    const searchLower = searchQuery.toLowerCase();
+    return sortedRoutes.filter(
+      (route) =>
+        route.name.toLowerCase().includes(searchLower) ||
+        route.routeId.toLowerCase().includes(searchLower),
+    );
+  }, [sortedRoutes, searchQuery]);
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-50 text-slate-600">
+        <Compass className="h-8 w-8 animate-spin text-amber-600" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-slate-50">
+      <MapGL
+        ref={mapRef}
+        initialViewState={{
+          longitude: 124.2452,
+          latitude: 8.228,
+          zoom: 16,
+          pitch: 60,
+          bearing: -20,
+        }}
+        mapStyle="https://tiles.openfreemap.org/styles/liberty"
+        onClick={handleMapClick}
+        interactiveLayerIds={["kalesa-route-hitbox"]}
+      >
+        <KalesaMapControls mapRef={mapRef} />
+        <FitToRoute
+          activeRouteId={activeRouteId}
+          mapRef={mapRef}
+          routesData={routesData}
+        />
+
+        {boundaryData && (
+          <Source id="iligan-boundary" type="geojson" data={boundaryData}>
+            <Layer
+              id="iligan-boundary-line"
+              type="line"
+              paint={{
+                "line-color": "#94a3b8",
+                "line-width": 2,
+                "line-dasharray": [4, 4],
+              }}
+            />
+            <Layer
+              id="iligan-boundary-fill"
+              type="fill"
+              paint={{
+                "fill-color": "#cbd5e1",
+                "fill-opacity": 0.05,
+              }}
+            />
+          </Source>
+        )}
+
+        {routesData && (
+          <Source id="kalesa-routes" type="geojson" data={routesData}>
+            {/* Route Line Layers */}
+            <Layer
+              id="kalesa-route-hitbox"
+              type="line"
+              filter={["==", "$type", "LineString"]}
+              paint={{
+                "line-color": "#000000",
+                "line-width": 24,
+                "line-opacity": 0,
+              }}
+            />
+            <Layer
+              id="kalesa-routes-layer"
+              type="line"
+              filter={["==", "$type", "LineString"]}
+              paint={{
+                "line-color": routeColorExpression as any,
+                "line-width": [
+                  "case",
+                  ["==", ["get", "routeId"], activeRouteId ?? ""],
+                  6,
+                  3,
+                ],
+                "line-opacity": [
+                  "case",
+                  ["==", ["get", "routeId"], activeRouteId ?? ""],
+                  1,
+                  showAllRoutes ? 0.6 : 0,
+                ],
+              }}
+            />
+
+            {/* Terminal Point Layers (from Point features in GeoJSON) */}
+            <Layer
+              id="terminal-pin-outer"
+              type="circle"
+              filter={["==", "$type", "Point"]}
+              paint={{
+                "circle-radius": 10,
+                "circle-color": "#d97706",
+                "circle-stroke-width": 3,
+                "circle-stroke-color": "#ffffff",
+              }}
+            />
+            <Layer
+              id="terminal-pin-inner"
+              type="circle"
+              filter={["==", "$type", "Point"]}
+              paint={{
+                "circle-radius": 4,
+                "circle-color": "#ffffff",
+              }}
+            />
+            <Layer
+              id="terminal-label"
+              type="symbol"
+              filter={["==", "$type", "Point"]}
+              layout={{
+                "text-field": ["get", "name"],
+                "text-size": 12,
+                "text-offset": [0, 1.5],
+                "text-anchor": "top",
+              }}
+              paint={{
+                "text-color": "#1e293b",
+                "text-halo-color": "#ffffff",
+                "text-halo-width": 2,
+              }}
+            />
+          </Source>
+        )}
+      </MapGL>
+
+      <MobileKalesaHeader
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filteredRoutes={filteredRoutes}
+        setActiveRouteId={setActiveRouteId}
+      />
+
+      <MobileKalesaRouteSelector
+        routes={filteredRoutes}
+        activeRouteId={activeRouteId}
+        setActiveRouteId={setActiveRouteId}
+        showAllRoutes={showAllRoutes}
+        setShowAllRoutes={setShowAllRoutes}
+        getRouteColor={getRouteColor}
+      />
+
+      <DesktopKalesaSidebar
+        sidebarPhase={sidebarPhase}
+        isClosing={isClosing}
+        toggleSidebar={toggleSidebar}
+        routes={filteredRoutes}
+        activeRouteId={activeRouteId}
+        setActiveRouteId={setActiveRouteId}
+        getRouteColor={getRouteColor}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
+
+      <KalesaRouteDetails
+        route={selectedRoute}
+        codeEntry={selectedRoute?.codeEntry}
+        getRouteColor={getRouteColor}
+        onClose={() => setActiveRouteId(null)}
+      />
+
+      <div
+        className="pointer-events-auto absolute top-4 right-4 z-[1000] rounded-2xl bg-slate-50 p-2 shadow-xl transition-transform duration-300 ease-in-out max-md:hidden"
+        style={{
+          transform: isDetailsOpen
+            ? "translateX(calc(-20rem - 1rem))"
+            : "translateX(0)",
+        }}
+      >
+        <Link
+          href="/"
+          aria-label="BetterIligan home"
+          className="flex items-center gap-2 transition-opacity hover:opacity-80"
+        >
+          <Image
+            src="/images/logos/betteriligan-logo.png"
+            alt="BetterIligan"
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 object-contain"
+          />
+          <span className="hidden text-sm font-extrabold tracking-tight text-slate-900 sm:inline">
+            BetterIligan
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
 }
