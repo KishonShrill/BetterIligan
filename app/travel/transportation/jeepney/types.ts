@@ -5,6 +5,7 @@ export type JeepneyFare = {
 
 export type JeepneyCodeEntry = {
   routeId: string;
+  routeName: string;
   routeColor?: string;
   routeFare?: JeepneyFare;
 
@@ -18,7 +19,7 @@ export type JeepneyCodeEntry = {
 
 export type JeepneyRoute = {
   routeId: string;
-  name: string;
+  routeName: string;
   routeColor?: string;
   routeFare?: JeepneyFare;
   hasGeoJson: boolean;

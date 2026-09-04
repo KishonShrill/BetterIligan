@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useCallback, useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MapGL, { Source, Layer } from "react-map-gl/maplibre";
@@ -17,11 +17,11 @@ import { Search, X } from "lucide-react";
 import { ROUTE_DIRECTORY_CODES } from "@/utils/variables";
 import type { JeepneyRoute, JeepneyCodeEntry } from "./types";
 
-import JeepneyMapControls from "./JeepneyMapControls";
-import DesktopJeepneySidebar from "./DesktopJeepneySidebar";
-import JeepneyRouteDetails from "./JeepneyRouteDetails";
-import MobileJeepneyHeader from "./MobileJeepneyHeader";
-import MobileJeepneyRouteSelector from "./MobileJeepneyRouteSelector";
+import MapLibreControls from "@/components/ui/MapLibreControls";
+import DesktopRouteSidebar from "@/components/ui/DesktopRouteSidebar";
+import RouteDetails from "@/components/ui/RouteDetails";
+import MobileRouteHeader from "@/components/ui/MobileRouteHeader";
+import MobileRouteSelector from "@/components/ui/MobileRouteSelector";
 
 const jeepneyRoutesData = await fetch("/data/travel/jeepney-routes.json").then(
   (res) => res.json(),
@@ -72,7 +72,10 @@ function FitToRoute({
 export default function InteractiveJeepneyMap() {
   const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
   const [showAllRoutes, setShowAllRoutes] = useState(true);
+  const [isTerrainEnabled, setIsTerrainEnabled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [hoveredRouteId, setHoveredRouteId] = useState<string | null>(null);
+  const [cursor, setCursor] = useState("auto");
 
   const mapRef = useRef<MapRef>(null);
 
@@ -124,6 +127,8 @@ export default function InteractiveJeepneyMap() {
     if (feature) {
       return {
         routeId: feature.properties.routeId,
+        routeName:
+          codeEntry?.routeName ?? `Route ${feature.properties.routeId}`,
         name: feature.properties.name ?? `Route ${feature.properties.routeId}`,
         routeColor: codeEntry?.routeColor ?? feature.properties.stroke,
         routeFare: codeEntry?.routeFare,
@@ -139,6 +144,7 @@ export default function InteractiveJeepneyMap() {
     if (codeEntry) {
       return {
         routeId: codeEntry.routeId,
+        routeName: codeEntry?.routeName,
         name: `Route ${codeEntry.routeId}`,
         routeColor: codeEntry.routeColor,
         routeFare: codeEntry.routeFare,
@@ -165,6 +171,29 @@ export default function InteractiveJeepneyMap() {
     setActiveRouteId(routeId);
     setShowAllRoutes(false);
   };
+
+  const handleMouseMove = useCallback((event: MapLayerMouseEvent) => {
+    // Because interactiveLayerIds is set, event.features will only contain our routes
+    const features = event.features || [];
+
+    if (features.length > 0) {
+      const routeId = features[0].properties?.routeId;
+      if (typeof routeId === "string") {
+        setHoveredRouteId(routeId);
+        setCursor("pointer");
+        return;
+      }
+    }
+
+    // If we aren't over a route, reset everything
+    setHoveredRouteId(null);
+    setCursor("auto");
+  }, []);
+
+  const handleMouseLeaveMap = useCallback(() => {
+    setHoveredRouteId(null);
+    setCursor("auto");
+  }, []);
 
   const toggleSidebar = () => {
     if (sidebarPhase === "closed") {
@@ -219,7 +248,7 @@ export default function InteractiveJeepneyMap() {
 
       routeMap.set(key, {
         routeId: codeEntry?.routeId ?? routeCode,
-        name: `Route ${routeCode}`,
+        routeName: codeEntry?.routeName ?? `Route ${routeCode}`,
         routeColor: codeEntry?.routeColor,
         routeFare: codeEntry?.routeFare,
         hasGeoJson: false,
@@ -235,7 +264,7 @@ export default function InteractiveJeepneyMap() {
 
       routeMap.set(key, {
         routeId: existing?.routeId ?? codeEntry?.routeId ?? routeId,
-        name: feature.properties.name || existing?.name || `Route ${routeId}`,
+        routeName: existing?.routeName || `Route ${routeId}`,
         routeColor:
           existing?.routeColor ??
           codeEntry?.routeColor ??
@@ -251,14 +280,13 @@ export default function InteractiveJeepneyMap() {
       if (!routeMap.has(key)) {
         routeMap.set(key, {
           routeId: codeEntry.routeId,
-          name: `Route ${codeEntry.routeId}`,
+          routeName: codeEntry.routeName,
           routeColor: codeEntry.routeColor,
           routeFare: codeEntry.routeFare,
           hasGeoJson: false,
         });
       }
     }
-
     return Array.from(routeMap.values());
   }, [codeLookup]);
 
@@ -285,7 +313,7 @@ export default function InteractiveJeepneyMap() {
 
     return sortedRoutes.filter(
       (route) =>
-        route.name.toLowerCase().includes(searchLower) ||
+        route.routeName.toLowerCase().includes(searchLower) ||
         route.routeId.toLowerCase().includes(searchLower),
     );
   }, [sortedRoutes, searchQuery]);
@@ -303,11 +331,46 @@ export default function InteractiveJeepneyMap() {
           bearing: -20,
         }}
         mapStyle="https://tiles.openfreemap.org/styles/liberty"
+        terrain={{
+          source: "terrain-source",
+          exaggeration: isTerrainEnabled ? 1 : 0,
+        }}
         onClick={handleMapClick}
         interactiveLayerIds={["jeepney-route-hitbox"]}
+        cursor={cursor}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeaveMap}
       >
-        <JeepneyMapControls mapRef={mapRef} />
+        <MapLibreControls
+          mapRef={mapRef}
+          isTerrainEnabled={isTerrainEnabled}
+          onToggleTerrain={() => setIsTerrainEnabled(!isTerrainEnabled)}
+        />
         <FitToRoute activeRouteId={activeRouteId} mapRef={mapRef} />
+
+        {isTerrainEnabled && (
+          <Source
+            id="terrain-source"
+            type="raster-dem"
+            tiles={[
+              "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+            ]}
+            encoding="terrarium"
+            tileSize={256}
+            maxzoom={14}
+          >
+            <Layer
+              id="hillshade-layer"
+              type="hillshade"
+              paint={{
+                // Controls the intensity of the shadows (0.0 to 1.0)
+                "hillshade-exaggeration": 0.6,
+                "hillshade-shadow-color": "#334155",
+                "hillshade-highlight-color": "#ffffff",
+              }}
+            />
+          </Source>
+        )}
 
         <Source id="iligan-boundary" type="geojson" data={boundaryGeoJsonData}>
           <Layer
@@ -367,12 +430,16 @@ export default function InteractiveJeepneyMap() {
                 "case",
                 ["==", ["get", "routeId"], activeRouteId ?? ""],
                 6,
+                ["==", ["get", "routeId"], hoveredRouteId ?? ""],
+                4.5,
                 3,
               ],
               "line-opacity": [
                 "case",
                 ["==", ["get", "routeId"], activeRouteId ?? ""],
                 1,
+                ["==", ["get", "routeId"], hoveredRouteId ?? ""],
+                showAllRoutes ? 0.9 : 0.4,
                 showAllRoutes ? 0.6 : 0,
               ],
             }}
@@ -381,14 +448,15 @@ export default function InteractiveJeepneyMap() {
       </MapGL>
 
       {/* MOBILE */}
-      <MobileJeepneyHeader
+      <MobileRouteHeader
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         filteredRoutes={filteredRoutes}
         setActiveRouteId={setActiveRouteId}
+        vehicleType="jeepney"
       />
 
-      <MobileJeepneyRouteSelector
+      <MobileRouteSelector
         routes={filteredRoutes}
         activeRouteId={activeRouteId}
         setActiveRouteId={setActiveRouteId}
@@ -399,7 +467,9 @@ export default function InteractiveJeepneyMap() {
 
       {/* DESKTOP */}
       {/* --- FLOATING LEFT SIDEBAR --- */}
-      <DesktopJeepneySidebar
+      <DesktopRouteSidebar
+        title="Jeepney Routes"
+        subtitle="Select a route to check the fare"
         sidebarPhase={sidebarPhase}
         isClosing={isClosing}
         toggleSidebar={toggleSidebar}
@@ -434,7 +504,7 @@ export default function InteractiveJeepneyMap() {
       </div>
 
       {/* --- FLOATING RIGHT SIDEBAR --- */}
-      <JeepneyRouteDetails
+      <RouteDetails
         route={selectedRoute}
         codeEntry={selectedRoute?.codeEntry}
         getRouteColor={getRouteColor}
