@@ -77,3 +77,5 @@ export const ROUTE_DIRECTORY_CODES = [
   "9D",
   "9F",
 ] as const;
+
+export const KALESA_DIRECTORY_CODES = ["1"] as const;

@@ -1,0 +1,10 @@
+[
+  {
+    "routeId": "1",
+    "routeColor": "#F97316",
+    "routeFare": {
+      "regular": 15,
+      "discounted": 10
+    }
+  }
+]
