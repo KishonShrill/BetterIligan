@@ -5,7 +5,8 @@
     "routeFare": {
       "regular": 15,
       "discounted": 13
-    }
+    },
+    "routeName": "Sta. Filomena - Acmac"
   },
   {
     "routeId": "1B",
@@ -13,7 +14,8 @@
     "routeFare": {
       "regular": 15,
       "discounted": 13
-    }
+    },
+    "routeName": "City Proper Ditucalan"
   },
   {
     "routeId": "9B-9C",
@@ -21,7 +23,8 @@
     "routeFare": {
       "regular": 30,
       "discounted": 25
-    }
+    },
+    "routeName": "Dalipuga - Mapalad - Paita"
   },
   {
     "routeId": "7G",
@@ -29,7 +32,17 @@
     "routeFare": {
       "regular": 15,
       "discounted": 13
-    }
+    },
+    "routeName": "Bagong Silang"
+  },
+  {
+    "routeId": "7H",
+    "routeColor": "#B545FF",
+    "routeFare": {
+      "regular": 15,
+      "discounted": 13
+    },
+    "routeName": "San Miguel - St. Mary"
   },
   {
     "routeId": "7A",
@@ -37,6 +50,37 @@
     "routeFare": {
       "regular": 15,
       "discounted": 13
-    }
+    },
+    "routeName": "Tambo - Gerona"
+  },
+  {
+    "routeId": "5A",
+    "routeName": "Del Carmen - Greenheights",
+    "routeColor": "rgba(52, 83, 176, 1)"
+  },
+  {
+    "routeId": "8H",
+    "routeName": "Luinab - Manrique",
+    "routeColor": "rgba(249, 154, 46, 1)"
+  },
+  {
+    "routeId": "8F",
+    "routeName": "Upper Hinalplanon Cabaro",
+    "routeColor": "rgba(103, 78, 160, 1)"
+  },
+  {
+    "routeId": "6B",
+    "routeName": "Ubaldo Laya - Greenfields",
+    "routeColor": "rgba(40, 214, 214, 1)"
+  },
+  {
+    "routeId": "6C",
+    "routeName": "Ubaldo Laya - Noria",
+    "routeColor": "rgba(255, 22, 201, 1)"
+  },
+  {
+    "routeId": "1N",
+    "routeName": "Bacayo - Mercy",
+    "routeColor": "rgba(36, 171, 85, 1)"
   }
 ]

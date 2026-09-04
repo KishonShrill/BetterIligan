@@ -4,9 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Del Carmen - Greenheights",
-        "routeId": "5A",
-        "stroke": "rgba(52, 83, 176, 1)"
+        "routeId": "5A"
       },
       "geometry": {
         "type": "LineString",
@@ -86,9 +84,7 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "8H",
-        "name": "Luinab - Manrique",
-        "stroke": "rgba(249, 154, 46, 1)"
+        "routeId": "8H"
       },
       "geometry": {
         "type": "LineString",
@@ -190,9 +186,7 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "8F",
-        "name": "Upper Hinalplanon Cabaro",
-        "stroke": "rgba(103, 78, 160, 1)"
+        "routeId": "8F"
       },
       "geometry": {
         "type": "LineString",
@@ -253,9 +247,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Ubaldo Laya - Greenfields",
-        "routeId": "6B",
-        "stroke": "rgba(40, 214, 214, 1)"
+        "routeId": "6B"
       },
       "geometry": {
         "type": "LineString",
@@ -292,9 +284,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Ubaldo Laya - Noria",
-        "routeId": "6C",
-        "stroke": "rgba(255, 22, 201, 1)"
+        "routeId": "6C"
       },
       "geometry": {
         "type": "LineString",
@@ -333,9 +323,7 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "1N",
-        "name": "Bacayo - Mercy",
-        "stroke": "rgba(36, 171, 85, 1)"
+        "routeId": "1N"
       },
       "geometry": {
         "type": "LineString",
@@ -391,9 +379,7 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "9F",
-        "name": "Sta. Filomena - Acmac",
-        "stroke": "#EC4899"
+        "routeId": "9F"
       },
       "geometry": {
         "type": "LineString",
@@ -466,9 +452,7 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "1B",
-        "name": "City Proper Ditucalan",
-        "stroke": "#3B82F6"
+        "routeId": "1B"
       },
       "geometry": {
         "type": "LineString",
@@ -524,9 +508,7 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "9B-9C",
-        "name": "Dalipuga - Mapalad - Paita",
-        "stroke": "#EF4444"
+        "routeId": "9B-9C"
       },
       "geometry": {
         "type": "LineString",
@@ -697,9 +679,62 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "7G",
-        "name": "Bagong Silang",
-        "stroke": "#F97316"
+        "routeId": "7H"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [124.2448412, 8.2397035],
+          [124.2460717, 8.2410121],
+          [124.2471623, 8.2415352],
+          [124.2495179, 8.2424336],
+          [124.2502441, 8.2405139],
+          [124.250495, 8.2400665],
+          [124.2509609, 8.2396108],
+          [124.2510526, 8.2395733],
+          [124.2496918, 8.2385325],
+          [124.2493484, 8.2383476],
+          [124.2491006, 8.2382747],
+          [124.2479364, 8.23863],
+          [124.248139, 8.2390503],
+          [124.2483065, 8.2392346],
+          [124.24849, 8.2393481],
+          [124.248113, 8.2402817],
+          [124.2471547, 8.2399019],
+          [124.2467153, 8.2397007],
+          [124.2462587, 8.2391827],
+          [124.2456448, 8.2393711],
+          [124.2449361, 8.2396311],
+          [124.2448408, 8.2397035],
+          [124.24442146000519, 8.239122552374567],
+          [124.243998558805, 8.237700599661437],
+          [124.24295534769414, 8.235447526921206],
+          [124.24233809991091, 8.23412930438056],
+          [124.24152913499557, 8.2329048596186],
+          [124.24113266927384, 8.232416906836562],
+          [124.24074282856975, 8.23015554573061],
+          [124.2406972234466, 8.229977237909367],
+          [124.24061059217786, 8.22948959651768],
+          [124.23687397497213, 8.229982850330202],
+          [124.2370033600073, 8.230998712680346],
+          [124.23462272058185, 8.231177982088354],
+          [124.23447608935959, 8.229513332450438],
+          [124.2340965670748, 8.229718212872925],
+          [124.23377742333304, 8.229573089251431],
+          [124.23374292130745, 8.22859990594543],
+          [124.23665834250193, 8.228420635076063],
+          [124.24033477093815, 8.227900678597408],
+          [124.24288791849307, 8.227473850105014],
+          [124.2431121816611, 8.228293375377064],
+          [124.24046415116834, 8.228651917150685],
+          [124.24057628275318, 8.229420219858241]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "routeId": "7G"
       },
       "geometry": {
         "type": "LineString",
@@ -759,9 +794,7 @@
     {
       "type": "Feature",
       "properties": {
-        "routeId": "7A",
-        "name": "Tambo - Gerona",
-        "stroke": "#8B5CF6"
+        "routeId": "7A"
       },
       "geometry": {
         "type": "LineString",

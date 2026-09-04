@@ -3,26 +3,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
-import type { KalesaRoute } from "./type";
 
-interface MobileKalesaHeaderProps {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  filteredRoutes: KalesaRoute[];
-  setActiveRouteId: (id: string | null) => void;
+// 1. Define a base interface for the properties this component needs to render
+export interface BaseHeaderRoute {
+  routeId: string;
+  routeName: string;
+  name?: string;
+  routeColor?: string;
 }
 
-export default function MobileKalesaHeader({
+// 2. Use a generic type <T> and add a `vehicleType` prop for the dynamic text
+interface MobileRouteHeaderProps<T extends BaseHeaderRoute> {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  filteredRoutes: T[];
+  setActiveRouteId: (id: string | null) => void;
+  vehicleType: string; // e.g., "jeepney" or "kalesa"
+}
+
+export default function MobileRouteHeader<T extends BaseHeaderRoute>({
   searchQuery,
   setSearchQuery,
   filteredRoutes,
   setActiveRouteId,
-}: MobileKalesaHeaderProps) {
+  vehicleType,
+}: MobileRouteHeaderProps<T>) {
   // Grab only the top 3 routes for the mobile dropdown
   const topMatches = filteredRoutes.slice(0, 3);
 
   return (
-    <div className="pointer-events-none absolute top-3 left-3 z-[1000] w-[calc(100vw-1.5rem)] md:hidden">
+    <div className="pointer-events-none absolute top-3 right-3 left-3 z-[1000] w-[calc(100vw-1.5rem)] md:hidden">
       <div className="flex gap-2">
         {/* BetterIligan Home Link */}
         <div className="flex items-center justify-between">
@@ -49,8 +59,8 @@ export default function MobileKalesaHeader({
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search kalesa routes..."
-              aria-label="Search kalesa routes"
+              placeholder={`Search ${vehicleType} routes...`}
+              aria-label={`Search ${vehicleType} routes`}
               className="h-full min-w-0 flex-1 bg-transparent px-2.5 text-sm font-medium text-slate-900 outline-none placeholder:text-slate-400"
             />
           </div>
@@ -80,7 +90,7 @@ export default function MobileKalesaHeader({
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="truncate text-sm font-bold text-slate-900">
-                            {route.name}
+                            {route?.routeName ? route.routeName : route.name}
                           </div>
                           <div
                             className="mt-0.5 text-[10px] font-bold tracking-wider uppercase"

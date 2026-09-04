@@ -15,11 +15,11 @@ setWorkerUrl(workerUrl);
 import { Compass } from "lucide-react";
 import type { KalesaRoute, KalesaCodeEntry } from "./type";
 
-import KalesaMapControls from "./KalesaMapControls";
-import DesktopKalesaSidebar from "./DesktopKalesaSidebar";
-import KalesaRouteDetails from "./KalesaRouteDetails";
-import MobileKalesaHeader from "./MobileKalesaHeader";
-import MobileKalesaRouteSelector from "./MobileKalesaRouteSelector";
+import MapLibreControls from "@/components/ui/MapLibreControls";
+import DesktopRouteSidebar from "@/components/ui/DesktopRouteSidebar";
+import RouteDetails from "@/components/ui/RouteDetails";
+import MobileRouteHeader from "@/components/ui/MobileRouteHeader";
+import MobileRouteSelector from "@/components/ui/MobileRouteSelector";
 
 function FitToRoute({
   activeRouteId,
@@ -59,6 +59,7 @@ function FitToRoute({
 export default function InteractiveKalesaMap() {
   const [routesData, setRoutesData] = useState<any>(null);
   const [codesData, setCodesData] = useState<any>(null);
+  const [isTerrainEnabled, setIsTerrainEnabled] = useState(false);
   const [boundaryData, setBoundaryData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -302,7 +303,11 @@ export default function InteractiveKalesaMap() {
         onClick={handleMapClick}
         interactiveLayerIds={["kalesa-route-hitbox"]}
       >
-        <KalesaMapControls mapRef={mapRef} />
+        <MapLibreControls
+          mapRef={mapRef}
+          isTerrainEnabled={isTerrainEnabled}
+          onToggleTerrain={() => setIsTerrainEnabled(!isTerrainEnabled)}
+        />
         <FitToRoute
           activeRouteId={activeRouteId}
           mapRef={mapRef}
@@ -406,14 +411,15 @@ export default function InteractiveKalesaMap() {
         )}
       </MapGL>
 
-      <MobileKalesaHeader
+      <MobileRouteHeader
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         filteredRoutes={filteredRoutes}
         setActiveRouteId={setActiveRouteId}
+        vehicleType="kalesa"
       />
 
-      <MobileKalesaRouteSelector
+      <MobileRouteSelector
         routes={filteredRoutes}
         activeRouteId={activeRouteId}
         setActiveRouteId={setActiveRouteId}
@@ -422,7 +428,9 @@ export default function InteractiveKalesaMap() {
         getRouteColor={getRouteColor}
       />
 
-      <DesktopKalesaSidebar
+      <DesktopRouteSidebar
+        title="Kalesa Routes"
+        subtitle="Select a route to check details"
         sidebarPhase={sidebarPhase}
         isClosing={isClosing}
         toggleSidebar={toggleSidebar}
@@ -434,7 +442,7 @@ export default function InteractiveKalesaMap() {
         setSearchQuery={setSearchQuery}
       />
 
-      <KalesaRouteDetails
+      <RouteDetails
         route={selectedRoute}
         codeEntry={selectedRoute?.codeEntry}
         getRouteColor={getRouteColor}

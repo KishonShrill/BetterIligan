@@ -1,10 +1,17 @@
 "use client";
 
 import { Eye, EyeOff } from "lucide-react";
-import type { KalesaRoute } from "./type";
 
-interface MobileKalesaRouteSelectorProps {
-  routes: KalesaRoute[];
+// 1. Define a base interface with the properties needed by the UI
+export interface BaseRoute {
+  routeId: string;
+  routeColor?: string;
+  hasGeoJson: boolean;
+}
+
+// 2. Use a Generic Type <T> so it accepts any route type that extends BaseRoute
+interface MobileRouteSelectorProps<T extends BaseRoute> {
+  routes: T[];
   activeRouteId: string | null;
   setActiveRouteId: (id: string | null) => void;
   showAllRoutes: boolean;
@@ -12,14 +19,14 @@ interface MobileKalesaRouteSelectorProps {
   getRouteColor: (routeId: string, fallbackStroke?: string) => string;
 }
 
-export default function MobileKalesaRouteSelector({
+export default function MobileRouteSelector<T extends BaseRoute>({
   routes,
   activeRouteId,
   setActiveRouteId,
   showAllRoutes,
   setShowAllRoutes,
   getRouteColor,
-}: MobileKalesaRouteSelectorProps) {
+}: MobileRouteSelectorProps<T>) {
   return (
     <div className="pointer-events-none absolute right-17 bottom-3 left-3 z-1000 md:hidden">
       <div className="flex flex-col gap-2">
@@ -29,7 +36,6 @@ export default function MobileKalesaRouteSelector({
             type="button"
             onClick={() => {
               const nextValue = !showAllRoutes;
-
               setShowAllRoutes(nextValue);
 
               if (nextValue) {
@@ -40,14 +46,13 @@ export default function MobileKalesaRouteSelector({
               showAllRoutes
                 ? "border-slate-700 bg-slate-800 text-white"
                 : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-            } `}
+            }`}
           >
             {showAllRoutes ? (
               <EyeOff className="h-3.5 w-3.5" />
             ) : (
               <Eye className="h-3.5 w-3.5" />
             )}
-
             {showAllRoutes ? "Hide All" : "Show All"}
           </button>
         </div>
@@ -57,7 +62,6 @@ export default function MobileKalesaRouteSelector({
           <div className="custom-scrollbar flex gap-2 overflow-x-auto overscroll-x-contain p-2">
             {routes.map((route) => {
               const isActive = activeRouteId === route.routeId;
-
               const routeColor = getRouteColor(route.routeId, route.routeColor);
 
               return (
@@ -71,7 +75,7 @@ export default function MobileKalesaRouteSelector({
                     isActive
                       ? "scale-[1.02] shadow-sm"
                       : "border-slate-100 bg-white hover:bg-slate-50"
-                  } ${!route.hasGeoJson ? "opacity-60" : ""} `}
+                  } ${!route.hasGeoJson ? "opacity-60" : ""}`}
                   style={
                     isActive
                       ? {
@@ -86,9 +90,7 @@ export default function MobileKalesaRouteSelector({
                   {/* Route code */}
                   <span
                     className="text-xs leading-none font-extrabold"
-                    style={{
-                      color: routeColor,
-                    }}
+                    style={{ color: routeColor }}
                   >
                     {route.routeId}
                   </span>
@@ -97,7 +99,7 @@ export default function MobileKalesaRouteSelector({
                   <span
                     className={`h-1.5 w-1.5 rounded-full ${
                       route.hasGeoJson ? "bg-emerald-500" : "bg-amber-400"
-                    } `}
+                    }`}
                     title={
                       route.hasGeoJson ? "Map available" : "Map unavailable"
                     }

@@ -1,21 +1,34 @@
 "use client";
 
 import { Map as MapIcon, X, Search } from "lucide-react";
-import type { KalesaRoute } from "./type";
 
-interface DesktopKalesaSidebarProps {
+// 1. Define a base interface for the properties needed to render the list items
+export interface BaseSidebarRoute {
+  routeId: string;
+  routeName: string;
+  routeColor?: string;
+  name?: string;
+  hasGeoJson: boolean;
+}
+
+// 2. Use a Generic Type <T> and add props for dynamic text and optional search
+interface DesktopRouteSidebarProps<T extends BaseSidebarRoute> {
+  title: string;
+  subtitle: string;
   sidebarPhase: "closed" | "peek" | "open";
   isClosing: boolean;
   toggleSidebar: () => void;
-  routes: KalesaRoute[];
+  routes: T[];
   activeRouteId: string | null;
   setActiveRouteId: (id: string | null) => void;
   getRouteColor: (routeId: string, fallbackStroke?: string) => string;
   searchQuery: string;
-  setSearchQuery: (query: string) => void;
+  setSearchQuery?: (query: string) => void; // Optional: If provided, renders search bar
 }
 
-export default function DesktopJeepneySidebar({
+export default function DesktopRouteSidebar<T extends BaseSidebarRoute>({
+  title,
+  subtitle,
   sidebarPhase,
   isClosing,
   toggleSidebar,
@@ -25,17 +38,19 @@ export default function DesktopJeepneySidebar({
   getRouteColor,
   searchQuery,
   setSearchQuery,
-}: DesktopKalesaSidebarProps) {
+}: DesktopRouteSidebarProps<T>) {
+  // Dynamically adjust the transition speed based on the current animation phase
   const sidebarStyle = {
     transitionProperty: "width, height, border-radius",
     transitionDuration:
       (sidebarPhase === "peek" && !isClosing) ||
       (sidebarPhase === "closed" && isClosing)
-        ? "250ms"
-        : "350ms",
+        ? "250ms" // Faster for horizontal expansions/shrinks
+        : "350ms", // Slower, smoother drop for vertical roll-ups/downs
     transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
   };
 
+  // Helper booleans for clean rendering
   const isExpanded = sidebarPhase !== "closed";
   const isFullyOpen = sidebarPhase === "open";
 
@@ -50,6 +65,7 @@ export default function DesktopJeepneySidebar({
             : "h-[56px] w-48 cursor-pointer rounded-2xl hover:bg-slate-50"
       }`}
     >
+      {/* Sidebar Header / Collapsed Button */}
       <div
         onClick={() => sidebarPhase === "closed" && toggleSidebar()}
         className={`flex shrink-0 items-center justify-between transition-colors duration-300 ${
@@ -73,7 +89,7 @@ export default function DesktopJeepneySidebar({
                 isExpanded ? "text-lg" : "text-sm"
               }`}
             >
-              Kalesa Routes
+              {title}
             </h2>
 
             <div
@@ -81,7 +97,7 @@ export default function DesktopJeepneySidebar({
                 isExpanded ? "mt-0.5 max-h-10 opacity-100" : "max-h-0 opacity-0"
               }`}
             >
-              Select a route to check details
+              {subtitle}
             </div>
           </div>
         </div>
@@ -100,8 +116,8 @@ export default function DesktopJeepneySidebar({
         )}
       </div>
 
-      {/* Search Input Bar */}
-      {isFullyOpen && (
+      {/* Search Input Bar (Conditionally rendered if setSearchQuery is passed) */}
+      {isFullyOpen && setSearchQuery && (
         <div className="px-3 pt-3">
           <div className="relative">
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -147,6 +163,7 @@ export default function DesktopJeepneySidebar({
                     }`}
                   >
                     <div className="flex items-center gap-3">
+                      {/* Route Code */}
                       <div
                         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg px-1 text-center text-[10px] leading-none font-bold text-white shadow-sm ${
                           !route.hasGeoJson ? "opacity-50" : ""
@@ -158,9 +175,10 @@ export default function DesktopJeepneySidebar({
                         {route.routeId}
                       </div>
 
+                      {/* Route Information */}
                       <div className="min-w-0">
                         <div className="truncate leading-tight font-bold text-slate-900">
-                          {route.name}
+                          {route.routeName ? route.routeName : route.name}
                         </div>
 
                         <div
@@ -174,6 +192,7 @@ export default function DesktopJeepneySidebar({
                       </div>
                     </div>
 
+                    {/* Missing GeoJSON */}
                     {!route.hasGeoJson && (
                       <div className="mt-3 flex items-center gap-2 border-t border-slate-100 pt-3">
                         <div className="h-2 w-2 shrink-0 rounded-full bg-amber-400" />
