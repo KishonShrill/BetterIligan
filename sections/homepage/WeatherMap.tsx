@@ -3,378 +3,932 @@
 import { useState, useEffect } from "react";
 import { ResultAsync, ok, err } from "neverthrow";
 import {
-  CloudSun,
-  Wind,
-  Droplets,
-  ThermometerSun,
-  MapPin,
-  X,
-  Sunrise,
-  Sunset,
-  Eye,
-  Compass,
-  Sun,
-  Moon,
-  Cloud,
-  CloudRain,
-  CloudLightning,
-  Loader2,
+    CloudSun, Wind, Droplets, ThermometerSun, MapPin, X,
+    Sunrise, Sunset, Eye, Compass, Sun, Moon, Cloud, CloudRain,
+    CloudLightning, Loader2,
 } from "lucide-react";
 
 import Section from "@/components/ui/Section";
 import { Text } from "@/components/ui/Text";
-import { OpenWeatherResponse } from "@/types/weather";
 import { FALLBACK_WEATHER } from "@/data/fallback/fallback_weather";
+import { WeatherResponse } from "@/types/weather";
 
-// Helper to map OpenWeatherMap icon codes to Lucide React icons
-const getWeatherIcon = (
-  iconCode: string,
-  className = "w-16 h-16 text-yellow-300",
-) => {
-  switch (iconCode) {
-    case "01d":
-      return <Sun className={className} />;
-    case "01n":
-      return <Moon className={`text-slate-200 ${className}`} />;
-    case "02d":
-    case "02n":
-    case "03d":
-    case "03n":
-    case "04d":
-    case "04n":
-      return <Cloud className={`text-slate-300 ${className}`} />;
-    case "09d":
-    case "09n":
-    case "10d":
-    case "10n":
-      return <CloudRain className={`text-blue-300 ${className}`} />;
-    case "11d":
-    case "11n":
-      return <CloudLightning className={`text-yellow-400 ${className}`} />;
-    default:
-      return <CloudSun className={className} />;
-  }
+type WeatherIconComponent = typeof Sun;
+
+interface WeatherInfo {
+    label: string;
+    icon: WeatherIconComponent;
+}
+
+const getWeatherInfo = (
+    code: number,
+    isDay = true,
+): WeatherInfo => {
+    if (code === 0) {
+        return {
+            label: "Clear sky",
+            icon: isDay ? Sun : Moon,
+        };
+    }
+
+    if (code === 1) {
+        return {
+            label: "Mainly clear",
+            icon: isDay ? Sun : Moon,
+        };
+    }
+
+    if (code === 2) {
+        return {
+            label: "Partly cloudy",
+            icon: CloudSun,
+        };
+    }
+
+    if (code === 3) {
+        return {
+            label: "Overcast",
+            icon: Cloud,
+        };
+    }
+
+    if ([45, 48].includes(code)) {
+        return {
+            label: "Fog",
+            icon: Cloud,
+        };
+    }
+
+    if ([51, 53, 55, 56, 57].includes(code)) {
+        return {
+            label: "Drizzle",
+            icon: CloudRain,
+        };
+    }
+
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) {
+        return {
+            label: "Rain",
+            icon: CloudRain,
+        };
+    }
+
+    if ([71, 73, 75, 77, 85, 86].includes(code)) {
+        return {
+            label: "Snow",
+            icon: Cloud,
+        };
+    }
+
+    if ([95, 96, 99].includes(code)) {
+        return {
+            label: "Thunderstorm",
+            icon: CloudLightning,
+        };
+    }
+
+    return {
+        label: "Unknown",
+        icon: CloudSun,
+    };
 };
 
-// Helper to convert UNIX timestamps to readable local time
-const formatTime = (unixTime: number) => {
-  return new Date(unixTime * 1000).toLocaleTimeString("en-PH", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  });
+const getDailyValue = (
+    values: Record<string, number>,
+    index: number,
+) => {
+    return values[String(index)] ?? 0;
+};
+
+const formatWeatherTime = (
+    dateString: string,
+    timezone: string,
+) => {
+    return new Intl.DateTimeFormat("en-PH", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: timezone,
+    }).format(new Date(dateString));
+};
+
+const formatWeatherDate = (
+    dateString: string,
+    timezone: string,
+) => {
+    return new Intl.DateTimeFormat("en-PH", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        timeZone: timezone,
+    }).format(new Date(dateString));
+};
+
+const getWindDirection = (degrees: number) => {
+    const directions = [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW",
+    ];
+
+    return directions[
+        Math.round(degrees / 45) % 8
+    ];
+};
+
+interface WeatherMetricProps {
+    icon: typeof Droplets;
+    label: string;
+    value: string;
+}
+
+const WeatherMetric = ({
+    icon: Icon,
+    label,
+    value,
+}: WeatherMetricProps) => {
+    return (
+        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
+            <Icon className="mb-2 h-5 w-5 text-blue-500" />
+
+            <p className="mb-1 text-xs text-slate-500">
+                {label}
+            </p>
+
+            <p className="text-lg font-bold text-slate-800">
+                {value}
+            </p>
+        </div>
+    );
 };
 
 export default function WeatherAndMap() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [weatherData, setWeatherData] = useState<OpenWeatherResponse | null>(
-    null,
-  );
-  const [loading, setLoading] = useState(true);
-  const [isFallback, setIsFallback] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch weather data when the component mounts
-  useEffect(() => {
-    const fetchWeather = async () => {
-      setLoading(true);
+    const [weatherData, setWeatherData] =
+        useState<WeatherResponse | null>(null);
 
-      const result = await ResultAsync.fromPromise(
-        fetch("/api/weather"),
-        (error) =>
-          new Error(error instanceof Error ? error.message : "Network error"),
-      )
-        .andThen((res) => {
-          if (!res.ok) {
-            return err(new Error(`API Unavailable: Status ${res.status}`));
-          }
-          return ResultAsync.fromPromise(
-            res.json() as Promise<OpenWeatherResponse>,
-            (jsonError) => new Error("Failed to parse response JSON"),
-          );
-        })
-        .andThen((data: any) => {
-          if (data && data.error) {
-            return err(new Error(data.error));
-          }
-          return ok(data as OpenWeatherResponse);
-        });
+    const [loading, setLoading] = useState(true);
+    const [isFallback, setIsFallback] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-      result.match(
-        (data) => {
-          setWeatherData(data);
-          setIsFallback(false);
-          setError(null);
-        },
-        (error) => {
-          console.error(
-            "Using fallback weather data due to error:",
-            error.message,
-          );
-          setWeatherData(FALLBACK_WEATHER);
-          setIsFallback(true);
-          setError(error.message);
-        },
-      );
+    useEffect(() => {
+        const fetchWeather = async () => {
+            setLoading(true);
 
-      setLoading(false);
-    };
-    fetchWeather();
-  }, []);
+            const result = await ResultAsync.fromPromise(
+                fetch("/api/weather"),
+                (error) =>
+                    new Error(
+                        error instanceof Error
+                            ? error.message
+                            : "Network error",
+                    ),
+            )
+                .andThen((res) => {
+                    if (!res.ok) {
+                        return err(
+                            new Error(
+                                `API Unavailable: Status ${res.status}`,
+                            ),
+                        );
+                    }
 
-  // Prevent background scrolling when modal is open
-  useEffect(() => {
-    if (isModalOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "unset";
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isModalOpen]);
+                    return ResultAsync.fromPromise(
+                        res.json() as Promise<WeatherResponse>,
+                        () =>
+                            new Error(
+                                "Failed to parse response JSON",
+                            ),
+                    );
+                })
+                .andThen((data: WeatherResponse | { error?: string }) => {
+                    if (
+                        data &&
+                        "error" in data &&
+                        data.error
+                    ) {
+                        return err(new Error(data.error));
+                    }
 
-  return (
-    <Section className="bg-white">
-      {/* Section Header */}
-      <div className="mb-10 text-center">
-        <h2 className="text-3xl font-bold text-slate-900">
-          Weather & Location
-        </h2>
-        <Text
-          className="mx-auto mt-2 text-sm text-slate-600 md:text-base"
-          size="md"
-        >
-          Current conditions and interactive map of Iligan City
-        </Text>
-      </div>
+                    return ok(data as WeatherResponse);
+                });
 
-      <div className="grid grid-cols-1 items-stretch gap-6 md:gap-8 lg:grid-cols-12">
-        {/* WEATHER CARD (Interactive) */}
-        <div
-          onClick={() => !loading && weatherData && setIsModalOpen(true)}
-          className={`flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 lg:col-span-4 ${!loading && weatherData ? "group cursor-context-menu hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg" : ""}`}
-        >
-          {loading ? (
-            <div className="flex min-h-[300px] flex-1 flex-col items-center justify-center">
-              <Loader2 className="mb-2 h-8 w-8 animate-spin text-blue-500" />
-              <p className="font-medium text-slate-500">
-                Fetching satellite data...
-              </p>
+            result.match(
+                (data) => {
+                    setWeatherData(data);
+                    setIsFallback(false);
+                    setError(null);
+                },
+                (error) => {
+                    console.error(
+                        "Using fallback weather data due to error:",
+                        error.message,
+                    );
+
+                    /*
+                     * NOTE:
+                     * FALLBACK_WEATHER still needs to be converted
+                     * to the new Open-Meteo response structure.
+                     */
+                    setWeatherData(
+                        FALLBACK_WEATHER as unknown as WeatherResponse,
+                    );
+
+                    setIsFallback(true);
+                    setError(error.message);
+                },
+            );
+
+            setLoading(false);
+        };
+
+        fetchWeather();
+    }, []);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [isModalOpen]);
+
+    const currentWeather = weatherData
+        ? getWeatherInfo(
+            weatherData.current.weather_code,
+            Boolean(weatherData.current.is_day),
+        )
+        : null;
+
+    const CurrentWeatherIcon =
+        currentWeather?.icon ?? CloudSun;
+
+    return (
+        <Section className="bg-white">
+            {/* Section Header */}
+            <div className="mb-10 text-center">
+                <h2 className="text-3xl font-bold text-slate-900">
+                    Weather & Location
+                </h2>
+
+                <Text
+                    className="mx-auto mt-2 text-sm text-slate-600 md:text-base"
+                    size="md"
+                >
+                    Current conditions and interactive map of Iligan City
+                </Text>
             </div>
-          ) : weatherData ? (
-            <>
-              <div className="relative overflow-hidden bg-blue-600 p-6 text-white">
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between">
-                    <p className="mb-1 text-sm font-medium text-blue-100">
-                      {weatherData.name}, {weatherData.sys.country}
-                    </p>
-                    {/* Fallback Badge */}
-                    {isFallback && (
-                      <span className="rounded bg-amber-400 px-2 py-0.5 text-[10px] font-bold tracking-wider text-amber-950 uppercase">
-                        Offline
-                      </span>
+
+            <div className="grid grid-cols-1 items-stretch gap-6 md:gap-8 lg:grid-cols-12">
+                {/* WEATHER CARD */}
+                <div
+                    onClick={() =>
+                        !loading &&
+                        weatherData &&
+                        setIsModalOpen(true)
+                    }
+                    className={`flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 lg:col-span-4 ${!loading && weatherData
+                        ? "group cursor-pointer hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg"
+                        : ""
+                        }`}
+                >
+                    {loading ? (
+                        <div className="flex min-h-[360px] flex-1 flex-col items-center justify-center">
+                            <Loader2 className="mb-2 h-8 w-8 animate-spin text-blue-500" />
+
+                            <p className="font-medium text-slate-500">
+                                Fetching weather data...
+                            </p>
+                        </div>
+                    ) : weatherData ? (
+                        <>
+                            {/* Current Weather */}
+                            <div className="relative overflow-hidden bg-blue-600 p-6 text-white">
+                                <div className="relative z-10">
+                                    <div className="flex items-start justify-between">
+                                        <div>
+                                            <p className="text-sm font-medium text-blue-100">
+                                                Iligan City
+                                            </p>
+
+                                            <p className="mt-0.5 text-xs text-blue-200">
+                                                Current weather
+                                            </p>
+                                        </div>
+
+                                        {isFallback && (
+                                            <span className="rounded bg-amber-400 px-2 py-0.5 text-[10px] font-bold tracking-wider text-amber-950 uppercase">
+                                                Offline
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    <div className="mt-5 flex items-center gap-4">
+                                        <CurrentWeatherIcon className="h-16 w-16 shrink-0 text-white" />
+
+                                        <div>
+                                            <h3 className="text-5xl font-bold tracking-tight">
+                                                {Math.round(
+                                                    weatherData.current
+                                                        .temperature_2m,
+                                                )}
+                                                °C
+                                            </h3>
+
+                                            <p className="mt-1 text-lg font-medium text-blue-50">
+                                                {currentWeather?.label}
+                                            </p>
+
+                                            <p className="mt-0.5 text-sm text-blue-100">
+                                                Feels like{" "}
+                                                {Math.round(
+                                                    weatherData.current
+                                                        .apparent_temperature,
+                                                )}
+                                                °C
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <CurrentWeatherIcon className="absolute -right-8 -top-8 h-40 w-40 rotate-12 text-white opacity-10" />
+                            </div>
+
+                            {/* Quick Stats */}
+                            <div className="grid grid-cols-3 border-b border-slate-100">
+                                <div className="p-4 text-center">
+                                    <Droplets className="mx-auto mb-1 h-4 w-4 text-blue-500" />
+
+                                    <p className="text-xs text-slate-500">
+                                        Humidity
+                                    </p>
+
+                                    <p className="font-bold text-slate-800">
+                                        {Math.round(
+                                            weatherData.current
+                                                .relative_humidity_2m,
+                                        )}
+                                        %
+                                    </p>
+                                </div>
+
+                                <div className="border-x border-slate-100 p-4 text-center">
+                                    <Wind className="mx-auto mb-1 h-4 w-4 text-slate-500" />
+
+                                    <p className="text-xs text-slate-500">
+                                        Wind
+                                    </p>
+
+                                    <p className="font-bold text-slate-800">
+                                        {Math.round(
+                                            weatherData.current
+                                                .wind_speed_10m,
+                                        )}{" "}
+                                        km/h
+                                    </p>
+                                </div>
+
+                                <div className="p-4 text-center">
+                                    <Cloud className="mx-auto mb-1 h-4 w-4 text-slate-400" />
+
+                                    <p className="text-xs text-slate-500">
+                                        Clouds
+                                    </p>
+
+                                    <p className="font-bold text-slate-800">
+                                        {Math.round(
+                                            weatherData.current
+                                                .cloud_cover,
+                                        )}
+                                        %
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Today's Forecast */}
+                            <div className="bg-slate-50 px-5 py-4">
+                                <div className="mb-3 flex items-center justify-between">
+                                    <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+                                        Today's Forecast
+                                    </span>
+
+                                    <span className="text-xs font-semibold text-blue-600">
+                                        {Math.round(
+                                            getDailyValue(
+                                                weatherData.daily
+                                                    .precipitation_probability_max,
+                                                0,
+                                            ),
+                                        )}
+                                        % rain
+                                    </span>
+                                </div>
+
+                                <div className="flex items-center justify-between gap-3">
+                                    <div className="flex min-w-0 items-center gap-3">
+                                        {(() => {
+                                            const info =
+                                                getWeatherInfo(
+                                                    getDailyValue(
+                                                        weatherData.daily
+                                                            .weather_code,
+                                                        0,
+                                                    ),
+                                                );
+
+                                            const Icon = info.icon;
+
+                                            return (
+                                                <Icon className="h-8 w-8 shrink-0 text-blue-500" />
+                                            );
+                                        })()}
+
+                                        <div className="min-w-0">
+                                            <p className="truncate text-sm font-semibold text-slate-800">
+                                                {
+                                                    getWeatherInfo(
+                                                        getDailyValue(
+                                                            weatherData.daily
+                                                                .weather_code,
+                                                            0,
+                                                        ),
+                                                    ).label
+                                                }
+                                            </p>
+
+                                            <p className="text-xs text-slate-500">
+                                                {getDailyValue(
+                                                    weatherData.daily
+                                                        .precipitation_sum,
+                                                    0,
+                                                ).toFixed(1)}{" "}
+                                                mm ·{" "}
+                                                {Math.round(
+                                                    getDailyValue(
+                                                        weatherData.daily
+                                                            .precipitation_hours,
+                                                        0,
+                                                    ),
+                                                )}
+                                                h rain
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="shrink-0 text-right">
+                                        <p className="font-bold text-slate-800">
+                                            {Math.round(
+                                                getDailyValue(
+                                                    weatherData.daily
+                                                        .temperature_2m_max,
+                                                    0,
+                                                ),
+                                            )}
+                                            °
+                                            <span className="font-medium text-slate-400">
+                                                {" "}
+                                                /{" "}
+                                                {Math.round(
+                                                    getDailyValue(
+                                                        weatherData.daily
+                                                            .temperature_2m_min,
+                                                        0,
+                                                    ),
+                                                )}
+                                                °
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Footer */}
+                            <div className="border-t border-slate-100 bg-white p-3 text-center text-xs font-medium text-slate-500 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600">
+                                {isFallback
+                                    ? "Viewing offline data • Click for details"
+                                    : "Click to view 7-day forecast →"}
+                            </div>
+                        </>
+                    ) : (
+                        <div className="flex min-h-[360px] flex-1 items-center justify-center text-slate-500">
+                            Unable to load weather
+                        </div>
                     )}
-                  </div>
-                  <div className="mt-2 flex items-center gap-4">
-                    {getWeatherIcon(weatherData.weather[0].icon, "w-16 h-16")}
-                    <div>
-                      <h3 className="text-5xl font-bold tracking-tight">
-                        {Math.round(weatherData.main.temp)}°C
-                      </h3>
-                      <p className="mt-1 text-lg font-medium text-blue-50 capitalize">
-                        {weatherData.weather[0].description}
-                      </p>
+                </div>
+
+                {/* MAP CARD */}
+                <div className="flex h-100 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-8 lg:h-auto">
+                    <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50/50 px-6 py-4">
+                        <MapPin className="h-5 w-5 text-blue-600" />
+
+                        <h3 className="font-semibold text-slate-800">
+                            City Map
+                        </h3>
                     </div>
-                  </div>
+
+                    <div className="relative w-full flex-1 bg-slate-100">
+                        <iframe
+                            title="Map of Iligan City"
+                            width="100%"
+                            height="100%"
+                            frameBorder="0"
+                            scrolling="no"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123662.66186301723!2d124.34488950644513!3d8.2392162636839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x325579b328c9540d0%3A0xe6e208aba2f0d03b!2sIligan%20City%2C%20Lanao%20del%20Norte!5e0!3m2!1sen!2sph!4v1782954555571!5m2!1sen!2sph"
+                            className="absolute inset-0 h-full w-full"
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                        />
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-slate-100 bg-white px-6 py-3 text-xs text-slate-500">
+                        <span>
+                            📍 Iligan City Hall, Buhanginan Hills
+                        </span>
+
+                        <a
+                            href="https://maps.app.goo.gl/YSWKTjcjZamf2dqC8"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-blue-600 hover:underline"
+                        >
+                            View Larger Map
+                        </a>
+                    </div>
                 </div>
-                {getWeatherIcon(
-                  weatherData.weather[0].icon,
-                  "absolute -right-8 -top-8 w-40 h-40 opacity-20 rotate-12",
-                )}
-              </div>
-
-              <div className="grid flex-1 grid-cols-3 content-center gap-4 bg-white p-6">
-                <div className="flex flex-col items-center text-center">
-                  <Droplets className="mb-2 h-5 w-5 text-blue-500" />
-                  <span className="text-xs font-semibold text-slate-500 uppercase">
-                    Humidity
-                  </span>
-                  <span className="text-base font-bold text-slate-800">
-                    {weatherData.main.humidity}%
-                  </span>
-                </div>
-                <div className="flex flex-col items-center border-x border-slate-100 text-center">
-                  <Wind className="mb-2 h-5 w-5 text-slate-400" />
-                  <span className="text-xs font-semibold text-slate-500 uppercase">
-                    Wind
-                  </span>
-                  {/* Convert m/s to km/h */}
-                  <span className="text-base font-bold text-slate-800">
-                    {Math.round(weatherData.wind.speed * 3.6)} km/h
-                  </span>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <ThermometerSun className="mb-2 h-5 w-5 text-orange-500" />
-                  <span className="text-xs font-semibold text-slate-500 uppercase">
-                    Feels Like
-                  </span>
-                  <span className="text-base font-bold text-slate-800">
-                    {Math.round(weatherData.main.feels_like)}°C
-                  </span>
-                </div>
-              </div>
-
-              <div className="border-t border-slate-100 bg-slate-50 p-3 text-center text-xs font-medium text-slate-500 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600">
-                {isFallback
-                  ? "Viewing cached data • Click for details"
-                  : "Click to view detailed forecast →"}
-              </div>
-            </>
-          ) : (
-            <div className="flex min-h-[300px] flex-1 items-center justify-center text-slate-500">
-              Unable to load weather
-            </div>
-          )}
-        </div>
-
-        {/* MAP CARD */}
-        <div className="flex h-100 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-8 lg:h-auto">
-          <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50/50 px-6 py-4">
-            <MapPin className="h-5 w-5 text-blue-600" />
-            <h3 className="font-semibold text-slate-800">City Map</h3>
-          </div>
-
-          <div className="relative w-full flex-1 bg-slate-100">
-            <iframe
-              title="Map of Iligan City"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              scrolling="no"
-              // Using the standard Google Maps embed URL (No API key required)
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123662.66186301723!2d124.34488950644513!3d8.2392162636839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x325579b328c9540d%3A0xe6e208aba2f0d03b!2sIligan%20City%2C%20Lanao%20del%20Norte!5e0!3m2!1sen!2sph!4v1782954555571!5m2!1sen!2sph"
-              className="absolute inset-0 h-full w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
-
-          <div className="flex items-center justify-between border-t border-slate-100 bg-white px-6 py-3 text-xs text-slate-500">
-            <span>📍 Iligan City Hall, Buhanginan Hills</span>
-            <a
-              href="https://maps.app.goo.gl/YSWKTjcjZamf2dqC8"
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              View Larger Map
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* WEATHER DETAILS MODAL */}
-      {isModalOpen && weatherData && (
-        <div className="fixed inset-0 z-1000 flex items-center justify-center p-4 sm:p-6">
-          <div
-            className="animate-in fade-in absolute inset-0 bg-slate-900/60 backdrop-blur-sm duration-200"
-            onClick={() => setIsModalOpen(false)}
-          ></div>
-
-          <div className="animate-in zoom-in-95 relative w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl duration-200">
-            <div className="relative bg-blue-600 p-6 text-white sm:p-8">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
-              >
-                <X className="h-5 w-5" />
-              </button>
-
-              <p className="mb-1 text-sm font-medium text-blue-100">
-                Detailed Weather Report
-              </p>
-              <h2 className="mb-4 text-2xl font-bold sm:text-3xl">
-                {weatherData.name}
-              </h2>
-
-              <div className="flex items-center gap-4">
-                {getWeatherIcon(weatherData.weather[0].icon, "w-20 h-20")}
-                <div>
-                  <div className="text-6xl font-bold tracking-tight sm:text-7xl">
-                    {Math.round(weatherData.main.temp)}°C
-                  </div>
-                  <p className="text-xl font-medium text-blue-50">
-                    Feels like {Math.round(weatherData.main.feels_like)}°C
-                  </p>
-                </div>
-              </div>
             </div>
 
-            <div className="bg-slate-50 p-6 sm:p-8">
-              <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
-                Current Conditions
-              </h3>
+            {/* WEATHER DETAILS MODAL */}
+            {isModalOpen && weatherData && (
+                <div className="fixed inset-0 z-1000 flex items-center justify-center p-4 sm:p-6">
+                    <div
+                        className="animate-in fade-in absolute inset-0 bg-slate-900/60 backdrop-blur-sm duration-200"
+                        onClick={() => setIsModalOpen(false)}
+                    />
 
-              <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <Droplets className="mb-2 h-5 w-5 text-blue-500" />
-                  <p className="mb-1 text-xs text-slate-500">Humidity</p>
-                  <p className="text-lg font-bold text-slate-800">
-                    {weatherData.main.humidity}%
-                  </p>
-                </div>
-                <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <Wind className="mb-2 h-5 w-5 text-slate-400" />
-                  <p className="mb-1 text-xs text-slate-500">Wind Speed</p>
-                  <p className="text-lg font-bold text-slate-800">
-                    {Math.round(weatherData.wind.speed * 3.6)} km/h
-                  </p>
-                </div>
-                <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <Eye className="mb-2 h-5 w-5 text-indigo-500" />
-                  <p className="mb-1 text-xs text-slate-500">Visibility</p>
-                  <p className="text-lg font-bold text-slate-800">
-                    {(weatherData.visibility / 1000).toFixed(1)} km
-                  </p>
-                </div>
-                <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <Compass className="mb-2 h-5 w-5 text-teal-500" />
-                  <p className="mb-1 text-xs text-slate-500">Pressure</p>
-                  <p className="text-lg font-bold text-slate-800">
-                    {weatherData.main.pressure} hPa
-                  </p>
-                </div>
-              </div>
+                    <div className="animate-in zoom-in-95 relative max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-2xl duration-200">
+                        {/* Modal Header */}
+                        <div className="relative bg-blue-600 p-6 text-white sm:p-8">
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setIsModalOpen(false)
+                                }
+                                aria-label="Close weather details"
+                                className="absolute top-4 right-4 rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="flex items-center gap-4 rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <div className="rounded-lg bg-orange-50 p-3">
-                    <Sunrise className="h-6 w-6 text-orange-500" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium text-slate-500">
-                      Sunrise
-                    </p>
-                    <p className="text-lg font-bold text-slate-800">
-                      {formatTime(weatherData.sys.sunrise)}
-                    </p>
-                  </div>
+                            <p className="mb-1 text-sm font-medium text-blue-100">
+                                Detailed Weather Report
+                            </p>
+
+                            <h2 className="mb-5 text-2xl font-bold sm:text-3xl">
+                                Iligan City
+                            </h2>
+
+                            <div className="flex items-center gap-4">
+                                <CurrentWeatherIcon className="h-20 w-20 shrink-0 text-white" />
+
+                                <div>
+                                    <div className="text-6xl font-bold tracking-tight sm:text-7xl">
+                                        {Math.round(
+                                            weatherData.current
+                                                .temperature_2m,
+                                        )}
+                                        °C
+                                    </div>
+
+                                    <p className="text-xl font-medium text-blue-50">
+                                        {currentWeather?.label}
+                                    </p>
+
+                                    <p className="mt-1 text-sm text-blue-100">
+                                        Feels like{" "}
+                                        {Math.round(
+                                            weatherData.current
+                                                .apparent_temperature,
+                                        )}
+                                        °C
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Modal Body */}
+                        <div className="max-h-[calc(90vh-268px)] overflow-y-auto bg-slate-50 p-6 sm:p-8">
+                            {/* 7-Day Forecast */}
+                            <div className="mb-8">
+                                <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
+                                    7-Day Forecast
+                                </h3>
+
+                                <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                                    {weatherData.daily.time.map(
+                                        (date, index) => {
+                                            const info =
+                                                getWeatherInfo(
+                                                    getDailyValue(
+                                                        weatherData.daily
+                                                            .weather_code,
+                                                        index,
+                                                    ),
+                                                );
+
+                                            const Icon = info.icon;
+
+                                            const isToday =
+                                                index === 0;
+
+                                            return (
+                                                <div
+                                                    key={date}
+                                                    className={`grid grid-cols-[1fr_auto_auto_auto] items-center gap-3 px-4 py-3 sm:px-5 ${index !== 0
+                                                        ? "border-t border-slate-100"
+                                                        : ""
+                                                        }`}
+                                                >
+                                                    <div className="min-w-0">
+                                                        <p
+                                                            className={`text-sm font-semibold ${isToday
+                                                                ? "text-blue-600"
+                                                                : "text-slate-700"
+                                                                }`}
+                                                        >
+                                                            {isToday
+                                                                ? "Today"
+                                                                : formatWeatherDate(
+                                                                    date,
+                                                                    weatherData
+                                                                        .location
+                                                                        .timezone,
+                                                                )}
+                                                        </p>
+
+                                                        <p className="truncate text-xs text-slate-400">
+                                                            {
+                                                                info.label
+                                                            }
+                                                        </p>
+                                                    </div>
+
+                                                    <Icon className="h-7 w-7 shrink-0 text-blue-500" />
+
+                                                    <div className="text-right text-sm">
+                                                        <span className="font-bold text-slate-800">
+                                                            {Math.round(
+                                                                getDailyValue(
+                                                                    weatherData
+                                                                        .daily
+                                                                        .temperature_2m_max,
+                                                                    index,
+                                                                ),
+                                                            )}
+                                                            °
+                                                        </span>
+
+                                                        <span className="ml-1 text-slate-400">
+                                                            {Math.round(
+                                                                getDailyValue(
+                                                                    weatherData
+                                                                        .daily
+                                                                        .temperature_2m_min,
+                                                                    index,
+                                                                ),
+                                                            )}
+                                                            °
+                                                        </span>
+                                                    </div>
+
+                                                    <div className="w-12 text-right">
+                                                        <p className="text-xs font-semibold text-blue-600">
+                                                            {Math.round(
+                                                                getDailyValue(
+                                                                    weatherData
+                                                                        .daily
+                                                                        .precipitation_probability_max,
+                                                                    index,
+                                                                ),
+                                                            )}
+                                                            %
+                                                        </p>
+
+                                                        <p className="text-[10px] text-slate-400">
+                                                            rain
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            );
+                                        },
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Current Conditions */}
+                            <div className="mb-8">
+                                <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
+                                    Current Conditions
+                                </h3>
+
+                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                                    <WeatherMetric
+                                        icon={Droplets}
+                                        label="Humidity"
+                                        value={`${Math.round(
+                                            weatherData.current
+                                                .relative_humidity_2m,
+                                        )}%`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={Wind}
+                                        label="Wind Speed"
+                                        value={`${Math.round(
+                                            weatherData.current
+                                                .wind_speed_10m,
+                                        )} km/h`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={Wind}
+                                        label="Wind Gusts"
+                                        value={`${Math.round(
+                                            weatherData.current
+                                                .wind_gusts_10m,
+                                        )} km/h`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={Compass}
+                                        label="Wind Direction"
+                                        value={`${getWindDirection(
+                                            weatherData.current
+                                                .wind_direction_10m,
+                                        )} · ${Math.round(
+                                            weatherData.current
+                                                .wind_direction_10m,
+                                        )}°`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={Cloud}
+                                        label="Cloud Cover"
+                                        value={`${Math.round(
+                                            weatherData.current
+                                                .cloud_cover,
+                                        )}%`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={Compass}
+                                        label="Pressure"
+                                        value={`${Math.round(
+                                            weatherData.current
+                                                .surface_pressure,
+                                        )} hPa`}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Sunrise / Sunset */}
+                            <div className="mb-8">
+                                <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
+                                    Sun & UV
+                                </h3>
+
+                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                                    <div className="flex items-center gap-4 rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
+                                        <div className="rounded-lg bg-orange-50 p-3">
+                                            <Sunrise className="h-6 w-6 text-orange-500" />
+                                        </div>
+
+                                        <div>
+                                            <p className="text-xs font-medium text-slate-500">
+                                                Sunrise
+                                            </p>
+
+                                            <p className="text-lg font-bold text-slate-800">
+                                                {formatWeatherTime(
+                                                    weatherData.daily
+                                                        .sunrise[0],
+                                                    weatherData.location
+                                                        .timezone,
+                                                )}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-4 rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
+                                        <div className="rounded-lg bg-purple-50 p-3">
+                                            <Sunset className="h-6 w-6 text-purple-500" />
+                                        </div>
+
+                                        <div>
+                                            <p className="text-xs font-medium text-slate-500">
+                                                Sunset
+                                            </p>
+
+                                            <p className="text-lg font-bold text-slate-800">
+                                                {formatWeatherTime(
+                                                    weatherData.daily
+                                                        .sunset[0],
+                                                    weatherData.location
+                                                        .timezone,
+                                                )}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-4 rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
+                                        <div className="rounded-lg bg-yellow-50 p-3">
+                                            <Sun className="h-6 w-6 text-yellow-500" />
+                                        </div>
+
+                                        <div>
+                                            <p className="text-xs font-medium text-slate-500">
+                                                UV Index
+                                            </p>
+
+                                            <p className="text-lg font-bold text-slate-800">
+                                                {getDailyValue(
+                                                    weatherData.daily
+                                                        .uv_index_max,
+                                                    0,
+                                                ).toFixed(1)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Today's Extended Details */}
+                            <div>
+                                <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
+                                    Today's Forecast Details
+                                </h3>
+
+                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                                    <WeatherMetric
+                                        icon={ThermometerSun}
+                                        label="High"
+                                        value={`${Math.round(
+                                            getDailyValue(
+                                                weatherData.daily
+                                                    .temperature_2m_max,
+                                                0,
+                                            ),
+                                        )}°C`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={ThermometerSun}
+                                        label="Low"
+                                        value={`${Math.round(
+                                            getDailyValue(
+                                                weatherData.daily
+                                                    .temperature_2m_min,
+                                                0,
+                                            ),
+                                        )}°C`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={CloudRain}
+                                        label="Rain"
+                                        value={`${getDailyValue(
+                                            weatherData.daily
+                                                .precipitation_sum,
+                                            0,
+                                        ).toFixed(1)} mm`}
+                                    />
+
+                                    <WeatherMetric
+                                        icon={CloudRain}
+                                        label="Rain Hours"
+                                        value={`${Math.round(
+                                            getDailyValue(
+                                                weatherData.daily
+                                                    .precipitation_hours,
+                                                0,
+                                            ),
+                                        )} hrs`}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-                  <div className="rounded-lg bg-purple-50 p-3">
-                    <Sunset className="h-6 w-6 text-purple-500" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium text-slate-500">Sunset</p>
-                    <p className="text-lg font-bold text-slate-800">
-                      {formatTime(weatherData.sys.sunset)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </Section>
-  );
+            )}
+        </Section>
+    );
 }
