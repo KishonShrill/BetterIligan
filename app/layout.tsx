@@ -20,12 +20,16 @@ export const metadata: Metadata = {
     siteName: "BetterIligan",
     locale: "en_PH",
     type: "website",
+    url: "https://betteriligancity.org",
   },
   twitter: {
     card: "summary_large_image",
   },
   facebook: {
     appId: "1036061575471786",
+  },
+  other: {
+    "fb:app_id": "1036061575471786",
   },
 };
 

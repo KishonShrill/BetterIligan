@@ -48,7 +48,7 @@ export default function CityStatsSummary() {
   ];
 
   return (
-    <Section className="border-t border-blue-100/50 bg-blue-50">
+    <Section className="bg-blue-50">
       {/* Header Block */}
       <div className="mb-8 flex flex-col justify-between gap-5 md:mb-12 md:flex-row md:items-end md:gap-4">
         <div className="text-left">

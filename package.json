@@ -27,6 +27,9 @@
     "deploy:next": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload:next": "opennextjs-cloudflare build && opennextjs-cloudflare upload"
   },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
+  },
   "dependencies": {
     "@bettergov/kapwa": "^1.2.4",
     "@turf/bbox": "^7.4.0",
@@ -66,6 +69,7 @@
     "eslint-config-next": "16.2.6",
     "exceljs": "^4.4.0",
     "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "satori": "^0.28.1",
     "sharp": "^0.35.3",
