@@ -4,7 +4,7 @@ import {
   Flame,
   Shield,
   Cross,
-  ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
 import Section from "@/components/ui/Section";
 import { Text } from "@/components/ui/Text";
@@ -20,61 +20,84 @@ function telHref(display: string): string {
 const CONTACTS = [
   { label: "National Emergency", number: "911", Icon: Phone, color: "#dc2626" },
   { label: "Rescue / CDRRMO", number: "811", Icon: LifeBuoy, color: "#059669" },
-  { label: "Fire", number: "160", Icon: Flame, color: "#ea580c" },
-  { label: "Police", number: "167", Icon: Shield, color: "#2563eb" },
+  { label: "Fire Department", number: "160", Icon: Flame, color: "#ea580c" },
+  { label: "Police Department", number: "167", Icon: Shield, color: "#2563eb" },
   { label: "Ambulance", number: "221-0081", Icon: Cross, color: "#dc2626" },
 ];
 
 export default function EmergencyHotlines() {
   return (
-    <Section>
-      <div className="mb-7 text-center sm:mb-10">
-        <h2 className="mb-4 text-3xl font-extrabold text-slate-900 md:text-4xl">
-          Emergency Hotlines
-        </h2>
-        <Text
-          className="mx-auto max-w-2xl text-sm text-slate-500 md:text-base"
-          size="md"
-        >
-          Save these before you need them. Tap any number to call.
-        </Text>
+    <Section className="border-t border-blue-100/50 bg-blue-50">
+      {/* Header Block matching CityStats Layout */}
+      <div className="mb-8 flex flex-col justify-between gap-5 md:mb-12 md:flex-row md:items-end md:gap-4">
+        <div className="text-left">
+          <p className="mb-1.5 text-[10px] font-bold tracking-widest text-blue-600 uppercase md:mb-2 md:text-xs">
+            Emergency Services
+          </p>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+            Emergency Hotlines
+          </h2>
+          <Text
+            className="mt-2 max-w-xl text-sm text-slate-500 md:text-base"
+            size="md"
+          >
+            Save these before you need them. Tap any number to call instantly
+            from your mobile device.
+          </Text>
+        </div>
+
+        {/* CTA Button */}
+        <Button3D
+          text="Disaster Preparedness Hub"
+          href="/disaster"
+          hasArrow={true}
+          size="sm"
+          variant="blue"
+        />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      {/* Main Hotlines Grid matching CityStats card structure */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-5">
         {CONTACTS.map(({ label, number, Icon, color }) => (
           <a
             key={label}
             href={telHref(number)}
             aria-label={`Call ${label} at ${number}`}
-            className="group flex flex-col items-center gap-2 rounded-xl border border-slate-200 bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98]"
+            className="group relative block flex h-full flex-col rounded-2xl border border-blue-100/50 bg-white p-5 shadow-sm transition-all duration-200 hover:border-blue-300 hover:shadow-md md:p-6"
           >
-            <span
-              className="flex h-12 w-12 items-center justify-center rounded-xl"
-              style={{ backgroundColor: `${color}1a` }}
-            >
-              <Icon className="h-6 w-6" style={{ color }} aria-hidden />
-            </span>
-            <span className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
+            <div className="absolute top-5 right-5 text-slate-300 transition-colors duration-200 group-hover:text-blue-500">
+              <ArrowUpRight className="h-5 w-5" />
+            </div>
+
+            <div className="mb-3 flex items-center gap-4 md:mb-4 md:block md:w-fit">
+              <div
+                className="shrink-0 rounded-xl border p-2.5"
+                style={{
+                  backgroundColor: `${color}1a`,
+                  borderColor: `${color}33`,
+                }}
+              >
+                <Icon className="h-5 w-5" style={{ color }} aria-hidden />
+              </div>
+              <p className="text-xs font-bold tracking-wider text-slate-400 uppercase md:hidden">
+                {label}
+              </p>
+            </div>
+
+            <p className="mb-1 hidden text-xs font-bold tracking-wider text-slate-400 uppercase md:block">
               {label}
-            </span>
-            <span
-              className="flex items-center gap-1 text-lg font-extrabold"
-              style={{ color }}
-            >
-              <Phone className="h-4 w-4" aria-hidden /> {number}
-            </span>
+            </p>
+            <div className="flex justify-between">
+              <h3 className="mb-1 text-xl font-black tracking-tight text-slate-800 transition-colors group-hover:text-blue-600 md:text-2xl">
+                {number}
+              </h3>
+              <p className="flex items-center gap-1.5 text-xs font-medium text-slate-500 sm:mt-auto sm:pt-2">
+                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-500"></span>
+                Tap to call
+              </p>
+            </div>
           </a>
         ))}
-      </div>
-
-      <div className="mt-8 flex justify-center">
-        <Button3D
-          text="Disaster Preparedness Hub"
-          href="/disaster"
-          variant="blue"
-          icon={ArrowRight}
-          iconPosition="right"
-        />
       </div>
     </Section>
   );

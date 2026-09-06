@@ -4,15 +4,9 @@ import ReferencesFooter from "@/components/ui/ReferencesFooter";
 
 // 1. Define your SEO Metadata
 export const metadata: Metadata = {
-  title: "Mugna sa Iligan 2026 | Traffic Routes & Parking",
+  title: "Mugna 2026 Traffic Routes & Parking",
   description:
     "Interactive map for MUGNA SA ILIGAN 2026 traffic routes, one-way streets, parking restrictions, and event zones.",
-  openGraph: {
-    title: "Mugna sa Iligan 2026 | Traffic Routes & Parking",
-    description:
-      "Interactive map for MUGNA SA ILIGAN 2026 traffic routes and parking restrictions.",
-    type: "website",
-  },
 };
 
 const REFERENCES = [
