@@ -40,5 +40,9 @@
       "binding": "VINEXT_KV_CACHE",
       "id": "1ade0e8ba40547f887581e768548bd3b",
     },
+    {
+      "binding": "WEATHER_CACHE",
+      "id": "731a32de778c488b9f6c51d3ecf7e78e",
+    },
   ],
 }
