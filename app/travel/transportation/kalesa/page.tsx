@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import MapWrapper from "./MapWrapper";
 
 export const metadata: Metadata = {
-  title: "Kalesa Routes",
+  title: "Iligan City Kalesa Routes and Fares",
   description:
     "Interactive map of Iligan City kalesa routes and transportation guides.",
 };
