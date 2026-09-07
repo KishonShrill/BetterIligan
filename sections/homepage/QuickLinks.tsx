@@ -30,7 +30,7 @@ const QUICK_LINKS = [
     iconBg: "bg-emerald-50",
   },
   {
-    title: "Emergency Response",
+    title: "Emergency",
     description: "Disaster recovery & alerts",
     href: "/bangon-iligan",
     Icon: ShieldAlert,
@@ -42,7 +42,7 @@ const QUICK_LINKS = [
 export default function QuickLinks() {
   return (
     <Section className="bg-slate-50">
-      <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+      <div className="flex flex-col items-start justify-between gap-4 md:mb-8 md:flex-row md:items-end">
         <div>
           <h2 className="mb-2 text-2xl font-extrabold text-slate-900 md:text-3xl">
             Quick Access
@@ -54,39 +54,31 @@ export default function QuickLinks() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 p-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 py-4 sm:gap-4 md:grid-cols-4">
         {QUICK_LINKS.map(
           ({ title, description, href, Icon, iconColor, iconBg, badge }) => (
             <Link
               key={title}
               href={href}
-              className="group relative flex w-full flex-col justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-blue-300 hover:shadow-md max-sm:h-fit max-sm:items-center max-sm:p-4 max-sm:text-center"
+              className="group relative flex w-full flex-row justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-blue-300 hover:shadow-md max-sm:h-fit max-sm:items-center max-sm:gap-2 max-sm:px-0 max-sm:py-4 max-sm:text-center sm:flex-col"
             >
-              {badge && (
-                <span className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full border border-purple-200 bg-purple-100 px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-purple-700 uppercase">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-400 opacity-75"></span>
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-purple-500"></span>
-                  </span>
-                  {badge}
-                </span>
-              )}
-
               <div
-                className={`flex h-12 w-12 items-center justify-center rounded-xl sm:mb-4 ${iconBg}`}
+                className={`flex h-12 w-12 items-center justify-center rounded-xl max-sm:hidden sm:mb-4 ${iconBg}`}
               >
                 <Icon className={`h-6 w-6 ${iconColor}`} />
               </div>
 
-              <h3 className="mb-1 text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-700 max-sm:text-base">
+              <Icon className={`h-6 w-6 sm:hidden ${iconColor}`} />
+
+              <h3 className="mb-1 text-sm font-bold text-slate-900 transition-colors group-hover:text-blue-700 sm:text-lg">
                 {title}
               </h3>
-              <p className="mb-4 flex-1 text-sm text-slate-500 max-sm:hidden">
+              <p className="flex-1 text-sm text-slate-500 max-sm:hidden md:mb-4">
                 {description}
               </p>
 
-              <div className="mt-auto flex items-center gap-1.5 text-sm font-semibold text-blue-600">
-                Access Now
+              <div className="mt-auto flex items-center gap-1.5 self-end text-sm font-semibold text-blue-600 max-md:hidden">
+                View More
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
