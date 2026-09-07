@@ -39,3 +39,10 @@ export interface WeatherResponse {
     uv_index_clear_sky_max: Record<string, number>;
   };
 }
+
+type WeatherIconComponent = typeof Sun;
+
+export interface WeatherInfo {
+  label: string;
+  icon: WeatherIconComponent;
+}
