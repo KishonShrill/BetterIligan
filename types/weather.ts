@@ -1,54 +1,99 @@
-export interface WeatherCoord {
-  lon: number;
-  lat: number;
+export interface OpenMeteoData {
+  location: {
+    latitude: number;
+    longitude: number;
+    elevation: number;
+    timezone: string;
+    timezone_abbreviation: string;
+    utc_offset_seconds: number;
+  };
+
+  current: {
+    time: string;
+    relative_humidity_2m: number;
+    precipitation: number;
+    surface_pressure: number;
+    wind_speed_10m: number;
+    wind_direction_10m: number;
+    wind_gusts_10m: number;
+    is_day: number;
+    cloud_cover: number;
+    temperature_2m: number;
+    apparent_temperature: number;
+    weather_code: number;
+  };
+
+  daily: {
+    time: string[];
+    weather_code: Record<string, number>;
+    temperature_2m_max: Record<string, number>;
+    temperature_2m_min: Record<string, number>;
+    apparent_temperature_max: Record<string, number>;
+    apparent_temperature_min: Record<string, number>;
+    precipitation_sum: Record<string, number>;
+    precipitation_probability_max: Record<string, number>;
+    precipitation_hours: Record<string, number>;
+    sunrise: string[];
+    sunset: string[];
+    uv_index_max: Record<string, number>;
+    uv_index_clear_sky_max: Record<string, number>;
+  };
 }
 
-export interface WeatherCondition {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
+type WeatherIconComponent = typeof Sun;
+
+export interface WeatherInfo {
+  label: string;
+  icon: WeatherIconComponent;
 }
 
-export interface WeatherMain {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  humidity: number;
-  sea_level?: number;
-  grnd_level?: number;
-}
+export type OpenWeatherData = {
+  coord: {
+    lon: number;
+    lat: number;
+  };
 
-export interface WeatherWind {
-  speed: number;
-  deg: number;
-  gust?: number;
-}
+  weather: Array<{
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  }>;
 
-export interface WeatherClouds {
-  all: number;
-}
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+    sea_level?: number;
+    grnd_level?: number;
+  };
 
-export interface WeatherSys {
-  country: string;
-  sunrise: number;
-  sunset: number;
-}
-
-export interface OpenWeatherResponse {
-  coord: WeatherCoord;
-  weather: WeatherCondition[];
-  base: string;
-  main: WeatherMain;
   visibility: number;
-  wind: WeatherWind;
-  clouds: WeatherClouds;
+
+  wind: {
+    speed: number;
+    deg: number;
+    gust?: number;
+  };
+
+  clouds: {
+    all: number;
+  };
+
   dt: number;
-  sys: WeatherSys;
+
+  sys: {
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+
   timezone: number;
+
   id: number;
   name: string;
   cod: number;
-}
+};
