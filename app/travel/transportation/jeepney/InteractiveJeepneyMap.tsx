@@ -26,7 +26,7 @@ import MobileRouteSelector from "@/components/ui/MobileRouteSelector";
 const jeepneyRoutesData = await fetch("/data/travel/jeepney-routes.json").then(
   (res) => res.json(),
 );
-const jeepneyCodesData = await fetch("/data/travel/jeepneyCoding.json").then(
+const jeepneyCodesData = await fetch("/data/travel/jeepney-fare.json").then(
   (res) => res.json(),
 );
 const iliganBoundaryData = await fetch(

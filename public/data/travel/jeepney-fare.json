@@ -24,7 +24,8 @@
       "regular": 30,
       "discounted": 25
     },
-    "routeName": "Dalipuga - Mapalad - Paita"
+    "routeName": "Dalipuga - Mapalad - Paita",
+    "places": ["Centennial Park", "Wet Market", "Gaisano"]
   },
   {
     "routeId": "7G",
@@ -51,7 +52,8 @@
       "regular": 15,
       "discounted": 13
     },
-    "routeName": "Tambo - Gerona"
+    "routeName": "Tambo - Gerona",
+    "places": ["Wet Market", "Gaisano", "Bus Terminal"]
   },
   {
     "routeId": "5A",
@@ -76,7 +78,12 @@
   {
     "routeId": "6C",
     "routeName": "Ubaldo Laya - Noria",
-    "routeColor": "rgba(255, 22, 201, 1)"
+    "routeColor": "rgba(255, 22, 201, 1)",
+    "routeFare": {
+      "regular": 15,
+      "discounted": 13
+    },
+    "places": ["Pala-o Market", "Wet Market", "Public Plaza"]
   },
   {
     "routeId": "1N",
