@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/travel/mugna", freq: "daily", prio: 0.9 },
     { path: "/travel/transportation/bus", freq: "monthly", prio: 0.8 },
     { path: "/travel/transportation/jeepney", freq: "monthly", prio: 0.8 },
+    { path: "/travel/transportation/kalesa", freq: "monthly", prio: 0.8 },
     { path: "/travel/waterfalls", freq: "monthly", prio: 0.8 },
     { path: "/transparency/budget", freq: "monthly", prio: 0.8 },
     { path: "/open-data", freq: "yearly", prio: 0.7 },
