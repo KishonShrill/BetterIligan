@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import MapWrapper from "./MapWrapper";
 
 export const metadata: Metadata = {
-  title: "Jeepney Routes",
+  title: "Iligan City Jeepney Routes and Fares",
   description:
     "Interactive map of Iligan City jeepney routes and transportation guides.",
 };
