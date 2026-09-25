@@ -17,6 +17,14 @@ const securityHeaders = [
     ].join("; "),
   },
   {
+    key: "Access-Control-Allow-Origin",
+    value: "http://localhost:3000",
+  },
+  {
+    key: "Access-Control-Allow-Methods",
+    value: "GET, OPTIONS",
+  },
+  {
     key: "X-Frame-Options",
     value: "DENY",
   },
