@@ -11,7 +11,7 @@ import ReportIssueSection from "@/sections/homepage/ReportIssue";
 import QuickLinksSection from "@/sections/homepage/QuickLinks";
 
 export const metadata: Metadata = {
-  title: { absolute: "BetterIligan City | Civic Tech Portal" },
+  title: { absolute: "Iligan City Website | Civic Tech Portal" },
 };
 
 export default function Home() {
@@ -19,7 +19,11 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "BetterIligan",
-    alternateName: ["BetterIligan City", "Better Iligan City"],
+    alternateName: [
+      "BetterIligan City",
+      "Better Iligan City",
+      "BetterIliganCity.org",
+    ],
     url: "https://betteriligancity.org/",
   };
 

@@ -11,8 +11,8 @@ import ScrollToTop from "@/components/ui/ScrollToTop";
 export const metadata: Metadata = {
   metadataBase: new URL("https://betteriligancity.org"),
   title: {
-    default: "BetterIligan City",
-    template: "%s | BetterIligan City",
+    default: "BetterIliganCity.org",
+    template: "%s | BetterIliganCity.org",
   },
   description:
     "A modernized, volunteer-driven portal to access government services, public data, and resources for the people of Iligan.",
@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   },
   other: {
     "fb:app_id": "1036061575471786",
+    "og:logo": "https://betteriligancity.org/icon.png",
   },
 };
 
