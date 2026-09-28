@@ -172,7 +172,7 @@ export default function Header({ className }: ClassName) {
     >
       <div className="relative" onMouseLeave={closeDropdown}>
         {/* ===== DESKTOP / MAIN HEADER ===== */}
-        <div className="relative container mx-auto">
+        <div className="relative container mx-auto max-sm:px-4">
           <div className="flex h-20 items-center justify-between sm:px-4">
             {/* Logo */}
             <div className="flex shrink-0 items-center gap-1 sm:gap-3">
