@@ -42,7 +42,7 @@ export default function MobileRouteHeader<T extends BaseHeaderRoute>({
             className="pointer-events-auto flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 shadow-lg transition-opacity hover:opacity-80"
           >
             <Image
-              src="/images/logos/betteriligan-logo.png"
+              src="/images/logos/betteriligan-logo.svg"
               alt="BetterIligan"
               width={28}
               height={28}

@@ -177,7 +177,7 @@ export default function Header({ className }: ClassName) {
             {/* Logo */}
             <div className="flex shrink-0 items-center gap-1 sm:gap-3">
               <Image
-                src="/images/logos/betteriligan-logo.png"
+                src="/images/logos/betteriligan-logo.svg"
                 alt="BetterIligan Logo"
                 width={75}
                 height={75}
@@ -188,10 +188,12 @@ export default function Header({ className }: ClassName) {
               <div className="block leading-[0.25]">
                 <Link
                   href="/"
-                  className="block text-xl leading-tight font-bold text-slate-900"
+                  className="block text-xl leading-4.5 font-bold text-blue-900"
                   onMouseEnter={closeDropdown}
                 >
-                  BetterIliganCity
+                  Better
+                  <br />
+                  IliganCity.org
                 </Link>
 
                 <span className="text-xs text-slate-500">

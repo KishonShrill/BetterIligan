@@ -17,8 +17,8 @@ import SubpageHero from "@/components/ui/SubpageHero";
 // --- CONFIGURATION ---
 // Change these values whenever you update the rates!
 const ILPI_DATA = {
-  rate: 14.1007,
-  lastUpdated: "2026-09-24", // Use YYYY-MM-DD format
+  rate: 14.1894,
+  lastUpdated: "2026-10-23", // Use YYYY-MM-DD format
 };
 
 // Quick preset appliances for user convenience

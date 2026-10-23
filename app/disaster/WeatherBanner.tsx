@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ResultAsync, ok, err } from "neverthrow";
 import {
   Sun,
+  Moon,
   Cloud,
   CloudRain,
   CloudLightning,
@@ -13,42 +14,42 @@ import {
   Loader2,
   TriangleAlert,
 } from "lucide-react";
-import type { OpenWeatherResponse } from "@/types/weather";
 import { FALLBACK_WEATHER } from "@/data/fallback/fallback_weather";
 
-function conditionIcon(iconCode: string, className: string) {
-  switch (iconCode) {
-    case "01d":
-    case "01n":
-      return <Sun className={className} />;
-    case "09d":
-    case "09n":
-    case "10d":
-    case "10n":
-      return <CloudRain className={className} />;
-    case "11d":
-    case "11n":
-      return <CloudLightning className={className} />;
-    case "02d":
-    case "02n":
-    case "03d":
-    case "03n":
-    case "04d":
-    case "04n":
-      return <Cloud className={className} />;
-    default:
-      return <CloudSun className={className} />;
-  }
+function getWeatherIcon(code: number, isDay = true) {
+  // WMO Codes (0-99)
+  if (code === 0) return isDay ? Sun : Moon;
+  if (code === 1 || code === 2) return isDay ? CloudSun : Cloud;
+  if (code === 3 || (code >= 45 && code <= 48)) return Cloud;
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82))
+    return CloudRain;
+  if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) return Cloud;
+  if (code >= 95 && code <= 99) return CloudLightning;
+
+  // OpenWeather Codes (200-804)
+  if (code >= 200 && code < 300) return CloudLightning;
+  if (code >= 300 && code < 600) return CloudRain;
+  if (code >= 600 && code < 800) return Cloud;
+  if (code === 800) return isDay ? Sun : Moon;
+  if (code === 801 || code === 802) return isDay ? CloudSun : Cloud;
+  if (code >= 803) return Cloud;
+
+  return CloudSun;
 }
 
-// OpenWeather condition ids: 2xx thunderstorm, 5xx rain, 7xx squall/atmosphere.
-// These warrant an advisory tone on the disaster hub; everything else is calm.
-function isAdvisoryWeather(id: number): boolean {
-  return id < 600 || (id >= 700 && id < 800 && id !== 701 && id !== 721);
+// OpenWeather condition ids & WMO codes that warrant an advisory tone
+function isAdvisoryWeather(code: number): boolean {
+  return (
+    (code >= 200 && code < 300) ||
+    (code >= 500 && code < 600) ||
+    (code >= 51 && code <= 67) ||
+    (code >= 80 && code <= 82) ||
+    (code >= 95 && code <= 99)
+  );
 }
 
 export default function WeatherBanner() {
-  const [weather, setWeather] = useState<OpenWeatherResponse | null>(null);
+  const [weatherData, setWeatherData] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [isFallback, setIsFallback] = useState(false);
 
@@ -63,23 +64,32 @@ export default function WeatherBanner() {
         .andThen((res) =>
           res.ok
             ? ResultAsync.fromPromise(
-                res.json() as Promise<OpenWeatherResponse>,
+                res.json() as Promise<any>,
                 () => new Error("Failed to parse response JSON"),
               )
             : err(new Error(`API Unavailable: ${res.status}`)),
         )
-        .andThen((data: OpenWeatherResponse & { error?: string }) =>
+        .andThen((data: any) =>
           data?.error ? err(new Error(data.error)) : ok(data),
         );
 
       if (cancelled) return;
       result.match(
         (data) => {
-          setWeather(data);
+          setWeatherData(data);
           setIsFallback(false);
         },
         () => {
-          setWeather(FALLBACK_WEATHER);
+          setWeatherData({
+            current: {
+              temperature: FALLBACK_WEATHER.main.temp,
+              feels_like: FALLBACK_WEATHER.main.feels_like,
+              humidity: FALLBACK_WEATHER.main.humidity,
+              wind_speed: FALLBACK_WEATHER.wind.speed * 3.6,
+              weather: FALLBACK_WEATHER.weather[0],
+              time: new Date().toISOString(),
+            },
+          });
           setIsFallback(true);
         },
       );
@@ -101,10 +111,15 @@ export default function WeatherBanner() {
     );
   }
 
-  if (!weather) return null;
+  if (!weatherData || !weatherData.current) return null;
 
-  const condition = weather.weather[0];
-  const advisory = isAdvisoryWeather(condition.id);
+  const current = weatherData.current;
+  const weatherCode = current.weather?.id ?? 0;
+  const description =
+    current.weather?.description || current.weather?.main || "Fair";
+  const advisory = isAdvisoryWeather(weatherCode);
+
+  const IconComponent = getWeatherIcon(weatherCode, true);
 
   return (
     <div
@@ -113,13 +128,13 @@ export default function WeatherBanner() {
     >
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <div className="flex items-center gap-3">
-          {conditionIcon(condition.icon, "w-12 h-12 text-white shrink-0")}
+          <IconComponent className="h-12 w-12 shrink-0 text-white" />
           <div>
             <p className="text-3xl leading-none font-extrabold">
-              {Math.round(weather.main.temp)}°C
+              {Math.round(current.temperature)}°C
             </p>
             <p className="mt-1 text-sm font-medium capitalize opacity-90">
-              {condition.description} · {weather.name}, {weather.sys.country}
+              {description} · Iligan City
             </p>
           </div>
         </div>
@@ -127,11 +142,11 @@ export default function WeatherBanner() {
         <div className="ml-auto flex items-center gap-4 text-sm font-semibold">
           <span className="inline-flex items-center gap-1.5">
             <Droplets className="h-4 w-4 opacity-80" aria-hidden />
-            {weather.main.humidity}%
+            {Math.round(current.humidity)}%
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Wind className="h-4 w-4 opacity-80" aria-hidden />
-            {Math.round(weather.wind.speed * 3.6)} km/h
+            {Math.round(current.wind_speed)} km/h
           </span>
           {isFallback && (
             <span className="rounded bg-white/20 px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase">

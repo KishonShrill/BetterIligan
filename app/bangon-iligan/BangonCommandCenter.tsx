@@ -72,7 +72,7 @@ export default function BangonCommandCenter({
   const [standbyDismissed, setStandbyDismissed] = useState(false);
   useEffect(() => {
     // Read after mount so SSR and first client render agree (no hydration flash).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     if (sessionStorage.getItem("bangon-standby-dismissed"))
       setStandbyDismissed(true);
   }, []);
@@ -119,7 +119,7 @@ export default function BangonCommandCenter({
             className="flex items-center gap-2 transition-opacity hover:opacity-80"
           >
             <Image
-              src="/images/logos/betteriligan-logo.png"
+              src="/images/logos/betteriligan-logo.svg"
               alt="BetterIligan"
               width={28}
               height={28}

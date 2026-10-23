@@ -3,13 +3,52 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, ArrowUpRight, FileText, Landmark, X } from "lucide-react";
+import {
+  Search,
+  ArrowUpRight,
+  FileText,
+  Landmark,
+  X,
+  Sparkles,
+  Zap,
+  Bus,
+  ShieldAlert,
+  ArrowRight,
+} from "lucide-react";
 import Section from "@/components/ui/Section";
 import Button3D from "@/components/ui/Button3D";
 
 // Import your centralized services array!
 import { allServices } from "@/data/services";
 import { AllService } from "@/validations/serviceSchema";
+
+const QUICK_LINKS = [
+  {
+    title: "Mugna Festival",
+    description: "Event schedules & guides",
+    href: "/travel/mugna",
+    Icon: Sparkles,
+    badge: "Featured",
+  },
+  {
+    title: "Electricity Rate",
+    description: "Power schedules & advisories",
+    href: "/iligan/electricity#ilpi",
+    Icon: Zap,
+  },
+  {
+    title: "Jeepney Routes",
+    description: "City-wide routes & fares",
+    href: "/travel/transportation/jeepney",
+    Icon: Bus,
+  },
+  {
+    title: "Emergency",
+    description: "Disaster recovery & alerts",
+    href: "/bangon-iligan",
+    Icon: ShieldAlert,
+  },
+];
 
 export default function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -102,23 +141,14 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] bg-[size:4rem_4rem]"></div>
 
       <div className="relative mx-auto grid w-full max-w-404 grid-cols-1 items-center gap-4 py-8 md:gap-8 md:py-12 lg:grid-cols-2">
-        {/* Status Badge */}
-        <div className="col-span-1 mx-auto inline-flex w-fit items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/30 px-3 py-1 text-sm font-medium text-blue-50 max-lg:hidden lg:col-span-2 lg:mx-0">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-100 opacity-75"></span>
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-200"></span>
-          </span>
-          Citizen Portal Active
-        </div>
-
         {/* Left Column */}
         <div className="mx-auto max-w-404 text-center lg:mx-0 lg:text-left">
-          <h1 className="mb-5 text-4xl leading-tight font-extrabold tracking-tight text-white md:text-5xl lg:text-left">
+          <h1 className="mb-3 text-4xl leading-tight font-extrabold tracking-tight text-white min-[767px]:text-5xl md:leading-[1.1] lg:text-left xl:text-6xl">
             Welcome to <br /> BetterIliganCity.org
           </h1>
 
           <p
-            className={`text-base text-blue-100 lg:max-w-lg lg:text-left lg:text-lg ${!isMobileSearchVisible ? "mb-8" : "mb-4"} leading-relaxed`}
+            className={`text-base text-blue-100 lg:max-w-lg lg:text-left lg:text-lg ${!isMobileSearchVisible ? "mb-6" : "mb-3"} leading-relaxed`}
           >
             A modernized, volunteer-driven portal to access government services,
             public data, and resources for the people of Iligan.
@@ -155,7 +185,7 @@ export default function HeroSection() {
         {/* Right Column - Dynamic Search Card */}
         {/* Notice the conditional class handling: It's always visible on 'lg', but toggled by state on mobile */}
         <div
-          className={`mx-auto w-full max-lg:max-w-2xl lg:mx-0 lg:ml-auto ${!isMobileSearchVisible ? "max-lg:hidden" : "max-lg:animate-in max-lg:fade-in max-lg:slide-in-from-bottom-4 max-lg:duration-300"}`}
+          className={`z-10 mx-auto w-full max-lg:max-w-2xl lg:mx-0 lg:ml-auto ${!isMobileSearchVisible ? "max-lg:hidden" : "max-lg:animate-in max-lg:fade-in max-lg:slide-in-from-bottom-4 max-lg:duration-300"}`}
         >
           {/* The main Search Card UI */}
           <div className="relative rounded-xl border border-white/20 p-5 shadow-lg max-lg:bg-white/10 max-lg:backdrop-blur-md md:rounded-2xl md:border-slate-100 md:bg-white md:p-8 md:shadow-2xl">
@@ -289,6 +319,54 @@ export default function HeroSection() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Quick Access Grid */}
+        <div className="relative mx-auto w-full max-w-404 pt-3 md:pt-6 lg:col-span-2">
+          <div className="mb-6 max-lg:hidden">
+            <h2 className="text-xl font-extrabold text-white md:text-2xl">
+              Quick Access
+            </h2>
+            <p className="mt-1 text-sm text-blue-100">
+              Direct links to Iligan's most frequently used tools and current
+              events.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+            {QUICK_LINKS.map(({ title, description, href, Icon, badge }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group relative z-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-4 shadow-lg backdrop-blur-md transition-all hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 md:p-5"
+              >
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 md:h-12 md:w-12">
+                    <Icon className="h-5 w-5 text-white md:h-6 md:w-6" />
+                  </div>
+                  {badge && (
+                    <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-white uppercase backdrop-blur-sm">
+                      {badge}
+                    </span>
+                  )}
+                </div>
+
+                <div>
+                  <h3 className="mb-1 text-sm font-bold text-white transition-colors group-hover:text-blue-200 md:text-base">
+                    {title}
+                  </h3>
+                  <p className="mb-3 line-clamp-1 text-xs text-blue-100 md:line-clamp-2 md:text-sm">
+                    {description}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-200 group-hover:text-white md:text-sm">
+                  View More
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 md:h-4 md:w-4" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
