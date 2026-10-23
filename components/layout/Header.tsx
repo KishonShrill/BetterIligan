@@ -195,6 +195,10 @@ export default function Header({ className }: ClassName) {
                   <br />
                   IliganCity.org
                 </Link>
+
+                <span className="text-xs text-slate-500">
+                  A community-run portal for Iliganons
+                </span>
               </div>
             </div>
 
