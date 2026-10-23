@@ -9,7 +9,7 @@ import ReportIssueModal from "@/components/modals/ReportIssueModal";
 export default function ReportIssueSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <Section className="border-t border-slate-200/60 bg-blue-100 py-12 md:py-16">
+    <Section className="bg-linear-to-b from-white from-50% to-[#0E172B] to-50%">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 rounded-3xl border border-slate-200/80 bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md md:flex-row md:gap-8 md:p-8 md:text-left">
         <div className="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-6">
           {/* Icon Block */}

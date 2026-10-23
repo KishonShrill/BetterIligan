@@ -16,7 +16,7 @@ const QUICK_LINKS = [
   {
     title: "Electricity Rate",
     description: "Power schedules & advisories",
-    href: "/iligan/electricity",
+    href: "/iligan/electricity#ilpi",
     Icon: Zap,
     iconColor: "text-amber-500",
     iconBg: "bg-amber-50",

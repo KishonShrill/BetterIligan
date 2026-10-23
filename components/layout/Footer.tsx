@@ -74,13 +74,14 @@ export default function Footer({ className }: ClassName) {
     <footer
       className={`${className} ${hideHeader && "hidden"} overflow-hidden bg-slate-900 font-sans text-white`}
     >
-      <div className="container mx-auto flex min-h-full flex-col px-4 pt-16 pb-8">
+      <div className="container mx-auto flex min-h-full flex-col px-4 pt-0 pb-8">
         {/* Description & Socials nested right above the giant logo */}
-        <div className="mb-6 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end md:mb-8">
-          <p className="max-w-sm text-sm leading-relaxed text-slate-400">
+        <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-6 md:mb-8">
+          <p className="max-w-[350px] text-sm leading-relaxed text-slate-400">
             Open-source civic tech initiative making government information
             accessible for Iliganons.
           </p>
+          <hr className="grow border-t border-slate-400 max-sm:hidden" />
           <div className="flex shrink-0 gap-3">
             <a
               href="https://www.facebook.com/BetterIliganCity.org"
