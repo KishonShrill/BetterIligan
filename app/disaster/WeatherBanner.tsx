@@ -103,7 +103,7 @@ export default function WeatherBanner() {
 
   if (!weather) return null;
 
-  const condition = weather.weather[0];
+  const condition = weather.weather ? weather?.weather[0] : "Okay";
   const advisory = isAdvisoryWeather(condition.id);
 
   return (

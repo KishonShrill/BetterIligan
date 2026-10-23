@@ -524,7 +524,7 @@ export default function InteractiveJeepneyMap() {
           className="flex items-center gap-2 transition-opacity hover:opacity-80"
         >
           <Image
-            src="/images/logos/betteriligan-logo.png"
+            src="/images/logos/betteriligan-logo.svg"
             alt="BetterIligan"
             width={28}
             height={28}
