@@ -72,7 +72,7 @@ export default function Footer({ className }: ClassName) {
 
   return (
     <footer
-      className={`${className} ${hideHeader && "hidden"} overflow-hidden bg-slate-900 font-sans text-white`}
+      className={`${className} ${hideHeader && "hidden"} overflow-hidden bg-slate-900 pt-8 font-sans text-white`}
     >
       <div className="container mx-auto flex min-h-full flex-col px-4 pt-0 pb-8">
         {/* Description & Socials nested right above the giant logo */}

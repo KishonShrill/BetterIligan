@@ -296,7 +296,7 @@ export default function Header({ className }: ClassName) {
 
         {/* ===== DESKTOP MEGA MENU ===== */}
         <div
-          className={`absolute top-full left-0 z-50 hidden w-full border-t border-slate-100 bg-white shadow-[0_12px_30px_-12px_rgba(15,23,42,0.12)] transition-all duration-200 ease-out lg:block ${
+          className={`absolute top-full left-0 z-50 hidden w-full border-t border-slate-100 bg-[#F8FAFC] shadow-[0_12px_30px_-12px_rgba(15,23,42,0.12)] transition-all duration-200 ease-out lg:block ${
             activeDropdown
               ? "pointer-events-auto translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-2 opacity-0"
@@ -332,7 +332,7 @@ export default function Header({ className }: ClassName) {
                             key={subItem.name}
                             href={subItem.href}
                             onClick={closeDropdown}
-                            className="group flex min-h-[82px] gap-4 rounded-xl p-3 transition-colors hover:bg-slate-50"
+                            className="group flex min-h-fit gap-4 rounded-xl p-3 transition-colors hover:bg-slate-50"
                           >
                             {/* Icon */}
                             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 transition-colors group-hover:bg-blue-700">
@@ -340,8 +340,10 @@ export default function Header({ className }: ClassName) {
                             </div>
 
                             {/* Text */}
-                            <div className="min-w-0 pt-0.5">
-                              <div className="flex items-center gap-2">
+                            <div
+                              className={`min-w-0 pt-0.5 ${!subItem.description && "flex items-center"}`}
+                            >
+                              <div className="my-auto flex items-center gap-2">
                                 <span className="text-sm font-semibold text-slate-900 transition-colors group-hover:text-blue-700 group-hover:underline">
                                   {subItem.name}
                                 </span>

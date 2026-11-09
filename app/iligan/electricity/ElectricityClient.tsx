@@ -8,7 +8,7 @@ import ReferencesFooter from "@/components/ui/ReferencesFooter";
 
 export default function ElectricityClient() {
   const facebookElectricityPriceLink =
-    "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Filiganlight%2Fposts%2Fpfbid02mJFAMa3ErGbrwMkHdYsCv98pzFWFBzRhuvmwf1V6TTMWxTPH17Ce1saNK7ShUiHql&show_text=true&width=500";
+    "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Filiganlight%2Fposts%2Fpfbid0fjLVYNvmdPQk2YF4GdXLj5v9s4raD786sX4sJS8xshtKJ5EECY6udGYPeARcdauRl&show_text=true&width=500";
   const electricityReferences = [
     {
       title: "Official Website of Iligan Light & Power, Inc. (ILPI)",

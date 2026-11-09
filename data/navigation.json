@@ -56,11 +56,6 @@
         "href": "/travel"
       },
       {
-        "name": "Mugna sa Iligan 2026",
-        "description": "A popular, month-long annual fiesta park and trade fair held every September as part of the grand Diyandi Festival honoring the city's patron saint, St. Michael the Archangel",
-        "href": "/travel/mugna"
-      },
-      {
         "name": "Jeepney Routes",
         "description": "Navigate Iligan with our interactive guide to local jeepney routes and commuting paths.",
         "href": "/travel/transportation/jeepney"
@@ -79,6 +74,11 @@
         "name": "Waterfalls",
         "description": "Explore Iligan’s famous waterfalls and natural attractions.",
         "href": "/travel/waterfalls"
+      },
+      {
+        "name": "Mugna sa Iligan 2026",
+        "description": "A popular, month-long annual fiesta park and trade fair held every September as part of the grand Diyandi Festival honoring the city's patron saint, St. Michael the Archangel",
+        "href": "/travel/mugna"
       }
     ]
   },
@@ -147,6 +147,11 @@
         "name": "Contributors",
         "description": "See who contributed to this community project.",
         "href": "/contributors"
+      },
+      {
+        "name": "Open Data",
+        "description": "Access our directory of Iligan City services, contact details, and facilities through our free, structured JSON API.",
+        "href": "/open-data"
       }
     ]
   }

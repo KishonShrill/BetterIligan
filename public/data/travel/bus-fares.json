@@ -1,0 +1,548 @@
+{
+  "metadata": {
+    "service_type": "NON AIRCON BUS SERVICE",
+    "effective_date": "2022-10-03",
+    "base_fare_1st_4km": {
+      "regular": 11.0,
+      "discounted": 8.75
+    },
+    "succeeding_km": {
+      "regular": 1.9,
+      "discounted": 1.5
+    }
+  },
+  "routes": {
+    "westbound_terminal_to": [
+      {
+        "destination": "OPOL",
+        "km": 7,
+        "regular_fare": 16.75,
+        "discounted_fare": 13.5
+      },
+      {
+        "destination": "EL SALVADOR",
+        "km": 15,
+        "regular_fare": 32.0,
+        "discounted_fare": 25.5
+      },
+      {
+        "destination": "ALUBIJID",
+        "km": 22,
+        "regular_fare": 45.25,
+        "discounted_fare": 36.25
+      },
+      {
+        "destination": "LAGUINDINGAN",
+        "km": 26,
+        "regular_fare": 52.75,
+        "discounted_fare": 42.25
+      },
+      {
+        "destination": "GITAGUM",
+        "km": 32,
+        "regular_fare": 64.25,
+        "discounted_fare": 51.5
+      },
+      {
+        "destination": "LIBERTAD",
+        "km": 41,
+        "regular_fare": 81.25,
+        "discounted_fare": 65.0
+      },
+      {
+        "destination": "INITAO",
+        "km": 49,
+        "regular_fare": 96.5,
+        "discounted_fare": 77.25
+      },
+      {
+        "destination": "NAAWAN",
+        "km": 59,
+        "regular_fare": 115.5,
+        "discounted_fare": 92.5
+      },
+      {
+        "destination": "MANTICAO",
+        "km": 63,
+        "regular_fare": 123.0,
+        "discounted_fare": 98.5
+      },
+      {
+        "destination": "LUGAIT",
+        "km": 71,
+        "regular_fare": 138.25,
+        "discounted_fare": 110.5
+      },
+      {
+        "destination": "KIWALAN",
+        "km": 79,
+        "regular_fare": 153.5,
+        "discounted_fare": 122.75
+      },
+      {
+        "destination": "ILIGAN CITY",
+        "km": 85,
+        "regular_fare": 165.0,
+        "discounted_fare": 132.0
+      },
+      {
+        "destination": "BURUUN",
+        "km": 93,
+        "regular_fare": 180.0,
+        "discounted_fare": 144.0
+      },
+      {
+        "destination": "LINAMON",
+        "km": 97,
+        "regular_fare": 187.75,
+        "discounted_fare": 150.25
+      },
+      {
+        "destination": "MAGOONG",
+        "km": 99,
+        "regular_fare": 191.5,
+        "discounted_fare": 153.25
+      },
+      {
+        "destination": "LAPAYAN",
+        "km": 101,
+        "regular_fare": 195.25,
+        "discounted_fare": 156.25
+      },
+      {
+        "destination": "KAUSWAGAN",
+        "km": 105,
+        "regular_fare": 203.0,
+        "discounted_fare": 162.5
+      },
+      {
+        "destination": "KAWIT",
+        "km": 109,
+        "regular_fare": 210.5,
+        "discounted_fare": 168.5
+      },
+      {
+        "destination": "LUPAGAN",
+        "km": 111,
+        "regular_fare": 214.25,
+        "discounted_fare": 171.5
+      },
+      {
+        "destination": "BINUNI",
+        "km": 112,
+        "regular_fare": 216.25,
+        "discounted_fare": 173.0
+      },
+      {
+        "destination": "BACOLOD",
+        "km": 116,
+        "regular_fare": 223.75,
+        "discounted_fare": 179.0
+      },
+      {
+        "destination": "ESPERANZA",
+        "km": 118,
+        "regular_fare": 227.5,
+        "discounted_fare": 182.0
+      },
+      {
+        "destination": "MAIGO",
+        "km": 124,
+        "regular_fare": 239.0,
+        "discounted_fare": 191.25
+      },
+      {
+        "destination": "BALAGATASA",
+        "km": 126,
+        "regular_fare": 242.75,
+        "discounted_fare": 194.25
+      },
+      {
+        "destination": "KULASIAN",
+        "km": 128,
+        "regular_fare": 246.5,
+        "discounted_fare": 197.25
+      },
+      {
+        "destination": "MONTAY",
+        "km": 129,
+        "regular_fare": 248.5,
+        "discounted_fare": 198.75
+      },
+      {
+        "destination": "KOLAMBOGAN",
+        "km": 132,
+        "regular_fare": 254.25,
+        "discounted_fare": 203.5
+      },
+      {
+        "destination": "SAGUNSAGING",
+        "km": 134,
+        "regular_fare": 258.0,
+        "discounted_fare": 206.5
+      },
+      {
+        "destination": "TITUNID",
+        "km": 136,
+        "regular_fare": 261.75,
+        "discounted_fare": 209.5
+      },
+      {
+        "destination": "KAROMATAN",
+        "km": 138,
+        "regular_fare": 265.5,
+        "discounted_fare": 212.5
+      },
+      {
+        "destination": "MUKAS",
+        "km": 140,
+        "regular_fare": 269.5,
+        "discounted_fare": 215.5
+      },
+      {
+        "destination": "TABIGUE",
+        "km": 141,
+        "regular_fare": 271.25,
+        "discounted_fare": 217.0
+      },
+      {
+        "destination": "MANGA",
+        "km": 142,
+        "regular_fare": 273.25,
+        "discounted_fare": 218.5
+      },
+      {
+        "destination": "LAMALAMA",
+        "km": 145,
+        "regular_fare": 279.0,
+        "discounted_fare": 223.25
+      },
+      {
+        "destination": "PIGGARANGAN",
+        "km": 148,
+        "regular_fare": 284.5,
+        "discounted_fare": 227.5
+      },
+      {
+        "destination": "BOLOD",
+        "km": 149,
+        "regular_fare": 286.5,
+        "discounted_fare": 229.25
+      },
+      {
+        "destination": "TUBOD",
+        "km": 150,
+        "regular_fare": 288.5,
+        "discounted_fare": 230.75
+      },
+      {
+        "destination": "BAROY",
+        "km": 153,
+        "regular_fare": 294.0,
+        "discounted_fare": 235.25
+      },
+      {
+        "destination": "RAW-AN",
+        "km": 155,
+        "regular_fare": 298.0,
+        "discounted_fare": 238.5
+      },
+      {
+        "destination": "MAGPATAO",
+        "km": 157,
+        "regular_fare": 301.75,
+        "discounted_fare": 241.5
+      },
+      {
+        "destination": "LANIPAO",
+        "km": 160,
+        "regular_fare": 307.5,
+        "discounted_fare": 246.0
+      },
+      {
+        "destination": "ABAGA",
+        "km": 163,
+        "regular_fare": 313.0,
+        "discounted_fare": 250.5
+      },
+      {
+        "destination": "MARANDING",
+        "km": 165,
+        "regular_fare": 317.0,
+        "discounted_fare": 253.5
+      },
+      {
+        "destination": "KAPATAGAN",
+        "km": 168,
+        "regular_fare": 322.5,
+        "discounted_fare": 258.0
+      }
+    ],
+    "kapatagan_to": [
+      {
+        "destination": "MARANDING",
+        "km": 3,
+        "regular_fare": 11.0,
+        "discounted_fare": 9.5
+      },
+      {
+        "destination": "ABAGA",
+        "km": 5,
+        "regular_fare": 13.0,
+        "discounted_fare": 10.5
+      },
+      {
+        "destination": "LANIPAO",
+        "km": 8,
+        "regular_fare": 18.5,
+        "discounted_fare": 14.75
+      },
+      {
+        "destination": "MAGPATAO",
+        "km": 11,
+        "regular_fare": 24.25,
+        "discounted_fare": 19.5
+      },
+      {
+        "destination": "RAW-AN",
+        "km": 13,
+        "regular_fare": 28.0,
+        "discounted_fare": 22.5
+      },
+      {
+        "destination": "BAROY",
+        "km": 15,
+        "regular_fare": 32.0,
+        "discounted_fare": 25.5
+      },
+      {
+        "destination": "TUBOD",
+        "km": 18,
+        "regular_fare": 37.5,
+        "discounted_fare": 30.0
+      },
+      {
+        "destination": "BOLOD",
+        "km": 19,
+        "regular_fare": 39.5,
+        "discounted_fare": 31.5
+      },
+      {
+        "destination": "PIGGARANGAN",
+        "km": 20,
+        "regular_fare": 41.5,
+        "discounted_fare": 33.25
+      },
+      {
+        "destination": "LAMALAMA",
+        "km": 23,
+        "regular_fare": 47.0,
+        "discounted_fare": 37.5
+      },
+      {
+        "destination": "MANGA",
+        "km": 26,
+        "regular_fare": 52.75,
+        "discounted_fare": 42.25
+      },
+      {
+        "destination": "TABIGUE",
+        "km": 27,
+        "regular_fare": 54.75,
+        "discounted_fare": 43.75
+      },
+      {
+        "destination": "MUKAS",
+        "km": 28,
+        "regular_fare": 56.5,
+        "discounted_fare": 45.25
+      },
+      {
+        "destination": "KAROMATAN",
+        "km": 30,
+        "regular_fare": 60.5,
+        "discounted_fare": 48.5
+      },
+      {
+        "destination": "TITUNID",
+        "km": 32,
+        "regular_fare": 64.25,
+        "discounted_fare": 51.5
+      },
+      {
+        "destination": "SAGUNSAGING",
+        "km": 34,
+        "regular_fare": 68.0,
+        "discounted_fare": 54.5
+      },
+      {
+        "destination": "KOLAMBOGAN",
+        "km": 36,
+        "regular_fare": 71.75,
+        "discounted_fare": 57.5
+      },
+      {
+        "destination": "MONTAY",
+        "km": 39,
+        "regular_fare": 77.5,
+        "discounted_fare": 62.0
+      },
+      {
+        "destination": "KULASIAN",
+        "km": 40,
+        "regular_fare": 79.5,
+        "discounted_fare": 63.5
+      },
+      {
+        "destination": "BALAGATASA",
+        "km": 42,
+        "regular_fare": 83.25,
+        "discounted_fare": 66.5
+      },
+      {
+        "destination": "MAIGO",
+        "km": 44,
+        "regular_fare": 87.0,
+        "discounted_fare": 69.5
+      },
+      {
+        "destination": "ESPERANZA",
+        "km": 50,
+        "regular_fare": 98.5,
+        "discounted_fare": 78.75
+      },
+      {
+        "destination": "BACOLOD",
+        "km": 52,
+        "regular_fare": 102.25,
+        "discounted_fare": 81.75
+      },
+      {
+        "destination": "BINUNI",
+        "km": 56,
+        "regular_fare": 109.75,
+        "discounted_fare": 87.75
+      },
+      {
+        "destination": "LUPAGAN",
+        "km": 57,
+        "regular_fare": 111.75,
+        "discounted_fare": 89.5
+      },
+      {
+        "destination": "KAWIT",
+        "km": 59,
+        "regular_fare": 115.5,
+        "discounted_fare": 92.5
+      },
+      {
+        "destination": "KAUSWAGAN",
+        "km": 63,
+        "regular_fare": 123.0,
+        "discounted_fare": 98.5
+      },
+      {
+        "destination": "LAPAYAN",
+        "km": 67,
+        "regular_fare": 130.75,
+        "discounted_fare": 104.5
+      },
+      {
+        "destination": "MAGOONG",
+        "km": 69,
+        "regular_fare": 134.5,
+        "discounted_fare": 107.5
+      },
+      {
+        "destination": "LINAMON",
+        "km": 71,
+        "regular_fare": 138.25,
+        "discounted_fare": 110.5
+      },
+      {
+        "destination": "BURUUN",
+        "km": 75,
+        "regular_fare": 146.0,
+        "discounted_fare": 116.75
+      },
+      {
+        "destination": "ILIGAN CITY",
+        "km": 83,
+        "regular_fare": 161.0,
+        "discounted_fare": 128.75
+      },
+      {
+        "destination": "KIWALAN",
+        "km": 89,
+        "regular_fare": 172.5,
+        "discounted_fare": 138.0
+      },
+      {
+        "destination": "LUGAIT",
+        "km": 97,
+        "regular_fare": 187.75,
+        "discounted_fare": 150.25
+      },
+      {
+        "destination": "MANTICAO",
+        "km": 105,
+        "regular_fare": 203.0,
+        "discounted_fare": 162.5
+      },
+      {
+        "destination": "NAAWAN",
+        "km": 109,
+        "regular_fare": 210.5,
+        "discounted_fare": 168.5
+      },
+      {
+        "destination": "INITAO",
+        "km": 119,
+        "regular_fare": 229.5,
+        "discounted_fare": 183.5
+      },
+      {
+        "destination": "LIBERTAD",
+        "km": 127,
+        "regular_fare": 244.75,
+        "discounted_fare": 195.75
+      },
+      {
+        "destination": "GITAGUM",
+        "km": 136,
+        "regular_fare": 261.75,
+        "discounted_fare": 209.5
+      },
+      {
+        "destination": "LAGUINDINGAN",
+        "km": 142,
+        "regular_fare": 273.25,
+        "discounted_fare": 218.5
+      },
+      {
+        "destination": "ALUBIJID",
+        "km": 146,
+        "regular_fare": 280.75,
+        "discounted_fare": 224.5
+      },
+      {
+        "destination": "EL SALVADOR",
+        "km": 153,
+        "regular_fare": 294.0,
+        "discounted_fare": 235.25
+      },
+      {
+        "destination": "OPOL",
+        "km": 161,
+        "regular_fare": 309.25,
+        "discounted_fare": 247.5
+      },
+      {
+        "destination": "WESTBOUND TERMINAL",
+        "km": 168,
+        "regular_fare": 322.5,
+        "discounted_fare": 258.0
+      }
+    ]
+  }
+}
