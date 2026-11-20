@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://betteriligancity.org";
 
   const routes = [
-    { path: "", freq: "weekly", prio: 1 },
+    { path: "/", freq: "weekly", prio: 1 },
     { path: "/services", freq: "daily", prio: 0.9 },
     { path: "/disaster", freq: "weekly", prio: 0.9 },
     { path: "/bangon-iligan", freq: "daily", prio: 0.9 },

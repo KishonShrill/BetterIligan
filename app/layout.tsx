@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "fb:app_id": "1036061575471786",
     "og:logo": "https://betteriligancity.org/icon.png",
   },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
