@@ -19,13 +19,7 @@
     "db:migrate:dev": "wrangler d1 migrations apply betteriligan-bangon --local",
     "db:migrate:start": "wrangler d1 migrations apply betteriligan-bangon --local --persist-to dist/server/.wrangler/state",
     "db:migrate": "wrangler d1 migrations apply betteriligan-bangon --remote",
-    "build:next": "next build",
-    "dev:next": "next dev --webpack",
-    "start:next": "next start",
-    "deploy": "npm run db:migrate && vinext-cloudflare deploy --config dist/server/wrangler.json",
-    "preview:next": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy:next": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload:next": "opennextjs-cloudflare build && opennextjs-cloudflare upload"
+    "deploy": "npm run db:migrate && vinext-cloudflare deploy --config dist/server/wrangler.json"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
