@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function IliganDirectories() {
   return (
-    <main className="min-h-screen bg-slate-50 pb-24 font-sans">
+    <main className="min-h-screen bg-slate-50 from-slate-50 pb-24 font-sans">
       <SubpageNav href="/" text="Go Home" />
       <SubpageHero>
         <SubpageHero.Title>Iligan Directory</SubpageHero.Title>

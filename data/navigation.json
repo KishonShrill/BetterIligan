@@ -102,6 +102,11 @@
         "href": "/transparency/resolutions"
       },
       {
+        "name": "Executive Orders",
+        "description": "Browse executive orders passed by the local government unit of Iligan City.",
+        "href": "/transparency/executive-orders"
+      },
+      {
         "name": "Bids & Procurement",
         "description": "Track open, awarded, and in-progress procurement projects from the city.",
         "href": "/transparency/bids"

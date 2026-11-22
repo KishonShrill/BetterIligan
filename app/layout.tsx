@@ -47,7 +47,7 @@ export default function RootLayout({
       lang="en"
       className={`${kapwaSans.variable} ${kapwaMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col from-slate-50">
         <TopBanner />
         <Header />
         <ScrollToTop />

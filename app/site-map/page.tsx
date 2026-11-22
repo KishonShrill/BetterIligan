@@ -45,26 +45,11 @@ const sections: SitemapSection[] = [
   {
     title: "Travel",
     links: [
-      {
-        label: "Explore Travel",
-        href: "travel",
-      },
-      {
-        label: "Transportation Guide",
-        href: "/travel/transportation",
-      },
-      {
-        label: "Jeepney Routes",
-        href: "/travel/transportation/jeepney",
-      },
-      {
-        label: "Bus Schedules",
-        href: "/travel/transportation/bus",
-      },
-      {
-        label: "Waterfalls",
-        href: "/travel/waterfalls",
-      },
+      { label: "Explore Travel", href: "travel" },
+      { label: "Transportation Guide", href: "/travel/transportation" },
+      { label: "Jeepney Routes", href: "/travel/transportation/jeepney" },
+      { label: "Bus Schedules", href: "/travel/transportation/bus" },
+      { label: "Waterfalls", href: "/travel/waterfalls" },
     ],
   },
   {
@@ -90,6 +75,13 @@ const sections: SitemapSection[] = [
     links: [
       { label: "Transparency Overview", href: "/transparency" },
       { label: "Budget & Finances", href: "/transparency/budget" },
+      { label: "Executive Orders", href: "/transparency/executive-orders" },
+      { label: "Bids & Procurement", href: "/transparency/bids" },
+      {
+        label: "Budgets to Projects Transparency",
+        href: "https://budget.betteriligancity.org/",
+        external: true,
+      },
     ],
   },
   {
@@ -107,7 +99,7 @@ const sections: SitemapSection[] = [
 
 function SitemapLinkItem({ link }: { link: SitemapLink }) {
   const className =
-    "text-sm text-slate-600 hover:text-blue-600 transition-colors";
+    "text-sm text-slate-600 hover:text-blue-600 transition-colors hover:underline";
 
   if (link.external) {
     return (
@@ -147,8 +139,8 @@ export default function SitemapPage() {
         </SubpageHero.Description>
       </SubpageHero>
 
-      <div className="mx-auto max-w-[800px] px-4 py-12 md:px-6">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="container mx-auto px-4 py-12 md:px-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {sections.map((section) => (
             <div
               key={section.title}

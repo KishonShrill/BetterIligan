@@ -7,7 +7,6 @@ import EmergencyHotlines from "@/sections/homepage/EmergencyHotlines";
 import WeatherAndMap from "@/sections/homepage/WeatherMap";
 import CityStatsSummary from "@/sections/homepage/CityStats";
 import DonationSection from "@/sections/homepage/DonationSection";
-import ReportIssueSection from "@/sections/homepage/ReportIssue";
 
 export const metadata: Metadata = {
   title: { absolute: "Iligan City Website | Civic Tech Portal" },
@@ -40,7 +39,6 @@ export default function Home() {
       <EmergencyHotlines />
       <CityStatsSummary />
       <WeatherAndMap />
-      <ReportIssueSection />
     </main>
   );
 }

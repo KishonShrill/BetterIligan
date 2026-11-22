@@ -231,7 +231,7 @@ export default function WeatherAndMap() {
   const currentCode = weatherData?.current.weather?.id ?? 0;
 
   return (
-    <Section className="bg-white">
+    <Section className="bg-slate-50">
       {/* Section Header */}
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-bold text-slate-900">
