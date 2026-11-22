@@ -16,7 +16,7 @@ export default function ExecutiveOrderCard({
 }) {
   return (
     <a
-      href={`https://web.archive.org/web/${order.archive_code}`}
+      href={`https://archive.org/details/${order.archive_code}`}
       target="_blank"
       rel="noopener noreferrer"
       className="group block h-full"
