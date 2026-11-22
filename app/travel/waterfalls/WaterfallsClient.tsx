@@ -15,6 +15,7 @@ import SubpageNav from "@/components/ui/SubpageNav";
 import SubpageHero from "@/components/ui/SubpageHero";
 import ReferencesFooter from "@/components/ui/ReferencesFooter";
 import type { Waterfall } from "@/validations/waterfallSchema";
+import ReportIssueSection from "@/sections/homepage/ReportIssue";
 
 const REFERENCES = [
   {
@@ -59,7 +60,7 @@ export default function WaterfallsClient({ falls }: { falls: Waterfall[] }) {
   }, [falls, query]);
 
   return (
-    <main className="min-h-screen bg-slate-50 pb-24 font-sans">
+    <main className="min-h-screen bg-slate-50 from-slate-50 font-sans">
       <SubpageNav href="/travel" text="Back to Travel" />
       <SubpageHero>
         <SubpageHero.Title>Waterfalls</SubpageHero.Title>
@@ -211,6 +212,7 @@ export default function WaterfallsClient({ falls }: { falls: Waterfall[] }) {
           disclaimer="Waterfalls are drawn from OpenStreetMap and verified to fall within Iligan City's administrative boundary, then cross-checked against the local guides above. A few falls named in those guides are not yet mapped with coordinates, so they are omitted rather than guessed. Coordinates are approximate — always travel with a local guide, especially to the upland falls. Photos are from Wikimedia Commons and Flickr, credited per card under their respective licenses."
         />
       </div>
+      <ReportIssueSection />
     </main>
   );
 }

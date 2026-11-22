@@ -13,13 +13,8 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import SubpageHero from "@/components/ui/SubpageHero";
-
-// --- CONFIGURATION ---
-// Change these values whenever you update the rates!
-const ILPI_DATA = {
-  rate: 13.9845,
-  lastUpdated: "2026-11-20", // Use YYYY-MM-DD format
-};
+import { formatPesos } from "@/utils/fareCalculator";
+import { ILPI_DATA } from "../ElectricityClient";
 
 // Quick preset appliances for user convenience
 const APPLIANCE_PRESETS = [
@@ -69,14 +64,6 @@ export default function ElectricityCalculatorPage() {
   const costPerDay = kwhPerDay * rate;
   const costPerMonth = costPerDay * 30; // Assuming 30 days
   const costPerYear = costPerDay * 365;
-
-  // Format currency helper
-  const formatPesos = (amount: number) => {
-    return new Intl.NumberFormat("en-PH", {
-      style: "currency",
-      currency: "PHP",
-    }).format(amount);
-  };
 
   return (
     <main className="min-h-screen bg-slate-50 pb-24 font-sans">

@@ -4,19 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  Menu,
-  ChevronDown,
-  ArrowRight,
-  Map,
-  Megaphone,
-  FileText,
-  Phone,
-  Users,
-  Building2,
-  Landmark,
-  Link2,
-} from "lucide-react";
+import { Menu, ChevronDown, ArrowRight } from "lucide-react";
+import { DynamicIcon } from "lucide-react/dynamic";
 
 import { headerDropdown } from "@/data/categories";
 import navigationJson from "@/data/navigation.json";
@@ -59,57 +48,31 @@ type ClassName = {
  */
 const getMenuIcon = (name: string) => {
   const normalized = name.toLowerCase();
-
-  if (
-    normalized.includes("transport") ||
-    normalized.includes("travel") ||
-    normalized.includes("jeep") ||
-    normalized.includes("route")
-  ) {
-    return Map;
+  function word(findWord: string): boolean {
+    return normalized.includes(findWord);
   }
 
-  if (
-    normalized.includes("report") ||
-    normalized.includes("issue") ||
-    normalized.includes("complaint")
-  ) {
-    return Megaphone;
-  }
+  if (word("transport") || word("travel") || word("jeep") || word("route"))
+    return "map";
 
-  if (
-    normalized.includes("ordinance") ||
-    normalized.includes("resolution") ||
-    normalized.includes("document")
-  ) {
-    return FileText;
-  }
+  if (word("bus")) return "bus";
+  if (word("electric")) return "utility-pole";
 
-  if (
-    normalized.includes("hotline") ||
-    normalized.includes("emergency") ||
-    normalized.includes("contact")
-  ) {
-    return Phone;
-  }
+  if (word("report") || word("issue") || word("complaint")) return "megaphone";
 
-  if (normalized.includes("volunteer") || normalized.includes("community")) {
-    return Users;
-  }
+  if (word("ordinance") || word("resolution") || word("document"))
+    return "file-text";
 
-  if (
-    normalized.includes("government") ||
-    normalized.includes("lgu") ||
-    normalized.includes("service")
-  ) {
-    return Building2;
-  }
+  if (word("hotline") || word("emergency") || word("contact")) return "phone";
 
-  if (normalized.includes("project") || normalized.includes("development")) {
-    return Landmark;
-  }
+  if (word("volunteer") || word("community") || word("officials"))
+    return "users";
 
-  return Link2;
+  if (word("government") || word("lgu") || word("service")) return "building-2";
+
+  if (word("project") || word("development")) return "landmark";
+
+  return "link-2";
 };
 
 export default function Header({ className }: ClassName) {
@@ -170,7 +133,7 @@ export default function Header({ className }: ClassName) {
         hideHeader ? "hidden" : ""
       } sticky top-0 z-50 w-full border-b border-slate-200 bg-white font-sans`}
     >
-      <div className="relative" onMouseLeave={closeDropdown}>
+      <div className="relative" onMouseLeave={closeDropdown} data-nosnippet>
         {/* ===== DESKTOP / MAIN HEADER ===== */}
         <div className="relative container mx-auto max-sm:px-4">
           <div className="flex h-20 items-center justify-between sm:px-4">
@@ -336,7 +299,10 @@ export default function Header({ className }: ClassName) {
                           >
                             {/* Icon */}
                             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 transition-colors group-hover:bg-blue-700">
-                              <Icon className="h-5 w-5 text-blue-800 group-hover:text-white" />
+                              <DynamicIcon
+                                name={Icon as any}
+                                className="h-5 w-5 text-blue-800 group-hover:text-white"
+                              />
                             </div>
 
                             {/* Text */}
@@ -445,7 +411,10 @@ export default function Header({ className }: ClassName) {
 
       {/* ===== MOBILE MENU ===== */}
       {isMobileMenuOpen && (
-        <div className="animate-in slide-in-from-top-2 fade-in absolute top-full left-0 flex max-h-[calc(100vh-81.1px-33.1px)] w-full flex-col items-center border-t border-t-gray-100 bg-white shadow-xl duration-200 lg:hidden">
+        <div
+          className="animate-in slide-in-from-top-2 fade-in absolute top-full left-0 flex max-h-[calc(100vh-81.1px-33.1px)] w-full flex-col items-center border-t border-t-gray-100 bg-white shadow-xl duration-200 lg:hidden"
+          data-nosnippet
+        >
           {/* Mobile Navigation Links */}
           <div className="container flex h-fit flex-col gap-1 overflow-y-auto px-4 py-4">
             {pathname !== "/" && (

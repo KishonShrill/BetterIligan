@@ -85,10 +85,16 @@
   },
   {
     "name": "Mimbalot Falls",
-    "lat": 8.180575,
-    "lon": 124.168466,
+    "lat": 8.180362702382988,
+    "lon": 124.17038384702359,
+    "photo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Iligan-city-mimbalot-falls-right-side.jpg",
+      "credit": "KishonShrill",
+      "license": "CC BY 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Iligan-city-mimbalot-falls-right-side.jpg"
+    },
     "source": "https://www.openstreetmap.org/node/1564891617",
-    "verifiedAt": "2026-07-08"
+    "verifiedAt": "2026-11-06"
   },
   {
     "name": "Hindang Falls",

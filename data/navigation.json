@@ -105,6 +105,11 @@
         "name": "Bids & Procurement",
         "description": "Track open, awarded, and in-progress procurement projects from the city.",
         "href": "/transparency/bids"
+      },
+      {
+        "name": "Budget to Projects Transparency",
+        "description": "112 projects for Iligan City in the 2027 budget.",
+        "href": "https://budget.betteriligancity.org/"
       }
     ]
   },

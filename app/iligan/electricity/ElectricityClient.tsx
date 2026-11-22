@@ -3,8 +3,23 @@
 import Link from "next/link";
 import SubpageNav from "@/components/ui/SubpageNav";
 import SubpageHero from "@/components/ui/SubpageHero";
-import { Calculator, Zap, Globe, Facebook } from "lucide-react";
+import {
+  Calculator,
+  Zap,
+  Globe,
+  Facebook,
+  CalendarCheck,
+  AlertTriangle,
+} from "lucide-react";
 import ReferencesFooter from "@/components/ui/ReferencesFooter";
+import { formatPesos } from "@/utils/fareCalculator";
+
+// --- CONFIGURATION ---
+// Change these values whenever you update the rates!
+export const ILPI_DATA = {
+  rate: 13.9845,
+  lastUpdated: "2026-11-20", // Use YYYY-MM-DD format
+};
 
 export default function ElectricityClient() {
   const facebookElectricityPriceLink =
@@ -40,6 +55,22 @@ export default function ElectricityClient() {
     },
   ];
 
+  // --- DATE LOGIC ---
+  const updatedDate = new Date(ILPI_DATA.lastUpdated);
+  const currentDate = new Date();
+
+  // Calculate if it has been more than 30 days
+  const timeDifference = currentDate.getTime() - updatedDate.getTime();
+  const daysSinceUpdate = timeDifference / (1000 * 3600 * 24);
+  const isStale = daysSinceUpdate > 30;
+
+  // Formatting for the UI
+  const formattedFullDate = updatedDate.toLocaleDateString("en-PH", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   return (
     <main className="min-h-screen bg-slate-50 pb-24 font-sans">
       <SubpageNav href="/" text="Go Home" />
@@ -48,6 +79,25 @@ export default function ElectricityClient() {
           <span className="rounded-full border border-amber-100 bg-amber-50 px-3 py-1 text-xs font-bold tracking-wider text-amber-700 uppercase">
             Public Utilities
           </span>
+          <Link
+            suppressHydrationWarning
+            className={`flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold tracking-wider uppercase shadow-sm ${
+              isStale
+                ? "border-amber-200 bg-amber-50 text-amber-700"
+                : "border-emerald-200 bg-emerald-50 text-emerald-700"
+            }`}
+            href={"#ilpi"}
+          >
+            {isStale ? (
+              <AlertTriangle className="h-3.5 w-3.5" />
+            ) : (
+              <CalendarCheck className="h-3.5 w-3.5" />
+            )}
+            <span className="max-md:hidden">
+              {isStale ? "Stale Information:" : "Recently Updated:"}{" "}
+            </span>
+            {formattedFullDate} - {formatPesos(ILPI_DATA.rate)}
+          </Link>
         </SubpageHero.Badges>
         <SubpageHero.Title>Electricity & Power</SubpageHero.Title>
         <SubpageHero.Description>
