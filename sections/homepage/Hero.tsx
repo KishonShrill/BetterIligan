@@ -9,11 +9,10 @@ import {
   FileText,
   Landmark,
   X,
-  Sparkles,
   Zap,
   Bus,
   ShieldAlert,
-  ArrowRight,
+  MapPinned,
 } from "lucide-react";
 import Section from "@/components/ui/Section";
 import Button3D from "@/components/ui/Button3D";
@@ -24,10 +23,10 @@ import { AllService } from "@/validations/serviceSchema";
 
 const QUICK_LINKS = [
   {
-    title: "Mugna Festival",
-    description: "Event schedules & guides",
-    href: "/travel/mugna",
-    Icon: Sparkles,
+    title: "CitiFix",
+    description: "Report and track community concerns.",
+    href: "https://citifix.betteriligancity.org",
+    Icon: MapPinned,
     badge: "Featured",
   },
   {
@@ -356,14 +355,9 @@ export default function HeroSection() {
                   <h3 className="mb-1 text-sm font-bold text-white transition-colors group-hover:text-blue-200 md:text-base">
                     {title}
                   </h3>
-                  <p className="mb-3 line-clamp-1 text-xs text-blue-100 md:line-clamp-2 md:text-sm">
+                  <p className="line-clamp-1 text-xs text-blue-100 md:line-clamp-2 md:text-sm">
                     {description}
                   </p>
-                </div>
-
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-200 group-hover:text-white md:text-sm">
-                  View More
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 md:h-4 md:w-4" />
                 </div>
               </Link>
             ))}

@@ -17,7 +17,7 @@ export default function ServicesSection() {
     : serviceCategories.slice(0, 4);
 
   return (
-    <Section>
+    <Section className="bg-slate-50">
       {/* Header */}
       <div className="mb-7 text-center sm:mb-12">
         <h2 className="mb-4 text-3xl font-extrabold text-slate-900 md:text-4xl">
