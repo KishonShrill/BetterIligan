@@ -1,0 +1,71 @@
+{
+  "topics": [
+    {
+      "id": "jeepney-routes",
+      "title": "Jeepney Routes",
+      "description": "Help document and improve public transportation information in Iligan City.",
+      "steps": [
+        {
+          "id": "jr-open-jeepney-routes",
+          "title": "Open jeepney routes",
+          "description": "Go to {{link:https://betteriligancity.org/travel/transportation/jeepney|Jeepney Routes}} and find an unavailable route you know to contribute.",
+          "media": {
+            "type": "image",
+            "src": "/images/contribute/jeepney-routes1.webp",
+            "alt": ""
+          }
+        },
+        {
+          "id": "jr-open-geojson-io",
+          "title": "Open geojson.io",
+          "description": "Once you have picked a route you want to contribute, go to {{link:https://geojson.io|Geojson.io}} and pick the line tool to start tracing the path of the route.",
+          "media": {
+            "type": "image",
+            "src": "/images/contribute/jeepney-routes2.webp",
+            "alt": ""
+          }
+        },
+        {
+          "id": "jr-draw-the-route",
+          "title": "Draw the route",
+          "description": "Trace the route that covers the tracks of the jeep. No need to worry if you don't trace back to the starting point. As long as the trace covers the whole route, you are done!",
+          "media": {
+            "type": "image",
+            "src": "/images/contribute/jeepney-routes3.webp",
+            "alt": ""
+          }
+        },
+        {
+          "id": "jr-fill-the-details",
+          "title": "Fill the details",
+          "description": "On the bottom panel, check the stroke checkbox to add a color on the route. On the left, add a new row with a key (left column) 'routeID' then on the value (right column) the route code. Refer to the {{link:https://scontent.fcgy1-3.fna.fbcdn.net/v/t39.30808-6/787205047_28863716713235220_4949584762130969099_n.jpg?stp=dst-jpg_tt6&cstp=mx780x814&ctp=s780x814&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=bd9a62&_nc_eui2=AeEVvsnYZ8eJw70rqz8RhZfRXoDjIKH9KK5egOMgof0orutQqxX6fO-5XwZcNoyA3Wy6V79BDRLXfmHcHQWwREVR&_nc_ohc=GKdir32zjZIQ7kNvwFSaaHu&_nc_oc=AdqatpA1KPwhKcDu51QS7KTokxCE5vPU43tcaWk_3k_nC7_kZKf_3A-uj1_HS-WDIW8&_nc_zt=23&_nc_ht=scontent.fcgy1-3.fna&_nc_gid=GeIpl6OFNuhdStO9DEbu5w&_nc_ss=7b3a8&oh=00_AQQxspVS6NU-UubuT1ZmwNpGL47lLjmK0en29AvqFoBupw&oe=6B0C3BE2|PUJ Route Directory}} board for the routeID. Then put another row 'routeName' then put the place name of the route.",
+          "media": {
+            "type": "image",
+            "src": "/images/contribute/jeepney-routes4.webp",
+            "alt": ""
+          }
+        },
+        {
+          "id": "jr-export",
+          "title": "Export",
+          "description": "Once you are done, go to the upper right and click 'Export'. Then on the pop-up, click 'Export' again. You should be able to download the .geojson file.",
+          "media": {
+            "type": "image",
+            "src": "/images/contribute/jeepney-routes5.webp",
+            "alt": ""
+          }
+        },
+        {
+          "id": "jr-send-with-email",
+          "title": "Send with Email",
+          "description": "Email the file to {{email:chriscent@betteriligancity.org}} with the .geojson file you exported then click send. Well done! You have just helped contribute on the jeepney routes for Iligan City!",
+          "media": {
+            "type": "image",
+            "src": "/images/contribute/jeepney-routes6.webp",
+            "alt": ""
+          }
+        }
+      ]
+    }
+  ]
+}

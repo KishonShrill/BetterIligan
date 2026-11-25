@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/transparency/bids", freq: "monthly", prio: 0.8 },
     { path: "/open-data", freq: "yearly", prio: 0.7 },
     { path: "/about", freq: "yearly", prio: 0.7 },
+    { path: "/about/how-to-contribute", freq: "weekly", prio: 0.9 },
     { path: "/volunteer", freq: "yearly", prio: 0.7 },
     { path: "/privacy-policy", freq: "monthly", prio: 0.7 },
     { path: "/terms-of-service", freq: "monthly", prio: 0.7 },

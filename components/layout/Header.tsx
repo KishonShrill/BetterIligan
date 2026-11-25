@@ -166,7 +166,7 @@ export default function Header({ className }: ClassName) {
             </div>
 
             {/* ===== DESKTOP NAVIGATION ===== */}
-            <nav className="hidden h-full items-center gap-2 lg:flex">
+            <nav className="hidden h-full items-center gap-2 min-[1279px]:gap-6 lg:flex">
               {/* Home */}
               {pathname !== "/" && (
                 <div className="flex h-full items-center">

@@ -162,6 +162,11 @@
         "name": "Open Data",
         "description": "Access our directory of Iligan City services, contact details, and facilities through our free, structured JSON API.",
         "href": "/open-data"
+      },
+      {
+        "name": "How to Contribute",
+        "description": "A step by step instruction on how to help contribute for BetterIliganCity.org",
+        "href": "/about/how-to-contribute"
       }
     ]
   }
