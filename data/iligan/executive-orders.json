@@ -1,6 +1,30 @@
 {
-  "years": [2025, 2026],
+  "years": [2022, 2026],
   "entries": [
+    {
+      "archive_code": "iligan-city-eo2025-154",
+      "title": "EXECUTIVE ORDER NO. 154, s. of 2025",
+      "description": "An Order Suspending Classes In All Levels, Both Public And Private, In Iligan City From 1:00 P.M. Of November 24 Until November 25, 2025, Due To Heavy Rains Brought By Tropical Depression 'Verbena'",
+      "publication_date": "2025-11-24"
+    },
+    {
+      "archive_code": "iligan-city-eo2026-027",
+      "title": "EXECUTIVE ORDER NO. 27, s. of 2026",
+      "description": "An Order Adopting Fuel Conservation Measures And Creating A Fuel Monitoring Task Force For Fuel Price Monitoring In The City Of Iligan",
+      "publication_date": "2026-03-09"
+    },
+    {
+      "archive_code": "iligan-city-eo2022-012-a",
+      "title": "Executive Order No. 12-A, Series of 2022",
+      "description": "An Order Enjoining City Of Iligan Contractors, Operators, Employees In The Local And National Government Offices, Barangay Officials, Private Sectors, Academes, Vendors, Drivers, And All Workers That Require Interaction With The General Public Must Observe The Minimum Public Health Standards And Must Be Fully Vaccinated With Booster Dose From Covid-19",
+      "publication_date": "2022-08-12"
+    },
+    {
+      "archive_code": "iligan-city-eo2026-010",
+      "title": "EXECUTIVE ORDER NO. 10, s. of 2026",
+      "description": "Suspension Of Work In Government Offices And Agencies In Iligan City From 12:00 Noon Of February 5 And February 6, 2026, Due To Tropical Storm 'Basyang'",
+      "publication_date": "2026-02-15"
+    },
     {
       "archive_code": "iligan-city-eo2026-114",
       "title": "ILIGAN CITY EXECUTIVE ORDER NO. 144, S. OF 2026",
