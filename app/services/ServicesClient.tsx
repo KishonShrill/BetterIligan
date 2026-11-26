@@ -9,6 +9,8 @@ import {
 } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Search, PlusCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 import { allServices } from "@/data/services";
 import ServiceCard from "@/components/ServiceCard";
@@ -16,6 +18,7 @@ import FilterGrid from "@/components/ui/FilterGrid";
 import ContributionModal from "@/components/ui/ContributionModal";
 
 function ServicesDirectoryContent() {
+  const { t } = useTranslation("services");
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isContributionModalOpen, setIsContributionModalOpen] = useState(false);
@@ -110,11 +113,10 @@ function ServicesDirectoryContent() {
     <main className="min-h-screen bg-[#F8FAFC] pb-24 font-sans">
       <section className="px-4 pt-12 pb-4 text-center sm:pt-16 sm:pb-8 md:pt-20 md:pb-12">
         <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-          Local Government Services
+          {t("title")}
         </h1>
         <p className="mx-auto mb-10 max-w-2xl text-[14px] text-slate-500 sm:text-lg">
-          Explore official municipal services from the Citizens Charter and
-          community contributions. Choose a category to filter or search below.
+          {t("description")}
         </p>
 
         <div className="group relative mx-auto max-w-2xl">

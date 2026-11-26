@@ -1,0 +1,48 @@
+{
+  "backHome": "Balik sa Panimalay",
+  "badge": "Proyekto sa Civic Tech",
+  "title": "Mahitungod sa BetterIliganCity.org",
+  "description": "Usa ka inisyatiba nga gipangunahan sa mga boluntaryo sa pagtukod og digital public goods para sa Dakbayan sa mga Hamili nga Busay.",
+  "missionTitle": "Atong Misyon",
+  "missionText": "Ang BetterIliganCity usa ka inisyatiba sa teknolohiya nga gipangunahan sa mga boluntaryo nga pasalig sa paghimo og mga <0>#civictechprojects</0> nga nagtumong sa paghimo sa lokal nga gobyerno nga mas transparent, episyente, ug dali maabot sa mga lumulupyo sa Iligan.",
+  "goalsTitle": "Atong mga Tumong",
+  "goals": [
+    "Pagtukod og website nga gipadagan sa mga boluntaryo nga nagpakita sa mga mithi ug kultura sa Iligan.",
+    "Open Source ug Open Data nga mga proyekto para sa mas maayong lokal nga kolaborasyon.",
+    "Paghimo og dali nga nabigasyon aron makit-an dayon ang mga lokal nga serbisyo.",
+    "Pagsiguro sa accessibility para sa tanang lumulupyo, apil ang mga adunay diperensya.",
+    "Paghatag og husto ug bag-ong impormasyon bahin sa mga serbisyo sa LGU.",
+    "Pag-establisar og modelo kung unsaon paglihok ang lokal nga digital governance."
+  ],
+  "whyTitle": "Nganong Gi-tukod Namo Kini",
+  "whyIntro": "Ang pagpangita sa mga numero sa kontak sa lokal nga gobyerno, mga rate sa kuryente, ug mga pamaagi sa serbisyo sa Iligan mahimong nagkatibulaag ug lisud. Ang kasamtangang kahimtang sa daghang pampublikong portal nagpresentar og daghang mga hagit para sa mga lungsuranon:",
+  "whyPoints": [
+    "Ang impormasyon sagad karaan na, nga nagbilin sa mga lungsuranon nga walay labing bag-ong mga detalye sa serbisyo.",
+    "Ang nabigasyon komplikado, nga naglisud sa pagpangita sa prangkahang agianan padulong sa hinungdanong mga panginahanglan.",
+    "Ang kakulang sa makanunayon nga disenyo ug mga bahin sa accessibility nagmugna og mga babag para sa inklusibong digital access."
+  ],
+  "whyOutro": "Kining mga problemaha nagmugna og tinuod nga kalibutan nga mga babag para sa mga lungsuranon nga naningkamot nga ma-access ang hinungdanong mga serbisyo sa lokal nga gobyerno. Pinaagi sa pagtubag niini dinhi, naglaum kami nga makahimo og mas nahiusa ug epektibo nga digital nga presensya para sa Iligan City.",
+  "betterGovTitle": "Gisuportahan uban ang garbo sa BetterGov",
+  "betterGovDesc": "Ang BetterIliganCity kabahin sa usa ka mas dako, tibuok nasod nga kalihukan sa mga citizen builders. Ang atong kinatibuk-ang tumong mao ang pagsuporta, pagpalambo, paghiusa, ug paghatag gahum sa mga developers sa tibuok Pilipinas sa pagtukod og epektibo nga civic tech projects.",
+  "betterGovFeaturesTitle": "Para sa mga Citizen Builders, ang BetterGov naghatag og:",
+  "betterGovFeatures": [
+    "• Imprastraktura ug mga Himan (Mga Server, AI Credits)",
+    "• Tech Hackathons & Kolaborasyon",
+    "• Datos & APIs para sa mga Serbisyo sa Gov",
+    "• Pagpares sa Team ug Networking",
+    "• Mentorship sa Industriya",
+    "• Pisikal nga Luna sa Opisina"
+  ],
+  "aboutBetterGov": "Bahin sa BetterGov",
+  "visitBetterGov": "Bisitaha ang BetterGov.ph",
+  "commitmentTitle": "Atong Pasalig",
+  "commitmentHeading": "HUMAN NA KAMI NAGHILOM.",
+  "commitmentP1": "Nasuko kami. Nasuko ka. Pero makatampo kita sa atong kaugalingong mga paagi — bisan unsa pa kini ka gamay. Makahimo kita og katingalahang mga butang nga magkauban. Estilo sa grassroots. Open source. Walay kinahanglan nga pagtugot.",
+  "commitmentP2": "Komitado kami sa pagbutang og oras, mga kahimtang, ug salapi niining inisyatiba. Padayon kaming magtukod nga walay paghunong bisan kinsa pa ang motugot. Open source, publiko, de-kalidad nga mga site.",
+  "commitmentHeading2": "NANGITA KAMI OG MGA TAWO NGA MAS ALAMAT KAY KAMO!",
+  "impactTitle": "Andam na ba Mokatap og Kaugalingong Epekto?",
+  "impactDesc": "Bisan ikaw usa ka developer, designer, researcher, o usa lang ka tawo nga gustong motabang sa pag-verify sa lokal nga datos—kinahanglan ka namo. Apil sa atong komunidad sa mga citizen builders ug tabangi og hulma ang digital nga kaugmaon sa Iligan City.",
+  "joinVolunteer": "Apil Isip Boluntaryo",
+  "licenseTitle": "Open Source nga Lisensya",
+  "licenseText": "Ang gigikanan nga kodigo niini nga proyekto gipagawas ubos sa MIT License. Kini nga gawasnon kang mogamit, mopuyo, magbag-o, maghiusa, magpatik, mag-apod-apod, mag-sublicense, ug/o magbaligya og mga kopya sa software, basta ang orihinal nga pahibalo sa copyright ug pahibalo sa pagtugot gilakip sa tanan nga mga kopya o mahinungdanong bahin sa software."
+}
