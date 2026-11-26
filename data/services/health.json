@@ -17,7 +17,8 @@
         "items": [
           "Signed Doctor's Blood Request (1 Original copy) - Secure from Hospital",
           "Certificate of Indigency from Barangay (1 Original Copy) - Secure from Barangay where the patient resides",
-          "CMO Referral Slip (1 Original Copy) - Secure from City Mayor's Office - Administrative Division"
+          "CMO Referral Slip (1 Original Copy) - Secure from City Mayor's Office - Administrative Division",
+          "For questions or clarifications, contact us at {{email:health@betteriligancity.org}} or view the {{link:/assistance|Assistance Hub}}."
         ]
       }
     ],
@@ -45,6 +46,84 @@
         "duration": "1 Minute",
         "personInCharge": "Administrative Aide V City Mayor’s Office",
         "fee": "Php 100.00"
+      }
+    ]
+  },
+  {
+    "slug": "philhealth-yakap-registration-and-availment",
+    "title": "PhilHealth YAKAP Registration and Availment of Benefits",
+    "category": "Health and Wellness",
+    "description": "Guidelines and procedures for registering with PhilHealth YAKAP and availing of its primary healthcare benefits, including consultations, laboratory services, and prescribed medicines.",
+    "source": "official",
+    "isWalkIn": true,
+    "isOnline": true,
+    "department": "Philippine Health Insurance Corporation (PhilHealth) - YAKAP Program",
+    "schedule": "Not specified in the source.",
+    "whoMayAvail": "Individuals seeking to register for and avail of PhilHealth YAKAP benefits.",
+    "type": "standard",
+    "requirements": [
+      {
+        "groupName": "PhilHealth Identification Number (PIN)",
+        "items": [
+          "PhilHealth Identification Number (PIN) - Existing registered PhilHealth members may proceed to registration. Unregistered individuals must first obtain a PIN.",
+          "PIN Application - Apply online through the {{link:https://memberinquiry.philhealth.gov.ph/member/pinApplication.xhtml|PhilHealth Member Portal}} or visit the nearest PhilHealth Local Health Insurance Office (LHIO)."
+        ]
+      },
+      {
+        "groupName": "Reference",
+        "items": [
+          "See the official step-by-step instruction {{link:https://www.philhealth.gov.ph/yakap/YakapSteps.pdf|YakapSteps.pdf}}"
+        ]
+      }
+    ],
+    "procedures": [
+      {
+        "stepNumber": 1,
+        "clientAction": "Obtain a PhilHealth Identification Number (PIN) if not yet registered with PhilHealth. Existing registered members may proceed directly to Step 2.",
+        "providerAction": "Provide the PhilHealth PIN through the Member Portal or the nearest PhilHealth Local Health Insurance Office (LHIO).",
+        "duration": "Not specified",
+        "personInCharge": "PhilHealth Member Services / Local Health Insurance Office",
+        "fee": "Not specified"
+      },
+      {
+        "stepNumber": 2,
+        "clientAction": "Register for PhilHealth YAKAP through the eGovPH App, PhilHealth Member Portal, nearest PhilHealth office, or chosen YAKAP Clinic. Refer to the official list of accredited YAKAP Clinics.",
+        "providerAction": "Process the member's YAKAP registration and provide access to the available YAKAP healthcare services.",
+        "duration": "Not specified",
+        "personInCharge": "PhilHealth Office / YAKAP Clinic",
+        "fee": "Not specified"
+      },
+      {
+        "stepNumber": 3,
+        "clientAction": "Visit the YAKAP Clinic where the member registered for an initial consultation.",
+        "providerAction": "Provide primary healthcare consultation and assess the patient's medical condition.",
+        "duration": "Not specified",
+        "personInCharge": "YAKAP Primary Care Provider",
+        "fee": "Not specified"
+      },
+      {
+        "stepNumber": 4,
+        "clientAction": "Undergo laboratory examinations or diagnostic tests when recommended by the attending doctor.",
+        "providerAction": "Refer the patient to a diagnostic clinic or laboratory. If the YAKAP Clinic does not have the required laboratory services, refer the patient to an accredited diagnostic or laboratory clinic.",
+        "duration": "Not specified",
+        "personInCharge": "YAKAP Primary Care Provider / Accredited Diagnostic or Laboratory Clinic",
+        "fee": "Not specified"
+      },
+      {
+        "stepNumber": 5,
+        "clientAction": "Obtain prescribed medicines from an accredited GAMOT provider. Present the prescription or its UPSC code to the pharmacist and submit the GAMOT Availment Slip.",
+        "providerAction": "Verify the prescription and dispense the prescribed medicines through the GAMOT App. Inform the patient about the available medicine balance and applicable benefit limit.",
+        "duration": "Not specified",
+        "personInCharge": "Accredited GAMOT Provider / Pharmacist",
+        "fee": "Up to Php 20,000.00 worth of medicines annually, subject to the applicable benefit coverage."
+      },
+      {
+        "stepNumber": 6,
+        "clientAction": "Return to the YAKAP Clinic for scheduled follow-up consultations and continue following the doctor's medical advice.",
+        "providerAction": "Monitor the patient's medical condition, evaluate treatment progress, and provide necessary follow-up consultations.",
+        "duration": "Not specified",
+        "personInCharge": "YAKAP Primary Care Provider",
+        "fee": "Not specified"
       }
     ]
   }

@@ -15,6 +15,7 @@ import {
 import SubpageNav from "@/components/ui/SubpageNav";
 import SubpageHero from "@/components/ui/SubpageHero";
 import { AllService } from "@/validations/serviceSchema";
+import { parseDescription } from "@/lib/parseDescription";
 
 interface ServiceClientProps {
   service: AllService;
@@ -84,7 +85,9 @@ export default function ServicePage({ service }: ServiceClientProps) {
 
         <SubpageHero.Title>{service.title}</SubpageHero.Title>
 
-        <SubpageHero.Description>{service.description}</SubpageHero.Description>
+        <SubpageHero.Description>
+          {parseDescription(service.description)}
+        </SubpageHero.Description>
       </SubpageHero>
 
       {/* Main Content Area */}
@@ -152,7 +155,7 @@ export default function ServicePage({ service }: ServiceClientProps) {
                                   : "text-slate-700 group-hover:text-slate-900"
                               }`}
                             >
-                              {item}
+                              {parseDescription(item)}
                             </span>
                           </li>
                         );
@@ -188,7 +191,7 @@ export default function ServicePage({ service }: ServiceClientProps) {
                           Applicant Action
                         </p>
                         <p className="text-sm leading-relaxed text-slate-700">
-                          {step.clientAction}
+                          {parseDescription(step.clientAction)}
                         </p>
                       </div>
                       <div>
@@ -196,7 +199,7 @@ export default function ServicePage({ service }: ServiceClientProps) {
                           LGU Action
                         </p>
                         <p className="text-sm leading-relaxed text-slate-700">
-                          {step.providerAction}
+                          {parseDescription(step.providerAction)}
                         </p>
                       </div>
                     </div>

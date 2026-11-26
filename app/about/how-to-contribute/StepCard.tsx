@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Step } from "./types";
 import { cn } from "@/lib/utils";
-import { parseDescription } from "./parseDescription";
+import { parseDescription } from "@/lib/parseDescription";
 
 interface StepCardProps {
   step: Step;

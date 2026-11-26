@@ -21,6 +21,12 @@ async function generateImages() {
     fs.mkdirSync(outDir, { recursive: true });
   }
 
+  const logoPath = path.join(process.cwd(), "app", "icon.svg");
+  const logoSvg = fs.readFileSync(logoPath, "utf8");
+  const logoDataUri = `data:image/svg+xml;base64,${Buffer.from(
+    logoSvg,
+  ).toString("base64")}`;
+
   // 2. Check for the --force flag
   const isForce = process.argv.includes("--force");
   const isCheck = process.argv.includes("--check"); // New flag for Husky
@@ -112,7 +118,7 @@ async function generateImages() {
             }}
           >
             <img
-              src="https://betteriligancity.org/icon.png"
+              src={logoDataUri}
               alt="BetterIliganCity logo"
               style={{ width: "64px", height: "64px", marginRight: 16 }}
             />
