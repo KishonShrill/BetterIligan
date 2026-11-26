@@ -11,6 +11,8 @@ import {
   X,
 } from "lucide-react";
 import Button3D from "@/components/ui/Button3D";
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 function telHref(display: string): string {
   const cleaned = display.replace(/[^+\d]/g, "");
@@ -51,6 +53,7 @@ const CONTACTS = [
 ];
 
 export default function EmergencyHotlines() {
+  const { t } = useTranslation("home");
   const [isOpen, setIsOpen] = useState(false);
 
   // Prevent the page from scrolling while the modal is open.
@@ -92,9 +95,9 @@ export default function EmergencyHotlines() {
           <Phone className="relative h-4 w-4" strokeWidth={2.5} />
         </span>
 
-        <span className="hidden sm:inline">Emergency Hotlines</span>
+        <span className="hidden sm:inline">{t("emergencyHotlines")}</span>
 
-        <span className="sm:hidden">Emergency</span>
+        <span className="sm:hidden">{t("emergencyShort")}</span>
       </button>
 
       <div
@@ -122,18 +125,18 @@ export default function EmergencyHotlines() {
           <div className="flex items-start justify-between border-b border-slate-100 px-5 py-5 sm:px-7 sm:py-6">
             <div className="pr-8">
               <p className="mb-1 text-[10px] font-bold tracking-widest text-red-600 uppercase sm:text-xs">
-                Emergency Services
+                {t("emergencyServices")}
               </p>
 
               <h2
                 id="emergency-hotlines-title"
                 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
               >
-                Emergency Hotlines
+                {t("emergencyHotlines")}
               </h2>
 
               <p className="mt-1.5 max-w-xl text-sm leading-5 text-slate-500 sm:text-base">
-                Tap any number below to call instantly from your mobile device.
+                {t("tapToCallInstruction")}
               </p>
             </div>
 
@@ -179,7 +182,7 @@ export default function EmergencyHotlines() {
 
                     <p className="mt-0.5 flex items-center gap-1.5 text-xs font-medium text-slate-500">
                       <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-                      Tap to call
+                      {t("tapToCall")}
                     </p>
                   </div>
 
@@ -192,16 +195,16 @@ export default function EmergencyHotlines() {
             <div className="mt-5 flex flex-col gap-4 rounded-2xl bg-blue-50 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
               <div>
                 <p className="text-sm font-bold text-slate-900">
-                  Want to be prepared?
+                  {t("wantToBePrepared")}
                 </p>
 
                 <p className="mt-1 text-xs leading-5 text-slate-500 sm:text-sm">
-                  Learn what to do before, during, and after disasters.
+                  {t("disasterHubDesc")}
                 </p>
               </div>
 
               <Button3D
-                text="Disaster Preparedness Hub"
+                text={t("disasterHubBtn")}
                 href="/disaster"
                 hasArrow={true}
                 size="sm"

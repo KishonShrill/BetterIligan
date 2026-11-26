@@ -7,8 +7,11 @@ import { Text } from "@/components/ui/Text";
 import Section from "@/components/ui/Section";
 import Button3D from "@/components/ui/Button3D";
 import { serviceCategories } from "@/data/categories";
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 export default function ServicesSection() {
+  const { t } = useTranslation("home");
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Only show the first 4 if not expanded
@@ -21,14 +24,13 @@ export default function ServicesSection() {
       {/* Header */}
       <div className="mb-7 text-center sm:mb-12">
         <h2 className="mb-4 text-3xl font-extrabold text-slate-900 md:text-4xl">
-          City Services
+          {t("cityServices")}
         </h2>
         <Text
           className="mx-auto max-w-2xl text-sm text-slate-500 md:text-base"
           size="md"
         >
-          Access all list of services quickly and easily. Find what you need for
-          citizenship, business, education, and more.
+          {t("cityServicesDesc")}
         </Text>
       </div>
 
@@ -86,7 +88,7 @@ export default function ServicesSection() {
 
               {/* Action Link (Hidden on mobile, visible on desktop) */}
               <span className="hidden w-fit items-center gap-1.5 self-end text-sm font-semibold text-blue-600 md:flex">
-                View More
+                {t("viewMore")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
@@ -97,7 +99,7 @@ export default function ServicesSection() {
       {/* Toggle Button */}
       <div className="flex justify-center">
         <Button3D
-          text={isExpanded ? "Show Less" : "View All Services"}
+          text={isExpanded ? t("showLess") : t("viewAllServices")}
           onClick={() => setIsExpanded(!isExpanded)}
           variant="blue"
         />

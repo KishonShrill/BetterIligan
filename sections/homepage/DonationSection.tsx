@@ -1,3 +1,5 @@
+"use client";
+
 import Section from "@/components/ui/Section";
 import {
   HeartHandshake,
@@ -8,11 +10,11 @@ import {
 } from "lucide-react";
 import donationJSON from "@/data/bangon/incident.json";
 import type { BangonConfig } from "@/validations/bangonSchema";
-// Rendered only when an operation is active. Values come from
-// data/bangon/incident.json — replace the TODO_ placeholders with the real,
-// official donation channels before flipping `active` to true.
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 export default function DonationSection() {
+  const { t } = useTranslation("home");
   const donation: BangonConfig["donation"] = donationJSON.donation;
   if (!donationJSON.active || !donationJSON.displayDonation) return null;
   return (
@@ -20,7 +22,7 @@ export default function DonationSection() {
       <div className="mb-4 flex items-center gap-2">
         <HeartHandshake className="h-6 w-6 text-emerald-600" />
         <h2 id="donate-heading" className="text-2xl font-bold text-slate-900">
-          How to help
+          {t("howToHelp")}
         </h2>
       </div>
 
@@ -31,20 +33,24 @@ export default function DonationSection() {
             <h3 className="font-bold">GCash</h3>
           </div>
           <dl className="mt-3 space-y-1 text-sm">
-            <Row label="Name" value={donation.gcash.name} />
-            <Row label="Number" value={donation.gcash.number} mono />
+            <Row label={t("accountName")} value={donation.gcash.name} />
+            <Row label={t("accountNo")} value={donation.gcash.number} mono />
           </dl>
         </div>
 
         <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-2 text-slate-900">
             <Landmark className="h-5 w-5 text-emerald-600" />
-            <h3 className="font-bold">Bank transfer</h3>
+            <h3 className="font-bold">{t("bankTransfer")}</h3>
           </div>
           <dl className="mt-3 space-y-1 text-sm">
             <Row label="Bank" value={donation.bank.bank} />
-            <Row label="Account name" value={donation.bank.accountName} />
-            <Row label="Account no." value={donation.bank.accountNumber} mono />
+            <Row label={t("accountName")} value={donation.bank.accountName} />
+            <Row
+              label={t("accountNo")}
+              value={donation.bank.accountNumber}
+              mono
+            />
           </dl>
         </div>
       </div>
@@ -53,7 +59,7 @@ export default function DonationSection() {
         <div className="mt-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-2 text-slate-900">
             <PackageOpen className="h-5 w-5 text-emerald-600" />
-            <h3 className="font-bold">Most-needed goods</h3>
+            <h3 className="font-bold">{t("mostNeededGoods")}</h3>
           </div>
           <ul className="mt-3 flex flex-wrap gap-2">
             {donation.inKindNeeds.map((item) => (
@@ -72,7 +78,7 @@ export default function DonationSection() {
         <div className="mt-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-2 text-slate-900">
             <MapPin className="h-5 w-5 text-emerald-600" />
-            <h3 className="font-bold">Drop-off points</h3>
+            <h3 className="font-bold">{t("dropOffPoints")}</h3>
           </div>
           <ul className="mt-3 space-y-2">
             {donation.dropOff.map((d) => (

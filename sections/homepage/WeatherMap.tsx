@@ -24,6 +24,8 @@ import Section from "@/components/ui/Section";
 import { Text } from "@/components/ui/Text";
 import { FALLBACK_WEATHER } from "@/data/fallback/fallback_weather";
 import WeatherStatusBadge from "@/components/modals/WeatherStatusBadgeModal";
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 type WeatherIconComponent = typeof Sun;
 
@@ -152,11 +154,11 @@ const WeatherIcon = ({
 };
 
 export default function WeatherAndMap() {
+  const { t } = useTranslation("home");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [weatherData, setWeatherData] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [isFallback, setIsFallback] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -187,7 +189,6 @@ export default function WeatherAndMap() {
         (data) => {
           setWeatherData(data);
           setIsFallback(false);
-          setError(null);
         },
         (error) => {
           console.error(
@@ -196,7 +197,6 @@ export default function WeatherAndMap() {
           );
           setWeatherData(FALLBACK_WEATHER);
           setIsFallback(true);
-          setError(error.message);
         },
       );
 
@@ -235,13 +235,13 @@ export default function WeatherAndMap() {
       {/* Section Header */}
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-bold text-slate-900">
-          Weather & Location
+          {t("weatherAndLocation")}
         </h2>
         <Text
           className="mx-auto mt-2 text-sm text-slate-600 md:text-base"
           size="md"
         >
-          Current conditions and interactive map of Iligan City
+          {t("weatherAndLocationDesc")}
         </Text>
       </div>
 
@@ -259,7 +259,7 @@ export default function WeatherAndMap() {
             <div className="flex min-h-[360px] flex-1 flex-col items-center justify-center">
               <Loader2 className="mb-2 h-8 w-8 animate-spin text-blue-500" />
               <p className="font-medium text-slate-500">
-                Fetching weather data...
+                {t("fetchingWeather")}
               </p>
             </div>
           ) : weatherData ? (
@@ -273,7 +273,7 @@ export default function WeatherAndMap() {
                         Iligan City
                       </p>
                       <p className="mt-0.5 text-xs text-blue-200">
-                        Current weather
+                        {t("currentWeather")}
                       </p>
                     </div>
 
@@ -300,7 +300,8 @@ export default function WeatherAndMap() {
                         {currentLabel}
                       </p>
                       <p className="mt-0.5 text-sm text-blue-100">
-                        Feels like {Math.round(weatherData.current.feels_like)}
+                        {t("feelsLike")}{" "}
+                        {Math.round(weatherData.current.feels_like)}
                         °C
                       </p>
                     </div>
@@ -317,21 +318,21 @@ export default function WeatherAndMap() {
               <div className="grid grid-cols-3 border-b border-slate-100">
                 <div className="p-4 text-center">
                   <Droplets className="mx-auto mb-1 h-4 w-4 text-blue-500" />
-                  <p className="text-xs text-slate-500">Humidity</p>
+                  <p className="text-xs text-slate-500">{t("humidity")}</p>
                   <p className="font-bold text-slate-800">
                     {Math.round(weatherData.current.humidity)}%
                   </p>
                 </div>
                 <div className="border-x border-slate-100 p-4 text-center">
                   <Wind className="mx-auto mb-1 h-4 w-4 text-slate-500" />
-                  <p className="text-xs text-slate-500">Wind</p>
+                  <p className="text-xs text-slate-500">{t("wind")}</p>
                   <p className="font-bold text-slate-800">
                     {weatherData.current.wind_speed.toFixed(1)} km/h
                   </p>
                 </div>
                 <div className="p-4 text-center">
                   <Cloud className="mx-auto mb-1 h-4 w-4 text-slate-400" />
-                  <p className="text-xs text-slate-500">Clouds</p>
+                  <p className="text-xs text-slate-500">{t("clouds")}</p>
                   <p className="font-bold text-slate-800">
                     {Math.round(weatherData.current.clouds)}%
                   </p>
@@ -342,7 +343,7 @@ export default function WeatherAndMap() {
               <div className="bg-slate-50 px-5 py-4">
                 <div className="mb-3 flex items-center justify-between">
                   <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-                    Today&apos;s Forecast
+                    {t("todaysForecast")}
                   </span>
                   <span className="text-xs font-semibold text-blue-600">
                     {Math.round(
@@ -351,7 +352,7 @@ export default function WeatherAndMap() {
                         0,
                       ),
                     )}
-                    % rain
+                    % {t("rain")}
                   </span>
                 </div>
 
@@ -385,7 +386,7 @@ export default function WeatherAndMap() {
                             0,
                           ),
                         )}
-                        h rain
+                        h {t("rain")}
                       </p>
                     </div>
                   </div>
@@ -417,14 +418,12 @@ export default function WeatherAndMap() {
 
               {/* Footer */}
               <div className="border-t border-slate-100 bg-white p-3 text-center text-xs font-medium text-slate-500 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600">
-                {isFallback
-                  ? "Viewing offline data • Click for details"
-                  : "Click to view 7-day forecast →"}
+                {isFallback ? t("offlineDataNote") : t("sevenDayNote")}
               </div>
             </>
           ) : (
             <div className="flex min-h-[360px] flex-1 items-center justify-center text-slate-500">
-              Unable to load weather
+              {t("unableToLoadWeather")}
             </div>
           )}
         </div>
@@ -433,7 +432,7 @@ export default function WeatherAndMap() {
         <div className="flex h-100 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-8 lg:h-auto">
           <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50/50 px-6 py-4">
             <MapPin className="h-5 w-5 text-blue-600" />
-            <h3 className="font-semibold text-slate-800">City Map</h3>
+            <h3 className="font-semibold text-slate-800">{t("cityMap")}</h3>
           </div>
 
           <div className="relative w-full flex-1 bg-slate-100">
@@ -441,10 +440,8 @@ export default function WeatherAndMap() {
               title="Map of Iligan City"
               width="100%"
               height="100%"
-              frameBorder="0"
-              scrolling="no"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123662.66186301723!2d124.34488950644513!3d8.2392162636839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x325579b328c9540d0%3A0xe6e208aba2f0d03b!2sIligan%20City%2C%20Lanao%20del%20Norte!5e0!3m2!1sen!2sph!4v1782954555571!5m2!1sen!2sph"
-              className="absolute inset-0 h-full w-full"
+              className="absolute inset-0 h-full w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
@@ -458,7 +455,7 @@ export default function WeatherAndMap() {
               rel="noreferrer"
               className="text-blue-600 hover:underline"
             >
-              View Larger Map
+              {t("viewLargerMap")}
             </a>
           </div>
         </div>
@@ -487,7 +484,7 @@ export default function WeatherAndMap() {
               <div className="flex items-start justify-between pr-12">
                 <div>
                   <p className="mb-1 text-sm font-medium text-blue-100">
-                    Detailed Weather Report
+                    {t("detailedWeather")}
                   </p>
                   <h2 className="mb-5 text-2xl font-bold sm:text-3xl">
                     Iligan City
@@ -515,7 +512,8 @@ export default function WeatherAndMap() {
                     {currentLabel}
                   </p>
                   <p className="mt-1 text-sm text-blue-100">
-                    Feels like {Math.round(weatherData.current.feels_like)}°C
+                    {t("feelsLike")}{" "}
+                    {Math.round(weatherData.current.feels_like)}°C
                   </p>
                 </div>
               </div>
@@ -526,7 +524,7 @@ export default function WeatherAndMap() {
               {/* 7-Day Forecast */}
               <div className="mb-8">
                 <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
-                  7-Day Forecast
+                  {t("sevenDayForecast")}
                 </h3>
 
                 <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-4 sm:overflow-visible">
@@ -598,7 +596,7 @@ export default function WeatherAndMap() {
                           <div className="border-t border-slate-100 pt-3">
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-slate-500">
-                                Rain
+                                {t("rain")}
                               </span>
                               <span className="text-xs font-bold text-blue-600">
                                 {Math.round(
@@ -636,18 +634,18 @@ export default function WeatherAndMap() {
               {/* Current Conditions */}
               <div className="mb-8">
                 <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
-                  Current Conditions
+                  {t("currentConditions")}
                 </h3>
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                   <WeatherMetric
                     icon={Droplets}
-                    label="Humidity"
+                    label={t("humidity")}
                     value={`${Math.round(weatherData.current.humidity)}%`}
                   />
                   <WeatherMetric
                     icon={Wind}
-                    label="Wind Speed"
+                    label={t("wind")}
                     value={`${weatherData.current.wind_speed.toFixed(1)} km/h`}
                   />
                   <WeatherMetric
@@ -662,7 +660,7 @@ export default function WeatherAndMap() {
                   />
                   <WeatherMetric
                     icon={Cloud}
-                    label="Cloud Cover"
+                    label={t("clouds")}
                     value={`${Math.round(weatherData.current.clouds)}%`}
                   />
                   <WeatherMetric
@@ -676,7 +674,7 @@ export default function WeatherAndMap() {
               {/* Sunrise / Sunset */}
               <div className="mb-8">
                 <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
-                  Sun & UV
+                  {t("sunAndUv")}
                 </h3>
 
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -686,7 +684,7 @@ export default function WeatherAndMap() {
                     </div>
                     <div>
                       <p className="text-xs font-medium text-slate-500">
-                        Sunrise
+                        {t("sunrise")}
                       </p>
                       <p className="text-lg font-bold text-slate-800">
                         {formatWeatherTime(
@@ -703,7 +701,7 @@ export default function WeatherAndMap() {
                     </div>
                     <div>
                       <p className="text-xs font-medium text-slate-500">
-                        Sunset
+                        {t("sunset")}
                       </p>
                       <p className="text-lg font-bold text-slate-800">
                         {formatWeatherTime(
@@ -720,7 +718,7 @@ export default function WeatherAndMap() {
                     </div>
                     <div>
                       <p className="text-xs font-medium text-slate-500">
-                        UV Index
+                        {t("uvIndex")}
                       </p>
                       <p className="text-lg font-bold text-slate-800">
                         {getDailyValue(
@@ -736,28 +734,28 @@ export default function WeatherAndMap() {
               {/* Today's Extended Details */}
               <div>
                 <h3 className="mb-4 text-sm font-bold tracking-wider text-slate-400 uppercase">
-                  Today&apos;s Forecast Details
+                  {t("todaysForecastDetails")}
                 </h3>
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <WeatherMetric
                     icon={ThermometerSun}
-                    label="High"
+                    label={t("high")}
                     value={`${Math.round(getDailyValue(weatherData.forecast.temperature_2m_max, 0))}°C`}
                   />
                   <WeatherMetric
                     icon={ThermometerSun}
-                    label="Low"
+                    label={t("low")}
                     value={`${Math.round(getDailyValue(weatherData.forecast.temperature_2m_min, 0))}°C`}
                   />
                   <WeatherMetric
                     icon={CloudRain}
-                    label="Rain"
+                    label={t("rain")}
                     value={`${getDailyValue(weatherData.forecast.precipitation_sum, 0).toFixed(1)} mm`}
                   />
                   <WeatherMetric
                     icon={CloudRain}
-                    label="Rain Hours"
+                    label={t("rainHours")}
                     value={`${Math.round(getDailyValue(weatherData.forecast.precipitation_hours, 0))} hrs`}
                   />
                 </div>

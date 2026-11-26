@@ -6,6 +6,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, ChevronDown, ArrowRight } from "lucide-react";
 import { DynamicIcon } from "lucide-react/dynamic";
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 import { headerDropdown } from "@/data/categories";
 import navigationJson from "@/data/navigation.json";
@@ -80,6 +82,8 @@ export default function Header({ className }: ClassName) {
   const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
+  const { i18n } = useTranslation();
+
   const pathname = usePathname();
   const hideHeader = HIDDEN_HEADER_PATHS.includes(pathname);
 
@@ -118,6 +122,11 @@ export default function Header({ className }: ClassName) {
 
   const closeDropdown = () => {
     setActiveDropdown(null);
+  };
+
+  const changeLanguage = (language: string) => {
+    localStorage.setItem("i18nextLng", language);
+    i18n.changeLanguage(language);
   };
 
   /*
@@ -225,13 +234,28 @@ export default function Header({ className }: ClassName) {
 
             {/* ===== RIGHT SIDE ACTIONS ===== */}
             <div className="flex items-center gap-4">
-              <Button3D
-                href="/volunteer"
-                text="Join Us!"
-                variant="blue"
-                size="sm"
-                className="w-fit max-[470px]:hidden max-sm:mx-auto"
-              />
+              <div className="flex items-center rounded-full border border-slate-200 bg-slate-100 p-1">
+                <button
+                  onClick={() => changeLanguage("en")}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                    i18n.language === "en" || i18n.language.startsWith("en")
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  Eng
+                </button>
+                <button
+                  onClick={() => changeLanguage("ceb")}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                    i18n.language === "ceb" || i18n.language.startsWith("ceb")
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  Bis
+                </button>
+              </div>
 
               {/* Mobile menu button */}
               <button
@@ -415,6 +439,45 @@ export default function Header({ className }: ClassName) {
           className="animate-in slide-in-from-top-2 fade-in absolute top-full left-0 flex max-h-[calc(100vh-81.1px-33.1px)] w-full flex-col items-center border-t border-t-gray-100 bg-white shadow-xl duration-200 lg:hidden"
           data-nosnippet
         >
+          {/* Mobile Language Switcher Row */}
+          <div className="flex w-full items-center justify-between border-b border-slate-100 bg-slate-50 px-6 py-3">
+            <span className="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+              Language
+            </span>
+            <div className="flex items-center rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+              <button
+                onClick={() => {
+                  i18n.changeLanguage("en");
+                  if (typeof window !== "undefined")
+                    localStorage.setItem("i18nextLng", "en");
+                }}
+                className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                  i18n.language === "en" ||
+                  !i18n.language ||
+                  i18n.language.startsWith("en")
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Eng
+              </button>
+              <button
+                onClick={() => {
+                  i18n.changeLanguage("ceb");
+                  if (typeof window !== "undefined")
+                    localStorage.setItem("i18nextLng", "ceb");
+                }}
+                className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                  i18n.language === "ceb" || i18n.language.startsWith("ceb")
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Bis
+              </button>
+            </div>
+          </div>
+
           {/* Mobile Navigation Links */}
           <div className="container flex h-fit flex-col gap-1 overflow-y-auto px-4 py-4">
             {pathname !== "/" && (

@@ -16,43 +16,46 @@ import {
 } from "lucide-react";
 import Section from "@/components/ui/Section";
 import Button3D from "@/components/ui/Button3D";
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 // Import your centralized services array!
 import { allServices } from "@/data/services";
 import { AllService } from "@/validations/serviceSchema";
 
-const QUICK_LINKS = [
-  {
-    title: "CitiFix",
-    description: "Report and track community concerns.",
-    href: "https://citifix.betteriligancity.org",
-    Icon: MapPinned,
-    badge: "Featured",
-  },
-  {
-    title: "Electricity Rate",
-    description: "Power schedules & advisories",
-    href: "/iligan/electricity#ilpi",
-    Icon: Zap,
-  },
-  {
-    title: "Jeepney Routes",
-    description: "City-wide routes & fares",
-    href: "/travel/transportation/jeepney",
-    Icon: Bus,
-  },
-  {
-    title: "Emergency",
-    description: "Disaster recovery & alerts",
-    href: "/bangon-iligan",
-    Icon: ShieldAlert,
-  },
-];
-
 export default function HeroSection() {
+  const { t } = useTranslation("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<AllService[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const QUICK_LINKS = [
+    {
+      title: t("citifix"),
+      description: t("citifixDesc"),
+      href: "https://citifix.betteriligancity.org",
+      Icon: MapPinned,
+      badge: t("featured"),
+    },
+    {
+      title: t("electricityRate"),
+      description: t("electricityDesc"),
+      href: "/iligan/electricity#ilpi",
+      Icon: Zap,
+    },
+    {
+      title: t("jeepneyRoutes"),
+      description: t("jeepneyDesc"),
+      href: "/travel/transportation/jeepney",
+      Icon: Bus,
+    },
+    {
+      title: t("emergency"),
+      description: t("emergencyDesc"),
+      href: "/bangon-iligan",
+      Icon: ShieldAlert,
+    },
+  ];
 
   // NEW STATE: Controls whether the full search card is visible on mobile
   const [isMobileSearchVisible, setIsMobileSearchVisible] = useState(false);
@@ -143,21 +146,20 @@ export default function HeroSection() {
         {/* Left Column */}
         <div className="mx-auto max-w-404 text-center lg:mx-0 lg:text-left">
           <h1 className="mb-3 text-4xl leading-tight font-extrabold tracking-tight text-white min-[767px]:text-5xl md:leading-[1.1] lg:text-left xl:text-6xl">
-            Welcome to <br /> BetterIliganCity.org
+            {t("welcome")} <br /> {t("portalName")}
           </h1>
 
           <p
             className={`text-base text-blue-100 lg:max-w-lg lg:text-left lg:text-lg ${!isMobileSearchVisible ? "mb-6" : "mb-3"} leading-relaxed`}
           >
-            A modernized, volunteer-driven portal to access government services,
-            public data, and resources for the people of Iligan.
+            {t("description")}
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
             {!isMobileSearchVisible && (
               <Button3D
-                text="Browse Services"
+                text={t("browseServices")}
                 href="/services"
                 hasArrow={true}
                 variant="white"
@@ -169,7 +171,7 @@ export default function HeroSection() {
             {/* NEW: The Mobile Reveal Search Button! Hidden on Desktop (lg) */}
             {!isMobileSearchVisible && (
               <Button3D
-                text="Find a Service"
+                text={t("findService")}
                 icon={Search}
                 iconPosition="left"
                 onClick={() => setIsMobileSearchVisible(true)}
@@ -195,7 +197,7 @@ export default function HeroSection() {
                   <Search className="h-5 w-5 text-white md:text-blue-600" />
                 </div>
                 <h2 className="text-xl font-bold text-white md:text-slate-800">
-                  Find a Service
+                  {t("findService")}
                 </h2>
               </div>
 
@@ -220,7 +222,7 @@ export default function HeroSection() {
               <input
                 ref={mobileSearchInputRef} // Added ref for auto-focus
                 type="text"
-                placeholder="e.g., birth certificate, business permit"
+                placeholder={t("searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() =>
@@ -299,17 +301,29 @@ export default function HeroSection() {
             {/* Popular Searches */}
             <div>
               <p className="mb-3 text-xs font-semibold tracking-wider text-blue-200 uppercase md:text-slate-400">
-                Popular Searches
+                {t("popularSearches")}
               </p>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { name: "Birth Certificate", icon: FileText },
-                  { name: "Marriage Certificate", icon: FileText },
-                  { name: "Business Permit", icon: Landmark },
+                  {
+                    name: t("birthCertificate"),
+                    icon: FileText,
+                    term: "Birth Certificate",
+                  },
+                  {
+                    name: t("marriageCertificate"),
+                    icon: FileText,
+                    term: "Marriage Certificate",
+                  },
+                  {
+                    name: t("businessPermit"),
+                    icon: Landmark,
+                    term: "Business Permit",
+                  },
                 ].map((item) => (
                   <button
                     key={item.name}
-                    onClick={() => handlePopularSearch(item.name)}
+                    onClick={() => handlePopularSearch(item.term)}
                     className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs text-white backdrop-blur-sm transition-colors hover:bg-white/20 hover:text-white md:border-slate-100 md:bg-slate-50 md:text-slate-600 md:backdrop-blur-none md:hover:bg-blue-50 md:hover:text-blue-700"
                   >
                     <item.icon className="h-3.5 w-3.5" />
@@ -325,12 +339,9 @@ export default function HeroSection() {
         <div className="relative mx-auto w-full max-w-404 pt-3 md:pt-6 lg:col-span-2">
           <div className="mb-6 max-lg:hidden">
             <h2 className="text-xl font-extrabold text-white md:text-2xl">
-              Quick Access
+              {t("quickAccess")}
             </h2>
-            <p className="mt-1 text-sm text-blue-100">
-              Direct links to Iligan's most frequently used tools and current
-              events.
-            </p>
+            <p className="mt-1 text-sm text-blue-100">{t("quickAccessDesc")}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">

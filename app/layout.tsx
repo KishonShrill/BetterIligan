@@ -3,6 +3,7 @@ import { kapwaSans, kapwaMono } from "./fonts";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
+import LanguageProvider from "@/translation/LanguageProvider";
 import Header from "@/components/layout/Header";
 import TopBanner from "@/components/layout/TopBanner";
 import Footer from "@/components/layout/Footer";
@@ -48,23 +49,25 @@ export default function RootLayout({
       className={`${kapwaSans.variable} ${kapwaMono.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col from-slate-50">
-        <TopBanner />
-        <Header />
-        <ScrollToTop />
-        <main className="flex grow flex-col">{children}</main>
-        <Footer />
-        <Toaster
-          position="top-center"
-          containerClassName="max-sm:!items-center max-sm:!justify-start"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              borderRadius: "12px",
-              background: "#333",
-              color: "#fff",
-            },
-          }}
-        />
+        <LanguageProvider>
+          <TopBanner />
+          <Header />
+          <ScrollToTop />
+          <main className="flex grow flex-col">{children}</main>
+          <Footer />
+          <Toaster
+            position="top-center"
+            containerClassName="max-sm:!items-center max-sm:!justify-start"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                borderRadius: "12px",
+                background: "#333",
+                color: "#fff",
+              },
+            }}
+          />
+        </LanguageProvider>
       </body>
     </html>
   );

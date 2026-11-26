@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Users,
@@ -12,27 +14,31 @@ import {
 import Section from "@/components/ui/Section";
 import { Text } from "@/components/ui/Text";
 import Button3D from "@/components/ui/Button3D";
+import { useTranslation } from "react-i18next";
+import "@/translation/i18n";
 
 export default function CityStatsSummary() {
+  const { t } = useTranslation("home");
+
   const quickStats = [
     {
       icon: <Users className="h-5 w-5 text-blue-600" />,
       bgIcon: "bg-blue-50 border-blue-100",
-      label: "Total Population",
+      label: t("totalPopulation"),
       value: "368,132",
       subtext: "2024 Census • 452.60/km² density",
     },
     {
       icon: <Map className="h-5 w-5 text-emerald-600" />,
       bgIcon: "bg-emerald-50 border-emerald-100",
-      label: "Land Area",
+      label: t("landArea"),
       value: "81,337 ha",
       subtext: "813.37 square kilometers",
     },
     {
       icon: <Droplets className="h-5 w-5 text-cyan-600" />,
       bgIcon: "bg-cyan-50 border-cyan-100",
-      label: "Natural Wonders",
+      label: t("naturalWonders"),
       value: "23 Waterfalls",
       subtext: "Plus 8 springs & 15 caves",
       href: "/travel/waterfalls",
@@ -40,7 +46,7 @@ export default function CityStatsSummary() {
     {
       icon: <Layers className="h-5 w-5 text-purple-600" />,
       bgIcon: "bg-purple-50 border-purple-100",
-      label: "Political Subdivisions",
+      label: t("politicalSubdivisions"),
       value: "44 Barangays",
       subtext: "Highly Urbanized City class",
       href: "/iligan/barangays",
@@ -53,23 +59,22 @@ export default function CityStatsSummary() {
       <div className="mb-8 flex flex-col justify-between gap-5 md:mb-12 md:flex-row md:items-end md:gap-4">
         <div className="text-left">
           <p className="mb-1.5 text-[10px] font-bold tracking-widest text-blue-600 uppercase md:mb-2 md:text-xs">
-            Iligan At A Glance
+            {t("atAGlance")}
           </p>
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
-            City Statistics & Profile
+            {t("cityStatsProfile")}
           </h2>
           <Text
             className="mt-2 max-w-xl text-sm text-slate-500 md:text-base"
             size="md"
           >
-            From vital demographics to natural resources, explore the
-            foundational numbers that drive the City of Majestic Waterfalls.
+            {t("cityStatsDesc")}
           </Text>
         </div>
 
         {/* CTA Button */}
         <Button3D
-          text="Explore Full City Profile"
+          text={t("exploreFullProfile")}
           href="/iligan/city-stats"
           hasArrow={true}
           size="sm"
@@ -143,14 +148,14 @@ export default function CityStatsSummary() {
           <div className="flex-1 text-left">
             <div className="mb-0.5 flex flex-wrap items-center gap-2 md:mb-1">
               <span className="rounded bg-amber-100 px-2 py-0.5 text-[9px] font-extrabold tracking-wider text-amber-800 uppercase md:text-[10px]">
-                Foundation
+                {t("foundation")}
               </span>
               <span className="text-xs font-bold text-slate-700 md:text-sm">
-                Charter Date: June 16, 1950
+                {t("charterDate")}
               </span>
             </div>
             <p className="text-[11px] text-slate-500 md:text-xs">
-              Created under Republic Act No. 525.
+              {t("createdUnder")}
             </p>
           </div>
         </div>
@@ -158,12 +163,12 @@ export default function CityStatsSummary() {
         <div className="flex w-full flex-row justify-between gap-3 border-t border-slate-100 pt-3 text-[11px] font-bold text-slate-500 md:w-auto md:flex-nowrap md:justify-end md:gap-4 md:border-t-0 md:pt-0 md:text-xs">
           <div className="flex flex-1 items-center justify-center gap-1.5 md:flex-auto md:justify-start">
             <TrendingUp className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
-            <span className="truncate">0.33% Growth</span>
+            <span className="truncate">{t("growthRate")}</span>
           </div>
           <div className="hidden h-4 w-px bg-slate-200 md:block"></div>
           <div className="flex flex-1 items-center justify-center gap-1.5 border-l border-slate-100 pl-3 md:flex-auto md:justify-start md:border-0 md:pl-0">
             <Compass className="h-3.5 w-3.5 shrink-0 text-indigo-500" />
-            <span className="truncate">Cebuano Dialect</span>
+            <span className="truncate">{t("cebuanoDialect")}</span>
           </div>
         </div>
       </div>
